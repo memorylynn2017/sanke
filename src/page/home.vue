@@ -5,8 +5,8 @@
             <li class="n1">
                 <el-button type="primary" style="border-radius:30px; width:80px; height:32px; background-color:#00c4c2;position: relative;top:2px;">日结</el-button>
             </li>
-            <li class="n2"><a href=""><img src=".././assets/img/archives_1.png" style="vertical-align:middle; height:28px;"></a></li>
-            <li class="n3"><a href=""><img src=".././assets/img/archives_2.png" style="vertical-align:middle; height:28px;"></a></li>
+            <li class="n2"><img src=".././assets/img/archives_1.png" style="vertical-align:middle; height:28px;"></li>
+            <li class="n3"><img src=".././assets/img/archives_2.png" style="vertical-align:middle; height:28px;"></li>
         </ul>
         <section class="data_section">
             <header class="section_title">数据统计</header>
@@ -191,7 +191,7 @@ export default {
     line-height: 50px;
     position: relative;
     top: -54px;
-    left: 870px;
+    left: 80%;
 }
 
 .btn_list li {
@@ -216,5 +216,7 @@ export default {
     width: 18px;
     border-right: 2px solid #c1c1c1;
 }
+
+
 
 </style>

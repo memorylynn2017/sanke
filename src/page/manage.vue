@@ -4,9 +4,9 @@
         <div class="advTop qf">
             <div class="advTop_left fl"><a href="#">淘亿批发管理系统 V1.0</a></div>
             <div class="advTop_right fr">
-                <a href=""><i class="iconfont icon-home" style="color:#fff;"></i> </a>
-                <a href=""><i class="iconfont icon-user" style="color:#fff;"></i> </a>
-                <a href=""><i class="iconfont icon-tuichu" style="color:#fff;"></i></a>
+                <i class="iconfont icon-home" style="color:#fff;"></i>
+                <i class="iconfont icon-user" style="color:#fff;"></i>
+                <i class="iconfont icon-tuichu" style="color:#fff;" @click="handleExit"></i>
             </div>
         </div>
         <el-row style="height: 100%;">
@@ -42,15 +42,14 @@
                         <template slot="title">图表</template>
                         <!-- <i class="el-icon-star-on"></i> -->
                         <el-menu-item index="visitor">用户分布</el-menu-item>
-                        <!-- <el-menu-item index="newMember">用户数据</el-menu-item> -->
+                        <el-menu-item index="newMember">用户数据</el-menu-item>
                     </el-submenu>
                     <el-submenu index="8">
                         <template slot="title">系统设置</template>
-                        <!-- <el-menu-item index="adminSet">管理员设置</el-menu-item> -->
+                        <el-menu-item index="adminSet">管理员设置</el-menu-item>
                     </el-submenu>
                     <el-submenu index="9">
                         <template slot="title">安全管理</template>
-                        <!-- <el-menu-item index="explain">系统说明书</el-menu-item> -->
                     </el-submenu>
                 </el-menu>
             </el-col>
@@ -63,8 +62,37 @@
     </div>
 </template>
 <script>
+import { signout } from '@/api/getData'
+import { mapActions, mapState } from 'vuex'
 export default {
+    created() {
+        if (!this.adminInfo.id) {
+            this.getAdminData()
+        }
+    },
+    methods: {
+        ...mapActions(['getAdminData']),
+        async handleExit() {
+            const res = await signout();
+            if (res.status == 1) {
+                this.$message({
+                    type: 'success',
+                    message: '退出成功'
+                });
+                this.$router.push('/');
+            } else {
+                this.$message({
+                    type: 'error',
+                    message: res.message
+                });
+            }
+        },
+    },
+
     computed: {
+        //状态的计算属性集合之adminInfo
+        ...mapState(['adminInfo']),
+        // 标准激活
         defaultActive: function() {
             return this.$route.path.replace('/', '');
         }
@@ -128,6 +156,15 @@ export default {
 .advTop .advTop_right i {
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
+}
+
+.el-submenu .el-menu-item {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 45px;
+    padding-left: 45px;
+    min-width: 100%;
 }
 
 </style>

@@ -1,4 +1,3 @@
-
 <!-- 头部组件区域 -->
 <template>
     <div class="header_container">
@@ -8,61 +7,78 @@
             <el-breadcrumb-item :to="{ path: '/manage' }">早上好，XXX</el-breadcrumb-item>
             <el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-dropdown @command="handleCommand" menu-align='start'>
+        <!-- <el-dropdown @command="handleCommand" menu-align='start'>
             <img :src="baseImgPath + adminInfo.avatar" class="avator">
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="home">首页</el-dropdown-item>
                 <el-dropdown-item command="singout">退出</el-dropdown-item>
             </el-dropdown-menu>
-        </el-dropdown>
+        </el-dropdown> -->
     </div>
 </template>
-        
-
 <script>
-import { signout } from '@/api/getData'
-import { baseImgPath } from '@/config/env'
-import { mapActions, mapState } from 'vuex'
+
+// 这个引用不到
+// import { baseImgPath } from '@/config/env'
+
+
+// import { signout } from '@/api/getData'
+// import { mapActions, mapState } from 'vuex'
 
 
 export default {
     data() {
         return {
-            baseImgPath,
+            // baseImgPath,
         }
     },
     created() {
-        if (!this.adminInfo.id) {
-            this.getAdminData()
-        }
+        // if (!this.adminInfo.id) {
+        //     this.getAdminData()
+        // }
     },
-    computed: {
-        ...mapState(['adminInfo']),
+    computed:{
+        // ...mapState(['adminInfo']),
     },
     methods: {
-        ...mapActions(['getAdminData']),
-        async handleCommand(command) {
-            if (command == 'home') {
-                this.$router.push('/manage');
-            } else if (command == 'singout') {
-                const res = await signout()
-                if (res.status == 1) {
-                    this.$message({
-                        type: 'success',
-                        message: '退出成功'
-                    });
-                    this.$router.push('/');
-                } else {
-                    this.$message({
-                        type: 'error',
-                        message: res.message
-                    });
-                }
-            }
-        },
+        // ...mapActions(['getAdminData']),
+        // async handleCommand(command) {
+            // if (command == 'home') {
+            //     this.$router.push('/manage');
+            // } else if (command == 'singout') {
+            //     const res = await signout()
+            //     if (res.status == 1) {
+            //         this.$message({
+            //             type: 'success',
+            //             message: '退出成功'
+            //         });
+            //         this.$router.push('/');
+            //     } else {
+            //         this.$message({
+            //             type: 'error',
+            //             message: res.message
+            //         });
+            //     }
+            // }
+
+            // if (command == 'singout') {
+            //     const res = await signout();
+            //     if (res.status == 1) {
+            //         this.$message({
+            //             type: 'success',
+            //             message: '退出成功'
+            //         });
+            //         this.$router.push('/');
+            //     } else {
+            //         this.$message({
+            //             type: 'error',
+            //             message: res.message
+            //         });
+            //     }
+            // }
+          
     }
 }
-
 
 </script>
 <style lang="less">
@@ -91,13 +107,10 @@ export default {
     .wh(36px, 36px);
     border-radius: 50%;
     margin: 6px 18px 0px 0px;
-    
 }
 
 .el-dropdown-menu__item {
     text-align: center;
 }
-
-
 
 </style>

@@ -6,14 +6,15 @@
                 <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="90px" class="demo-ruleForm qf">
                     <div class="login-left fl">
                         <el-form-item label="账号：" prop="username">
-                            <el-input v-model="loginForm.username" placeholder="用户名"><span></span></el-input>
+                            <el-input placeholder="用户名" v-model="loginForm.username"><span></span></el-input>
                         </el-form-item>
                         <el-form-item label="密码：" prop="password">
                             <el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
                         </el-form-item>
                         <el-form-item label="验证码：" prop="checknode">
-                            <el-input placeholder="验证码" v-model="loginForm.checknode" id="checking"></el-input>
-                            <span style="width: 76px; height: 36px;" v-model="loginForm.codeimg" id="codeimg"></span>
+                            <el-input placeholder="验证码" v-model="loginForm.checknode"></el-input>
+                            <!-- id="checking" -->
+                            <div style="width: 76px; height: 36px;" id="codeimg"></div>
                         </el-form-item>
                     </div>
                     <div class="line fl"></div>
@@ -33,79 +34,210 @@ import { login, getAdminInfo } from '@/api/getData'
 import { mapActions, mapState } from 'vuex'
 import Code from '.././assets/js/gverify.js'
 
+// import Vue from "vue"
+// import verify from "vue-verify-plugin";
+// Vue.use(verify);
+
+
 export default {
+
     data() {
-        var validateCode = (rule, value, callback) => {
-            const res = verifyCode.validate(value);
-            if (res) {
-                callback();
-            } else {
-                callback(new Error('验证码错误'));
-            }
-        };
         return {
             loginForm: {
+                userid: '',
                 username: '',
                 password: '',
-                checknode: '',
-
+                // checknode: '',
             },
+
+            verifyForm: {
+                userid: '',
+                user_name: '',
+                pass_word: '',
+                checknode: '',
+            },
+
             rules: {
                 username: [
-                    { required: true, message: '请输入用户名', trigger: 'blur' }
+                    { required: true, message: '请输入用户名', trigger: 'blur' },
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' }
                 ],
-                checkNode: [
+                checknode: [
                     { required: true, message: '请输入验证码', trigger: 'blur' }
                 ],
             },
             showLogin: false,
         }
     },
+    created() {
+        this.initData();
+    },
     mounted() {
+
         this.showLogin = true;
+
+
         if (!this.adminInfo.id) {
             this.getAdminData()
-        };
-        this.$nextTick(function() {
-            const verifyCode = new GVerify("codeimg");
-        })
+        }
+
+
+        this.loginForm.verifycode = new GVerify("codeimg");
+        // this.$nextTick(function() {
+
+
+        // })
     },
     computed: {
         ...mapState(['adminInfo']),
     },
+
     methods: {
+        initData() {
+            var data = []
+            let url = 'http://localhost:3000/verifyForm'
+            let _this = this
+            this.$http.get(url, {}).then(function(res) {
+                for (let i = 0; i < res.data.length; i++) {
+
+                    var obj = {}
+                    obj.userid = res.data[i].user_id
+                    obj.username = res.data[i].user_name
+                    obj.password = res.data[i].pass_word
+                    data[i] = obj
+                }
+
+                // console.log(data);
+                _this.verifyForm = data;
+
+            }).catch(function(error) {
+                console.log(error);
+            })
+        },
+
+
         ...mapActions(['getAdminData']),
         async submitForm(formName) {
+
+
             this.$refs[formName].validate(async(valid) => {
+                console.log(this.verifyForm);
+                // const res = await initData({ user_name: this.loginForm.username, password: this.loginForm.password })
+                // console.log(res.status);
+
+
                 if (valid) {
-                    const res = await login({ user_name: this.loginForm.username, password: this.loginForm.password })
-                    if (res.status == 1) {
+
+                    console.log(this.verifyForm[0].username);
+                    console.log(this.verifyForm[0].password);
+
+                    var myusername = this.verifyForm[0].username;
+                    var mypassword = this.verifyForm[0].password;
+
+                    // console.log(this.loginForm.username);
+                    // console.log(this.loginForm.password);
+
+                    console.log("验证码：" + this.loginForm.verifycode.validate(this.loginForm.checknode));
+
+
+
+                    // 1、现在的逻辑
+                    // this.$router.push('manage')
+                    if (this.loginForm.username == myusername && this.loginForm.password == mypassword && this.loginForm.verifycode.validate(this.loginForm.checknode)) {
                         this.$message({
                             type: 'success',
-                            message: '登录成功'
+                            message: '验证成功'
                         });
                         this.$router.push('manage')
+
+                    } else if (this.loginForm.username != myusername) {
+                        this.$message({
+                            type: 'error',
+                            message: '用户名错误'
+                        });
+                    } else if (this.loginForm.password != mypassword) {
+                        this.$message({
+                            type: 'error',
+                            message: '密码错误'
+                        });
+                    } else if (!this.loginForm.verifycode.validate(this.loginForm.checknode)) {
+                        this.$message({
+                            type: 'error',
+                            message: '验证码错误,请重新输入'
+                        });
                     } else {
                         this.$message({
                             type: 'error',
-                            message: res.message
+                            message: '验证信息输入有误'
                         });
                     }
+
+
+
                 } else {
                     this.$notify.error({
                         title: '错误',
-                        message: '请输入正确的用户名密码',
+                        message: '验证信息输入有误',
                         offset: 100
                     });
                     return false;
                 }
+
+
+
+
+                // 2、以前的逻辑
+                //     const res = await login({ user_name: this.loginForm.username, password: this.loginForm.password });
+                //     if (res.status == 1) {
+                //         this.$message({
+                //             type: 'success',
+                //             message: '验证信息正确,登录成功'
+                //         });
+                //         this.$router.push('manage')
+                //     } else if(this.loginForm.verifycode.validate(this.loginForm.checknode)) {
+
+                //         this.$message({
+                //             type: 'error',
+                //             message: res.message 
+
+
+                //         });
+                //     } else {
+                //         this.$message({
+                //             type: 'error',
+                //             message: "验证码错误"
+
+                //         });
+                //     }
+
+
+
+                // } else {
+                //     this.$notify.error({
+                //         title: '错误',
+                //         message: '请输入验证码',
+                //         offset: 100
+                //     });
+                //     return false;
+                // }
+
+
+
             });
         },
     },
+
+
+
+
+
+
+
+
     watch: {
+
         adminInfo: function(newValue) {
             if (newValue.id) {
                 this.$message({
@@ -144,7 +276,7 @@ export default {
 
 .login_page {
     width: 100%;
-    min-width: 320px;
+    min-width: 345px;
     height: 100%;
     padding-top: 60px;
     padding-left: 105px;

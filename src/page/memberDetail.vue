@@ -532,9 +532,7 @@ export default {
 .table_container {
    /* border: 1px solid red; */
 
-    .el-tabs__content {
-        position: static;
-      }
+
     .el-tabs__item.is-active {
         color: #e51c23;
     }

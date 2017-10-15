@@ -758,7 +758,7 @@ export default {
             border-radius: 4px;
             position: relative;
             top: -7px;
-            left: 960px;
+            left: 89%;
             z-index: 1000;
         }
     }

@@ -3,7 +3,7 @@
         <head-top></head-top>
         <div class="headAdv">
             <div class="listed">
-                <span style="font:9px;color:#000;"><strong>会员列表</strong></span>
+                <span><strong>会员列表</strong></span>
             </div>
             <div class="searched">
                 <div class="searched_left">
@@ -25,15 +25,18 @@
                 </div>
             </div>
             <div class="recorded">
-                <span><strong style="font:8px;color:#000;">总记录数 {{count}}</strong></span>
+                <span><strong >总记录数 {{count}}</strong></span>
             </div>
         </div>
         <!-- 以后需要从后台模拟数据出来 -->
+        <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
         <div class="table_container">
             <el-table :data="userList" highlight-current-row style="width: 100%">
-                <el-table-column type="index" width="120">
+                <el-table-column type="index" width="60">
                 </el-table-column>
-                <el-table-column property="levelname" label="等级" width="100" :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag">
+                <el-table-column property="customer_id" label="客户ID" width="100">
+                </el-table-column>
+                <el-table-column property="levelname" label="等级" width="100">
                 </el-table-column>
                 <el-table-column property="username" label="用户名" width="100">
                 </el-table-column>
@@ -41,13 +44,13 @@
                 </el-table-column>
                 <el-table-column property="purshname" label="订单" width="100">
                 </el-table-column>
-                <el-table-column property="countname" label="数量" width="120">
+                <el-table-column property="countname" label="数量" width="100">
                 </el-table-column>
-                <el-table-column property="pricename" label="金额" width="120">
+                <el-table-column property="pricename" label="金额" width="110">
                 </el-table-column>
-                <el-table-column property="costname" label="余额" width="120">
+                <el-table-column property="costname" label="余额" width="110">
                 </el-table-column>
-                <el-table-column property="registe_time" label="注册时间" width="120">
+                <el-table-column property="registe_time" label="注册时间" width="110">
                 </el-table-column>
                 <el-table-column property="editname" label="操作" width="80">
                     <template scope="scope">
@@ -72,523 +75,171 @@ import {
 } from '@/api/getData'
 export default {
     data() {
-            return {
-                tableData: [{
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
+        return {
+            tableData: [],
+            options1: [{
+                value: '所有等级',
+                label: '所有等级'
+            }, {
+                value: 'VIP',
+                label: 'VIP'
+            }, {
+                value: '批发会员',
+                label: '批发会员'
+            }, {
+                value: '注册会员',
+                label: '注册会员'
+            }],
+            options2: [{
+                value: '选项1',
+                label: '30'
+            }, {
+                value: '选项2',
+                label: '60'
+            }, {
+                value: '选项3',
+                label: '90'
+            }, {
+                value: '选项4',
+                label: '120'
+            }],
+            input1: '',
+            input2: '',
+            myvalue1: '所有等级',
+            myvalue2: '30',
+            currentRow: null,
+            offset: 0,
+            limit: 20,
+            count: 0,
+            currentPage: 1,
+            userList: [],
+        }
+    },
+    components: {
+        headTop,
+    },
+    computed: {
+        // tableFilter() {
+        //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
+        // }
+    },
 
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
+    // 创建后的钩子函数
 
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
+    // 注意这个循环逻辑
 
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '批发会员',
-                    areaname: '美国',
-                    purshname: '5566',
-                    username: '王小虎',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: 'VIP',
-                    areaname: '美国',
-                    purshname: '7788',
-                    username: '陈小曼',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '9900',
-                    username: '惠彬',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '1086',
-                    username: '小红',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '1086',
-                    username: '小红',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '1086',
-                    username: '小红',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '1086',
-                    username: '小红',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }, {
-                    levelname: '注册会员',
-                    areaname: '美国',
-                    purshname: '1086',
-                    username: '小红',
-                    countname: '10000',
-                    pricename: '1000',
-                    costname: '1000000',
-                    registe_time: '2016-10-10',
-                    statusname: '正常',
-                }],
-                options1: [{
-                    value: '所有等级',
-                    label: '所有等级'
-                }, {
-                    value: 'VIP',
-                    label: 'VIP'
-                }, {
-                    value: '批发会员',
-                    label: '批发会员'
-                }, {
-                    value: '注册会员',
-                    label: '注册会员'
-                }],
-                options2: [{
-                    value: '选项1',
-                    label: '30'
-                }, {
-                    value: '选项2',
-                    label: '60'
-                }, {
-                    value: '选项3',
-                    label: '90'
-                }, {
-                    value: '选项4',
-                    label: '120'
-                }],
-                input1: '',
-                input2: '',
-                myvalue1: '所有等级',
-                myvalue2: '30',
-                currentRow: null,
-                offset: 0,
-                limit: 20,
-                count: 0,
-                currentPage: 1,
-                userList: [],
+    // this.tableData.forEach((e, i) => {
+    //     if (e.levelname == myvalue1) {
+    //         tablearray.push(this.tableData[i]);
+    //     }
+    //     // console.log(tablearray);
+    //     this.tableData = tablearray;
+    // })
+
+    created() {
+        this.initData();
+
+    },
+    methods: {
+
+        test1(myvalue1) {
+            // console.log(myvalue1);
+            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+                this.userList = this.tableData;
+            } else {
+                this.userList = this.tableData.filter(item => {
+                    return item.levelname !== null && item.levelname == this.myvalue1;
+                });
             }
         },
-        components: {
-            headTop,
-        },
-        computed: {
-            // tableFilter() {
-            //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
-            // }
-        },
+        test2(input2) {
+            this.$http.get("http://localhost:3000/bannerList").then(response => {
+                console.log(response.data);
+            }, response => {})
 
-        // 创建后的钩子函数
-
-        // 注意这个循环逻辑
-
-        // this.tableData.forEach((e, i) => {
-        //     if (e.levelname == myvalue1) {
-        //         tablearray.push(this.tableData[i]);
-        //     }
-        //     // console.log(tablearray);
-        //     this.tableData = tablearray;
-        // })
-
-        created() {
-            // this.initData();
-            this.userList = this.tableData;
-        },
-        methods: {
-            test1(myvalue1) {
-                // console.log(myvalue1);
-                if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
-                    this.userList = this.tableData;
-                } else {
-                    this.userList = this.tableData.filter(item => {
-                        return item.levelname !== null && item.levelname == this.myvalue1;
-                    });
-                }
-            },
-            test2(input2) {
-                this.$http.get("http://localhost:9090/db").then(response => {
-                    console.log(response.data);
-                }, response => {})
-
-                let tablearray = [];
-                if (this.input2 !== '') {
-                    tablearray = this.tableData.filter(item => {
-                        return item.levelname !== null && item.levelname == this.input2
-                    });
-                    console.log(tablearray);
-
-                } else {}
-            },
-            // async initData() {
-            //     try {
-            //         const countData = await getUserCount();
-            //         if (countData.status == 1) {
-            //             this.count = countData.count;
-            //         } else {
-            //             throw new Error('获取数据失败');
-            //         }
-            //         this.getUsers();
-
-            //     } catch (err) {
-            //         console.log('获取数据失败', err);
-            //     }
-            // },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                this.offset = (val - 1) * this.limit;
-                this.getUsers()
-            },
-            handleEdit() {
-                this.$router.push({
-                    path: '/member'
+            let tablearray = [];
+            if (this.input2 !== '') {
+                tablearray = this.tableData.filter(item => {
+                    return item.levelname !== null && item.levelname == this.input2
                 });
-            },
-            filterTag(value, row) {
-                return row.levelname === value;
-            },
-            // async getUsers() {
-            //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
-            //     this.tableData = [];
-            //     Users.forEach(item => {
-            //         const tableData = {};
-            //         tableData.username = item.username;
-            //         tableData.registe_time = item.registe_time;
-            //         tableData.city = item.city;
-            //         this.tableData.push(tableData);
-            //     })
-            // },
+                console.log(tablearray);
 
+            } else {}
         },
+        // async initData() {
+        //     try {
+        //         const countData = await getUserCount();
+        //         if (countData.status == 1) {
+        //             this.count = countData.count;
+        //         } else {
+        //             throw new Error('获取数据失败');
+        //         }
+        //         this.getUsers();
+
+        //     } catch (err) {
+        //         console.log('获取数据失败', err);
+        //     }
+        // },
+
+        async initData() {
+            var data = []
+            let url = 'http://localhost:3000/tableData'
+            let _this = this
+            this.$http.get(url, {}).then(function(res) {
+                for (let i = 0; i < res.data.length; i++) {
+
+                    var obj = {}
+                    obj.customer_id = res.data[i].customer_id
+                    obj.levelname = res.data[i].levelname
+                    obj.areaname = res.data[i].areaname
+                    obj.purshname = res.data[i].purshname
+                    obj.username = res.data[i].username
+                    obj.countname = res.data[i].countname
+                    obj.pricename = res.data[i].pricename
+                    obj.costname = res.data[i].costname
+                    obj.registe_time = res.data[i].registe_time
+                    obj.statusname = res.data[i].statusname
+                    data[i] = obj
+                }
+                console.log(data);
+                _this.tableData = data;
+                console.log(_this.tableData);
+                _this.userList = _this.tableData;
+            }).catch(function(error) {
+                console.log(error);
+            })
+        },
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.offset = (val - 1) * this.limit;
+            this.getUsers()
+        },
+        handleEdit() {
+            this.$router.push({
+                path: '/member'
+            });
+        },
+        filterTag(value, row) {
+            return row.levelname === value;
+        },
+        // async getUsers() {
+        //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
+        //     this.tableData = [];
+        //     Users.forEach(item => {
+        //         const tableData = {};
+        //         tableData.username = item.username;
+        //         tableData.registe_time = item.registe_time;
+        //         tableData.city = item.city;
+        //         this.tableData.push(tableData);
+        //     })
+        // },
+
+    },
 }
+
 </script>
 <style lang="less">
 @import '../style/mixin';
@@ -614,6 +265,18 @@ export default {
     padding: 20px;
 }
 
+.el-table .cell {
+    white-space: normal;
+    word-break: break-all;
+    line-height: 24px;
+    text-align: center;
+}
+
+.el-table {
+    font-size: 13px;
+    color: #1f2d3d;
+}
+
 .fillcontain .headAdv {
     display: flex;
     justify-content: space-between;
@@ -622,8 +285,15 @@ export default {
 }
 
 .headAdv .listed {
+    font-size:14px;
     display: inline-block;
-    padding-left: 22px;
+
+    margin-left:20px;
+}
+
+.headAdv .recorded {
+    display: inline-block;
+    font-size:14px;
 }
 
 .headAdv .searched {
@@ -631,6 +301,10 @@ export default {
     text-align: center;
     width: 550px;
     height: 45px;
+}
+
+.headAdv .el-select-dropdown {
+    width:95px;
 }
 
 .headAdv .el-input__inner {
@@ -658,7 +332,7 @@ export default {
 }
 
 .headAdv .searched .searched_middle .el-input__inner {
-    width: 50px;
+    width: 65px;
     border-radius: 5px;
 }
 
@@ -672,6 +346,7 @@ export default {
     display: inline-block;
     position: relative;
     left: 0px;
+    top:2px;
 }
 
 .headAdv .searched .searched_right {
@@ -683,7 +358,7 @@ export default {
 .headAdv .searched .searched_middle {
     display: inline-block;
     position: relative;
-    top: 0px;
+    top: 3px;
     left: 40px;
 }
 
@@ -752,6 +427,7 @@ export default {
 }
 
 .searched_middle .el-select .el-input .el-input__icon {
-    left: 50px;
+    left: 55px;
 }
+
 </style>
