@@ -1,0 +1,87 @@
+
+{
+    
+    "fuctionList":[
+                   
+                   {
+                   "iocUrl":"kq_icon",
+                   "name":"考勤",
+                   "fileName":"www/com.bonade.h5.attend",
+                   "url":"index.html",
+                   "enable":"1"
+                   
+                   },
+                   {
+                   "iocUrl":"sp_icon",
+                   "name":"审批",
+                   "fileName":"",
+                   "url":"",
+                   "enable":"0"
+                   },
+                   {
+                   "iocUrl":"yc_icon",
+                   "name":"用车",
+                   "fileName":"www/com.bonade.h5.usercar",
+                   "url":"index.html",
+                   "enable":"1"
+                   },
+                   {
+                   "iocUrl":"yy_icon",
+                   "name":"用油",
+                   "fileName":"www/com.bonade.h5.oil",
+                   "url":"index.html",
+                   "enable":"1"
+                   }
+                   
+                   ],
+    "bannerList":[
+                  
+                  {
+                  "image":"gfjz",
+                  "topTitle":"广发环保策略主题基金",
+                  "content":"年化 6.06%",
+                  "channel":"广发基金 20已购买",
+                  "date":"09/18"
+                  
+                  },
+                  {
+                  "image":"mrzb",
+                  "topTitle":"每日早报",
+                  "content":"广发基金2017年度投资建议",
+                  "channel":"财经新闻  30评论",
+                  "date":"09/17"
+                  
+                  },
+                  {
+                  "image":"amddc",
+                  "topTitle":"爱玛电动车",
+                  "content":"¥1600.00 50%专属折扣",
+                  "channel":"爱玛机械  60已购买",
+                  "date":"09/17"
+                  
+                  },
+                  {
+                  "image":"hxjj",
+                  "topTitle":"和讯基金",
+                  "content":"国内最大最快的免费基金争执数据库",
+                  "channel":"资金资讯  60评论",
+                  "date":"09/17"
+                  
+                  },
+                  {
+                  "image":"djzj",
+                  "topTitle":"大家基金深度调研",
+                  "content":"格上财富深度调研大家资金",
+                  "channel":"资金调查  238评论",
+                  "date":"09/16"
+                  
+                  }
+                  
+                  ]
+}
+
+
+
+
+
+

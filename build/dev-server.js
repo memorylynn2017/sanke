@@ -2,17 +2,21 @@ require('./check-versions')()
 
 var config = require('../config')
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+
+
+
+// 中间件代理
 var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = process.env.NODE_ENV === 'testing'
-  ? require('./webpack.prod.conf')
-  : require('./webpack.dev.conf')
+var webpackConfig = process.env.NODE_ENV === 'testing' ?
+    require('./webpack.prod.conf') :
+    require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -26,19 +30,19 @@ var app = express()
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: () => {}
+    log: () => {}
 })
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function (compilation) {
-  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
-    cb()
-  })
+compiler.plugin('compilation', function(compilation) {
+    compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
+        hotMiddleware.publish({ action: 'reload' })
+        cb()
+    })
 })
 
 // proxy api requests
@@ -52,9 +56,13 @@ compiler.plugin('compilation', function (compilation) {
 
 var context = config.dev.context
 
-switch(process.env.NODE_ENV){
-    case 'local': var proxypath = 'http://localhost:8001'; break;
-    case 'online': var proxypath = 'http://cangdu.org:8001'; break;
+switch (process.env.NODE_ENV) {
+    case 'local':
+        var proxypath = 'http://localhost:8001';
+        break;
+    case 'online':
+        var proxypath = 'http://cangdu.org:8001';
+        break;
 }
 var options = {
     target: proxypath,
@@ -77,28 +85,90 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
+
+
+// 第一篇加入的
+
+var jsonServer = require('json-server')
+var apiServer = jsonServer.create()
+var apiRouter = jsonServer.router('db.json')
+var apiMiddlewares = jsonServer.defaults()
+
+apiServer.use(apiMiddlewares)
+apiServer.use('/api', apiRouter)
+apiServer.listen(port + 1, function(err) {
+    if (err) {
+        console.log(err)
+        return
+    }
+    console.log('Listening at http://localhost:' + (port + 1) + '\n')
+})
+
+// var jsonServer=require('json-server')
+// const apiserver=jsonServer.create()
+// const apirouter=jsonServer.router('db.json')
+// const middlewares=jsonServer.defaults()
+
+// apiserver.use(middlewares)
+// apiserver.use('/api',apirouter)
+// apiserver.listen(port+1,()=>{
+//   console.log('JSON Server is running')
+// })
+
+// 第二篇加入的
+// var apiServer=express()
+// var bodyParser=require('body-parser')
+// apiServer.use(bodyParser.urlencoded({extended:true}))
+// apiServer.use(bodyParser.json())
+// var apiRouter=express.Router()
+// var fs=require('fs')
+//all表示post\put\get等所有的请求都执行后面的回调
+// apiRouter.route('/:apiName')
+// .all(function(req,res){
+//   fs.readFile('./db.json','utf8',function(err,data){
+//     if (err) throw err
+//     var data=JSON.parse(data)
+//     if (data[req.params.apiName]) {
+//       res.json(data[req.params.apiName])
+//     }
+//     else{
+//       res.send('no such api name')
+//     }
+//   })
+// })
+// apiServer.use('/api',apiRouter);
+// apiServer.listen(port+1,function(err){
+//   if (err) {
+//     console.log(err)
+//     return
+//   }
+//   console.log('Listening at http://localhost:'+(port+1)+'\n')
+// })
+
+//完
+
 var uri = 'http://localhost:' + port
 
 var _resolve
 var readyPromise = new Promise(resolve => {
-  _resolve = resolve
+    _resolve = resolve
 })
 
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
-  console.log('> Listening at ' + uri + '\n')
-  // when env is testing, don't need open it
-  if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
-  }
-  _resolve()
+    console.log('> Listening at ' + uri + '\n')
+    // when env is testing, don't need open it
+    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+        opn(uri)
+    }
+    _resolve()
 })
 
 var server = app.listen(port)
 
 module.exports = {
-  ready: readyPromise,
-  close: () => {
-    server.close()
-  }
+    ready: readyPromise,
+    close: () => {
+        server.close()
+    }
 }

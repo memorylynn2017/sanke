@@ -1,0 +1,651 @@
+{
+
+
+
+    "tableData": [
+
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "5566",
+            "username": "王小虎",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "注册会员",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "刘美丽",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "1156",
+            "username": "陈思",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "VIP",
+            "areaname": "美国",
+            "purshname": "55888",
+            "username": "小优",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "99977",
+            "username": "黄建明",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "99977",
+            "username": "黄建明",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "99977",
+            "username": "黄建明",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "99977",
+            "username": "黄建明",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        },
+        {
+            "customer_id": "800615",
+            "levelname": "批发会员",
+            "areaname": "美国",
+            "purshname": "99977",
+            "username": "黄建明",
+            "countname": "100001",
+            "pricename": "10001",
+            "costname": "100011",
+            "registe_time": "2016-10-10",
+            "statusname": "正常"
+        }
+    ],
+    "verifyForm": [
+
+        {
+            "user_id": "1",
+            "user_name": "admin",
+            "pass_word": "123"
+
+
+        },
+        {
+            "user_id": "2",
+            "user_name": "wenli",
+            "pass_word": "123"
+
+
+        }
+
+    ],
+    "shopForm": [
+
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        },
+        {
+            "shop_id": "6001",
+            "shop_type": "C类",
+            "shop_name": "Nana娜那",
+            "shop_market": "KKC_1F098A",
+            "shop_area": "广州市",
+            "shop_ranking": "4800",
+            "shop_time": "2017－07－13 09:00:00",
+            "shop_status": "启用",
+            "shop_edit": "编辑",
+            "shop_Crawling": "抓取商品"
+
+        }
+
+    ],
+    "products": [
+
+        {
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        },
+        {
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        },{
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        },
+        {
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        },
+        {
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        },
+        {
+            "product_id": "0",
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "1",
+            "product_down_time": "4800",
+            "product_edit_up": "[下架]",
+            "product_edit": "编辑",
+            "product_downing": ""
+        }
+
+    ]
+}
+
+
+
