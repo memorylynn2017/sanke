@@ -2,17 +2,17 @@
 
     "userInfo": [
 
-      {
-          "user_name": "admin",
-          "pass_word": "123"
-      },
+        {
+            "user_name": "admin",
+            "pass_word": "admin"
+        },
         {
             "user_name": "wenli",
             "pass_word": "123"
         },
         {
-          "user_name": "abin",
-          "pass_word": "123"
+            "user_name": "abin",
+            "pass_word": "123"
         }
 
     ],

@@ -1,3 +1,5 @@
+//静态网页……需要改成异求请示数据实现内功能
+
 <template>
     <div class="fillcontain">
         <head-top></head-top>

@@ -1,3 +1,6 @@
+
+//模拟异步请求，登陆注册的验证……验证码点击后要能够刷新才算完成
+
 <template>
 <div class="login_page fillcontain">
     <div class="pic"><img src=".././assets/img/figure.png" alt=""></div>
