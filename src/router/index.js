@@ -21,6 +21,7 @@ const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vue
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+const businessList = r => require.ensure([], () => r(require('@/page/businessList')), 'businessList');
 
 const routes = [{
         path: '/',
@@ -93,6 +94,10 @@ const routes = [{
         }, {
             path: '/explain',
             component: explain,
+            meta: ['说明', '说明'],
+        }, {
+            path: '/businessList',
+            component: businessList,
             meta: ['说明', '说明'],
         }]
     }
