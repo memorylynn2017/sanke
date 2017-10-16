@@ -76,7 +76,7 @@
 				ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
 				var x = this.options.width / 5 * i;
 				var y = this.options.height / 2;
-				var deg = randomNum(-30, 30);
+				var deg = randomNum(-20, 20);
 				/**设置旋转角度和坐标原点**/
 				ctx.translate(x, y);
 				ctx.rotate(deg * Math.PI / 180);
@@ -86,13 +86,13 @@
 				ctx.translate(-x, -y);
 			}
 			/**绘制干扰线**/
-			for(var i = 0; i < 4; i++) {
+			/* for(var i = 0; i < 4; i++) {
 				ctx.strokeStyle = randomColor(40, 180);
 				ctx.beginPath();
 				ctx.moveTo(randomNum(0, this.options.width), randomNum(0, this.options.height));
 				ctx.lineTo(randomNum(0, this.options.width), randomNum(0, this.options.height));
 				ctx.stroke();
-			}
+			} */
 			/**绘制干扰点**/
 			for(var i = 0; i < this.options.width/4; i++) {
 				ctx.fillStyle = randomColor(0, 255);
