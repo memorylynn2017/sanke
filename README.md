@@ -1,6 +1,10 @@
 # sanke
 # cd sanke
 # npm install
+
+模拟后台数据接口
+首先运行：
 # npm run mock
-# npm run dev 
+然后：
+# npm run dev
 # npm run build
