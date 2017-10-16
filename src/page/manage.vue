@@ -1,68 +1,72 @@
 <!-- -->
 <template>
-    <div class="manage_page fillcontain">
-        <div class="advTop qf">
-            <div class="advTop_left fl"><a href="#">淘亿批发管理系统 V1.0</a></div>
-            <div class="advTop_right fr">
-                <i class="iconfont icon-home" style="color:#fff;"></i>
-                <i class="iconfont icon-user" style="color:#fff;"></i>
-                <i class="iconfont icon-tuichu" style="color:#fff;" @click="handleExit"></i>
-            </div>
+<div class="manage_page fillcontain">
+    <div class="advTop qf">
+        <div class="advTop_left fl"><a href="#">淘亿批发管理系统 V1.0</a></div>
+        <div class="advTop_right fr">
+            <i class="iconfont icon-home" style="color:#fff;"></i>
+            <i class="iconfont icon-user" style="color:#fff;"></i>
+            <i class="iconfont icon-tuichu" style="color:#fff;" @click="handleExit"></i>
         </div>
-        <el-row style="height: 100%;">
-            <el-col :span="4" style="min-height: 100%; background-color: #293641;">
-                <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
-                    <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
-                    <el-submenu index="2">
-                        <template slot="title">会员管理</template>
-                        <el-menu-item index="userList">会员列表</el-menu-item>
-                        <el-menu-item index="adminList">管理列表</el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="3">
-                        <template slot="title">商家管理</template>
-                        <el-menu-item index="shopList">商家列表</el-menu-item>
-                        <!-- <el-menu-item index="addShop">添加商家</el-menu-item> -->
-                    </el-submenu>
-                    <el-submenu index="4">
-                        <template slot="title">商品管理</template>
-                        <el-menu-item index="foodList">商品列表</el-menu-item>
-                        <!-- <el-menu-item index="addGoods">添加商品</el-menu-item> -->
-                    </el-submenu>
-                    <el-submenu index="5">
-                        <template slot="title">订单管理</template>
-                        <el-menu-item index="orderList">订单列表</el-menu-item>
-                        <!-- <el-menu-item index="orderList">添加订单</el-menu-item> -->
-                    </el-submenu>
-                    <el-submenu index="6">
-                        <template slot="title">发货管理</template>
-                        <el-menu-item index="#">已入库</el-menu-item>
-                        <el-menu-item index="#">待出库</el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="7">
-                        <template slot="title">图表</template>
-                        <el-menu-item index="visitor">用户分布</el-menu-item>
-                        <el-menu-item index="newMember">用户数据</el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="8">
-                        <template slot="title">系统设置</template>
-                        <el-menu-item index="adminSet">管理员设置</el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="9">
-                        <template slot="title">安全管理</template>
-                    </el-submenu>
-                </el-menu>
-            </el-col>
-            <el-col :span="20" style="height: 100%;overflow: auto;">
-                <keep-alive>
-                    <router-view></router-view>
-                </keep-alive>
-            </el-col>
-        </el-row>
     </div>
+    <el-row style="height: 100%;">
+        <el-col :span="4" style="min-height: 100%; background-color: #293641;">
+            <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
+                <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">会员管理</template>
+                    <el-menu-item index="userList">会员列表</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title">商家管理</template>
+                    <el-menu-item index="shopList">商家列表</el-menu-item>
+                    <!-- <el-menu-item index="addShop">添加商家</el-menu-item> -->
+                </el-submenu>
+                <el-submenu index="4">
+                    <template slot="title">商品管理</template>
+                    <el-menu-item index="foodList">商品列表</el-menu-item>
+                    <!-- <el-menu-item index="addGoods">添加商品</el-menu-item> -->
+                </el-submenu>
+                <el-submenu index="5">
+                    <template slot="title">订单管理</template>
+                    <el-menu-item index="orderList">订单列表</el-menu-item>
+                    <!-- <el-menu-item index="orderList">添加订单</el-menu-item> -->
+                </el-submenu>
+                <el-submenu index="6">
+                    <template slot="title">发货管理</template>
+                    <el-menu-item index="#">已入库</el-menu-item>
+                    <el-menu-item index="#">待出库</el-menu-item>
+                </el-submenu>
+                <el-submenu index="7">
+                    <template slot="title">图表</template>
+                    <el-menu-item index="visitor">用户分布</el-menu-item>
+                    <el-menu-item index="newMember">用户数据</el-menu-item>
+                </el-submenu>
+                <el-submenu index="8">
+                    <template slot="title">系统设置</template>
+                    <el-menu-item index="adminSet">管理员设置</el-menu-item>
+                </el-submenu>
+                <!-- <el-submenu index="9">
+                    <template slot="title">安全管理</template>
+                </el-submenu> -->
+            </el-menu>
+        </el-col>
+        <el-col :span="20" style="height: 100%;overflow: auto;">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </el-col>
+    </el-row>
+</div>
 </template>
 <script>
-import { signout } from '@/api/getData'
-import { mapActions, mapState } from 'vuex'
+import {
+    signout
+} from '@/api/getData'
+import {
+    mapActions,
+    mapState
+} from 'vuex'
 export default {
     created() {
         if (!this.adminInfo.id) {
@@ -97,12 +101,10 @@ export default {
         }
     },
 }
-
 </script>
 <style lang="less" scoped>
 @import '../style/mixin';
 @import '//at.alicdn.com/t/font_434872_krcqu8kwibyphkt9.css';
-
 
 .manage_page {
     min-width: 980px;
@@ -111,7 +113,6 @@ export default {
 .qf {
     *zoom: 1;
 }
-
 .qf:after {
     content: '';
     display: table;
@@ -125,7 +126,6 @@ export default {
 .fr {
     float: right;
 }
-
 
 .advTop {
     background: url(".././assets/img/top_1.png") repeat-x;
@@ -162,8 +162,6 @@ export default {
     height: 50px;
     line-height: 50px;
     padding: 0 45px;
-    padding-left: 45px;
     min-width: 100%;
 }
-
 </style>

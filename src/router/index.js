@@ -7,8 +7,6 @@ const login = r => require.ensure([], () => r(require('@/page/login')), 'login')
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const member = r => require.ensure([], () => r(require('@/page/member')), 'member');
-const memberlist = r => require.ensure([], () => r(require('@/page/memberlist')), 'memberlist');
-const memberDetail = r => require.ensure([], () => r(require('@/page/memberDetail')), 'memberDetail');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
@@ -39,14 +37,6 @@ const routes = [{
         }, {
             path: '/member',
             component: member,
-            meta: ['会员管理', '会员信息'],
-        }, {
-            path: '/memberlist',
-            component: memberlist,
-            meta: ['会员管理', '会员信息'],
-        }, {
-            path: '/memberDetail',
-            component: memberDetail,
             meta: ['会员管理', '会员信息'],
         }, {
             path: '/addShop',

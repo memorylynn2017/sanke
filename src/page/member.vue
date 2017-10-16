@@ -3,7 +3,7 @@
         <head-top></head-top>
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-button class="backbtn">返回</el-button>
+                <el-button class="backbtn" @click="handleReturn">返回</el-button>
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
                     <template>
@@ -510,7 +510,7 @@ export default {
         // },
         handleReturn() {
             this.$router.push({
-                path: '/manage.vue'
+                path: '/userList'
             });
         },
     },
@@ -745,7 +745,7 @@ export default {
         }
     }
     .el-tabs--border-card {
-       
+
         border: 1px solid #fff;
         box-shadow: none;
         .backbtn {

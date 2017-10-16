@@ -1,69 +1,73 @@
 <template>
-    <div class="fillcontain">
-        <head-top></head-top>
-        <div class="headAdv">
-            <div class="listed">
-                <span><strong>商家列表</strong></span>
+<div class="fillcontain">
+    <head-top></head-top>
+    <div class="headAdv">
+        <div class="listed">
+            <span><strong>商家列表</strong></span>
+        </div>
+        <div class="searched">
+            <div class="searched_left">
+                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
+                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
-            <div class="searched">
-                <div class="searched_left">
-                    <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
-                        <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-                <div class="searched_right">
-                    <el-input icon="search" v-model="input2">
-                        <el-button slot="append">查询</el-button>   <!--  @click="test2" -->
-                    </el-input>
-                </div>
-                <div class="searched_middle">
-                    <span>显示</span>&nbsp;
-                    <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                        <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-                    </el-select>
-                </div>
+            <div class="searched_right">
+                <el-input icon="search" v-model="input2">
+                    <el-button slot="append">查询</el-button>
+                    <!--  @click="test2" -->
+                </el-input>
             </div>
-            <div class="recorded">
-                <span><strong >总记录数 {{count}}</strong></span>
+            <div class="searched_middle">
+                <span>显示</span>&nbsp;
+                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
+                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
             </div>
         </div>
-        <div class="table_container">
-            <el-table :data="productList" highlight-current-row style="width: 100%">
-                <el-table-column type="index" width="60">
-                </el-table-column>
-                <el-table-column property="product_name" label="商品名称" width="170">
-                </el-table-column>
-                <el-table-column property="product_code" label="商品编号" width="105">
-                </el-table-column>
-                <el-table-column property="product_class" label="分类" width="90">
-                </el-table-column>
-                <el-table-column property="product_puprice" label="拿货价" width="100">
-                </el-table-column>
-                <el-table-column property="product_shop" label="商家名称" width="100">
-                </el-table-column>
-                <el-table-column property="product_up" label="上架" width="80">
-                </el-table-column>
-                <el-table-column property="product_up_time" label="上架时间" width="140">
-                </el-table-column>
-                <el-table-column property="product_down_time" label="下架时间" width="140">
-                </el-table-column>
-                <el-table-column property="editname" label="操作" width="180">
-                  <template scope="scope">
+        <div class="recorded">
+            <span><strong >总记录数 {{count}}</strong></span>
+        </div>
+    </div>
+    <div class="table_container">
+        <el-table ref="multipleTable" :data="productList" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
+            <!-- <el-table-column type="index" width="60">
+                </el-table-column> -->
+            <el-table-column type="selection" width="55">
+            </el-table-column>
+
+            <el-table-column property="product_name" label="商品名称" width="170">
+            </el-table-column>
+            <el-table-column property="product_code" label="商品编号" width="105">
+            </el-table-column>
+            <el-table-column property="product_class" label="分类" width="90">
+            </el-table-column>
+            <el-table-column property="product_puprice" label="拿货价" width="100">
+            </el-table-column>
+            <el-table-column property="product_shop" label="商家名称" width="100">
+            </el-table-column>
+            <el-table-column property="product_up" label="上架" width="80">
+            </el-table-column>
+            <el-table-column property="product_up_time" label="上架时间" width="140">
+            </el-table-column>
+            <el-table-column property="product_down_time" label="下架时间" width="140">
+            </el-table-column>
+            <el-table-column property="editname" label="操作" width="180">
+                <template scope="scope">
                     <el-button style="float:left; border:none;" size="small">[下架]</el-button>
                     <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
                   </template>
-                </el-table-column>
-                <el-table-column property="product_down" label="下架" width="80">
-                </el-table-column>
-              </el-table>
+            </el-table-column>
+            <el-table-column property="product_down" label="下架" width="80">
+            </el-table-column>
+        </el-table>
 
-            <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-                </el-pagination>
-            </div>
+        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+            </el-pagination>
         </div>
     </div>
+</div>
 </template>
 <script>
 import headTop from '../components/headTop'
@@ -114,6 +118,7 @@ export default {
             count: 0,
             currentPage: 1,
             productList: [],
+            multipleSelection: []
         }
     },
     components: {
@@ -153,6 +158,9 @@ export default {
                 });
             }
         },
+        handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
 
         async initData() {
             var data = []
@@ -208,7 +216,6 @@ export default {
 .qf {
     *zoom: 1;
 }
-
 .qf:after {
     content: '';
     display: table;
@@ -286,7 +293,7 @@ export default {
     line-height: 1;
     outline: 0;
     padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
 }
 
 .headAdv .searched .searched_left .el-input__inner {
@@ -307,7 +314,7 @@ export default {
 .headAdv .searched .searched_left {
     display: inline-block;
     position: relative;
-    left: 0px;
+    left: 0;
     top: 2px;
 }
 
@@ -337,7 +344,7 @@ export default {
     text-align: left;
 }
 
-.el-table th>.cell {
+.el-table th > .cell {
     background-color: #4f616a;
 }
 
@@ -373,13 +380,13 @@ export default {
     top: 2px;
     text-align: center;
     color: #bfcbd9;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .el-select .el-input .el-input__icon {
     color: #bfcbd9;
     font-size: 12px;
-    transition: transform .3s;
+    transition: transform 0.3s;
     -ms-transform: translateY(-50%) rotate(180deg);
     transform: translateY(-50%) rotateZ(180deg);
     line-height: 16px;
@@ -392,4 +399,16 @@ export default {
     left: 55px;
 }
 
+.el-checkbox__inner {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #bfcbd9;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    z-index: 1;
+    transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+}
 </style>
