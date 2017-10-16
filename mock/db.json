@@ -659,95 +659,16 @@
     "products": [
 
         {
-            "product_id": "0",
             "product_name": "实拍7166# 2017秋装",
             "product_code": "7166",
             "product_class": "打底衫",
-
             "product_puprice": "￥35.00",
             "product_shop": "时代物语",
             "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
-        },
-        {
-            "product_id": "0",
-            "product_name": "实拍7166# 2017秋装",
-            "product_code": "7166",
-            "product_class": "打底衫",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1",
 
-            "product_puprice": "￥35.00",
-            "product_shop": "时代物语",
-            "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
-        },
-        {
-            "product_id": "0",
-            "product_name": "实拍7166# 2017秋装",
-            "product_code": "7166",
-            "product_class": "打底衫",
-
-            "product_puprice": "￥35.00",
-            "product_shop": "时代物语",
-            "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
-        },
-        {
-            "product_id": "0",
-            "product_name": "实拍7166# 2017秋装",
-            "product_code": "7166",
-            "product_class": "打底衫",
-
-            "product_puprice": "￥35.00",
-            "product_shop": "时代物语",
-            "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
-        },
-        {
-            "product_id": "0",
-            "product_name": "实拍7166# 2017秋装",
-            "product_code": "7166",
-            "product_class": "打底衫",
-
-            "product_puprice": "￥35.00",
-            "product_shop": "时代物语",
-            "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
-        },
-        {
-            "product_id": "0",
-            "product_name": "实拍7166# 2017秋装",
-            "product_code": "7166",
-            "product_class": "打底衫",
-
-            "product_puprice": "￥35.00",
-            "product_shop": "时代物语",
-            "product_up": "1",
-            "product_up_time": "1",
-            "product_down_time": "4800",
-            "product_edit_up": "[下架]",
-            "product_edit": "编辑",
-            "product_downing": ""
         }
-
     ]
 }
