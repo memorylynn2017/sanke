@@ -19,7 +19,7 @@
                 <div class="line fl"></div>
                 <div class="login-right fl">
                     <el-form-item>
-                        <el-button @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
+                        <el-button @click="login()" class="submit_btn">登陆</el-button>
                     </el-form-item>
                 </div>
             </el-form>
@@ -29,26 +29,21 @@
 </div>
 </template>
 <script>
-import {
-    login,
-    getAdminInfo
-} from '@/api/getData'
-import {
-    mapActions,
-    mapState
-} from 'vuex'
-import Code from '.././assets/js/gverify.js'
-
+import {login, getAdminInfo} from '@/api/getData'
+import {mapActions, mapState} from 'vuex'
+import Gverify from '.././assets/js/gverify.js'
+import axios from 'axios'
 
 export default {
 
     data() {
         return {
             loginForm: {
-                userid: '',
                 username: '',
                 password: '',
+                checknode: ''
             },
+            loginCode: 10,
             verifyForm: {
               userid: '',
               user_name: '',
@@ -72,28 +67,31 @@ export default {
               }],
             },
             showLogin: false,
+            codImg: ''
           }
         },
 
 
     created() {
-        this.initData();
+        //this.initData();
     },
     mounted() {
+        //this.checkLogin('admin','123');
         this.showLogin = true;
         // 执行this.getAdminData;
         // if (!this.adminInfo.id) {
         //     this.getAdminData()
         // }
-        this.$nextTick(function() {
+        /* this.$nextTick(function() {
           this.loginForm.verifycode = new GVerify("codeimg");
-        })
+        }) */
+        this.codImg = new GVerify("codeimg");
       },
       computed: {
         ...mapState(['adminInfo']),
       },
       methods: {
-        initData() {
+        /* initData() {
           var data = []
           let url = 'http://localhost:3000/verifyForm'
           let _this = this
@@ -109,19 +107,101 @@ export default {
           }).catch(function(error) {
             console.log(error);
           })
+        }, */
+        checkLogin(userName,password){
+          const url = 'http://localhost:3000/verifyForm';
+          //console.log(this.loginCode);
+          axios.get(url).then(res=>{
+              if(res.data){
+                  const userData = res.data;
+                  const data = userData.filter(function(item){
+                    return item.user_name == userName;
+                  });
+                  if(data){
+                    if(data[0].pass_word == password){
+                    this.loginCode = 200;
+                  }else{
+                    this.loginCode = 100;
+                  }  
+                  }else{
+                    this.loginCode = 300;
+                  } 
+              }
+               console.log(this.loginCode);
+          }).catch(error=>{
+              console.log(error);
+          })
+          console.log(this.loginCode);
+        },
+        login(){
+          if(this.codImg.validate(this.loginForm.checknode)){
+            this.checkLogin(this.loginForm.username,this.loginForm.password);
+            console.log(this.loginCode);
+            if(this.loginCode == 200){
+              this.$message({
+                type: 'success',
+                message: '验证成功'
+              });
+              this.$router.push('manage');
+            }else if(this.loginCode == 100){
+              this.$message({
+                type: 'error',
+                message: '密码错误'
+              });
+            }else if(this.loginCode == 300){
+              this.$message({
+                type: 'error',
+                message: '用户名不存在'
+              });
+            }else{
+                //接口请求错误
+            }
+          }else{
+            this.$notify.error({
+              title: '错误',
+              message: '验证信息输入有误',
+              offset: 100
+            });
+           
+          }
         },
         ...mapActions(['getAdminData']),
         async submitForm(formName) {
-          this.$refs[formName].validate(async(valid) => {
+          this.$refs[formName].validate(async(valid) => { 
             console.log(this.verifyForm);
             // const res = await initData({ user_name: this.loginForm.username, password: this.loginForm.password })
             // console.log(res.status);
             if (valid) {
-              var myusername = this.verifyForm[0].username;
+              if(this.loginForm.verifycode.validate(this.loginForm.checknode)){
+                const code = this.checkLogin(this.loginForm.username,this.loginForm.password);
+                if(code == 200){
+                  this.$message({
+                    type: 'success',
+                    message: '验证成功'
+                  });
+                  this.$router.push('manage')
+                }else if(code == 100){
+                  this.$message({
+                    type: 'error',
+                    message: '用户名或密码错误'
+                  });
+                }else{
+                  //接口出错，调试
+                }
+              }else{
+                this.$notify.error({
+                  title: '错误',
+                  message: '验证信息输入有误',
+                  offset: 100
+                });
+                return false;
+              }
+              /* var myusername = this.verifyForm[0].username;
               var mypassword = this.verifyForm[0].password;
-              console.log("验证码：" + this.loginForm.verifycode.validate(this.loginForm.checknode));
+              console.log("验证码：" + this.loginForm.verifycode.validate(this.loginForm.checknode)); */
+              
               // 1、现在的逻辑
-              if (this.loginForm.username == myusername && this.loginForm.password == mypassword && this.loginForm.verifycode.validate(this.loginForm.checknode)) {
+              /* if (this.loginForm.username == myusername && this.loginForm.password == mypassword && this.loginForm.verifycode.validate(this.loginForm.checknode)) {
                 this.$message({
                   type: 'success',
                   message: '验证成功'
@@ -156,9 +236,9 @@ export default {
                 offset: 100
               });
               return false;
-            }
+            } */
 
-
+            
             // 2、以前的逻辑
             //     const res = await login({ user_name: this.loginForm.username, password: this.loginForm.password });
             //     if (res.status == 1) {
@@ -189,7 +269,7 @@ export default {
             //         offset: 100
             //     });
             //     return false;
-            // }
+            }
           });
         },
       },
