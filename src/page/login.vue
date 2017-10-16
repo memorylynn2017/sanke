@@ -1,3 +1,5 @@
+
+/ *come from  login.vue.r1 */
 <template>
 <div class="login_page fillcontain">
     <div class="pic"><img src=".././assets/img/figure.png" alt=""></div>
