@@ -42,11 +42,11 @@
                 </el-table-column>
                 <el-table-column property="product_shop" label="商家名称" width="100">
                 </el-table-column>
-                <el-table-column property="product_up" label="上架" width="70">
+                <el-table-column property="product_up" label="上架" width="80">
                 </el-table-column>
-                <el-table-column property="product_up_time" label="上架时间" width="180">
+                <el-table-column property="product_up_time" label="上架时间" width="140">
                 </el-table-column>
-                <el-table-column property="product_down_time" label="下架时间" width="180">
+                <el-table-column property="product_down_time" label="下架时间" width="140">
                 </el-table-column>
                 <el-table-column property="editname" label="操作" width="180">
                   <template scope="scope">
@@ -54,7 +54,7 @@
                     <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
                   </template>
                 </el-table-column>
-                <el-table-column property="product_down" label="下架" width="70">
+                <el-table-column property="product_down" label="下架" width="80">
                 </el-table-column>
               </el-table>
 

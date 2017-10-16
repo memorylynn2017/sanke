@@ -21,17 +21,17 @@
                     <el-submenu index="3">
                         <template slot="title">商家管理</template>
                         <el-menu-item index="shopList">商家列表</el-menu-item>
-                        <el-menu-item index="addShop">添加商家</el-menu-item>
+                        <!-- <el-menu-item index="addShop">添加商家</el-menu-item> -->
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">商品管理</template>
                         <el-menu-item index="foodList">商品列表</el-menu-item>
-                        <el-menu-item index="addGoods">添加商品</el-menu-item>
+                        <!-- <el-menu-item index="addGoods">添加商品</el-menu-item> -->
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">订单管理</template>
                         <el-menu-item index="orderList">订单列表</el-menu-item>
-                        <el-menu-item index="orderList">添加订单</el-menu-item>
+                        <!-- <el-menu-item index="orderList">添加订单</el-menu-item> -->
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">发货管理</template>
@@ -40,7 +40,6 @@
                     </el-submenu>
                     <el-submenu index="7">
                         <template slot="title">图表</template>
-                        <!-- <i class="el-icon-star-on"></i> -->
                         <el-menu-item index="visitor">用户分布</el-menu-item>
                         <el-menu-item index="newMember">用户数据</el-menu-item>
                     </el-submenu>
