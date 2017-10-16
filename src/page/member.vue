@@ -489,32 +489,22 @@ export default {
                 console.log('获取数据失败', err);
             }
         },
+        handleReturn() {
+          this.$router.push({
+            path: '/userList'
+          });
+        },
         handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
+          console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
-            this.currentPage = val;
-            this.offset = (val - 1) * this.limit;
-            this.getUsers()
+          this.currentPage = val;
+          this.offset = (val - 1) * this.limit;
+          this.getUsers()
         },
-        // async getUsers() {
-        //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
-        //     this.tableData = [];
-        //     Users.forEach(item => {
-        //         const tableData = {};
-        //         tableData.username = item.username;
-        //         tableData.registe_time = item.registe_time;
-        //         tableData.city = item.city;
-        //         this.tableData.push(tableData);
-        //     })
-        // },
-        handleReturn() {
-            this.$router.push({
-                path: '/userList'
-            });
-        },
-    },
-}
+      },
+    }
+
 
 </script>
 <style lang="less">

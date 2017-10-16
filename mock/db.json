@@ -1,6 +1,21 @@
 {
 
+    "userInfo": [
 
+      {
+          "user_name": "admin",
+          "pass_word": "123"
+      },
+        {
+            "user_name": "wenli",
+            "pass_word": "123"
+        },
+        {
+          "user_name": "abin",
+          "pass_word": "123"
+        }
+
+    ],
 
     "tableData": [
 
@@ -654,104 +669,104 @@
             "shop_Crawling": "抓取商品"
 
         }
-      ],
-      "products": [
+    ],
+    "products": [
 
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "7166",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "时代物语",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
-
-        },
-        {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "7166",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "时代物语",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "7166",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "时代物语",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "7166",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "时代物语",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "2163",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "EJOY女装",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "7166",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "时代物语",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "2163",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "EJOY女装",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "2163",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "EJOY女装",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "2163",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "EJOY女装",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "2163",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "EJOY女装",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         },
         {
-          "product_name": "实拍7166# 2017秋装",
-          "product_code": "2163",
-          "product_class": "打底衫",
-          "product_puprice": "￥35.00",
-          "product_shop": "EJOY女装",
-          "product_up": "1",
-          "product_up_time": "2017-10-10",
-          "product_down_time": "2017-10-16",
-          "product_down": "1"
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "2163",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "EJOY女装",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
+
+        },
+        {
+            "product_name": "实拍7166# 2017秋装",
+            "product_code": "2163",
+            "product_class": "打底衫",
+            "product_puprice": "￥35.00",
+            "product_shop": "EJOY女装",
+            "product_up": "1",
+            "product_up_time": "2017-10-10",
+            "product_down_time": "2017-10-16",
+            "product_down": "1"
 
         }
-      ]
-    }
+    ]
+}
