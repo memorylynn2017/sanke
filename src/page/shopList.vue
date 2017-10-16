@@ -1,69 +1,72 @@
 <template>
-    <div class="fillcontain">
-        <head-top></head-top>
-        <div class="headAdv">
-            <div class="listed">
+<div class="fillcontain">
+    <head-top></head-top>
+    <div class="headAdv">
+        <!-- <div class="listed">
                 <span><strong>商家列表</strong></span>
+            </div> -->
+        <div class="searched" style="width:850px;">
+            <div class="searched_left">
+                <el-button style="background-color:#80808033;">新建商家</el-button>
+                <el-button style="background-color:#80808033;">更新数据</el-button>
+                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1" style="margin-left:40px">
+                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
-            <div class="searched">
-                <div class="searched_left">
-                    <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
-                        <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-                <div class="searched_right">
-                    <el-input icon="search" v-model="input2">
-                        <el-button slot="append">查询</el-button>   <!--  @click="test2" -->
-                    </el-input>
-                </div>
-                <div class="searched_middle">
-                    <span>显示</span>&nbsp;
-                    <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                        <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-                    </el-select>
-                </div>
+            <div class="searched_right_r">
+
+                <el-input icon="search" v-model="input2">
+                    <el-button slot="append">查询</el-button>
+                </el-input>
             </div>
-            <div class="recorded">
-                <span><strong >总记录数 {{count}}</strong></span>
+            <div class="searched_right_l">
+                <span>显示</span>&nbsp;
+                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
+                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
             </div>
         </div>
-        <!-- 以后需要从后台模拟数据出来 -->
-        <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
-        <div class="table_container">
-            <el-table :data="shopList" highlight-current-row style="width: 100%">
-                <!-- <el-table-column type="index" width="60">
+        <div class="recorded">
+            <span><strong >总记录数 {{count}}</strong></span>
+        </div>
+    </div>
+    <!-- 以后需要从后台模拟数据出来 -->
+    <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
+    <div class="table_container">
+        <el-table :data="shopList" highlight-current-row style="width: 100%">
+            <!-- <el-table-column type="index" width="60">
                 </el-table-column> -->
-                <el-table-column property="shop_id" label="商家ID" width="80">
-                </el-table-column>
-                <el-table-column property="shop_type" label="类型" width="70">
-                </el-table-column>
-                <el-table-column property="shop_market" label="商家名称" width="135">
-                </el-table-column>
-                <el-table-column property="shop_area" label="所在市场" width="100">
-                </el-table-column>
-                <el-table-column property="shop_ranking" label="商家排名" width="100">
-                </el-table-column>
-                <el-table-column property="shop_time" label="最后抓取商品时间" width="180">
-                </el-table-column>
-                <el-table-column property="shop_time" label="进驻时间" width="180">
-                </el-table-column>
-                </el-table-column>
-                <el-table-column property="shop_status" label="状态" width="75 ">
-                </el-table-column>
-                <el-table-column property="editname" label="操作" width="180">
-                    <template scope="scope">
+            <el-table-column property="shop_id" label="商家ID" width="80">
+            </el-table-column>
+            <el-table-column property="shop_type" label="类型" width="70">
+            </el-table-column>
+            <el-table-column property="shop_market" label="商家名称" width="135">
+            </el-table-column>
+            <el-table-column property="shop_area" label="所在市场" width="100">
+            </el-table-column>
+            <el-table-column property="shop_ranking" label="商家排名" width="100">
+            </el-table-column>
+            <el-table-column property="shop_time" label="最后抓取商品时间" width="180">
+            </el-table-column>
+            <el-table-column property="shop_time" label="进驻时间" width="180">
+            </el-table-column>
+            </el-table-column>
+            <el-table-column property="shop_status" label="状态" width="75 ">
+            </el-table-column>
+            <el-table-column property="editname" label="操作" width="180">
+                <template scope="scope">
                         <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
                         <el-button style="float:left; display:inline-block; border:none;" size="small">[抓取商品]</el-button>
                     </template>
-                </el-table-column>
-            </el-table>
-            <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-                </el-pagination>
-            </div>
+            </el-table-column>
+        </el-table>
+        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+            </el-pagination>
         </div>
     </div>
+</div>
 </template>
 <script>
 import headTop from '../components/headTop'
@@ -238,14 +241,12 @@ export default {
 
     },
 }
-
 </script>
 <style lang="less">
 @import '../style/mixin';
 .qf {
     *zoom: 1;
 }
-
 .qf:after {
     content: '';
     display: table;
@@ -277,6 +278,7 @@ export default {
 }
 
 .fillcontain .headAdv {
+    min-width: 900px;
     display: flex;
     justify-content: space-between;
     height: 45px;
@@ -298,7 +300,7 @@ export default {
 .headAdv .searched {
     display: inline-block;
     text-align: center;
-    width: 550px;
+    width: 850px;
     height: 45px;
 }
 
@@ -323,14 +325,14 @@ export default {
     line-height: 1;
     outline: 0;
     padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
 }
 
 .headAdv .searched .searched_left .el-input__inner {
     border-radius: 5px;
 }
 
-.headAdv .searched .searched_middle .el-input__inner {
+.headAdv .searched .searched_right_l .el-input__inner {
     width: 65px;
     border-radius: 5px;
 }
@@ -348,13 +350,13 @@ export default {
     top: 2px;
 }
 
-.headAdv .searched .searched_right {
+.headAdv .searched .searched_right_r {
     display: inline-block;
     position: relative;
     left: 5px;
 }
 
-.headAdv .searched .searched_middle {
+.headAdv .searched .searched_right_l {
     display: inline-block;
     position: relative;
     top: 3px;
@@ -374,7 +376,7 @@ export default {
     text-align: left;
 }
 
-.el-table th>.cell {
+.el-table th > .cell {
     background-color: #4f616a;
 }
 
@@ -410,13 +412,13 @@ export default {
     top: 2px;
     text-align: center;
     color: #bfcbd9;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .el-select .el-input .el-input__icon {
     color: #bfcbd9;
     font-size: 12px;
-    transition: transform .3s;
+    transition: transform 0.3s;
     -ms-transform: translateY(-50%) rotate(180deg);
     transform: translateY(-50%) rotateZ(180deg);
     line-height: 16px;
@@ -425,8 +427,7 @@ export default {
     cursor: pointer;
 }
 
-.searched_middle .el-select .el-input .el-input__icon {
+.searched_right_l .el-select .el-input .el-input__icon {
     left: 55px;
 }
-
 </style>

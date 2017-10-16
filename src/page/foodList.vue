@@ -1,210 +1,202 @@
 <template>
-    <div class="fillcontain">
-        <head-top></head-top>
-        <div class="table_container">
-            <el-table>
-                <el-table-column>
-                </el-table-column>
-                <el-table-column label="商品名称" prop="name">
-                </el-table-column>
-                <el-table-column label="商品介绍" prop="description">
-                </el-table-column>
-                <el-table-column label="评分" prop="rating">
-                </el-table-column>
-                <el-table-column label="操作" width="160">
-                    <template scope="scope">
-                        <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="Pagination">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-                </el-pagination>
+<div class="fillcontain">
+    <head-top></head-top>
+    <div class="headAdv">
+        <div class="listed">
+            <span><strong>商家列表</strong></span>
+        </div>
+        <div class="searched">
+            <div class="searched_left">
+                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
+                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
-            <el-dialog title="修改商品信息" v-model="dialogFormVisible">
-                <el-form :model="selectTable">
-                    <el-form-item label="商品名称" label-width="100px">
-                        <el-input v-model="selectTable.name" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="商品介绍" label-width="100px">
-                        <el-input v-model="selectTable.description"></el-input>
-                    </el-form-item>
-                    <el-form-item label="商品分类" label-width="100px">
-                        <el-select v-model="selectIndex" :placeholder="selectMenu.label" @change="handleSelect">
-                            <el-option v-for="item in menuOptions" :key="item.value" :label="item.label" :value="item.index">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="商品图片" label-width="100px">
-                        <el-upload class="avatar-uploader" :action="baseUrl + '/v1/addimg/food'" :show-file-list="false" :on-success="handleServiceAvatarScucess" :before-upload="beforeAvatarUpload">
-                            <img v-if="selectTable.image_path" :src="baseImgPath + selectTable.image_path" class="avatar">
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload>
-                    </el-form-item>
-                </el-form>
-                <el-row style="overflow: auto; text-align: center;">
-                    <el-table :data="specs" style="margin-bottom: 20px;" :row-class-name="tableRowClassName">
-                        <el-table-column prop="specs" label="规格">
-                        </el-table-column>
-                        <el-table-column prop="packing_fee" label="包装费">
-                        </el-table-column>
-                        <el-table-column prop="price" label="价格">
-                        </el-table-column>
-                        <el-table-column label="操作">
-                            <template scope="scope">
-                                <el-button size="small" type="danger" @click="deleteSpecs(scope.$index)">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                    <el-button type="primary" @click="specsFormVisible = true" style="margin-bottom: 10px;">添加规格</el-button>
-                </el-row>
-                <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="updateFood">确 定</el-button>
-                </div>
-            </el-dialog>
-            <el-dialog title="添加规格" v-model="specsFormVisible">
-                <el-form :rules="specsFormrules" :model="specsForm">
-                    <el-form-item label="规格" label-width="100px" prop="specs">
-                        <el-input v-model="specsForm.specs" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="包装费" label-width="100px">
-                        <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
-                    </el-form-item>
-                    <el-form-item label="价格" label-width="100px">
-                        <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
-                    </el-form-item>
-                </el-form>
-                <div slot="footer" class="dialog-footer">
-                    <el-button @click="specsFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="addspecs">确 定</el-button>
-                </div>
-            </el-dialog>
+            <div class="searched_right">
+                <el-input icon="search" v-model="input2">
+                    <el-button slot="append">查询</el-button>
+                </el-input>
+            </div>
+            <div class="searched_middle">
+                <span>显示</span>&nbsp;
+                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
+                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="recorded">
+            <span><strong >总记录数 {{count}}</strong></span>
         </div>
     </div>
+    <div class="table_container">
+        <el-table ref="multipleTable" :data="productList" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
+            <!-- <el-table-column type="index" width="60">
+                </el-table-column> -->
+            <el-table-column type="selection" width="55">
+            </el-table-column>
+
+            <el-table-column property="product_name" label="商品名称" width="170">
+            </el-table-column>
+            <el-table-column property="product_code" label="商品编号" width="105">
+            </el-table-column>
+            <el-table-column property="product_class" label="分类" width="90">
+            </el-table-column>
+            <el-table-column property="product_puprice" label="拿货价" width="100">
+            </el-table-column>
+            <el-table-column property="product_shop" label="商家名称" width="100">
+            </el-table-column>
+            <el-table-column property="product_up" label="上架" width="80">
+
+            </el-table-column>
+            <el-table-column property="product_up_time" label="上架时间" width="140">
+            </el-table-column>
+            <el-table-column property="product_down_time" label="下架时间" width="140">
+            </el-table-column>
+            <el-table-column property="editname" label="操作" width="180">
+                <template scope="scope">
+                    <el-button style="float:left; border:none;" size="small">[下架]</el-button>
+                    <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
+                  </template>
+            </el-table-column>
+            <el-table-column property="product_down" label="下架" width="80">
+                <template scope="scope">
+                <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
+                </el-switch>
+                </template>
+            </el-table-column>
+
+
+        </el-table>
+
+        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+            </el-pagination>
+        </div>
+    </div>
+</div>
 </template>
 <script>
 import headTop from '../components/headTop'
-import { baseUrl, baseImgPath } from '@/config/env'
-import { getFoods, getFoodsCount, getMenu, updateFood, deleteFood, getResturantDetail, getMenuById } from '@/api/getData'
+import {
+    getUserList,
+    getUserCount
+} from '@/api/getData'
 export default {
     data() {
         return {
-            baseUrl,
-            baseImgPath,
-            restaurant_id: null,
-            city: {},
+            oncontrol: true,
+            tableData: [
+
+            ],
+            options1: [{
+                value: 'A类',
+                label: 'A类'
+            }, {
+                value: 'B类',
+                label: 'B类'
+            }, {
+                value: 'C类',
+                label: 'C类'
+            }, {
+                value: 'D类',
+                label: 'D类'
+            }, {
+                value: 'T类',
+                label: 'T类'
+            }],
+            options2: [{
+                value: '选项1',
+                label: '30'
+            }, {
+                value: '选项2',
+                label: '60'
+            }, {
+                value: '选项3',
+                label: '90'
+            }, {
+                value: '选项4',
+                label: '120'
+            }],
+            input1: '',
+            input2: '',
+            myvalue1: '所有等级',
+            myvalue2: '30',
+            currentRow: null,
             offset: 0,
             limit: 20,
             count: 0,
-            tableData: [],
             currentPage: 1,
-            selectTable: {},
-            dialogFormVisible: false,
-            menuOptions: [],
-            selectMenu: {},
-            selectIndex: null,
-            specsForm: {
-                specs: '',
-                packing_fee: 0,
-                price: 20,
-            },
-            specsFormrules: {
-                specs: [
-                    { required: true, message: '请输入规格', trigger: 'blur' },
-                ],
-            },
-            specsFormVisible: false,
-            expendRow: [],
-        }
-    },
-    created() {
-        this.restaurant_id = this.$route.query.restaurant_id;
-        this.initData();
-    },
-    computed: {
-        specs: function() {
-            let specs = [];
-            if (this.selectTable.specfoods) {
-                this.selectTable.specfoods.forEach(item => {
-                    specs.push({
-                        specs: item.specs_name,
-                        packing_fee: item.packing_fee,
-                        price: item.price,
-                    })
-                })
-            }
-            return specs
+            productList: [],
+            multipleSelection: []
         }
     },
     components: {
         headTop,
     },
+    computed: {
+        // tableFilter() {
+        //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
+        // }
+    },
+
+    // 创建后的钩子函数
+
+    // 注意这个循环逻辑
+
+    // this.tableData.forEach((e, i) => {
+    //     if (e.levelname == myvalue1) {
+    //         tablearray.push(this.tableData[i]);
+    //     }
+    //     // console.log(tablearray);
+    //     this.tableData = tablearray;
+    // })
+
+    created() {
+        this.initData();
+
+    },
     methods: {
+
+        test1(myvalue1) {
+            // console.log(myvalue1);
+            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+                this.productList = this.tableData;
+            } else {
+                this.productList = this.tableData.filter(item => {
+                    return item.shop_type !== null && item.shop_type == this.myvalue1;
+                });
+            }
+        },
+        handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
+
         async initData() {
-            try {
-                const countData = await getFoodsCount({ restaurant_id: this.restaurant_id });
-                if (countData.status == 1) {
-                    this.count = countData.count;
-                } else {
-                    throw new Error('获取数据失败');
+            var data = []
+            let url = 'http://localhost:3000/products'
+            let _this = this
+            this.$http.get(url, {}).then(function(res) {
+                for (let i = 0; i < res.data.length; i++) {
+
+                    var obj = {}
+                    obj.product_name = res.data[i].product_name
+                    obj.product_code = res.data[i].product_code
+                    obj.product_class = res.data[i].product_class
+                    obj.product_puprice = res.data[i].product_puprice
+                    obj.product_shop = res.data[i].product_shop
+                    obj.product_up = res.data[i].product_up
+                    obj.product_up_time = res.data[i].product_up_time
+                    obj.product_down_time = res.data[i].product_down_time
+                    obj.product_down = res.data[i].product_down
+                    data[i] = obj
                 }
-                this.getFoods();
-            } catch (err) {
-                console.log('获取数据失败', err);
-            }
-        },
-        async getMenu() {
-            this.menuOptions = [];
-            try {
-                const menu = await getMenu({ restaurant_id: this.selectTable.restaurant_id, allMenu: true });
-                menu.forEach((item, index) => {
-                    this.menuOptions.push({
-                        label: item.name,
-                        value: item.id,
-                        index,
-                    })
-                })
-            } catch (err) {
-                console.log('获取商品种类失败', err);
-            }
-        },
-        async getFoods() {
-            const Foods = await getFoods({ offset: this.offset, limit: this.limit, restaurant_id: this.restaurant_id });
-            this.tableData = [];
-            Foods.forEach((item, index) => {
-                const tableData = {};
-                tableData.name = item.name;
-                tableData.item_id = item.item_id;
-                tableData.description = item.description;
-                tableData.rating = item.rating;
-                tableData.month_sales = item.month_sales;
-                tableData.restaurant_id = item.restaurant_id;
-                tableData.category_id = item.category_id;
-                tableData.image_path = item.image_path;
-                tableData.specfoods = item.specfoods;
-                tableData.index = index;
-                this.tableData.push(tableData);
+                console.log(data);
+                _this.tableData = data;
+                console.log(_this.tableData);
+                _this.productList = _this.tableData;
+            }).catch(function(error) {
+                console.log(error);
             })
-        },
-        tableRowClassName(row, index) {
-            if (index === 1) {
-                return 'info-row';
-            } else if (index === 3) {
-                return 'positive-row';
-            }
-            return '';
-        },
-        addspecs() {
-            this.specs.push({ ...this.specsForm });
-            this.specsForm.specs = '';
-            this.specsForm.packing_fee = 0;
-            this.specsForm.price = 20;
-            this.specsFormVisible = false;
-        },
-        deleteSpecs(index) {
-            this.specs.splice(index, 1);
         },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
@@ -212,128 +204,220 @@ export default {
         handleCurrentChange(val) {
             this.currentPage = val;
             this.offset = (val - 1) * this.limit;
-            this.getFoods()
+            this.getUsers()
         },
-        expand(row, status) {
-            if (status) {
-                this.getSelectItemData(row)
-            } else {
-                const index = this.expendRow.indexOf(row.index);
-                this.expendRow.splice(index, 1)
-            }
+        // handleEdit() {
+        //     this.$router.push({
+        //         path: '/member'
+        //     });
+        // },
+        filterTag(value, row) {
+            return row.levelname === value;
         },
-        handleEdit(row) {
-            this.getSelectItemData(row, 'edit')
-            this.dialogFormVisible = true;
-        },
-        async getSelectItemData(row, type) {
-            const restaurant = await getResturantDetail(row.restaurant_id);
-            const category = await getMenuById(row.category_id)
-            this.selectTable = { ...row, ...{ restaurant_name: restaurant.name, restaurant_address: restaurant.address, category_name: category.name } };
+      },
+    }
+    </script>
 
-            this.selectMenu = { label: category.name, value: row.category_id }
-            this.tableData.splice(row.index, 1, { ...this.selectTable });
-            this.$nextTick(() => {
-                this.expendRow.push(row.index);
-            })
-            if (type == 'edit' && this.restaurant_id != row.restaurant_id) {
-                this.getMenu();
-            }
-        },
-        handleSelect(index) {
-            this.selectIndex = index;
-            this.selectMenu = this.menuOptions[index];
-        },
-        async handleDelete(index, row) {
-            try {
-                const res = await deleteFood(row.item_id);
-                if (res.status == 1) {
-                    this.$message({
-                        type: 'success',
-                        message: '删除商品成功'
-                    });
-                    this.tableData.splice(index, 1);
-                } else {
-                    throw new Error(res.message)
-                }
-            } catch (err) {
-                this.$message({
-                    type: 'error',
-                    message: err.message
-                });
-                console.log('删除商品失败')
-            }
-        },
-        handleServiceAvatarScucess(res, file) {
-            if (res.status == 1) {
-                this.selectTable.image_path = res.image_path;
-            } else {
-                this.$message.error('上传图片失败！');
-            }
-        },
-        beforeAvatarUpload(file) {
-            const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 2;
 
-            if (!isRightType) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
-            }
-            if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
-            }
-            return isRightType && isLt2M;
-        },
-        async updateFood() {
-            this.dialogFormVisible = false;
-            try {
-                const subData = { new_category_id: this.selectMenu.value, specs: this.specs };
-                const postData = { ...this.selectTable, ...subData };
-                const res = await updateFood(postData)
-                if (res.status == 1) {
-                    this.$message({
-                        type: 'success',
-                        message: '更新商品信息成功'
-                    });
-                    this.getFoods();
-                } else {
-                    this.$message({
-                        type: 'error',
-                        message: res.message
-                    });
-                }
-            } catch (err) {
-                console.log('更新商铺信息失败', err);
-            }
-        },
-    },
-}
 
-</script>
 <style lang="less">
 @import '../style/mixin';
-.demo-table-expand {
-    font-size: 0;
+.qf {
+    *zoom: 1;
+}
+.qf:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
-.demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
+.fl {
+    float: left;
 }
 
-.demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
+.fr {
+    float: right;
 }
 
 .table_container {
     padding: 20px;
 }
 
-.Pagination {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 8px;
+.el-table .cell {
+    white-space: normal;
+    word-break: break-all;
+    line-height: 24px;
+    text-align: center;
 }
 
+.el-table {
+    font-size: 13px;
+    color: #1f2d3d;
+}
+
+.fillcontain .headAdv {
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    line-height: 45px;
+}
+
+.headAdv .listed {
+    font-size: 14px;
+    display: inline-block;
+
+    margin-left: 20px;
+}
+
+.headAdv .recorded {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.headAdv .searched {
+    display: inline-block;
+    text-align: center;
+    width: 550px;
+    height: 45px;
+}
+
+.headAdv .el-select-dropdown {
+    width: 95px;
+}
+
+.headAdv .el-input__inner {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 50px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    font-size: inherit;
+    height: 32px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
+}
+
+.headAdv .searched .searched_left .el-input__inner {
+    border-radius: 5px;
+}
+
+.headAdv .searched .searched_middle .el-input__inner {
+    width: 65px;
+    border-radius: 5px;
+}
+
+.headAdv .searched .el-select .el-input {
+    width: 112px;
+    height: 45px;
+    border-radius: 50px;
+}
+
+.headAdv .searched .searched_left {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    top: 2px;
+}
+
+.headAdv .searched .searched_right {
+    display: inline-block;
+    position: relative;
+    left: 5px;
+}
+
+.headAdv .searched .searched_middle {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    left: 40px;
+}
+
+.headAdv .recorded {
+    display: inline-block;
+    width: 170px;
+    height: 50px;
+}
+
+.el-table th {
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #50606a;
+    text-align: left;
+}
+
+.el-table th > .cell {
+    background-color: #4f616a;
+}
+
+.el-table__footer-wrapper thead div,
+.el-table__header-wrapper thead div {
+    background-color: #eef1f6;
+    color: #1f2d3d;
+    color: white;
+}
+
+.el-input-group__append {
+    background-color: rgb(0, 209, 186);
+    color: #fff;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border-radius: 50px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid #bfcbd9;
+    padding: 0 10px;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.el-input-group__prepend {}
+
+.el-input__icon {
+    position: absolute;
+    width: 35px;
+    height: 100%;
+    left: 2px;
+    top: 2px;
+    text-align: center;
+    color: #bfcbd9;
+    transition: all 0.3s;
+}
+
+.el-select .el-input .el-input__icon {
+    color: #bfcbd9;
+    font-size: 12px;
+    transition: transform 0.3s;
+    -ms-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotateZ(180deg);
+    line-height: 16px;
+    left: 80px;
+    top: 52%;
+    cursor: pointer;
+}
+
+.searched_middle .el-select .el-input .el-input__icon {
+    left: 55px;
+}
+
+.el-checkbox__inner {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #bfcbd9;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    z-index: 1;
+    transition: border-color 0.25s cubic-bezier(.71,-.46,.29,1.46),background-color 0.25s cubic-bezier(.71,-.46,.29,1.46);
+}
 </style>

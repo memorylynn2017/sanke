@@ -1,71 +1,71 @@
 <template>
-    <div class="fillcontain">
-        <head-top></head-top>
-        <div class="headAdv">
-            <div class="listed">
-                <span><strong>会员列表</strong></span>
+<div class="fillcontain">
+    <head-top></head-top>
+    <div class="headAdv">
+        <div class="listed">
+            <span><strong>会员列表</strong></span>
+        </div>
+        <div class="searched">
+            <div class="searched_left">
+                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
+                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
-            <div class="searched">
-                <div class="searched_left">
-                    <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
-                        <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-                <div class="searched_right">
-                    <el-input icon="search" v-model="input2">
-                        <el-button slot="append" @click="test2">查询</el-button>
+            <div class="searched_right">
+                <el-input icon="search" v-model="input2">
+                        <el-button slot="append">查询</el-button>
                     </el-input>
-                </div>
-                <div class="searched_middle">
-                    <span>显示</span>&nbsp;
-                    <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                        <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-                    </el-select>
-                </div>
             </div>
-            <div class="recorded">
-                <span><strong >总记录数 {{count}}</strong></span>
+            <div class="searched_middle">
+                <span>显示</span>&nbsp;
+                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
+                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
             </div>
         </div>
-        <!-- 以后需要从后台模拟数据出来 -->
-        <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
-        <div class="table_container">
-            <el-table :data="userList" highlight-current-row style="width: 100%">
-                <el-table-column type="index" width="60">
-                </el-table-column>
-                <el-table-column property="customer_id" label="客户ID" width="100">
-                </el-table-column>
-                <el-table-column property="levelname" label="等级" width="100">
-                </el-table-column>
-                <el-table-column property="username" label="用户名" width="100">
-                </el-table-column>
-                <el-table-column property="areaname" label="地区" width="100">
-                </el-table-column>
-                <el-table-column property="purshname" label="订单" width="100">
-                </el-table-column>
-                <el-table-column property="countname" label="数量" width="100">
-                </el-table-column>
-                <el-table-column property="pricename" label="金额" width="110">
-                </el-table-column>
-                <el-table-column property="costname" label="余额" width="110">
-                </el-table-column>
-                <el-table-column property="registe_time" label="注册时间" width="110">
-                </el-table-column>
-                <el-table-column property="editname" label="操作" width="80">
-                    <template scope="scope">
-                        <el-button style="border:none;" size="small" @click="handleEdit">[详情]</el-button>
-                    </template>
-                </el-table-column>
-                <el-table-column property="statusname" label="状态" width="80">
-                </el-table-column>
-            </el-table>
-            <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-                </el-pagination>
-            </div>
+        <div class="recorded">
+            <span><strong >总记录数 {{count}}</strong></span>
         </div>
     </div>
+    <!-- 以后需要从后台模拟数据出来 -->
+    <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
+    <div class="table_container">
+        <el-table :data="userList" highlight-current-row style="width: 100%">
+            <el-table-column type="index" width="60">
+            </el-table-column>
+            <el-table-column property="customer_id" label="客户ID" width="100">
+            </el-table-column>
+            <el-table-column property="levelname" label="等级" width="100">
+            </el-table-column>
+            <el-table-column property="username" label="用户名" width="100">
+            </el-table-column>
+            <el-table-column property="areaname" label="地区" width="100">
+            </el-table-column>
+            <el-table-column property="purshname" label="订单" width="100">
+            </el-table-column>
+            <el-table-column property="countname" label="数量" width="100">
+            </el-table-column>
+            <el-table-column property="pricename" label="金额" width="110">
+            </el-table-column>
+            <el-table-column property="costname" label="余额" width="110">
+            </el-table-column>
+            <el-table-column property="registe_time" label="注册时间" width="110">
+            </el-table-column>
+            <el-table-column property="editname" label="操作" width="80">
+                <template scope="scope">
+                        <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
+                    </template>
+            </el-table-column>
+            <el-table-column property="statusname" label="状态" width="80">
+            </el-table-column>
+        </el-table>
+        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+            </el-pagination>
+        </div>
+    </div>
+</div>
 </template>
 <script>
 import headTop from '../components/headTop'
@@ -141,46 +141,6 @@ export default {
 
     },
     methods: {
-
-        test1(myvalue1) {
-            // console.log(myvalue1);
-            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
-                this.userList = this.tableData;
-            } else {
-                this.userList = this.tableData.filter(item => {
-                    return item.levelname !== null && item.levelname == this.myvalue1;
-                });
-            }
-        },
-        test2(input2) {
-            this.$http.get("http://localhost:3000/bannerList").then(response => {
-                console.log(response.data);
-            }, response => {})
-
-            let tablearray = [];
-            if (this.input2 !== '') {
-                tablearray = this.tableData.filter(item => {
-                    return item.levelname !== null && item.levelname == this.input2
-                });
-                console.log(tablearray);
-
-            } else {}
-        },
-        // async initData() {
-        //     try {
-        //         const countData = await getUserCount();
-        //         if (countData.status == 1) {
-        //             this.count = countData.count;
-        //         } else {
-        //             throw new Error('获取数据失败');
-        //         }
-        //         this.getUsers();
-
-        //     } catch (err) {
-        //         console.log('获取数据失败', err);
-        //     }
-        // },
-
         async initData() {
             var data = []
             let url = 'http://localhost:3000/tableData'
@@ -209,6 +169,15 @@ export default {
                 console.log(error);
             })
         },
+        test1(myvalue1) {
+            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+                this.userList = this.tableData;
+            } else {
+                this.userList = this.tableData.filter(item => {
+                    return item.levelname !== null && item.levelname == this.myvalue1;
+                });
+            }
+        },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
         },
@@ -217,7 +186,7 @@ export default {
             this.offset = (val - 1) * this.limit;
             this.getUsers()
         },
-        handleEdit() {
+        handleList() {
             this.$router.push({
                 path: '/member'
             });
@@ -225,28 +194,14 @@ export default {
         filterTag(value, row) {
             return row.levelname === value;
         },
-        // async getUsers() {
-        //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
-        //     this.tableData = [];
-        //     Users.forEach(item => {
-        //         const tableData = {};
-        //         tableData.username = item.username;
-        //         tableData.registe_time = item.registe_time;
-        //         tableData.city = item.city;
-        //         this.tableData.push(tableData);
-        //     })
-        // },
-
-    },
+    }
 }
-
 </script>
 <style lang="less">
 @import '../style/mixin';
 .qf {
     *zoom: 1;
 }
-
 .qf:after {
     content: '';
     display: table;
@@ -285,15 +240,15 @@ export default {
 }
 
 .headAdv .listed {
-    font-size:14px;
+    font-size: 14px;
     display: inline-block;
 
-    margin-left:20px;
+    margin-left: 20px;
 }
 
 .headAdv .recorded {
     display: inline-block;
-    font-size:14px;
+    font-size: 14px;
 }
 
 .headAdv .searched {
@@ -304,7 +259,7 @@ export default {
 }
 
 .headAdv .el-select-dropdown {
-    width:95px;
+    width: 95px;
 }
 
 .headAdv .el-input__inner {
@@ -324,7 +279,7 @@ export default {
     line-height: 1;
     outline: 0;
     padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
 }
 
 .headAdv .searched .searched_left .el-input__inner {
@@ -345,8 +300,8 @@ export default {
 .headAdv .searched .searched_left {
     display: inline-block;
     position: relative;
-    left: 0px;
-    top:2px;
+    left: 0;
+    top: 2px;
 }
 
 .headAdv .searched .searched_right {
@@ -375,7 +330,7 @@ export default {
     text-align: left;
 }
 
-.el-table th>.cell {
+.el-table th > .cell {
     background-color: #4f616a;
 }
 
@@ -411,13 +366,13 @@ export default {
     top: 2px;
     text-align: center;
     color: #bfcbd9;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .el-select .el-input .el-input__icon {
     color: #bfcbd9;
     font-size: 12px;
-    transition: transform .3s;
+    transition: transform 0.3s;
     -ms-transform: translateY(-50%) rotate(180deg);
     transform: translateY(-50%) rotateZ(180deg);
     line-height: 16px;
@@ -429,5 +384,4 @@ export default {
 .searched_middle .el-select .el-input .el-input__icon {
     left: 55px;
 }
-
 </style>
