@@ -15,7 +15,6 @@
             <div class="searched_right">
                 <el-input icon="search" v-model="input2">
                     <el-button slot="append">查询</el-button>
-                    <!--  @click="test2" -->
                 </el-input>
             </div>
             <div class="searched_middle">
@@ -47,6 +46,7 @@
             <el-table-column property="product_shop" label="商家名称" width="100">
             </el-table-column>
             <el-table-column property="product_up" label="上架" width="80">
+
             </el-table-column>
             <el-table-column property="product_up_time" label="上架时间" width="140">
             </el-table-column>
@@ -59,7 +59,13 @@
                   </template>
             </el-table-column>
             <el-table-column property="product_down" label="下架" width="80">
+                <template scope="scope">
+                <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
+                </el-switch>
+                </template>
             </el-table-column>
+
+
         </el-table>
 
         <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
@@ -78,7 +84,10 @@ import {
 export default {
     data() {
         return {
-            tableData: [],
+            oncontrol: true,
+            tableData: [
+
+            ],
             options1: [{
                 value: 'A类',
                 label: 'A类'
@@ -409,6 +418,6 @@ export default {
     height: 18px;
     background-color: #fff;
     z-index: 1;
-    transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+    transition: border-color 0.25s cubic-bezier(.71,-.46,.29,1.46),background-color 0.25s cubic-bezier(.71,-.46,.29,1.46);
 }
 </style>

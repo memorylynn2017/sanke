@@ -5,23 +5,22 @@
         <!-- <div class="listed">
                 <span><strong>商家列表</strong></span>
             </div> -->
-        <div class="searched">
+        <div class="searched" style="width:850px;">
             <div class="searched_left">
-                <el-button>新建商家</el-button>
-                <el-button>更新数据</el-button>
+                <el-button style="background-color:#80808033;">新建商家</el-button>
+                <el-button style="background-color:#80808033;">更新数据</el-button>
                 <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1" style="margin-left:40px">
                     <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
             </div>
-            <div class="searched_right">
+            <div class="searched_right_r">
 
                 <el-input icon="search" v-model="input2">
                     <el-button slot="append">查询</el-button>
-                    <!--  @click="test2" -->
                 </el-input>
             </div>
-            <div class="searched_middle">
+            <div class="searched_right_l">
                 <span>显示</span>&nbsp;
                 <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
                     <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
@@ -279,6 +278,7 @@ export default {
 }
 
 .fillcontain .headAdv {
+    min-width: 900px;
     display: flex;
     justify-content: space-between;
     height: 45px;
@@ -332,7 +332,7 @@ export default {
     border-radius: 5px;
 }
 
-.headAdv .searched .searched_middle .el-input__inner {
+.headAdv .searched .searched_right_l .el-input__inner {
     width: 65px;
     border-radius: 5px;
 }
@@ -346,17 +346,17 @@ export default {
 .headAdv .searched .searched_left {
     display: inline-block;
     position: relative;
-    left: -30px;
+    left: 0px;
     top: 2px;
 }
 
-.headAdv .searched .searched_right {
+.headAdv .searched .searched_right_r {
     display: inline-block;
     position: relative;
     left: 5px;
 }
 
-.headAdv .searched .searched_middle {
+.headAdv .searched .searched_right_l {
     display: inline-block;
     position: relative;
     top: 3px;
@@ -427,7 +427,7 @@ export default {
     cursor: pointer;
 }
 
-.searched_middle .el-select .el-input .el-input__icon {
+.searched_right_l .el-select .el-input .el-input__icon {
     left: 55px;
 }
 </style>
