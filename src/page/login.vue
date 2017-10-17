@@ -22,7 +22,7 @@
                 <div class="login-right fl">
                     <el-form-item>
                         <!-- @click="submitForm('loginForm')" -->
-                        <el-button @click="login()" class="submit_btn">登陆</el-button>
+                        <el-button @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
                     </el-form-item>
                 </div>
             </el-form>
@@ -45,6 +45,7 @@ export default {
                 userid: '',
                 username: '',
                 password: '',
+                verifycode:''
             },
             verifyForm: {
               userid: '',
@@ -71,10 +72,10 @@ export default {
           }
         },
         mounted() {
-            // this.$nextTick(function() {
-            //   this.loginForm.verifycode = new GVerify("codeimg");
-            // })
-            this.codImg = new GVerify("codeimg");
+            this.$nextTick(function() {
+              this.loginForm.verifycode = new GVerify("codeimg");
+            })
+            //this.codImg = new GVerify("codeimg");
           },
           created() { },
           computed: {
@@ -115,35 +116,58 @@ export default {
                 }).catch(error=>{
                     console.log(error);
                 })
-              }  
+              }else{
+                this.$message({
+                    type: 'error',
+                    message: '验证码错误'
+                  });
+                return false;
+              } 
             },
             ...mapActions(['getAdminData']),
             async submitForm(formName) {
               this.$refs[formName].validate(async(valid) => {
                      if (valid) {
                          if(this.loginForm.verifycode.validate(this.loginForm.checknode)){
-                                const code = this.checkLogin(this.loginForm.username,this.loginForm.password);
-                                 if(code == 200){
-                                   this.$message({
-                                     type: 'success',
-                                     message: '验证成功'
-                                   });
-                                   this.$router.push('manage')
-                                  }else if(code == 100){
-                                     this.$message({
-                                       type: 'error',
-                                       message: '用户名或密码错误'
-                                     });
-                                  }else{
-                                   //接口出错，调试
+                                axios.get('/login').then(res=>{
+                                  if(res.data){
+                                      const userData = res.data;
+                                      const data = userData.filter((item)=>{
+                                        return item.user_name == this.loginForm.username;
+                                      });
+                                      if(data){
+                                        if(data[0].pass_word == this.loginForm.password){
+                                        //登录成功
+                                        this.$message({
+                                              type: 'success',
+                                              message: '验证成功'
+                                            });
+                                        this.$router.push('manage')
+                                        }else{
+                                          this.$message({
+                                            type: 'error',
+                                            message: '密码错误'
+                                          });
+                                          return false;
+                                        }
+                                      }else{
+                                        this.$message({
+                                            type: 'error',
+                                            message: '用户名不存在'
+                                          });
+                                        return false;
+                                      }
                                   }
+                                }).catch(error=>{
+                                    console.log(error);
+                                })
                          }else{
                            this.$notify.error({
                              title: '错误',
                              message: '验证信息输入有误',
                              offset: 100
-                        });
-                        return false;
+                          });
+                          return false;
                         }
                       }
 
