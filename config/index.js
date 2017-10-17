@@ -28,7 +28,7 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api/':'http://localhost:8003/'
+            '/api/':'http://localhost:8003/',
         },
         context: [ //代理路径
             '/shopping',
