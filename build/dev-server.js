@@ -33,6 +33,11 @@ var mockData = require('./../mock/db.json');
 router.get("/login",function(req,res,next){
     res.json(mockData.userInfo);
 })
+
+router.get("/getUserList",function(req,res,next){
+    res.json(mockData.tableData);
+})
+
 app.use(router);
 
 var compiler = webpack(webpackConfig)
