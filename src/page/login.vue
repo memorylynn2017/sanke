@@ -32,16 +32,10 @@
 </div>
 </template>
 <script>
-import {
-    login,
-    getAdminInfo
-} from '@/api/getData'
-import {
-    mapActions,
-    mapState
-} from 'vuex'
+import {login, getAdminInfo} from '@/api/getData'
+import { mapActions,mapState} from 'vuex'
 import Code from '.././assets/js/gverify.js'
-
+import axios from 'axios'
 
 export default {
 
@@ -52,7 +46,6 @@ export default {
                 username: '',
                 password: '',
             },
-            loginCode: 10,
             verifyForm: {
               userid: '',
               user_name: '',
@@ -90,86 +83,43 @@ export default {
             ...mapState(['adminInfo']),
           },
           methods: {
-            checkLogin(userName,password){
-              const url = 'http://localhost:3000/verifyForm';
-              //console.log(this.loginCode);
-              this.$http.get(url).then(res=>{
-                  if(res.data){
-                      const userData = res.data;
-                      const data = userData.filter(function(item){
-                        return item.user_name == userName;
-                      });
-                      if(data){
-                        if(data[0].pass_word == password){
-                        this.loginCode = 200;
-                      }else{
-                        this.loginCode = 100;
-                      }
-                      }else{
-                        this.loginCode = 300;
-                      }
-                  }
-                   console.log(this.loginCode);
-              }).catch(error=>{
-                  console.log(error);
-              })
-              console.log(this.loginCode);
-            },
             login(){
               if(this.codImg.validate(this.loginForm.checknode)){
-                this.checkLogin(this.loginForm.username,this.loginForm.password);
-                console.log(this.loginCode);
-                if(this.loginCode == 200){
-                  this.$message({
-                    type: 'success',
-                    message: '验证成功'
-                  });
-                  this.$router.push('manage');
-                }else if(this.loginCode == 100){
-                  this.$message({
-                    type: 'error',
-                    message: '密码错误'
-                  });
-                }else if(this.loginCode == 300){
-                  this.$message({
-                    type: 'error',
-                    message: '用户名不存在'
-                  });
-                }else{
-                    //接口请求错误
-                }
-              }else{
-                this.$notify.error({
-                  title: '错误',
-                  message: '验证信息输入有误',
-                  offset: 100
-                });
-
-              }
+                axios.get('/login').then(res=>{
+                  if(res.data){
+                      const userData = res.data;
+                      const data = userData.filter((item)=>{
+                        return item.user_name == this.loginForm.username;
+                      });
+                      if(data){
+                        if(data[0].pass_word == this.loginForm.password){
+                        //登录成功
+                        this.$message({
+                              type: 'success',
+                              message: '验证成功'
+                            });
+                        this.$router.push('manage')
+                        }else{
+                          this.$message({
+                            type: 'error',
+                            message: '密码错误'
+                          });
+                          return false;
+                        }
+                      }else{
+                        this.$message({
+                            type: 'error',
+                            message: '用户名不存在'
+                          });
+                        return false;
+                      }
+                  }
+                }).catch(error=>{
+                    console.log(error);
+                })
+              }  
             },
             ...mapActions(['getAdminData']),
-            // login(paras){
-            //       var data = [];
-            //       var url='http://localhost:3000/userInfo';
-            //
-            //       this.$http.get(url,paras).then(function(res) {
-            //               var obj = {};
-            //
-            //               for (let i = 0; i < res.data.length; i++) {
-            //                     if (res.data[i].user_name==paras.username&&res.data[i].pass_word==paras.password) {
-            //                             console.log(res.data[i]);
-            //                             return res.data[i].status =1;
-            //
-            //                     } else {
-            //                         console.log(res.data[i]);
-            //                        return res.data[i].status=null;
-            //                     }
-            //               }
-            //         }).catch(function(error) {
-            //               console.log(error);
-            //         })
-            // },
-
             async submitForm(formName) {
               this.$refs[formName].validate(async(valid) => {
                      if (valid) {

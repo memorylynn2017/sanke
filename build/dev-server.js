@@ -27,6 +27,19 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+//用mock数据模拟接口
+var router = express.Router();
+var mockData = require('./../mock/db.json');
+router.get("/login",function(req,res,next){
+    res.json(mockData.userInfo);
+})
+
+router.get("/getUserList",function(req,res,next){
+    res.json(mockData.tableData);
+})
+
+app.use(router);
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -96,12 +109,12 @@ var apiMiddlewares = jsonServer.defaults()
 
 apiServer.use(apiMiddlewares)
 apiServer.use('/api', apiRouter)
-apiServer.listen(port + 1, function(err) {
+apiServer.listen(port+1, function(err) {
     if (err) {
         console.log(err)
         return
     }
-    console.log('Listening at http://localhost:' + (port + 1) + '\n')
+    console.log('Listening at http://localhost:' + (port+1) + '\n')
 })
 
 // var jsonServer=require('json-server')

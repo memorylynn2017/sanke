@@ -69,10 +69,8 @@
 </template>
 <script>
 import headTop from '../components/headTop'
-import {
-    getUserList,
-    getUserCount
-} from '@/api/getData'
+import { getUserList, getUserCount} from '@/api/getData'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -136,13 +134,13 @@ export default {
     //     this.tableData = tablearray;
     // })
 
-    created() {
+    mounted() {
         this.initData();
 
     },
     methods: {
         async initData() {
-            var data = []
+            /* var data = []
             let url = 'http://localhost:3000/tableData'
             let _this = this
             this.$http.get(url, {}).then(function(res) {
@@ -166,6 +164,14 @@ export default {
                 console.log(_this.tableData);
                 _this.userList = _this.tableData;
             }).catch(function(error) {
+                console.log(error);
+            }) */
+            axios.get('/getUserList').then(res=>{
+                if(res.data){
+                    this.tableData = res.data;
+                    this.userList = res.data;
+                }
+            }).catch(error=>{
                 console.log(error);
             })
         },
