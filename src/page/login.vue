@@ -4,7 +4,7 @@
 <div class="login_page fillcontain">
     <div class="pic"><img src=".././assets/img/figure.png" alt=""></div>
     <transition name="form-fade" mode="in-out">
-        <section class="form_contianer" v-show="showLogin">
+        <section class="form_contianer">
             <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="90px" class="demo-ruleForm qf">
                 <div class="login-left fl">
                     <el-form-item label="账号：" prop="username">
@@ -67,12 +67,10 @@ export default {
                 message: '请输入验证码',
                 trigger: 'blur'
               }],
-            },
-            showLogin: false,
+            }
           }
         },
         mounted() {
-            this.showLogin = true;
             // this.$nextTick(function() {
             //   this.loginForm.verifycode = new GVerify("codeimg");
             // })

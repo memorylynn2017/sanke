@@ -38,6 +38,10 @@ router.get("/getUserList",function(req,res,next){
     res.json(mockData.tableData);
 })
 
+router.get("/getShopList",function(req,res,next){
+    res.json(mockData.shopForm);
+})
+
 app.use(router);
 
 var compiler = webpack(webpackConfig)

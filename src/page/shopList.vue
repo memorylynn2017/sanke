@@ -70,10 +70,8 @@
 </template>
 <script>
 import headTop from '../components/headTop'
-import {
-    getUserList,
-    getUserCount
-} from '@/api/getData'
+import {getUserList, getUserCount} from '@/api/getData'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -140,7 +138,7 @@ export default {
     //     this.tableData = tablearray;
     // })
 
-    created() {
+    mounted() {
         this.initData();
 
     },
@@ -186,7 +184,7 @@ export default {
         // },
 
         async initData() {
-            var data = []
+            /* var data = []
             let url = 'http://localhost:3000/shopForm'
             let _this = this
             this.$http.get(url, {}).then(function(res) {
@@ -208,6 +206,14 @@ export default {
                 console.log(_this.tableData);
                 _this.shopList = _this.tableData;
             }).catch(function(error) {
+                console.log(error);
+            }) */
+            axios.get().then(res=>{
+                if(res.data){
+                    this.shopList = res.data;
+                    this.tableData = res.data;
+                }
+            }).catch(error=>{
                 console.log(error);
             })
         },
