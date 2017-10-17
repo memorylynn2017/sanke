@@ -42,6 +42,10 @@ router.get("/getShopList",function(req,res,next){
     res.json(mockData.shopForm);
 })
 
+router.get("/getGoodsList",function(req,res,next){
+    res.json(mockData.products);
+})
+
 app.use(router);
 
 var compiler = webpack(webpackConfig)

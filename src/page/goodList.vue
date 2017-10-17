@@ -172,7 +172,7 @@ export default {
       },
 
         async initData() {
-            var data = []
+            /* var data = []
             let url = 'http://localhost:3000/products'
             let _this = this
             this.$http.get(url, {}).then(function(res) {
@@ -196,7 +196,13 @@ export default {
                 _this.productList = _this.tableData;
             }).catch(function(error) {
                 console.log(error);
-            })
+            }) */
+            axios.get('getGoodsList').then(res=>{
+                this.tableData = res.data;
+                this.productList = res.data;
+            }).catch(error=>{
+                console.log(error)
+            });
         },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
