@@ -113,6 +113,7 @@ export default {
                                             type: 'error',
                                             message: '密码错误'
                                           });
+                                          this.loginForm.verifycode.refresh();
                                           return false;
                                         }
                                       }else{
@@ -120,6 +121,7 @@ export default {
                                             type: 'error',
                                             message: '用户名不存在'
                                           });
+                                        this.loginForm.verifycode.refresh();
                                         return false;
                                       }
                                   }
@@ -132,6 +134,7 @@ export default {
                              message: '验证信息输入有误',
                              offset: 100
                           });
+                          this.loginForm.verifycode.refresh();
                           return false;
                         }
                       }
