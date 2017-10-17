@@ -56,7 +56,7 @@
             </el-table-column>
             <el-table-column property="editname" label="操作" width="180">
                 <template scope="scope">
-                        <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
+                        <el-button style="float:left; border:none;" size="small" @click="handleList">[编辑]</el-button>
                         <el-button style="float:left; display:inline-block; border:none;" size="small">[抓取商品]</el-button>
                     </template>
             </el-table-column>
@@ -224,6 +224,11 @@ export default {
             this.currentPage = val;
             this.offset = (val - 1) * this.limit;
             this.getUsers()
+        },
+        handleList() {
+            this.$router.push({
+                path: '/businessList'
+            });
         },
         // handleEdit() {
         //     this.$router.push({
