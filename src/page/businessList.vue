@@ -331,7 +331,7 @@
             },
             gobackIndex() {
               this.$router.push({
-                  path: '/manage'
+                  path: '/shopList'
               });
             }
         },
