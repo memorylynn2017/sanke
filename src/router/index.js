@@ -56,8 +56,8 @@ const routes = [{
             component: shopList,
             meta: ['数据管理', '商家列表'],
         }, {
-            path: '/foodList',
-            component: foodList,
+            path: '/goodList',
+            component: goodList,
             meta: ['数据管理', '食品列表'],
         }, {
             path: '/orderList',

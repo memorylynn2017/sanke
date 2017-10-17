@@ -77,10 +77,8 @@
 </template>
 <script>
 import headTop from '../components/headTop'
-import {
-    getUserList,
-    getUserCount
-} from '@/api/getData'
+import {getUserList, getUserCount} from '@/api/getData'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -151,7 +149,7 @@ export default {
     //     this.tableData = tablearray;
     // })
 
-    created() {
+    mounted() {
         this.initData();
 
     },

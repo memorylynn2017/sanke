@@ -24,7 +24,7 @@
                 </el-submenu>
                 <el-submenu index="4">
                     <template slot="title">商品管理</template>
-                    <el-menu-item index="foodList">商品列表</el-menu-item>
+                    <el-menu-item index="goodList">商品列表</el-menu-item>
                     <!-- <el-menu-item index="addGoods">添加商品</el-menu-item> -->
                 </el-submenu>
                 <el-submenu index="5">
