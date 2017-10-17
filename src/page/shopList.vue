@@ -208,7 +208,7 @@ export default {
             }).catch(function(error) {
                 console.log(error);
             }) */
-            axios.get().then(res=>{
+            axios.get('getShopList').then(res=>{
                 if(res.data){
                     this.shopList = res.data;
                     this.tableData = res.data;
