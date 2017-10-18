@@ -103,7 +103,7 @@ const routes = [{
         }, {
             path: '/productList',
             component: productList,
-            meta: ['说明', '说明'],
+            meta: ['商品列表', '详情'],
         }]
     }
 ]
