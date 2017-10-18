@@ -1,9 +1,9 @@
 <template>
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
+        <el-button class="backbtn" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-button class="backbtn" @click="handleReturn">返回</el-button>
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
                     <template>
@@ -490,21 +490,20 @@ export default {
             }
         },
         handleReturn() {
-          this.$router.push({
-            path: '/userList'
-          });
+            this.$router.push({
+                path: '/userList'
+            });
         },
         handleSizeChange(val) {
-          console.log(`每页 ${val} 条`);
+            console.log(`每页 ${val} 条`);
         },
         handleCurrentChange(val) {
-          this.currentPage = val;
-          this.offset = (val - 1) * this.limit;
-          this.getUsers()
+            this.currentPage = val;
+            this.offset = (val - 1) * this.limit;
+            this.getUsers()
         },
-      },
-    }
-
+    },
+}
 
 </script>
 <style lang="less">
@@ -519,8 +518,22 @@ export default {
     clear: both;
 }
 
+.backbtn {
+    width: 100px;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 15px;
+    background: #e6e6e6;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 88%;
+    z-index: 1000;
+}
+
 .table_container {
-   /* border: 1px solid red; */
+
 
 
     .el-tabs__item.is-active {
@@ -738,19 +751,6 @@ export default {
 
         border: 1px solid #fff;
         box-shadow: none;
-        .backbtn {
-            width: 100px;
-            font-size: 16px;
-            color: #333;
-            padding: 6px 15px;
-            background: #e6e6e6;
-            border: 1px solid #bbbbbb;
-            border-radius: 4px;
-            position: relative;
-            top: -7px;
-            left: 89%;
-            z-index: 1000;
-        }
     }
 
     .el-select .el-input .el-input__icon {

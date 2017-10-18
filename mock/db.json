@@ -33,11 +33,11 @@
         },
 
         {
-            "customer_id": "8005896",
+            "customer_id": "8005897",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "陈源",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -45,11 +45,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005898",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "杨小盼",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -57,11 +57,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005899",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "韦会师",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -69,11 +69,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005810",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "蒋飞勇",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -81,11 +81,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005811",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "刘彬",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -93,11 +93,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005812",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "李元爱",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -105,11 +105,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005813",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "好吓人",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -117,11 +117,11 @@
             "statusname": "正常"
         },
         {
-            "customer_id": "8005896",
+            "customer_id": "8005814",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "5566",
-            "username": "王小虎",
+            "username": "人人乐",
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
@@ -203,7 +203,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -215,7 +215,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -227,7 +227,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -239,7 +239,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -251,7 +251,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -263,7 +263,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -275,7 +275,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -287,7 +287,7 @@
         {
             "customer_id": "700615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "1156",
             "username": "陈思",
             "countname": "100001",
@@ -299,7 +299,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -311,7 +311,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -323,7 +323,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -335,7 +335,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -347,7 +347,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -359,7 +359,7 @@
         {
             "customer_id": "600615",
             "levelname": "VIP",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "55888",
             "username": "小优",
             "countname": "100001",
@@ -371,7 +371,7 @@
         {
             "customer_id": "600615",
             "levelname": "批发会员",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "99977",
             "username": "黄建明",
             "countname": "100001",
@@ -383,7 +383,7 @@
         {
             "customer_id": "500615",
             "levelname": "批发会员",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "99977",
             "username": "黄建明",
             "countname": "100001",
@@ -395,7 +395,7 @@
         {
             "customer_id": "500615",
             "levelname": "批发会员",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "99977",
             "username": "黄建明",
             "countname": "100001",
@@ -407,7 +407,7 @@
         {
             "customer_id": "500615",
             "levelname": "批发会员",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "99977",
             "username": "黄建明",
             "countname": "100001",
@@ -419,7 +419,7 @@
         {
             "customer_id": "500615",
             "levelname": "批发会员",
-            "areaname": "美国",
+            "areaname": "英国",
             "purshname": "99977",
             "username": "黄建明",
             "countname": "100001",
@@ -462,7 +462,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "6001",
+            "shop_id": "6002",
             "shop_type": "A类",
             "shop_name": "Nana",
             "shop_market": "KKC_1F098A",
@@ -474,7 +474,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "6001",
+            "shop_id": "6003",
             "shop_type": "A类",
             "shop_name": "Nana",
             "shop_market": "KKC_1F098A",
@@ -486,7 +486,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "6001",
+            "shop_id": "6004",
             "shop_type": "A类",
             "shop_name": "Nana",
             "shop_market": "KKC_1F098A",
@@ -498,7 +498,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "6001",
+            "shop_id": "6005",
             "shop_type": "A类",
             "shop_name": "Nana",
             "shop_market": "KKC_1F098A",
@@ -510,7 +510,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "6001",
+            "shop_id": "6006",
             "shop_type": "A类",
             "shop_name": "Nana",
             "shop_market": "KKC_1F098A",
@@ -534,7 +534,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5002",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -546,7 +546,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5003",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -558,7 +558,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5004",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -570,7 +570,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5005",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -582,7 +582,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5006",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -594,7 +594,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5007",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -606,7 +606,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5008",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -618,7 +618,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5009",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -630,7 +630,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5010",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",
@@ -642,7 +642,7 @@
             "shop_Crawling": "抓取商品"
         },
         {
-            "shop_id": "5001",
+            "shop_id": "5011",
             "shop_type": "B类",
             "shop_name": "优衣库",
             "shop_market": "KKC_1F098A",

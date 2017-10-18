@@ -1,70 +1,74 @@
 <template>
-<div class="fillcontain">
-    <!-- <head-top></head-top> -->
-    <div class="headAdv">
-        <div class="listed">
-            <span><strong>会员列表</strong></span>
-        </div>
-        <div class="searched">
-            <div class="searched_left">
-                <el-select v-model="levelName" placeholder="请选择" @change="filterLevel" >     
-                    <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
-                    </el-option>
-                </el-select>
+    <div class="fillcontain">
+        <!-- <head-top></head-top> -->
+        <div class="headAdv">
+            <div class="listed">
+                <span><strong>会员列表</strong></span>
             </div>
-            <div class="searched_right">
-                <!-- <el-input v-model="customer_id" placeholder="请输入要查询的客户Id"></el-input>
+            <div class="searched">
+                <div class="searched_left">
+                    <el-select v-model="levelName" placeholder="请选择" @change="filterLevel">
+                        <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="areaName" placeholder="区域" @change="test">
+                        <el-option　v-for="area in areaData" :key="area.value" :label="area.label" :value="area.value"></el-option>
+                        
+                    </el-select>
+                </div>
+                <div class="searched_right">
+                    <!-- <el-input v-model="customer_id" placeholder="请输入要查询的客户Id"></el-input>
                 <el-input v-model="username" placeholder="请输入要查询的用户名"></el-input>
                 <el-button type="primary">查询</el-button> -->
-                <el-input v-model="customer_id" placeholder="请输入要查询的客户Id">
+                    <el-input v-model="customer_id" placeholder="请输入要查询的客户Id">
                         <el-button slot="append" @click="searchUser()">查询</el-button>
-                </el-input>
+                    </el-input>
+                </div>
+                <div class="searched_middle">
+                    <span>显示</span>&nbsp;
+                    <el-select v-model="pageNum" filterable style="margin-left:-30px;">
+                        <el-option v-for="page in pageData" :key="page.value" :label="page.label" :value="page.value"> </el-option>
+                    </el-select>
+                </div>
             </div>
-            <div class="searched_middle">
-                <span>显示</span>&nbsp;
-                <el-select v-model="pageNum" filterable style="margin-left:-30px;">
-                    <el-option v-for="page in pageData" :key="page.value" :label="page.label" :value="page.value" > </el-option>
-                </el-select>
+            <div class="recorded">
+                <span>总记录数 {{Message}}</span>
             </div>
         </div>
-        <div class="recorded">
-            <span>总记录数 {{count}}</span>
-        </div>
-    </div>
-    <div class="table_container">
-        <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
-            <el-table-column property="customer_id" label="客户ID" width="100">
-            </el-table-column>
-            <el-table-column property="levelname" label="等级" width="100">
-            </el-table-column>
-            <el-table-column property="username" label="用户名" width="100">
-            </el-table-column>
-            <el-table-column property="areaname" label="地区" width="100">
-            </el-table-column>
-            <el-table-column property="purshname" label="订单" width="100">
-            </el-table-column>
-            <el-table-column property="countname" label="数量" width="100">
-            </el-table-column>
-            <el-table-column property="pricename" label="金额" width="110">
-            </el-table-column>
-            <el-table-column property="costname" label="余额" width="110">
-            </el-table-column>
-            <el-table-column property="registe_time" label="注册时间" width="160">
-            </el-table-column>
-            <el-table-column property="editname" label="操作" width="80">
-                <template slot-scope="scope">
+        <div class="table_container">
+            <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
+                <el-table-column property="customer_id" label="客户ID" width="100">
+                </el-table-column>
+                <el-table-column property="levelname" label="等级" width="100">
+                </el-table-column>
+                <el-table-column property="username" label="用户名" width="100">
+                </el-table-column>
+                <el-table-column property="areaname" label="地区" width="100">
+                </el-table-column>
+                <el-table-column property="purshname" label="订单" width="100" sortable>
+                </el-table-column>
+                <el-table-column property="countname" label="数量" width="100" sortable>
+                </el-table-column>
+                <el-table-column property="pricename" label="金额" width="110" sortable>
+                </el-table-column>
+                <el-table-column property="costname" label="余额" width="110" sortable>
+                </el-table-column>
+                <el-table-column property="registe_time" label="注册时间" width="160">
+                </el-table-column>
+                <el-table-column property="editname" label="操作" width="80">
+                    <template slot-scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
                     </template>
-            </el-table-column>
-            <el-table-column property="statusname" label="状态" width="80">
-            </el-table-column>
-        </el-table>
-        <!-- <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+                </el-table-column>
+                <el-table-column property="statusname" label="状态" width="80">
+                </el-table-column>
+            </el-table>
+            <!-- <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
             </el-pagination>
         </div> -->
+        </div>
     </div>
-</div>
 </template>
 <script>
 // import headTop from '../components/headTop'
@@ -87,6 +91,19 @@ export default {
                 value: '注册会员',
                 label: '注册会员'
             }],
+            areaData: [{
+                value: '全部地区',
+                label: '全部地区'
+            }, {
+                value: '美国',
+                label: '美国'
+            }, {
+                value: '英国',
+                label: '英国'
+            }, {
+                value: '广州',
+                label: '广州'
+            }],
             pageData: [{
                 value: '选项1',
                 label: '15'
@@ -102,7 +119,9 @@ export default {
             }],
             customer_id: '',
             levelName: '所有等级',
-            pageNum:30,
+            areaName: '全部地区',
+            region:"地区",
+            pageNum: 30,
             currentRow: null,
             offset: 0,
             limit: 20,
@@ -115,9 +134,10 @@ export default {
         // headTop,
     },
     computed: {
-        getUserListFilter(){
-            return this.userList.slice(0,this.pageNum);
-        }
+        getUserListFilter() {
+            return this.userList.slice(0, this.pageNum);
+        },
+        Message:function(){ return this.userList.length }
     },
 
     mounted() {
@@ -125,26 +145,28 @@ export default {
     },
     methods: {
         async initData() {
-            axios.get('/getUserList').then(res=>{
-                if(res.data){
+            axios.get('/getUserList').then(res => {
+                if (res.data) {
+                    //临时表
                     this.tableData = res.data;
+                    //数据表
                     this.userList = res.data;
                 }
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error);
             })
         },
-        // test(myvalue) {
-        //     // console.log(myvalue1);
-        //     if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
-        //         this.productList = this.tableData;
-        //     } else {
-        //         this.productList = this.tableData.filter(item => {
-        //             return item.levelname !== null && item.levelname == this.myvalue1;
-        //         });
-        //     }
-        // },
-        showNums(index){
+        test(areaName) {
+            // console.log(myvalue1);
+            if (this.areaName == '' || this.areaName == "全部地区") {
+                this.userList = this.tableData;
+            } else {
+                this.userList = this.tableData.filter(item => {
+                    return item.areaname !== null && item.areaname == this.areaName;
+                });
+            }
+        },
+        showNums(index) {
             this.pageNum = parseInt(this.options2[index].label);
         },
         filterLevel(levelName) {
@@ -156,10 +178,14 @@ export default {
                 });
             }
         },
-        searchUser(){
-            if(this.customer_id){
-                this.userList = this.tableData.filter((item)=>{
-                    return item.customer_id == this.customer_id;
+        searchUser() {
+            if (this.customer_id) {
+                // this.userList = this.tableData.filter((item) => {
+                //     return item.customer_id == this.customer_id;
+                // });
+                this.userList = this.tableData.filter((item) => {
+                    return item.customer_id.toLowerCase().indexOf(this.customer_id.toLowerCase()) !== -1
+
                 });
             }
         },
@@ -181,8 +207,10 @@ export default {
         // },
     }
 }
+
 </script>
 <style lang="less">
 @import '../style/mixin';
 @import '../style/stable';
+
 </style>

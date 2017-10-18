@@ -1,9 +1,9 @@
 <template>
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
+        <el-button class="backbtn" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-button class="backbtn" @click="gobackIndex">返回</el-button>
                 <el-tab-pane>
                     <span slot="label">基本信息</span>
                     <table class="table0 w100">
@@ -264,12 +264,12 @@ export default {
     data() {
         return {
             handlePictureCardPreview: '',
-            handleRemove:'',
-            dialogVisible:false,
+            handleRemove: '',
+            dialogVisible: false,
             // handlePreview:'',
             // onRemove:'',
             // onPreview:'',
-            dialogImageUrl:'',
+            dialogImageUrl: '',
             input: '',
             value: '',
             auto: '',
@@ -291,7 +291,7 @@ export default {
                 value: '选项5',
                 label: '北京烤鸭'
             }],
-            options:[],
+            options: [],
             level: '',
             tableData: []
         }
@@ -312,6 +312,20 @@ export default {
 <style lang="less">
 @import '../style/mixin';
 @import '../style/sstyle';
+.backbtn {
+    width: 100px;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 15px;
+    background: #e6e6e6;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 88%;
+    z-index: 1000;
+}
+
 .table0 {
     tr {
         td {

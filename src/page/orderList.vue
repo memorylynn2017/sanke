@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="recorded">
-                <span>总记录数 {{count}}</span>
+                <span>总记录数 {{Message}}</span>
             </div>
         </div>
         <div class="table_container">
-            <el-table :data="productList" highlight-current-row style="width:100%">
+            <el-table :data="purchList" highlight-current-row style="width:100%">
                 <el-table-column property="purchase_num" label="订单号" width="100">
                 </el-table-column>
                 <el-table-column property="purchase_count" label="数量" width="90">
@@ -83,7 +83,7 @@ export default {
     data() {
         return {
             oncontrol: true,
-            productList: [
+            purchList: [
 
             ],
             tableData:[
@@ -153,14 +153,16 @@ export default {
             limit: 20,
             count: 0,
             currentPage: 1,
-            productList: [],
+            purchList: [],
             multipleSelection: []
         }
     },
     components: {
         // headTop,
     },
-    computed: {},
+    computed: {
+        Message:function(){ return this.purchList.length }
+    },
 
 
     mounted() {
@@ -171,9 +173,9 @@ export default {
 
         test1(myvalue1) {
             if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
-                this.productList = this.tableData;
+                this.purchList = this.tableData;
             } else {
-                this.productList = this.tableData.filter(item => {
+                this.purchList = this.tableData.filter(item => {
                     return item.shop_type !== null && item.shop_type == this.myvalue1;
                 });
             }
@@ -185,7 +187,7 @@ export default {
         async initData() {
             axios.get('getPurchasList').then(res => {
                 this.tableData = res.data;
-                this.productList = res.data;
+                this.purchList = res.data;
             }).catch(error => {
                 console.log(error)
             });

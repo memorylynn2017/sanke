@@ -1,9 +1,9 @@
 <template>
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
+        <el-button class="backbtn" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-button class="backbtn" @click="gobackIndex">返回</el-button>
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
                     <el-row :gutter="30">
@@ -338,7 +338,7 @@ export default {
 }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '../style/mixin';
 .qf {
     *zoom: 1;
@@ -348,6 +348,20 @@ export default {
     content: '';
     display: table;
     clear: both;
+}
+
+.backbtn {
+    width: 100px;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 15px;
+    background: #e6e6e6;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 88%;
+    z-index: 1000;
 }
 
 .table_container {

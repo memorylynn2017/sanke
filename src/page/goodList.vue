@@ -3,7 +3,7 @@
     <!-- <head-top></head-top> -->
     <div class="headAdv">
         <div class="listed">
-            <span><strong>商家列表</strong></span>
+            <span><strong>商品列表</strong></span>
         </div>
         <div class="searched">
             <div class="searched_left">
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="recorded">
-            <span><strong >总记录数 {{count}}</strong></span>
+            <span>总记录数 {{Message}}</span>
         </div>
     </div>
     <div class="table_container">
@@ -112,7 +112,7 @@ export default {
             currentRow: null,
             offset: 0,
             limit: 20,
-            count: 0,
+            count: 5,
             currentPage: 1,
             productList: [],
             multipleSelection: []
@@ -122,6 +122,7 @@ export default {
         // headTop,
     },
     computed: {
+        Message:function(){ return this.productList.length },
     },
 
 

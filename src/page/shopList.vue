@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="recorded">
-                <span>总记录数 {{count}}</span>
+                <span>总记录数 {{Message}}</span>
             </div>
         </div>
         <div class="table_container">
-            <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
+            <el-table :data="getshopListFilter" highlight-current-row style="width: 100%">
                 <el-table-column property="shop_id" label="商家ID" width="80">
                 </el-table-column>
                 <el-table-column property="shop_type" label="类型" width="70">
@@ -103,16 +103,17 @@ export default {
             limit: 20,
             count: 0,
             currentPage: 1,
-            userList: []
+            shopList: []
         }
     },
     components: {
         // headTop,
     },
     computed: {
-        getUserListFilter() {
-            return this.userList.slice(0, this.pageNum);
-        }
+        getshopListFilter() {
+            return this.shopList.slice(0, this.pageNum);
+        },
+        Message:function(){ return this.shopList.length }
     },
     mounted() {
         this.initData();
@@ -122,7 +123,7 @@ export default {
             axios.get('/getShopList').then(res => {
                 if (res.data) {
                     this.tableData = res.data;
-                    this.userList = res.data;
+                    this.shopList = res.data;
                 }
             }).catch(error => {
                 console.log(error);
@@ -133,16 +134,16 @@ export default {
         },
         filterLevel() {
             if (this.levelName == '' || this.myvalue1 == "所有等级") {
-                this.userList = this.tableData;
+                this.shopList = this.tableData;
             } else {
-                this.userList = this.tableData.filter(item => {
+                this.shopList = this.tableData.filter(item => {
                     return item.levelName !== null && item.levelName == this.levelName;
                 });
             }
         },
         searchUser() {
             if (this.customer_id) {
-                this.userList = this.tableData.filter((item) => {
+                this.shopList = this.tableData.filter((item) => {
                     return item.customer_id == this.customer_id;
                 });
             }
