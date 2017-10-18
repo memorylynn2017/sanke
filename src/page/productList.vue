@@ -5,7 +5,7 @@
         <el-tabs type="border-card">
           <el-button class="backbtn" @click="gobackIndex">返回</el-button>
           <el-tab-pane>
-            <span slot="label">会员资料</span>
+            <span slot="label">基本信息</span>
               <table class="table0 w100">
                 <tr>
                   <td>商品编号</td>
@@ -114,11 +114,11 @@
                 </tr>
                 <tr>
                   <td>页面关键词</td>
-                  <td><el-input type="textarea" v-model="form.desc"></el-input></td>
+                  <td><el-input type="textarea" style="width: 410px;"></el-input></td>
                 </tr>
                 <tr>
                   <td>提示标签</td>
-                  <td><el-input type="textarea" v-model="form.desc"></el-input></td>
+                  <td><el-input type="textarea" style="width: 410px;"></el-input></td>
                 </tr>
                 <tr>
                   <td>购买禁用</td>
@@ -135,83 +135,132 @@
                   <td>自动上架</td>
                   <td>
                     <el-input size="small" v-model="input" placeholder="请输入内容"></el-input>
-                    <span>自动下架</span>
+                    <span style="margin: 0 10px 0 25px;">自动下架</span>
                     <el-input size="small" v-model="input" placeholder="请输入内容"></el-input>
                   </td>
                 </tr>
-                <tr>
+                <tr class="last">
                   <td></td>
-                  <td><el-button>确定</el-button></td>
+                  <td><el-button  size="small">确定</el-button></td>
                 </tr>
               </table>
           </el-tab-pane>
-          <el-tab-pane class="shopset" label="店铺设置">
-            <el-row :gutter="30">
-                <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                  <div class="grid-content bg-purple">
-                    <template>
-                      <el-form label-position="left" inline class="demo-table-expand qf">
-                        <el-form-item label="淘宝店铺地址">
-                          <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><span class="warn">！请设置淘宝店铺所有分类页面的分页URL</span></span>
-                        </el-form-item>
-                        <el-form-item label="搜索页面大小">
-                          <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><span class="warn">！请设置淘宝店铺所有分类页面的分页数</span></span>
-                        </el-form-item>
-                        <el-form-item label="价格统一减去">
-                          <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><span class="warn">！系统提示：若设置0~1之间的小数则为打折，例如0.5表示五折(打包价同理)</span></span>
-                        </el-form-item>
-                        <el-form-item label="打包价统一减去">
-                          <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><em>*</em></span>
-                        </el-form-item>
-                        <el-form-item label="重量">
-                          <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><em>*</em></span>
-                        </el-form-item>
-                        <el-form-item label="分类">
-                          <span>
-                            <el-select size="small" v-model="classify" placeholder="请选择">
-                              <el-option
-                                v-for="item in classifys"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
-                        </el-form-item>
-                        <el-form-item label="类型">
-                          <span>
-                            <el-select size="small" v-model="shoptype" placeholder="请选择">
-                              <el-option
-                                v-for="item in shoptypes"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
-                        </el-form-item>
-                        <el-form-item label="品牌">
-                          <span>
-                            <el-select size="small" v-model="brand" placeholder="请选择">
-                              <el-option
-                                v-for="item in brands"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </span>
-                        </el-form-item>
-                        <el-form-item  class="special">
-                          <span><el-button>确定</el-button></span>
-                        </el-form-item>
-                      </el-form>
-                    </template>
-                  </div>
-                </el-col>
-              </el-row>
+          <el-tab-pane class="shopset" label="商品描述">
+          </el-tab-pane>
+          <el-tab-pane class="shopset" label="商品属性">
+            <table class="table0 w100">
+                <tr>
+                  <td>商品类型</td>
+                  <td>
+                    <el-select size="small" v-model="level" placeholder="请选择">
+                      <el-option
+                        v-for="item in levels"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>厂家</td>
+                  <td><el-input size="small" v-model="input" placeholder="请输入内容"></el-input></td>
+                </tr>
+                <tr class="last">
+                  <td></td>
+                  <td>
+                    <el-button size="small">确定保存</el-button>
+                    <el-button size="small" style="margin-left: 15px;">返回</el-button>
+                    <el-checkbox class="radio" v-model="auto" label="1" style="margin-left: 20px;">保存后继续添加商品</el-checkbox>
+                  </td>
+                </tr>
+            </table>
+          </el-tab-pane>
+          <el-tab-pane class="shopset" label="商品规格">
+            <table class="table0 w100">
+               <tr>
+                  <td>规格名称</td>
+                  <td>
+                    <el-checkbox-group v-model="checkList">
+                      <el-checkbox label="颜色"></el-checkbox>
+                      <el-checkbox label="尺码"></el-checkbox>
+                    </el-checkbox-group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>设置库存<div style="font-size: 12px;text-align: left; color: #e51c23;">(温馨提示：无货空挂可能会引起买家或卖家的投诉。)</div></td>
+                  <td>
+                    <el-button size="small" style="margin-bottom: 10px;">增加库存</el-button>
+                    <table class="table0 w100" style="font-size: 14px;">
+                        <tr>
+                            <td>编号</td>
+                            <td>颜色</td>
+                            <td>尺码</td>
+                            <td>库存</td>
+                            <td>操作</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <el-select size="mini" v-model="value" placeholder="请选择">
+                                  <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                  </el-option>
+                                </el-select>
+                            </td>
+                            <td>
+                                <el-select size="mini" v-model="value" placeholder="请选择">
+                                  <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                  </el-option>
+                                </el-select>
+                            </td>
+                            <td><el-input size="mini" v-model="input" placeholder="请输入内容" style="margin-right: 10px;"></el-input>件</td>
+                            <td>删除</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <el-select size="mini" v-model="value" placeholder="请选择">
+                                  <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                  </el-option>
+                                </el-select>
+                            </td>
+                            <td>
+                                <el-select size="mini" v-model="value" placeholder="请选择">
+                                  <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                  </el-option>
+                                </el-select>
+                            </td>
+                            <td><el-input size="mini" v-model="input" placeholder="请输入内容" style="margin-right: 10px;"></el-input>件</td>
+                            <td>删除</td>
+                        </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr class="last">
+                  <td></td>
+                  <td>
+                    <el-button size="small">确定保存</el-button>
+                    <el-button size="small" style="margin-left: 15px;">返回</el-button>
+                    <el-checkbox class="radio" v-model="auto" label="1" style="margin-left: 20px;">保存后继续添加商品</el-checkbox>
+                  </td>
+                </tr>
+            </table>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -239,102 +288,14 @@
                   value: '选项5',
                   label: '北京烤鸭'
                 }],
-                marketplaces: [{
-                  value: '选项11',
-                  label: '市场1'
-                }, {
-                  value: '选项22',
-                  label: '市场2'
-                }],
-                floors: [{
-                  value: '选项11',
-                  label: 'F1'
-                }, {
-                  value: '选项22',
-                  label: 'F2'
-                }],
-                classifys: [{
-                  value: '选项11',
-                  label: 'F1'
-                }, {
-                  value: '选项22',
-                  label: 'F2'
-                }],
-                shoptypes: [{
-                  value: '选项11',
-                  label: 'F1'
-                }, {
-                  value: '选项22',
-                  label: 'F2'
-                }],
-                brands: [{
-                  value: '选项11',
-                  label: 'F1'
-                }, {
-                  value: '选项22',
-                  label: 'F2'
-                }],
                 level: '',
-                marketplace: '',
-                floor: '',
-                classify:'',
-                shoptype: '',
-                brand:'',
-                type: 3,
-                serve: '',
-                start: '',
-                auto: '',
-                tableData: [{
-                    edit_type: '提现',
-                    pursh_code: '900023',
-                    save_in: '100',
-                    save_out: '1200',
-                    cost_count: '50',
-                    sell_time: '2016-10-10',
-                    edit_name: '管理员',
-                    edit_exp: '补运费',
-                }]
+                tableData: []
             }
         },
         components: {
             headTop,
         },
-        created(){
-            this.initData();
-        },
         methods: {
-            async initData(){
-                try{
-                    const countData = await getUserCount();
-                    if (countData.status == 1) {
-                        this.count = countData.count;
-                    }else{
-                        throw new Error('获取数据失败');
-                    }
-                    this.getUsers();
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                this.offset = (val - 1)*this.limit;
-                this.getUsers()
-            },
-            async getUsers(){
-                const Users = await getUserList({offset: this.offset, limit: this.limit});
-                this.tableData = [];
-                Users.forEach(item => {
-                    const tableData = {};
-                    tableData.username = item.username;
-                    tableData.registe_time = item.registe_time;
-                    tableData.city = item.city;
-                    this.tableData.push(tableData);
-                })
-            },
             gobackIndex() {
               this.$router.push({
                   path: '/manage'
@@ -359,6 +320,11 @@
           .el-input {
             width: 200px;
           }
+        }
+        &.last {
+            td {
+                border: none;
+            }
         }
       }
     }
