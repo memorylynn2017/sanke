@@ -157,7 +157,7 @@ export default {
         },
         handleList() {
             this.$router.push({
-                path: '/member'
+                path: '/businessList'
             });
         },
         filterTag(value, row) {

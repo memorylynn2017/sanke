@@ -49,7 +49,7 @@
             </el-table-column>
             <el-table-column property="costname" label="余额" width="110">
             </el-table-column>
-            <el-table-column property="registe_time" label="注册时间" width="110">
+            <el-table-column property="registe_time" label="注册时间" width="160">
             </el-table-column>
             <el-table-column property="editname" label="操作" width="80">
                 <template slot-scope="scope">
@@ -59,16 +59,16 @@
             <el-table-column property="statusname" label="状态" width="80">
             </el-table-column>
         </el-table>
-        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+        <!-- <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
             </el-pagination>
-        </div>
+        </div> -->
     </div>
 </div>
 </template>
 <script>
 // import headTop from '../components/headTop'
-import { getUserList, getUserCount} from '@/api/getData'
+// import { getUserList, getUserCount} from '@/api/getData'
 import axios from 'axios'
 export default {
     data() {
@@ -134,16 +134,16 @@ export default {
                 console.log(error);
             })
         },
-        test(myvalue1) {
-            // console.log(myvalue1);
-            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
-                this.productList = this.tableData;
-            } else {
-                this.productList = this.tableData.filter(item => {
-                    return item.levelname !== null && item.levelname == this.myvalue1;
-                });
-            }
-        },
+        // test(myvalue) {
+        //     // console.log(myvalue1);
+        //     if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+        //         this.productList = this.tableData;
+        //     } else {
+        //         this.productList = this.tableData.filter(item => {
+        //             return item.levelname !== null && item.levelname == this.myvalue1;
+        //         });
+        //     }
+        // },
         showNums(index){
             this.pageNum = parseInt(this.options2[index].label);
         },
@@ -163,22 +163,22 @@ export default {
                 });
             }
         },
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            this.currentPage = val;
-            this.offset = (val - 1) * this.limit;
-            this.getUsers()
-        },
+        // handleSizeChange(val) {
+        //     console.log(`每页 ${val} 条`);
+        // },
+        // handleCurrentChange(val) {
+        //     this.currentPage = val;
+        //     this.offset = (val - 1) * this.limit;
+        //     this.getUsers()
+        // },
         handleList() {
             this.$router.push({
                 path: '/member'
             });
         },
-        filterTag(value, row) {
-            return row.levelname === value;
-        },
+        // filterTag(value, row) {
+        //     return row.levelname === value;
+        // },
     }
 }
 </script>

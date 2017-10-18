@@ -1,6 +1,6 @@
 <template>
     <div class="fillcontain">
-        <head-top></head-top>
+        <!-- <head-top></head-top> -->
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-button class="backbtn" @click="handleReturn">返回</el-button>
@@ -256,7 +256,7 @@
     </div>
 </template>
 <script>
-import headTop from '../components/headTop'
+// import headTop from '../components/headTop'
 import { getUserList, getUserCount } from '@/api/getData'
 export default {
     data() {
@@ -470,7 +470,7 @@ export default {
         }
     },
     components: {
-        headTop,
+        // headTop,
     },
     created() {
         this.initData();

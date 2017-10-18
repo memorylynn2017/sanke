@@ -21,7 +21,6 @@
                 <div class="line fl"></div>
                 <div class="login-right fl">
                     <el-form-item>
-                        <!-- @click="submitForm('loginForm')" -->
                         <el-button @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
                     </el-form-item>
                 </div>
