@@ -1,3 +1,5 @@
+
+
 <template>
     <div>
      	<head-top></head-top>
@@ -99,7 +101,7 @@
 						      label="价格">
 						    </el-table-column>
 						    <el-table-column label="操作" >
-						    <template scope="scope"> 
+						    <template slot-scope="scope"> 
 						        <el-button
 						          size="small"
 						          type="danger"

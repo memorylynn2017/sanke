@@ -1,6 +1,6 @@
 <template>
 <div class="fillcontain">
-    <head-top></head-top>
+    <!-- <head-top></head-top> -->
     <div class="headAdv">
         <div class="listed">
             <span><strong>商家列表</strong></span>
@@ -30,8 +30,6 @@
     </div>
     <div class="table_container">
         <el-table ref="multipleTable" :data="productList" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
-            <!-- <el-table-column type="index" width="60">
-                </el-table-column> -->
             <el-table-column type="selection" width="55">
             </el-table-column>
 
@@ -45,28 +43,29 @@
             </el-table-column>
             <el-table-column property="product_shop" label="商家名称" width="100">
             </el-table-column>
-            <el-table-column property="product_up" label="上架" width="80">
-
-            </el-table-column>
+            <!-- <el-table-column property="product_up" label="上架" width="80">
+          </el-table-column> -->
             <el-table-column property="product_up_time" label="上架时间" width="140">
             </el-table-column>
             <el-table-column property="product_down_time" label="下架时间" width="140">
             </el-table-column>
             <el-table-column property="editname" label="操作" width="180">
-                <template scope="scope">
-                    <el-button style="float:left; border:none;" size="small">[下架]</el-button>
-                    <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
-                  </template>
+                <template slot-scope="scope">
+              <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button>
+              <el-button style="float:left; border:none;" size="small" @click="handleEdit">[编辑]</el-button>
+            </template>
             </el-table-column>
             <el-table-column property="product_down" label="下架" width="80">
-                <template scope="scope">
-                <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
-                </el-switch>
-                </template>
+                <!-- 这里有用到scope -->
+                <!-- <template scope="scope">
+                      <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
+                      </el-switch>
+               </template> -->
             </el-table-column>
-
-
         </el-table>
+
+
+
 
         <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
@@ -76,7 +75,7 @@
 </div>
 </template>
 <script>
-import headTop from '../components/headTop'
+// import headTop from '../components/headTop'
 import {getUserList, getUserCount} from '@/api/getData'
 import axios from 'axios'
 export default {
@@ -129,7 +128,7 @@ export default {
         }
     },
     components: {
-        headTop,
+        // headTop,
     },
     computed: {
         // tableFilter() {
@@ -170,31 +169,6 @@ export default {
       },
 
         async initData() {
-            /* var data = []
-            let url = 'http://localhost:3000/products'
-            let _this = this
-            this.$http.get(url, {}).then(function(res) {
-                for (let i = 0; i < res.data.length; i++) {
-
-                    var obj = {}
-                    obj.product_name = res.data[i].product_name
-                    obj.product_code = res.data[i].product_code
-                    obj.product_class = res.data[i].product_class
-                    obj.product_puprice = res.data[i].product_puprice
-                    obj.product_shop = res.data[i].product_shop
-                    obj.product_up = res.data[i].product_up
-                    obj.product_up_time = res.data[i].product_up_time
-                    obj.product_down_time = res.data[i].product_down_time
-                    obj.product_down = res.data[i].product_down
-                    data[i] = obj
-                }
-                console.log(data);
-                _this.tableData = data;
-                console.log(_this.tableData);
-                _this.productList = _this.tableData;
-            }).catch(function(error) {
-                console.log(error);
-            }) */
             axios.get('getGoodsList').then(res=>{
                 this.tableData = res.data;
                 this.productList = res.data;
@@ -210,11 +184,11 @@ export default {
             this.offset = (val - 1) * this.limit;
             this.getUsers()
         },
-        // handleEdit() {
-        //     this.$router.push({
-        //         path: '/member'
-        //     });
-        // },
+        handleEdit() {
+            this.$router.push({
+                path: '/productList'
+            });
+        },
         filterTag(value, row) {
             return row.levelname === value;
         },
@@ -224,189 +198,7 @@ export default {
 
 
 
-<style lang="less">
+<style lang="less" scoped>
 @import '../style/mixin';
-
-
-.table_container {
-    padding: 20px;
-}
-
-.el-table .cell {
-    white-space: normal;
-    word-break: break-all;
-    line-height: 24px;
-    text-align: center;
-}
-
-.el-table {
-    font-size: 13px;
-    color: #1f2d3d;
-}
-
-.fillcontain .headAdv {
-    display: flex;
-    justify-content: space-between;
-    height: 45px;
-    line-height: 45px;
-}
-
-.headAdv .listed {
-    font-size: 14px;
-    display: inline-block;
-
-    margin-left: 20px;
-}
-
-.headAdv .recorded {
-    display: inline-block;
-    font-size: 14px;
-}
-
-.headAdv .searched {
-    display: inline-block;
-    text-align: center;
-    width: 550px;
-    height: 45px;
-}
-
-.headAdv .el-select-dropdown {
-    width: 95px;
-}
-
-.headAdv .el-input__inner {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 50px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border: 1px solid #bfcbd9;
-    box-sizing: border-box;
-    color: #1f2d3d;
-    font-size: inherit;
-    height: 32px;
-    line-height: 1;
-    outline: 0;
-    padding: 3px 10px;
-    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
-}
-
-.headAdv .searched .searched_left .el-input__inner {
-    border-radius: 5px;
-}
-
-.headAdv .searched .searched_middle .el-input__inner {
-    width: 65px;
-    border-radius: 5px;
-}
-
-.headAdv .searched .el-select .el-input {
-    width: 112px;
-    height: 45px;
-    border-radius: 50px;
-}
-
-.headAdv .searched .searched_left {
-    display: inline-block;
-    position: relative;
-    left: 0;
-    top: 2px;
-}
-
-.headAdv .searched .searched_right {
-    display: inline-block;
-    position: relative;
-    left: 5px;
-}
-
-.headAdv .searched .searched_middle {
-    display: inline-block;
-    position: relative;
-    top: 3px;
-    left: 40px;
-}
-
-.headAdv .recorded {
-    display: inline-block;
-    width: 170px;
-    height: 50px;
-}
-
-.el-table th {
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: #50606a;
-    text-align: left;
-}
-
-.el-table th > .cell {
-    background-color: #4f616a;
-}
-
-.el-table__footer-wrapper thead div,
-.el-table__header-wrapper thead div {
-    background-color: #eef1f6;
-    color: #1f2d3d;
-    color: white;
-}
-
-.el-input-group__append {
-    background-color: rgb(0, 209, 186);
-    color: #fff;
-    vertical-align: middle;
-    display: table-cell;
-    position: relative;
-    border-radius: 50px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border: 1px solid #bfcbd9;
-    padding: 0 10px;
-    width: 1px;
-    white-space: nowrap;
-}
-
-.el-input-group__prepend {}
-
-.el-input__icon {
-    position: absolute;
-    width: 35px;
-    height: 100%;
-    left: 2px;
-    top: 2px;
-    text-align: center;
-    color: #bfcbd9;
-    transition: all 0.3s;
-}
-
-.el-select .el-input .el-input__icon {
-    color: #bfcbd9;
-    font-size: 12px;
-    transition: transform 0.3s;
-    -ms-transform: translateY(-50%) rotate(180deg);
-    transform: translateY(-50%) rotateZ(180deg);
-    line-height: 16px;
-    left: 80px;
-    top: 52%;
-    cursor: pointer;
-}
-
-.searched_middle .el-select .el-input .el-input__icon {
-    left: 55px;
-}
-
-.el-checkbox__inner {
-    display: inline-block;
-    position: relative;
-    border: 1px solid #bfcbd9;
-    border-radius: 20px;
-    box-sizing: border-box;
-    width: 18px;
-    height: 18px;
-    background-color: #fff;
-    z-index: 1;
-    transition: border-color 0.25s cubic-bezier(.71,-.46,.29,1.46),background-color 0.25s cubic-bezier(.71,-.46,.29,1.46);
-}
+@import '../style/stable';
 </style>

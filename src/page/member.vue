@@ -174,7 +174,7 @@
                         <el-table-column label="备注" width="140" property="edit_exp">
                         </el-table-column>
                         <el-table-column label="查看" width="140">
-                            <template scope="scope">
+                            <template slot-scope="scope">
                                 <el-button style="border:none;" size="small">[订单]</el-button>
                             </template>
                         </el-table-column>

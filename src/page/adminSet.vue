@@ -32,13 +32,13 @@
             <template>
                 <el-table :data="tableData" border style="width: 100%">
                     <el-table-column label="日期" width="180">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-icon name="time"></el-icon>
                             <span style="margin-left: 10px">{{ scope.row.date }}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="姓名" width="180">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-popover trigger="hover" placement="top">
                                 <p>姓名: {{ scope.row.name }}</p>
                                 <p>备注: {{ scope.row.address }}</p>
@@ -49,7 +49,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="操作">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         </template>

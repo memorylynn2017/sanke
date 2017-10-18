@@ -11,17 +11,19 @@
                         <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
-                    <el-select v-model="myvalue2" filterable placeholder="请选择" @change="test2">
+                      <!-- @change="test2" -->
+                    <el-select v-model="myvalue2" filterable placeholder="请选择" >
                         <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
-                    <el-select v-model="myvalue3" filterable placeholder="请选择" @change="test3">
+                    <!-- @change="test3" -->
+                    <el-select v-model="myvalue3" filterable placeholder="请选择" >
                         <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <el-input icon="search" v-model="input2">
+                    <el-input icon="search" v-model="input">
                         <el-button slot="append">查询</el-button>
                     </el-input>
                 </div>
@@ -40,11 +42,11 @@
             <el-table :data="productList" highlight-current-row style="width:100%">
                 <el-table-column property="purchase_num" label="订单号" width="100">
                 </el-table-column>
-                <el-table-column property="purchase_count" label="数量" width="100">
+                <el-table-column property="purchase_count" label="数量" width="90">
                 </el-table-column>
-                <el-table-column property="purchase_price" label="金额" width="100">
+                <el-table-column property="purchase_price" label="金额" width="90">
                 </el-table-column>
-                <el-table-column property="purchase_freight" label="运费" width="100">
+                <el-table-column property="purchase_freight" label="运费" width="90">
                 </el-table-column>
                 <el-table-column property="purchase_key" label="会员编号" width="100">
                 </el-table-column>
@@ -54,17 +56,17 @@
                 </el-table-column>
                 <el-table-column property="purchase_area" label="地区" width="100">
                 </el-table-column>
-                <el-table-column property="purchase_area" label="配送方式" width="100">
+                <!-- <el-table-column property="purchase_areasend" label="配送方式" width="100">
+                </el-table-column> -->
+                <el-table-column property="purchase_purstatus" label="订单状态" width="90">
                 </el-table-column>
-                <el-table-column property="purchase_purstatus" label="订单状态" width="100">
+                <el-table-column property="purchase_senstatus" label="发货状态" width="90">
                 </el-table-column>
-                <el-table-column property="purchase_senstatus" label="发货状态" width="100">
+                <el-table-column property="purchase_times" label="下架时间" width="160">
                 </el-table-column>
-                <el-table-column property="purchase_times" label="下架时间" width="135">
-                </el-table-column>
-                <el-table-column property="editname" label="处理" width="180">
-                    <template scope="scope">
-                        <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
+                <el-table-column property="editname" label="处理" width="90">
+                    <template slot-scope="scope">
+                        <el-button style="float:left; border:none;" size="small">[处理]</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -128,8 +130,20 @@ export default {
                 value: '已作废',
                 label: '已作废'
             }],
-            input1: '',
-            input2: '',
+            options4: [{
+                value: '选项1',
+                label: '30'
+            }, {
+                value: '选项2',
+                label: '60'
+            }, {
+                value: '选项3',
+                label: '90'
+            }, {
+                value: '选项4',
+                label: '120'
+            }],
+            input: '',
             myvalue1: '所有等级',
             myvalue2: '订单状态',
             myvalue3: '发货状态',
@@ -191,188 +205,8 @@ export default {
 }
 
 </script>
-<style lang="less">
+<style lang="less" >
 @import '../style/mixin';
-.table_container {
-    padding: 20px;
-}
-
-.el-table .cell {
-    white-space: normal;
-    word-break: break-all;
-    line-height: 24px;
-    text-align: center;
-}
-
-.el-table {
-    font-size: 13px;
-    color: #1f2d3d;
-}
-
-.fillcontain .headAdv {
-    display: flex;
-    justify-content: space-between;
-    height: 45px;
-    line-height: 45px;
-}
-
-.headAdv .listed {
-    font-size: 14px;
-    display: inline-block;
-
-    margin-left: 20px;
-}
-
-.headAdv .recorded {
-    display: inline-block;
-    font-size: 14px;
-}
-
-.headAdv .searched {
-    display: inline-block;
-    text-align: center;
-    width: 550px;
-    height: 45px;
-}
-
-.headAdv .el-select-dropdown {
-    width: 95px;
-}
-
-.headAdv .el-input__inner {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 50px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border: 1px solid #bfcbd9;
-    box-sizing: border-box;
-    color: #1f2d3d;
-    font-size: inherit;
-    height: 32px;
-    line-height: 1;
-    outline: 0;
-    padding: 3px 10px;
-    transition: border-color 0.2s cubic-bezier(.645, .045, .355, 1);
-}
-
-.headAdv .searched .searched_left .el-input__inner {
-    border-radius: 5px;
-}
-
-.headAdv .searched .searched_middle .el-input__inner {
-    width: 65px;
-    border-radius: 5px;
-}
-
-.headAdv .searched .el-select .el-input {
-    width: 112px;
-    height: 45px;
-    border-radius: 50px;
-}
-
-.headAdv .searched .searched_left {
-    display: inline-block;
-    position: relative;
-    left: 0;
-    top: 2px;
-}
-
-.headAdv .searched .searched_right {
-    display: inline-block;
-    position: relative;
-    left: 5px;
-}
-
-.headAdv .searched .searched_middle {
-    display: inline-block;
-    position: relative;
-    top: 3px;
-    left: 40px;
-}
-
-.headAdv .recorded {
-    display: inline-block;
-    width: 170px;
-    height: 50px;
-}
-
-.el-table th {
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: #50606a;
-    text-align: left;
-}
-
-.el-table th > .cell {
-    background-color: #4f616a;
-}
-
-.el-table__footer-wrapper thead div,
-.el-table__header-wrapper thead div {
-    background-color: #eef1f6;
-    color: #1f2d3d;
-    color: white;
-}
-
-.el-input-group__append {
-    background-color: rgb(0, 209, 186);
-    color: #fff;
-    vertical-align: middle;
-    display: table-cell;
-    position: relative;
-    border-radius: 50px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border: 1px solid #bfcbd9;
-    padding: 0 10px;
-    width: 1px;
-    white-space: nowrap;
-}
-
-.el-input-group__prepend {}
-
-.el-input__icon {
-    position: absolute;
-    width: 35px;
-    height: 100%;
-    left: 2px;
-    top: 2px;
-    text-align: center;
-    color: #bfcbd9;
-    transition: all 0.3s;
-}
-
-.el-select .el-input .el-input__icon {
-    color: #bfcbd9;
-    font-size: 12px;
-    transition: transform 0.3s;
-    -ms-transform: translateY(-50%) rotate(180deg);
-    transform: translateY(-50%) rotateZ(180deg);
-    line-height: 16px;
-    left: 80px;
-    top: 52%;
-    cursor: pointer;
-}
-
-.searched_middle .el-select .el-input .el-input__icon {
-    left: 55px;
-}
-
-.el-checkbox__inner {
-    display: inline-block;
-    position: relative;
-    border: 1px solid #bfcbd9;
-    border-radius: 20px;
-    box-sizing: border-box;
-    width: 18px;
-    height: 18px;
-    background-color: #fff;
-    z-index: 1;
-    transition: border-color 0.25s cubic-bezier(.71,-.46,.29,1.46),background-color 0.25s cubic-bezier(.71,-.46,.29,1.46);
-}
+@import '../style/stable';
 
 </style>
