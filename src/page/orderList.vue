@@ -1,158 +1,198 @@
 <template>
     <div class="fillcontain">
-        <head-top></head-top>
+        <!-- <head-top></head-top> -->
+        <div class="headAdv">
+            <div class="listed">
+                <span><strong>订单列表</strong></span>
+            </div>
+            <div class="searched">
+                <div class="searched_left">
+                    <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
+                        <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="myvalue2" filterable placeholder="请选择" @change="test2">
+                        <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <el-select v-model="myvalue3" filterable placeholder="请选择" @change="test3">
+                        <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="searched_right">
+                    <el-input icon="search" v-model="input2">
+                        <el-button slot="append">查询</el-button>
+                    </el-input>
+                </div>
+                <div class="searched_middle">
+                    <span>显示</span>&nbsp;
+                    <el-select v-model="myvalue4" filterable style="margin-left:-30px;">
+                        <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                    </el-select>
+                </div>
+            </div>
+            <div class="recorded">
+                <span>总记录数 {{count}}</span>
+            </div>
+        </div>
         <div class="table_container">
-            <el-table
-			    :data="tableData"
-			    @expand='expand'
-                :expand-row-keys='expendRow'
-                :row-key="row => row.index"
-			    style="width: 100%">
-			    <el-table-column type="expand">
-			      <template scope="props">
-			        <el-form label-position="left" inline class="demo-table-expand">
-			          <el-form-item label="用户名" >
-			            <span>{{ props.row.user_name }}</span>
-			          </el-form-item>
-			          <el-form-item label="店铺名称">
-			            <span>{{ props.row.restaurant_name }}</span>
-			          </el-form-item>
-			          <el-form-item label="收货地址">
-			            <span>{{ props.row.address }}</span>
-			          </el-form-item>
-			          <el-form-item label="店铺 ID">
-			            <span>{{ props.row.restaurant_id }}</span>
-			          </el-form-item>
-			          <el-form-item label="店铺地址">
-			            <span>{{ props.row.restaurant_address }}</span>
-			          </el-form-item>
-			        </el-form>
-			      </template>
-			    </el-table-column>
-			    <el-table-column
-			      label="订单 ID"
-			      prop="id">
-			    </el-table-column>
-			    <el-table-column
-			      label="总价格"
-			      prop="total_amount">
-			    </el-table-column>
-			    <el-table-column
-			      label="订单状态"
-			      prop="status">
-			    </el-table-column>
-			</el-table>
-            <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="total, prev, pager, next"
-                  :total="count">
+            <el-table :data="productList" highlight-current-row style="width:100%">
+                <el-table-column property="purchase_num" label="订单号" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_count" label="数量" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_price" label="金额" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_freight" label="运费" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_key" label="会员编号" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_goodsman" label="收货人" width="90">
+                </el-table-column>
+                <el-table-column property="purchase_leval" label="等级" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_area" label="地区" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_area" label="配送方式" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_purstatus" label="订单状态" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_senstatus" label="发货状态" width="100">
+                </el-table-column>
+                <el-table-column property="purchase_times" label="下架时间" width="135">
+                </el-table-column>
+                <el-table-column property="editname" label="处理" width="180">
+                    <template scope="scope">
+                        <el-button style="float:left; border:none;" size="small">[编辑]</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
                 </el-pagination>
             </div>
         </div>
     </div>
 </template>
-
 <script>
-    import headTop from '../components/headTop'
-    import {getOrderList, getOrderCount, getResturantDetail, getUserInfo, getAddressById} from '@/api/getData'
-    export default {
-        data(){
-            return {
-                tableData: [],
-                currentRow: null,
-                offset: 0,
-                limit: 20,
-                count: 0,
-                currentPage: 1,
-                restaurant_id: null,
-                expendRow: [],
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            oncontrol: true,
+            productList: [
+
+            ],
+            tableData:[
+            ],
+            options1: [{
+                value: 'A类',
+                label: 'A类'
+            }, {
+                value: 'B类',
+                label: 'B类'
+            }, {
+                value: 'C类',
+                label: 'C类'
+            }, {
+                value: 'D类',
+                label: 'D类'
+            }, {
+                value: 'T类',
+                label: 'T类'
+            }],
+            options2: [{
+                value: '未付款',
+                label: '未付款'
+            }, {
+                value: '已付款',
+                label: '已付款'
+            }, {
+                value: '已取消',
+                label: '已取消'
+            }],
+            options3: [{
+                value: '未发货',
+                label: '未发货'
+            }, {
+                value: '已打单',
+                label: '已打单'
+            }, {
+                value: '已发货',
+                label: '已发货'
+            }, {
+                value: '已完结',
+                label: '已完结'
+            }, {
+                value: '已作废',
+                label: '已作废'
+            }],
+            input1: '',
+            input2: '',
+            myvalue1: '所有等级',
+            myvalue2: '订单状态',
+            myvalue3: '发货状态',
+            myvalue4: '30',
+            currentRow: null,
+            offset: 0,
+            limit: 20,
+            count: 0,
+            currentPage: 1,
+            productList: [],
+            multipleSelection: []
+        }
+    },
+    components: {
+        // headTop,
+    },
+    computed: {},
+
+
+    mounted() {
+        this.initData();
+
+    },
+    methods: {
+
+        test1(myvalue1) {
+            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+                this.productList = this.tableData;
+            } else {
+                this.productList = this.tableData.filter(item => {
+                    return item.shop_type !== null && item.shop_type == this.myvalue1;
+                });
             }
         },
-    	components: {
-    		headTop,
-    	},
-        created(){
-        	this.restaurant_id = this.$route.query.restaurant_id;
-            this.initData();
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
         },
-        mounted(){
-            
-        },
-        methods: {
-            async initData(){
-                try{
-                    const countData = await getOrderCount({restaurant_id: this.restaurant_id});
-                    if (countData.status == 1) {
-                        this.count = countData.count;
-                    }else{
-                        throw new Error('获取数据失败');
-                    }
-                    this.getOrders();
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                this.offset = (val - 1)*this.limit;
-                this.getOrders()
-            },
-            async getOrders(){
-                const Orders = await getOrderList({offset: this.offset, limit: this.limit, restaurant_id: this.restaurant_id});
-                this.tableData = [];
-                Orders.forEach((item, index) => {
-                    const tableData = {};
-                    tableData.id = item.id;
-                    tableData.total_amount = item.total_amount;
-                    tableData.status = item.status_bar.title;
-                    tableData.user_id = item.user_id;
- 					tableData.restaurant_id = item.restaurant_id;
- 					tableData.address_id = item.address_id;
-                    tableData.index = index;
-                    this.tableData.push(tableData);
-                })
-            },
-            async expand(row, status){
-            	if (status) {
-            		const restaurant = await getResturantDetail(row.restaurant_id);
-	            	const userInfo = await getUserInfo(row.user_id);
-	            	const addressInfo = await getAddressById(row.address_id);
 
-	                this.tableData.splice(row.index, 1, {...row, ...{restaurant_name: restaurant.name, restaurant_address: restaurant.address, address: addressInfo.address, user_name: userInfo.username}}); 
-                    this.$nextTick(() => {
-                        this.expendRow.push(row.index);
-                    })	
-	            }else{
-                    const index = this.expendRow.indexOf(row.index);
-                    this.expendRow.splice(index, 1)
-                }
-            },
+        async initData() {
+            axios.get('getPurchasList').then(res => {
+                this.tableData = res.data;
+                this.productList = res.data;
+            }).catch(error => {
+                console.log(error)
+            });
         },
-    }
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.offset = (val - 1) * this.limit;
+            this.getUsers()
+        },
+        filterTag(value, row) {
+            return row.levelname === value;
+        },
+    },
+}
+
 </script>
-
 <style lang="less">
-	@import '../style/mixin';
-    .table_container{
-        padding: 20px;
-    }
-    .demo-table-expand {
-	    font-size: 0;
-	}
-	.demo-table-expand label {
-	    width: 90px;
-	    color: #99a9bf;
-	}
-	.demo-table-expand .el-form-item {
-	    margin-right: 0;
-	    margin-bottom: 0;
-	    width: 50%;
-	}
+@import '../style/mixin';
+@import '../style/table';
+
 </style>

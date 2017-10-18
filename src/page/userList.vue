@@ -7,8 +7,8 @@
         </div>
         <div class="searched">
             <div class="searched_left">
-                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
-                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
+                <el-select v-model="levelName" placeholder="请选择"  @change="filterLevel()">
+                    <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
                     </el-option>
                 </el-select>
             </div>
@@ -22,8 +22,8 @@
             </div>
             <div class="searched_middle">
                 <span>显示</span>&nbsp;
-                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                    <el-option v-for="(item,index) in options2" :key="item.value" :label="item.label" :value="item.value" @click="showNums(index)"> </el-option>
+                <el-select v-model="pageNum" filterable style="margin-left:-30px;">
+                    <el-option v-for="page in pageData" :key="page.value" :label="page.label" :value="page.value" > </el-option>
                 </el-select>
             </div>
         </div>
@@ -78,7 +78,7 @@ export default {
     data() {
         return {
             tableData: [],
-            options1: [{
+            levelData: [{
                 value: '所有等级',
                 label: '所有等级'
             }, {
@@ -91,7 +91,7 @@ export default {
                 value: '注册会员',
                 label: '注册会员'
             }],
-            options2: [{
+            pageData: [{
                 value: '选项1',
                 label: '15'
             }, {
@@ -105,15 +105,14 @@ export default {
                 label: '120'
             }],
             customer_id: '',
-            myvalue1: '所有等级',
-            myvalue2: '30',
+            levelName: '请选择',
+            pageNum:30,
             currentRow: null,
             offset: 0,
             limit: 20,
             count: 0,
             currentPage: 1,
-            userList: [],
-            pageNum:30
+            userList: []
         }
     },
     components: {
@@ -183,12 +182,12 @@ export default {
         showNums(index){
             this.pageNum = parseInt(this.options2[index].label);
         },
-        test1(myvalue1) {
-            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+        filterLevel() {
+            if (this.levelName == '' || this.myvalue1 == "所有等级") {
                 this.userList = this.tableData;
             } else {
                 this.userList = this.tableData.filter(item => {
-                    return item.levelname !== null && item.levelname == this.myvalue1;
+                    return item.levelName !== null && item.levelName == this.levelName;
                 });
             }
         },
