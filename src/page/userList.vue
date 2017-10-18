@@ -7,7 +7,7 @@
         </div>
         <div class="searched">
             <div class="searched_left">
-                <el-select v-model="levelName" placeholder="请选择"  @change="filterLevel()">
+                <el-select v-model="levelName" placeholder="请选择" @change="filterLevel" >     
                     <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
                     </el-option>
                 </el-select>
@@ -101,7 +101,7 @@ export default {
                 label: '120'
             }],
             customer_id: '',
-            levelName: '请选择',
+            levelName: '所有等级',
             pageNum:30,
             currentRow: null,
             offset: 0,
@@ -134,10 +134,20 @@ export default {
                 console.log(error);
             })
         },
+        test(myvalue1) {
+            // console.log(myvalue1);
+            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+                this.productList = this.tableData;
+            } else {
+                this.productList = this.tableData.filter(item => {
+                    return item.levelname !== null && item.levelname == this.myvalue1;
+                });
+            }
+        },
         showNums(index){
             this.pageNum = parseInt(this.options2[index].label);
         },
-        filterLevel() {
+        filterLevel(levelName) {
             if (this.levelName == '' || this.myvalue1 == "所有等级") {
                 this.userList = this.tableData;
             } else {
@@ -172,7 +182,7 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/mixin';
 @import '../style/stable';
 </style>

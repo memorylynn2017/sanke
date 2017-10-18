@@ -70,17 +70,17 @@ export default {
         return {
             tableData: [],
             levelData: [{
-                value: '所有等级',
-                label: '所有等级'
+                value: '所有分类',
+                label: '所有分类'
             }, {
-                value: 'VIP',
-                label: 'VIP'
+                value: 'A类',
+                label: 'A类'
             }, {
-                value: '批发会员',
-                label: '批发会员'
+                value: 'B类',
+                label: 'B类'
             }, {
-                value: '注册会员',
-                label: '注册会员'
+                value: 'C类',
+                label: 'C类'
             }],
             pageData: [{
                 value: '选项1',
@@ -113,29 +113,13 @@ export default {
         getUserListFilter() {
             return this.userList.slice(0, this.pageNum);
         }
-        // tableFilter() {
-        //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
-        // }
     },
-
-    // 创建后的钩子函数
-
-    // 注意这个循环逻辑
-
-    // this.tableData.forEach((e, i) => {
-    //     if (e.levelname == myvalue1) {
-    //         tablearray.push(this.tableData[i]);
-    //     }
-    //     // console.log(tablearray);
-    //     this.tableData = tablearray;
-    // })
-
     mounted() {
         this.initData();
     },
     methods: {
         async initData() {
-            axios.get('/getUserList').then(res => {
+            axios.get('/getShopList').then(res => {
                 if (res.data) {
                     this.tableData = res.data;
                     this.userList = res.data;
@@ -183,7 +167,7 @@ export default {
 }
 
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/mixin';
 @import '../style/stable';
 

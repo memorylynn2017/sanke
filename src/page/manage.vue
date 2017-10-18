@@ -10,7 +10,7 @@
         </div>
     </div>
     <el-row style="height: 100%;">
-        <el-col :span="4" style="min-height: 100%; background-color: #293641;">
+        <el-col :span="3" style="min-height: 100%; background-color: #293641;">
             <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
                 <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
                 <el-submenu index="2">
@@ -51,7 +51,7 @@
                 </el-submenu> -->
             </el-menu>
         </el-col>
-        <el-col :span="20" style="height: 100%;overflow: auto;">
+        <el-col :span="21" style="height: 100%;overflow: auto;">
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>

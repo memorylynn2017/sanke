@@ -28,7 +28,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
 
@@ -41,7 +41,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -53,7 +53,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -65,7 +65,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -77,7 +77,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -89,7 +89,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -101,7 +101,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -113,7 +113,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
@@ -125,11 +125,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -137,11 +137,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -149,11 +149,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -161,11 +161,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -173,11 +173,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -185,11 +185,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "900615",
             "levelname": "注册会员",
             "areaname": "美国",
             "purshname": "1156",
@@ -197,11 +197,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -209,11 +209,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -221,11 +221,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -233,11 +233,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -245,11 +245,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -257,11 +257,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -269,11 +269,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -281,11 +281,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "700615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "1156",
@@ -293,11 +293,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -305,11 +305,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -317,11 +317,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -329,11 +329,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -341,11 +341,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -353,11 +353,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "VIP",
             "areaname": "美国",
             "purshname": "55888",
@@ -365,11 +365,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "600615",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "99977",
@@ -377,11 +377,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "500615",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "99977",
@@ -389,11 +389,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "500615",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "99977",
@@ -401,11 +401,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "500615",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "99977",
@@ -413,11 +413,11 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         },
         {
-            "customer_id": "800615",
+            "customer_id": "500615",
             "levelname": "批发会员",
             "areaname": "美国",
             "purshname": "99977",
@@ -425,7 +425,7 @@
             "countname": "100001",
             "pricename": "10001",
             "costname": "100011",
-            "registe_time": "2016-10-10",
+            "registe_time": "2017-10-18 20:00",
             "statusname": "正常"
         }
     ],
@@ -1110,7 +1110,7 @@
 
         {
             "purchase_num": "9000001",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1125,7 +1125,7 @@
         },
         {
             "purchase_num": "9000002",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1140,7 +1140,7 @@
         },
         {
             "purchase_num": "9000003",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1155,7 +1155,7 @@
         },
         {
             "purchase_num": "9000004",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1170,7 +1170,7 @@
         },
         {
             "purchase_num": "9000005",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1185,7 +1185,7 @@
         },
         {
             "purchase_num": "9000006",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1200,7 +1200,7 @@
         },
         {
             "purchase_num": "9000007",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1215,7 +1215,7 @@
         },
         {
             "purchase_num": "9000008",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1230,7 +1230,7 @@
         },
         {
             "purchase_num": "9000009",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",
@@ -1245,7 +1245,7 @@
         },
         {
             "purchase_num": "9000010",
-            "purchase_count": "3",
+            "purchase_count": "1000",
             "purchase_price": "¥45.00",
             "purchase_freight": "¥23.00",
             "purchase_key": "8005896",

@@ -57,10 +57,10 @@
             </el-table-column>
             <el-table-column property="product_down" label="下架" width="80">
                 <!-- 这里有用到scope -->
-                <!-- <template scope="scope">
+                <template slot-scope="scope">
                       <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
                       </el-switch>
-               </template> -->
+               </template>
             </el-table-column>
         </el-table>
 
@@ -86,32 +86,23 @@ export default {
 
             ],
             options1: [{
-                value: 'A类',
-                label: 'A类'
+                value: '打底衫',
+                label: '打底衫'
             }, {
-                value: 'B类',
-                label: 'B类'
-            }, {
-                value: 'C类',
-                label: 'C类'
-            }, {
-                value: 'D类',
-                label: 'D类'
-            }, {
-                value: 'T类',
-                label: 'T类'
+                value: '外套外衣',
+                label: '外套外衣'
             }],
             options2: [{
-                value: '选项1',
+                value: '30',
                 label: '30'
             }, {
-                value: '选项2',
+                value: '60',
                 label: '60'
             }, {
-                value: '选项3',
+                value: '90',
                 label: '90'
             }, {
-                value: '选项4',
+                value: '120',
                 label: '120'
             }],
             input1: '',
@@ -131,22 +122,8 @@ export default {
         // headTop,
     },
     computed: {
-        // tableFilter() {
-        //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
-        // }
     },
 
-    // 创建后的钩子函数
-
-    // 注意这个循环逻辑
-
-    // this.tableData.forEach((e, i) => {
-    //     if (e.levelname == myvalue1) {
-    //         tablearray.push(this.tableData[i]);
-    //     }
-    //     // console.log(tablearray);
-    //     this.tableData = tablearray;
-    // })
 
     mounted() {
         this.initData();
@@ -160,7 +137,7 @@ export default {
                 this.productList = this.tableData;
             } else {
                 this.productList = this.tableData.filter(item => {
-                    return item.shop_type !== null && item.shop_type == this.myvalue1;
+                    return item.product_class !== null && item.product_class == this.myvalue1;
                 });
             }
         },
@@ -198,7 +175,7 @@ export default {
 
 
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/mixin';
 @import '../style/stable';
 </style>
