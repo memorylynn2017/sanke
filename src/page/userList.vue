@@ -13,17 +13,14 @@
                 </el-select>
             </div>
             <div class="searched_right">
-                <!-- <el-input v-model="customer_id" placeholder="请输入要查询的客户Id"></el-input>
-                <el-input v-model="username" placeholder="请输入要查询的用户名"></el-input>
-                <el-button type="primary">查询</el-button> -->
-                <el-input v-model="customer_id" placeholder="请输入要查询的客户Id">
-                        <el-button slot="append" @click="searchUser()">查询</el-button>
-                </el-input>
+                <el-input icon="search" v-model="input2">
+                        <el-button slot="append">查询</el-button>
+                    </el-input>
             </div>
             <div class="searched_middle">
                 <span>显示</span>&nbsp;
                 <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                    <el-option v-for="(item,index) in options2" :key="item.value" :label="item.label" :value="item.value" @click="showNums(index)"> </el-option>
+                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
                 </el-select>
             </div>
         </div>
@@ -34,7 +31,7 @@
     <!-- 以后需要从后台模拟数据出来 -->
     <!-- :filters="[{ text: 'VIP', value: 'VIP' }, { text: '批发会员', value: '批发会员' },{ text: '注册会员', value: '注册会员' }]" :filter-method="filterTag" -->
     <div class="table_container">
-        <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
+        <el-table :data="userList" highlight-current-row style="width: 100%">
             <el-table-column type="index" width="60">
             </el-table-column>
             <el-table-column property="customer_id" label="客户ID" width="100">
@@ -93,10 +90,10 @@ export default {
             }],
             options2: [{
                 value: '选项1',
-                label: '15'
+                label: '30'
             }, {
                 value: '选项2',
-                label: '30'
+                label: '60'
             }, {
                 value: '选项3',
                 label: '90'
@@ -104,7 +101,8 @@ export default {
                 value: '选项4',
                 label: '120'
             }],
-            customer_id: '',
+            input1: '',
+            input2: '',
             myvalue1: '所有等级',
             myvalue2: '30',
             currentRow: null,
@@ -113,16 +111,12 @@ export default {
             count: 0,
             currentPage: 1,
             userList: [],
-            pageNum:30
         }
     },
     components: {
         headTop,
     },
     computed: {
-        getUserListFilter(){
-            return this.userList.slice(0,this.pageNum);
-        }
         // tableFilter() {
         //     return this.myvalue1.length ? this.tableData.filter(item => item.levelname.indexof(this.myvalue1) > -1) : this.tableData;
         // }
@@ -142,6 +136,7 @@ export default {
 
     mounted() {
         this.initData();
+
     },
     methods: {
         async initData() {
@@ -180,22 +175,12 @@ export default {
                 console.log(error);
             })
         },
-        showNums(index){
-            this.pageNum = parseInt(this.options2[index].label);
-        },
         test1(myvalue1) {
             if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
                 this.userList = this.tableData;
             } else {
                 this.userList = this.tableData.filter(item => {
                     return item.levelname !== null && item.levelname == this.myvalue1;
-                });
-            }
-        },
-        searchUser(){
-            if(this.customer_id){
-                this.userList = this.tableData.filter((item)=>{
-                    return item.customer_id == this.customer_id;
                 });
             }
         },
