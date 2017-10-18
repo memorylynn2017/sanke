@@ -12,5 +12,4 @@
 
 <style lang="less">
     @import './style/common';
-	@import './style/sstyle';
 </style>

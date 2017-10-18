@@ -307,6 +307,7 @@
 
 <style lang="less">
     @import '../style/mixin';
+    @import '../style/sstyle';
     .table0 {
       tr {
         td {

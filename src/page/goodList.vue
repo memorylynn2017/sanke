@@ -226,22 +226,7 @@ export default {
 
 <style lang="less">
 @import '../style/mixin';
-.qf {
-    *zoom: 1;
-}
-.qf:after {
-    content: '';
-    display: table;
-    clear: both;
-}
 
-.fl {
-    float: left;
-}
-
-.fr {
-    float: right;
-}
 
 .table_container {
     padding: 20px;

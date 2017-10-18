@@ -46,6 +46,10 @@ router.get("/getGoodsList",function(req,res,next){
     res.json(mockData.products);
 })
 
+router.get("/getPurchasList",function(req,res,next){
+    res.json(mockData.purchases);
+})
+
 app.use(router);
 
 var compiler = webpack(webpackConfig)
