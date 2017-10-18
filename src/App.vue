@@ -6,10 +6,11 @@
 
 <script>
     export default {
-    	
+
     }
 </script>
 
 <style lang="less">
-	@import './style/common';
+    @import './style/common';
+	@import './style/sstyle';
 </style>
