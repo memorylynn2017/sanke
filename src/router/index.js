@@ -23,6 +23,7 @@ const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'a
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
 const productList = r => require.ensure([], () => r(require('@/page/productList')), 'productList');
+const orderHandle = r => require.ensure([], () => r(require('@/page/orderHandle')), 'orderHandle');
 
 const routes = [{
         path: '/',
@@ -104,6 +105,10 @@ const routes = [{
             path: '/productList',
             component: productList,
             meta: ['商品列表', '详情'],
+        }, {
+            path: '/orderHandle',
+            component: orderHandle,
+            meta: ['订单列表', '列表处理'],
         }]
     }
 ]
