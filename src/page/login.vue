@@ -16,6 +16,7 @@
                     <el-form-item label="验证码：" prop="checknode">
                         <el-input placeholder="验证码" v-model="loginForm.checknode"></el-input>
                         <div style="width: 76px; height: 36px;" id="codeimg"></div>
+                        <el-checkbox v-model="rememberMe">记住密码</el-checkbox>
                     </el-form-item>
                 </div>
                 <div class="line fl"></div>
@@ -67,7 +68,8 @@ export default {
                 message: '请输入验证码',
                 trigger: 'blur'
               }],
-            }
+            },
+            rememberMe:false
           }
         },
         mounted() {
