@@ -184,9 +184,6 @@ export default {
                 });
             }
         },
-        showNums(index) {
-            this.pageNum = parseInt(this.options2[index].label);
-        },
         filterLevel(levelName) {
             if (this.levelName == '' || this.levelName == "所有等级") {
                 this.userList = this.tableData;
