@@ -6,21 +6,31 @@
     display: table;
     clear: both;
   }
+  .tal {
+    text-align: left!important;
+  }
+  .tac {
+    text-align: center!important;
+  }
+  .tar {
+    text-align: right!important;
+  }
+  .backbtn {
+    width: 100px;
+    font-size: 16px;
+    color: #333;
+    padding: 6px 15px;
+    background: #e6e6e6;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+  }
+
   .table_container{
     position: relative;
-    .backbtn {
-      width: 100px;
-      font-size: 16px;
-      color: #333;
-      padding: 6px 15px;
-      background: #e6e6e6;
-      border: 1px solid #bbbbbb;
-      border-radius: 4px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1;
-    }
     .el-tabs__content {
       position: static;
     }
@@ -51,6 +61,9 @@
 
 @basecolor: #e51c23!important;
 
+.basecolor {
+    color: @basecolor;
+}
 .w100 {
     width: 100%;
 }
@@ -75,4 +88,14 @@
 .el-radio__input.is-checked .el-radio__inner {
     border-color: @basecolor;
     background: @basecolor;
+}
+
+
+.writeo {
+  display: inline-block;
+  width: 21px;
+  height: 16px;
+  vertical-align: middle;
+  background: url(".././assets/img/write.png") no-repeat center center;
+  margin-left: 10px;
 }
