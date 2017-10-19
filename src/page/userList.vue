@@ -183,6 +183,7 @@ export default {
                     return item.areaname !== null && item.areaname == this.areaName;
                 });
             }
+            this.count = this.userList.length;
         },
         filterLevel(levelName) {
             if (this.levelName == '' || this.levelName == "所有等级") {
@@ -191,7 +192,9 @@ export default {
                 this.userList = this.tableData.filter(item => {
                     return item.levelname !== null && item.levelname == this.levelName;
                 });
+                
             }
+            this.count = this.userList.length;
         },
         searchUser() {
             if (this.customer_id) {
