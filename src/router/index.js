@@ -6,8 +6,9 @@ Vue.use(Router)
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
-const member = r => require.ensure([], () => r(require('@/page/member')), 'member');
-const businessList = r => require.ensure([], () => r(require('@/page/businessList')), 'businessList');
+const userDetail = r => require.ensure([], () => r(require('@/page/userDetail')), 'userDetail');
+const orderDetail = r => require.ensure([], () => r(require('@/page/orderDetail')), 'orderDetail');
+const shopDetail = r => require.ensure([], () => r(require('@/page/shopDetail')), 'shopDetail');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
@@ -22,7 +23,7 @@ const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vue
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
-const productList = r => require.ensure([], () => r(require('@/page/productList')), 'productList');
+const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
 
 const routes = [{
         path: '/',
@@ -37,10 +38,14 @@ const routes = [{
             component: home,
             meta: [],
         }, {
-            path: '/member',
-            component: member,
+            path: '/userDetail',
+            component: userDetail,
             meta: ['会员管理', '会员信息'],
-        }, {
+        },{
+            path: '/orderDetail',
+            component: orderDetail,
+            meta: ['会员管理', '会员信息'],
+        },  {
             path: '/addShop',
             component: addShop,
             meta: ['添加数据', '添加商铺'],
@@ -97,12 +102,12 @@ const routes = [{
             component: explain,
             meta: ['说明', '说明'],
         }, {
-            path: '/businessList',
-            component: businessList,
-            meta: ['说明', '说明'],
+            path: '/shopDetail',
+            component: shopDetail,
+            meta: ['商家列表', '详情'],
         }, {
-            path: '/productList',
-            component: productList,
+            path: '/goodDetail',
+            component: goodDetail,
             meta: ['商品列表', '详情'],
         }]
     }

@@ -4,7 +4,7 @@
     <div class="advTop qf">
         <div class="advTop_left fl"><a href="#">淘亿批发管理系统 V1.0</a></div>
         <div class="advTop_right fr">
-            <i class="iconfont icon-home" style="color:#fff;"></i>
+            <i class="iconfont icon-home" style="color:#fff;" @click="handleHome"></i>
             <i class="iconfont icon-user" style="color:#fff;"></i>
             <i class="iconfont icon-tuichu" style="color:#fff;" @click="handleExit"></i>
         </div>
@@ -14,21 +14,21 @@
             <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
                 <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
                 <el-submenu index="2">
-                    <template slot="title">会员管理</template>
+                    <template slot="title" :to="{ path: '/manage' }">会员管理</template>
                     <el-menu-item index="userList">会员列表</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
-                    <template slot="title">商家管理</template>
+                    <template slot="title" :to="{ path: '/manage' }">商家管理</template>
                     <el-menu-item index="shopList">商家列表</el-menu-item>
                     <!-- <el-menu-item index="addShop">添加商家</el-menu-item> -->
                 </el-submenu>
                 <el-submenu index="4">
-                    <template slot="title">商品管理</template>
+                    <template slot="title" :to="{ path: '/manage' }">商品管理</template>
                     <el-menu-item index="goodList">商品列表</el-menu-item>
                     <!-- <el-menu-item index="addGoods">添加商品</el-menu-item> -->
                 </el-submenu>
                 <el-submenu index="5">
-                    <template slot="title">订单管理</template>
+                    <template slot="title" :to="{ path: '/manage' }">订单管理</template>
                     <el-menu-item index="orderList">订单列表</el-menu-item>
                     <!-- <el-menu-item index="orderList">添加订单</el-menu-item> -->
                 </el-submenu>
@@ -90,6 +90,12 @@ export default {
                 });
             }
         },
+        handleHome() {
+            this.$router.push({
+                path: '/manage'
+            });
+        },
+
     },
 
     computed: {

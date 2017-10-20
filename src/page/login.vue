@@ -1,5 +1,3 @@
-
-/ *come from  login.vue.r1 */
 <template>
 <div class="login_page fillcontain">
     <div class="pic"><img src=".././assets/img/figure.png" alt=""></div>
@@ -16,6 +14,7 @@
                     <el-form-item label="验证码：" prop="checknode">
                         <el-input placeholder="验证码" v-model="loginForm.checknode"></el-input>
                         <div style="width: 76px; height: 36px;" id="codeimg"></div>
+                        <el-checkbox v-model="rememberMe">记住密码</el-checkbox>
                     </el-form-item>
                 </div>
                 <div class="line fl"></div>
@@ -35,9 +34,7 @@ import {login, getAdminInfo} from '@/api/getData'
 import { mapActions,mapState} from 'vuex'
 import Code from '.././assets/js/gverify.js'
 import axios from 'axios'
-
 export default {
-
     data() {
         return {
             loginForm: {
@@ -67,7 +64,8 @@ export default {
                 message: '请输入验证码',
                 trigger: 'blur'
               }],
-            }
+            },
+            rememberMe:false
           }
         },
         mounted() {
@@ -137,7 +135,6 @@ export default {
                           return false;
                         }
                       }
-
               })
             }
           },
@@ -146,7 +143,6 @@ export default {
 
         <style lang="less" scoped>
           @import '../style/mixin';
-
           .qf {
             *zoom: 1;
           }
@@ -155,15 +151,12 @@ export default {
             display: table;
             clear: both;
           }
-
           .fl {
             float: left;
           }
-
           .fr {
             float: right;
           }
-
           .login_page {
             width: 100%;
             min-width: 345px;
@@ -173,19 +166,16 @@ export default {
             background: #7bc4f9 url(".././assets/img/bg.jpg") no-repeat top center;
             box-sizing: border-box;
           }
-
           .login_page .pic {
             width: 263px;
             height: 121px;
             margin-left: 130px;
             margin-bottom: 30px;
           }
-
           .login_page .pic img {
             width: 100%;
             vertical-align: top;
           }
-
           .login_page .demo-ruleForm {
             width: 480px;
             padding: 24px 0 22px;
@@ -193,28 +183,22 @@ export default {
             box-sizing: border-box;
             border-radius: 10px;
           }
-
           .login_page .demo-ruleForm .el-input {
             width: 160px;
           }
-
           .login_page .demo-ruleForm .login-left {
             width: 310px;
           }
-
           .login_page .demo-ruleForm .login-left .el-form-item {
             margin-bottom: 18px;
           }
-
           .login_page .login-left .el-form-item .el-form-item__label {
             padding: 7px 12px 7px 0;
             color: #333;
           }
-
           .login_page .demo-ruleForm .login-left .el-form-item .el-form-item__content {
             line-height: 28px;
           }
-
           .login_page .demo-ruleForm .login-left .el-form-item .el-input__inner {
             height: 28px;
             border: 1px solid #ccc;
@@ -234,18 +218,15 @@ export default {
             width: 100%;
             vertical-align: top;
           }
-
           .login_page .demo-ruleForm .line {
             margin-top: 10px;
             width: 1px;
             height: 120px;
             background: #fff;
           }
-
           .login_page .demo-ruleForm .login-right {
             margin-left: -65px;
           }
-
           .login_page .demo-ruleForm .login-right .el-form-item .el-button {
             padding: 10px 42px;
             color: #333;
@@ -255,7 +236,6 @@ export default {
           .login_page .demo-ruleForm .login-right .el-form-item .el-button:hover {
             border-color: #ccc;
           }
-
           .login_page .txt {
             padding-left: 24px;
             margin-top: 16px;

@@ -6,6 +6,7 @@
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
+
                     <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
@@ -213,6 +214,7 @@
 </template>
 <script>
 // import headTop from '../components/headTop'
+import 'element-ui/lib/theme-default/index.css'
 export default {
     data() {
         return {
@@ -318,17 +320,17 @@ export default {
             this.offset = (val - 1) * this.limit;
             this.getUsers()
         },
-        async getUsers() {
-            const Users = await getUserList({ offset: this.offset, limit: this.limit });
-            this.tableData = [];
-            Users.forEach(item => {
-                const tableData = {};
-                tableData.username = item.username;
-                tableData.registe_time = item.registe_time;
-                tableData.city = item.city;
-                this.tableData.push(tableData);
-            })
-        },
+        // async getUsers() {
+        //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
+        //     this.tableData = [];
+        //     Users.forEach(item => {
+        //         const tableData = {};
+        //         tableData.username = item.username;
+        //         tableData.registe_time = item.registe_time;
+        //         tableData.city = item.city;
+        //         this.tableData.push(tableData);
+        //     })
+        // },
         gobackIndex() {
             this.$router.push({
                 path: '/shopList'
@@ -340,15 +342,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import '../style/mixin';
-.qf {
-    *zoom: 1;
-}
-
-.qf:after {
-    content: '';
-    display: table;
-    clear: both;
-}
+@import '../style/sstyle';
 
 .backbtn {
     width: 100px;
@@ -358,42 +352,12 @@ export default {
     background: #e6e6e6;
     border: 1px solid #bbbbbb;
     border-radius: 4px;
-    position: absolute;
-    top: 30px;
-    left: 88%;
+    position: relative;
+    top:60px;
+    left: 87%;
     z-index: 1000;
 }
-
 .table_container {
-    position: relative;
-    .backbtn {
-        width: 100px;
-        font-size: 16px;
-        color: #333;
-        padding: 6px 15px;
-        background: #e6e6e6;
-        border: 1px solid #bbbbbb;
-        border-radius: 4px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 1;
-    }
-    .el-tabs__content {
-        position: static;
-    }
-    .el-tabs__item.is-active {
-        color: #e51c23;
-    }
-    .el-tabs__item {
-        padding: 0 40px;
-        height: 50px;
-        line-height: 50px;
-        color: #000;
-    }
-    .el-tabs--border-card>.el-tabs__header {
-        background: #f5f5f5;
-    }
     .el-form {
         border-top: 1px solid #ececec;
         .el-form-item {
@@ -486,6 +450,8 @@ export default {
         }
     }
 }
+
+
 
 @media screen and (max-width: 820px) {
     .el-form .el-form-item {

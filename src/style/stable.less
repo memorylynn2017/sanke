@@ -38,8 +38,9 @@
 
 .headAdv .searched {
     display: inline-block;
+    /* border:1px solid red; */
     text-align: center;
-    width: 850px;
+    width: 900px;
     height: 50px;
 }
 
@@ -72,7 +73,7 @@
 }
 
 .headAdv .searched .searched_middle .el-input__inner {
-    width: 65px;
+    width: 120px;
     border-radius: 5px;
 }
 
@@ -80,13 +81,14 @@
     /* border:1px solid red; */
     width: 112px;
     height: 50px;
+    line-height:50px;
     border-radius: 50px;
 }
 
 .headAdv .searched .searched_left {
     display: inline-block;
     position: relative;
-    left: 0;
+    left: -20px;
     top: 2px;
 }
 
@@ -98,8 +100,12 @@
 
 .headAdv .searched .searched_middle {
     display: inline-block;
+    box-sizing:border-box;
+    width:200px;
+    height:50px;
+    line-height:50px;
     position: relative;
-    top: 3px;
+    top: 0px;
     left: 40px;
 }
 
@@ -168,7 +174,7 @@
 }
 
 .searched_middle .el-select .el-input .el-input__icon {
-    left: 55px;
+    left: 80px;
 }
 
 .el-checkbox__inner {

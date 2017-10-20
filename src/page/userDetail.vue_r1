@@ -526,9 +526,9 @@ export default {
     background: #e6e6e6;
     border: 1px solid #bbbbbb;
     border-radius: 4px;
-    position: absolute;
-    top: 30px;
-    left: 88%;
+    position: relative;
+    top:39px;
+    left: 87%;
     z-index: 1000;
 }
 

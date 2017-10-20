@@ -302,16 +302,17 @@ export default {
     methods: {
         gobackIndex() {
             this.$router.push({
-                path: '/manage'
+                path: '/goodList'
             });
         }
     },
 }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '../style/mixin';
 @import '../style/sstyle';
+
 .backbtn {
     width: 100px;
     font-size: 16px;
@@ -320,9 +321,9 @@ export default {
     background: #e6e6e6;
     border: 1px solid #bbbbbb;
     border-radius: 4px;
-    position: absolute;
-    top: 30px;
-    left: 88%;
+    position: relative;
+    top:60px;
+    left: 87%;
     z-index: 1000;
 }
 
@@ -346,6 +347,21 @@ export default {
             }
         }
     }
+}
+
+
+.el-select .el-input .el-input__icon {
+    color: #bfcbd9;
+    font-size: 12px;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+    -webkit-transform: translateY(-50%) rotateZ(180deg);
+    transform: translateY(-50%) rotateZ(180deg);
+    line-height: 16px;
+    left: 165px;
+    top: 52%;
+    cursor: pointer;
 }
 
 </style>

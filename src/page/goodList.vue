@@ -1,96 +1,100 @@
 <template>
-<div class="fillcontain">
-    <!-- <head-top></head-top> -->
-    <div class="headAdv">
-        <div class="listed">
-            <span><strong>商品列表</strong></span>
+    <div class="fillcontain">
+        <!-- <head-top></head-top> -->
+        <div class="headAdv">
+            <div class="listed">
+                <span><strong>商品列表</strong></span>
+            </div>
+            <div class="searched">
+                <div class="searched_left">
+                    <el-select v-model="levelName" filterable placeholder="请选择" @change="filterLevel">
+                        <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="searched_right">
+                    <el-input v-model="product_code" placeholder="请输入要查询的商品Id">
+                        <el-button slot="append" @click="searchUser()">查询</el-button>
+                    </el-input>
+                </div>
+                <div class="searched_middle qf">
+                    <span class="pashow">显示</span>&nbsp;
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
+                    </el-pagination>
+                </div>
+            </div>
+            <div class="recorded">
+                <span>总记录数 {{Message}}</span>
+            </div>
         </div>
-        <div class="searched">
-            <div class="searched_left">
-                <el-select v-model="myvalue1" filterable placeholder="请选择" @change="test1">
-                    <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
+        <div class="table_container">
+            <el-table ref="multipleTable" :data="getProductListFilter" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55">
+                </el-table-column>
+                <el-table-column property="product_name" label="商品名称" width="170">
+                </el-table-column>
+                <el-table-column property="product_code" label="商品编号" width="100">
+                </el-table-column>
+                <el-table-column property="product_class" label="分类" width="90">
+                </el-table-column>
+                <el-table-column property="product_puprice" label="拿货价" width="100">
+                </el-table-column>
+                <el-table-column property="product_shop" label="商家名称" width="100">
+                </el-table-column>
+                <!-- <el-table-column property="product_up" label="上架" width="80">
+                </el-table-column> -->
+                <el-table-column property="product_up_time" label="上架时间" width="140">
+                </el-table-column>
+                <el-table-column property="product_down_time" label="下架时间" width="140">
+                </el-table-column>
+                <el-table-column property="editname" label="操作" width="180">
+                    <template slot-scope="scope">
+                        <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button>
+                        <el-button style="float:left; border:none;" size="small" @click="handleEdit">[编辑]</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column property="product_down" label="下架" width="80">
+                    <!-- 这里有用到scope -->
+                    <template slot-scope="scope">
+                        <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
+                        </el-switch>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="pagination_bottom">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
+                </el-pagination>
             </div>
-            <div class="searched_right">
-                <el-input icon="search" v-model="input2">
-                    <el-button slot="append">查询</el-button>
-                </el-input>
-            </div>
-            <div class="searched_middle">
-                <span>显示</span>&nbsp;
-                <el-select v-model="myvalue2" filterable style="margin-left:-30px;">
-                    <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-                </el-select>
-            </div>
-        </div>
-        <div class="recorded">
-            <span>总记录数 {{Message}}</span>
         </div>
     </div>
-    <div class="table_container">
-        <el-table ref="multipleTable" :data="productList" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55">
-            </el-table-column>
-
-            <el-table-column property="product_name" label="商品名称" width="170">
-            </el-table-column>
-            <el-table-column property="product_code" label="商品编号" width="105">
-            </el-table-column>
-            <el-table-column property="product_class" label="分类" width="90">
-            </el-table-column>
-            <el-table-column property="product_puprice" label="拿货价" width="100">
-            </el-table-column>
-            <el-table-column property="product_shop" label="商家名称" width="100">
-            </el-table-column>
-            <!-- <el-table-column property="product_up" label="上架" width="80">
-          </el-table-column> -->
-            <el-table-column property="product_up_time" label="上架时间" width="140">
-            </el-table-column>
-            <el-table-column property="product_down_time" label="下架时间" width="140">
-            </el-table-column>
-            <el-table-column property="editname" label="操作" width="180">
-                <template slot-scope="scope">
-              <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button>
-              <el-button style="float:left; border:none;" size="small" @click="handleEdit">[编辑]</el-button>
-            </template>
-            </el-table-column>
-            <el-table-column property="product_down" label="下架" width="80">
-                <!-- 这里有用到scope -->
-                <template slot-scope="scope">
-                      <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
-                      </el-switch>
-               </template>
-            </el-table-column>
-        </el-table>
-
-
-
-
-        <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-            </el-pagination>
-        </div>
-    </div>
-</div>
 </template>
 <script>
 // import headTop from '../components/headTop'
-import {getUserList, getUserCount} from '@/api/getData'
+import { getUserList, getUserCount } from '@/api/getData'
 import axios from 'axios'
 export default {
     data() {
         return {
+            product_code: '',
             oncontrol: true,
             tableData: [
 
             ],
-            options1: [{
+            levelData: [{
+                value: '所有类型',
+                label: '所有类型'
+            },{
                 value: '打底衫',
                 label: '打底衫'
             }, {
                 value: '外套外衣',
                 label: '外套外衣'
+            }, {
+                value: '短裤',
+                label: '短裤'
+            }, {
+                value: '长裤',
+                label: '长裤'
             }],
             options2: [{
                 value: '30',
@@ -107,13 +111,15 @@ export default {
             }],
             input1: '',
             input2: '',
-            myvalue1: '所有等级',
+            levelName: '所有类型',
             myvalue2: '30',
             currentRow: null,
-            offset: 0,
+            begin: 0,
+            end: 0,
             limit: 20,
-            count: 5,
+            count: 0,
             currentPage: 1,
+            pageSize: 15,
             productList: [],
             multipleSelection: []
         }
@@ -122,7 +128,13 @@ export default {
         // headTop,
     },
     computed: {
-        Message:function(){ return this.productList.length },
+
+        getProductListFilter() {
+            return this.productList.slice(this.begin, this.end);
+        },
+        Message: function() {
+            return this.productList.length
+        },
     },
 
 
@@ -132,51 +144,91 @@ export default {
     },
     methods: {
 
-        test1(myvalue1) {
-            // console.log(myvalue1);
-            if (this.myvalue1 == '' || this.myvalue1 == "所有等级") {
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
+
+        async initData() {
+            axios.get('/getGoodsList').then(res => {
+                if (res.data) {
+                    //临时表
+                    this.tableData = res.data;
+                    //数据表
+                    this.productList = res.data;
+                    this.count = this.productList.length;
+                    this.begin = 0;
+                    this.end = this.pageSize;
+                    console.log(this.productList)
+                    console.log('\separter');
+                    console.log(this.productList.slice(this.begin, this.end));
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        },
+        showNums(index) {
+            this.pageNum = parseInt(this.options2[index].label);
+        },
+        filterLevel(levelName) {
+            // console.log(levelName);
+            if (this.levelName == '' || this.levelName == "所有类型") {
                 this.productList = this.tableData;
             } else {
                 this.productList = this.tableData.filter(item => {
-                    return item.product_class !== null && item.product_class == this.myvalue1;
+                    return item.product_class !== null && item.product_class == this.levelName;
                 });
             }
         },
-        handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-
-        async initData() {
-            axios.get('getGoodsList').then(res=>{
-                this.tableData = res.data;
-                this.productList = res.data;
-            }).catch(error=>{
-                console.log(error)
-            });
-        },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
         },
+
         handleCurrentChange(val) {
             this.currentPage = val;
-            this.offset = (val - 1) * this.limit;
-            this.getUsers()
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
+            console.log(this.currentPage);
+            console.log(this.begin);
         },
         handleEdit() {
             this.$router.push({
-                path: '/productList'
+                path: '/goodDetail'
             });
         },
         filterTag(value, row) {
             return row.levelname === value;
         },
-      },
-    }
-    </script>
+        searchUser() {
+            if (this.product_code) {
+                // this.userList = this.tableData.filter((item) => {
+                //     return item.customer_id == this.customer_id;
+                // });
+                this.productList = this.tableData.filter((item) => {
+                    return item.product_code.toLowerCase().indexOf(this.product_code.toLowerCase()) !== -1
 
+                });
+            }
+        },
+    },
+}
 
-
+</script>
 <style lang="less">
-@import '../style/mixin';
 @import '../style/stable';
+.patag {
+    display: inline-block;
+    float: left;
+    position: relative;
+    top: -3px;
+    left: 5px;
+}
+
+.pashow {
+    display: inline-block;
+    float: left;
+}
+
 </style>

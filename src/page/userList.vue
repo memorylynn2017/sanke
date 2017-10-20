@@ -13,22 +13,17 @@
                     </el-select>
                     <el-select v-model="areaName" placeholder="区域" @change="test">
                         <el-option　v-for="area in areaData" :key="area.value" :label="area.label" :value="area.value"></el-option>
-                        
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <!-- <el-input v-model="customer_id" placeholder="请输入要查询的客户Id"></el-input>
-                <el-input v-model="username" placeholder="请输入要查询的用户名"></el-input>
-                <el-button type="primary">查询</el-button> -->
                     <el-input v-model="customer_id" placeholder="请输入要查询的客户Id">
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>
-                <div class="searched_middle">
-                    <span>显示</span>&nbsp;
-                    <el-select v-model="pageNum" filterable style="margin-left:-30px;">
-                        <el-option v-for="page in pageData" :key="page.value" :label="page.label" :value="page.value"> </el-option>
-                    </el-select>
+                <div class="searched_middle qf">
+                    <span class="pashow">显示</span>&nbsp;
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
+                    </el-pagination>
                 </div>
             </div>
             <div class="recorded">
@@ -53,20 +48,20 @@
                 </el-table-column>
                 <el-table-column property="costname" label="余额" width="110" sortable>
                 </el-table-column>
-                <el-table-column property="registe_time" label="注册时间" width="160">
+                <el-table-column property="registe_time" label="注册时间" width="160" sortable>
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="80">
+                <el-table-column property="editname" label="操作" width="140">
                     <template slot-scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
                     </template>
                 </el-table-column>
-                <el-table-column property="statusname" label="状态" width="80">
-                </el-table-column>
+                <!-- <el-table-column property="statusname" label="状态" width="80">
+                </el-table-column> -->
             </el-table>
-            <!-- <div class="Pagination" style="text-align: center;margin-top: 10px;opacity:0">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
-            </el-pagination>
-        </div> -->
+            <div class="pagination_bottom">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
+                </el-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -120,13 +115,13 @@ export default {
             customer_id: '',
             levelName: '所有等级',
             areaName: '全部地区',
-            region:"地区",
-            pageNum: 30,
             currentRow: null,
-            offset: 0,
+            begin: 0,
+            end: 0,
             limit: 20,
             count: 0,
             currentPage: 1,
+            pageSize: 15,
             userList: []
         }
     },
@@ -135,9 +130,11 @@ export default {
     },
     computed: {
         getUserListFilter() {
-            return this.userList.slice(0, this.pageNum);
+            return this.userList.slice(this.begin, this.end);
         },
-        Message:function(){ return this.userList.length }
+        Message: function() {
+            return this.userList.length
+        }
     },
 
     mounted() {
@@ -151,13 +148,19 @@ export default {
                     this.tableData = res.data;
                     //数据表
                     this.userList = res.data;
+                    this.count = this.userList.length;
+                    this.begin = 0;
+                    this.end = this.pageSize;
+                    console.log(this.userList)
+                    console.log('\separter');
+                    console.log(this.userList.slice(this.begin, this.end));
                 }
             }).catch(error => {
                 console.log(error);
             })
         },
         test(areaName) {
-            // console.log(myvalue1);
+            // console.log(areaName);
             if (this.areaName == '' || this.areaName == "全部地区") {
                 this.userList = this.tableData;
             } else {
@@ -170,14 +173,19 @@ export default {
             this.pageNum = parseInt(this.options2[index].label);
         },
         filterLevel(levelName) {
-            if (this.levelName == '' || this.myvalue1 == "所有等级") {
+            // console.log(levelName);
+            if (this.levelName == '' || this.levelName == "所有等级") {
                 this.userList = this.tableData;
             } else {
                 this.userList = this.tableData.filter(item => {
-                    return item.levelName !== null && item.levelName == this.levelName;
+                    return item.levelname !== null && item.levelname == this.levelName;
                 });
             }
         },
+        showNums(index) {
+            this.pageNum = parseInt(this.options2[index].label);
+        },
+
         searchUser() {
             if (this.customer_id) {
                 // this.userList = this.tableData.filter((item) => {
@@ -189,17 +197,23 @@ export default {
                 });
             }
         },
-        // handleSizeChange(val) {
-        //     console.log(`每页 ${val} 条`);
-        // },
-        // handleCurrentChange(val) {
-        //     this.currentPage = val;
-        //     this.offset = (val - 1) * this.limit;
-        //     this.getUsers()
-        // },
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
+        },
+
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
+            console.log(this.currentPage);
+            console.log(this.begin);
+        },
         handleList() {
             this.$router.push({
-                path: '/member'
+                path: '/userDetail'
             });
         },
         // filterTag(value, row) {
@@ -210,7 +224,18 @@ export default {
 
 </script>
 <style lang="less">
-@import '../style/mixin';
 @import '../style/stable';
+.patag {
+    display: inline-block;
+    float: left;
+    position: relative;
+    top: -3px;
+    left: 5px;
+}
+
+.pashow {
+    display: inline-block;
+    float: left;
+}
 
 </style>
