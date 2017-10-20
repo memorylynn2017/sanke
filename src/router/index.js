@@ -23,7 +23,9 @@ const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vue
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+
 const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
+
 
 const routes = [{
         path: '/',
@@ -109,6 +111,10 @@ const routes = [{
             path: '/goodDetail',
             component: goodDetail,
             meta: ['商品列表', '详情'],
+        }, {
+            path: '/orderHandle',
+            component: orderHandle,
+            meta: ['订单列表', '列表处理'],
         }]
     }
 ]

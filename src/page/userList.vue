@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="recorded">
-                <span>总记录数 {{Message}}</span>
+                <span>总记录数 {{count}}</span>
             </div>
         </div>
         <div class="table_container">
@@ -55,19 +55,26 @@
                         <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
                     </template>
                 </el-table-column>
-                <!-- <el-table-column property="statusname" label="状态" width="80">
-                </el-table-column> -->
             </el-table>
+
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
+            <div>
+                <el-pagination 
+                    @size-change="handleSizeChange" 
+                    @current-change="handleCurrentChange" 
+                    :current-page="currentPage" 
+                    :page-size="pageSize" 
+                    :page-sizes="[15,30,60,90]" 
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="count">
                 </el-pagination>
             </div>
         </div>
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
-// import { getUserList, getUserCount} from '@/api/getData'
+
 import axios from 'axios'
 export default {
     data() {
@@ -99,7 +106,7 @@ export default {
                 value: '广州',
                 label: '广州'
             }],
-            pageData: [{
+            /* pageData: [{
                 value: '选项1',
                 label: '15'
             }, {
@@ -111,13 +118,17 @@ export default {
             }, {
                 value: '选项4',
                 label: '120'
-            }],
+            }], */
             customer_id: '',
             levelName: '所有等级',
             areaName: '全部地区',
             currentRow: null,
             begin: 0,
             end: 0,
+            region:"地区",
+            currentRow: null,
+            begin: 0,
+            end:0,
             limit: 20,
             count: 0,
             currentPage: 1,
@@ -130,11 +141,17 @@ export default {
     },
     computed: {
         getUserListFilter() {
+
             return this.userList.slice(this.begin, this.end);
         },
         Message: function() {
             return this.userList.length
         }
+
+            return this.userList.slice(this.begin,this.end);
+        },
+        //Message:function(){ return this.userList.length }
+
     },
 
     mounted() {
@@ -168,19 +185,21 @@ export default {
                     return item.areaname !== null && item.areaname == this.areaName;
                 });
             }
-        },
-        showNums(index) {
-            this.pageNum = parseInt(this.options2[index].label);
+            this.count = this.userList.length;
         },
         filterLevel(levelName) {
-            // console.log(levelName);
+
+           
+
             if (this.levelName == '' || this.levelName == "所有等级") {
                 this.userList = this.tableData;
             } else {
                 this.userList = this.tableData.filter(item => {
                     return item.levelname !== null && item.levelname == this.levelName;
                 });
+                
             }
+            this.count = this.userList.length;
         },
         showNums(index) {
             this.pageNum = parseInt(this.options2[index].label);
@@ -198,16 +217,20 @@ export default {
             }
         },
         handleSizeChange(val) {
+
             console.log(`每页 ${val} 条`);
             this.pageSize = val;
             this.begin = (this.currentPage - 1) * this.pageSize;
             this.end = this.currentPage * this.pageSize;
         },
 
+
+        
         handleCurrentChange(val) {
             this.currentPage = val;
             this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage * this.pageSize;
+            this.end = this.currentPage*this.pageSize;
+
             console.log(this.currentPage);
             console.log(this.begin);
         },
