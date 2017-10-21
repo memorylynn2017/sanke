@@ -16,8 +16,8 @@
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <el-input v-model="customer_id" placeholder="请输入要查询的客户Id">
-                        <el-button slot="append" @click="searchUser()">查询</el-button>
+                    <el-input v-model="customer_id" placeholder="请输入要查询的客户Id" @keyup.enter.native="searchUser">
+                        <el-button slot="append" @click="searchUser">查询</el-button>
                     </el-input>
                 </div>
                 <div class="searched_middle qf">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="recorded">
-                <span>总记录数 {{count}}</span>
+                <span>总记录数 {{Message}}</span>
             </div>
         </div>
         <div class="table_container">
@@ -55,30 +55,24 @@
                         <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
                     </template>
                 </el-table-column>
+                <!-- <el-table-column property="statusname" label="状态" width="80">
+                </el-table-column> -->
             </el-table>
-
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
-            <div>
-                <el-pagination 
-                    @size-change="handleSizeChange" 
-                    @current-change="handleCurrentChange" 
-                    :current-page="currentPage" 
-                    :page-size="pageSize" 
-                    :page-sizes="[15,30,60,90]" 
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="count">
                 </el-pagination>
             </div>
         </div>
     </div>
 </template>
 <script>
-
+// import headTop from '../components/headTop'
+// import { getUserList, getUserCount} from '@/api/getData'
 import axios from 'axios'
 export default {
     data() {
         return {
+
             tableData: [],
             levelData: [{
                 value: '所有等级',
@@ -106,7 +100,7 @@ export default {
                 value: '广州',
                 label: '广州'
             }],
-            /* pageData: [{
+            pageData: [{
                 value: '选项1',
                 label: '15'
             }, {
@@ -118,22 +112,19 @@ export default {
             }, {
                 value: '选项4',
                 label: '120'
-            }], */
+            }],
             customer_id: '',
             levelName: '所有等级',
             areaName: '全部地区',
             currentRow: null,
             begin: 0,
             end: 0,
-            region:"地区",
-            currentRow: null,
-            begin: 0,
-            end:0,
             limit: 20,
             count: 0,
             currentPage: 1,
             pageSize: 15,
-            userList: []
+            userList: [],
+            mid_userList: []
         }
     },
     components: {
@@ -141,23 +132,34 @@ export default {
     },
     computed: {
         getUserListFilter() {
-
             return this.userList.slice(this.begin, this.end);
         },
         Message: function() {
             return this.userList.length
         }
-
-            return this.userList.slice(this.begin,this.end);
-        },
-        //Message:function(){ return this.userList.length }
-
     },
 
+    directives: {
+        focus: {
+            // 指令的定义
+            inserted: function(el, option) {
+                var defClass = 'el-input',
+                    defTag = 'input';
+                var value = option.value || true;
+                if (typeof value === 'boolean')
+                    value = { cls: defClass, tag: defTag, foc: value };
+                else
+                    value = { cls: value.cls || defClass, tag: value.tag || defTag, foc: value.foc || false };
+                if (el.classList.contains(value.cls) && value.foc)
+                    el.getElementsByTagName(value.tag)[0].focus();
+            }
+        }
+    },
     mounted() {
         this.initData();
     },
     methods: {
+
         async initData() {
             axios.get('/getUserList').then(res => {
                 if (res.data) {
@@ -176,35 +178,36 @@ export default {
                 console.log(error);
             })
         },
+
         test(areaName) {
             // console.log(areaName);
             if (this.areaName == '' || this.areaName == "全部地区") {
-                this.userList = this.tableData;
+                this.userList = this.mid_userList;
             } else {
-                this.userList = this.tableData.filter(item => {
+                this.userList = this.mid_userList.filter(item => {
+                    // console.log(item);
                     return item.areaname !== null && item.areaname == this.areaName;
                 });
             }
-            this.count = this.userList.length;
-        },
-        filterLevel(levelName) {
-
-           
-
-            if (this.levelName == '' || this.levelName == "所有等级") {
-                this.userList = this.tableData;
-            } else {
-                this.userList = this.tableData.filter(item => {
-                    return item.levelname !== null && item.levelname == this.levelName;
-                });
-                
-            }
-            this.count = this.userList.length;
         },
         showNums(index) {
             this.pageNum = parseInt(this.options2[index].label);
         },
-
+        filterLevel(levelName) {
+            // console.log(levelName);
+            if (this.levelName == '' || this.levelName == "所有等级") {
+                this.userList = this.tableData;
+                this.areaName = '全部地区';
+            } else {
+                this.userList = this.tableData.filter(item => {
+                    return item.levelname !== null && item.levelname == this.levelName;
+                });
+                this.mid_userList = this.userList;
+            }
+        },
+        showNums(index) {
+            this.pageNum = parseInt(this.options2[index].label);
+        },
         searchUser() {
             if (this.customer_id) {
                 // this.userList = this.tableData.filter((item) => {
@@ -214,23 +217,23 @@ export default {
                     return item.customer_id.toLowerCase().indexOf(this.customer_id.toLowerCase()) !== -1
 
                 });
+                this.customer_id = "";
+            } else {
+                this.userList = this.tableData;
+
             }
         },
         handleSizeChange(val) {
-
             console.log(`每页 ${val} 条`);
             this.pageSize = val;
             this.begin = (this.currentPage - 1) * this.pageSize;
             this.end = this.currentPage * this.pageSize;
         },
 
-
-        
         handleCurrentChange(val) {
             this.currentPage = val;
             this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage*this.pageSize;
-
+            this.end = this.currentPage * this.pageSize;
             console.log(this.currentPage);
             console.log(this.begin);
         },
@@ -247,6 +250,7 @@ export default {
 
 </script>
 <style lang="less">
+@import '../style/mixin';
 @import '../style/stable';
 .patag {
     display: inline-block;

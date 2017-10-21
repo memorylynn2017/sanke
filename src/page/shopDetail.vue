@@ -6,7 +6,6 @@
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
-
                     <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
@@ -214,7 +213,6 @@
 </template>
 <script>
 // import headTop from '../components/headTop'
-import 'element-ui/lib/theme-default/index.css'
 export default {
     data() {
         return {
@@ -340,9 +338,34 @@ export default {
 }
 
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/mixin';
-@import '../style/sstyle';
+// @import '../style/sstyle';
+.table_container .el-select .el-input .el-input__icon {
+    color: #bfcbd9;
+    font-size: 12px;
+    transition: -webkit-transform 0.3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+    -webkit-transform: translateY(-50%) rotateZ(180deg);
+    transform: translateY(-50%) rotateZ(180deg);
+    line-height: 16px;
+    left: 160px;
+    top: 52%;
+    cursor: pointer;
+}
+
+.qf {
+    *zoom: 1;
+}
+
+.qf:after {
+    content: '';
+    display: table;
+    clear: both;
+}
 
 .backbtn {
     width: 100px;
@@ -353,11 +376,41 @@ export default {
     border: 1px solid #bbbbbb;
     border-radius: 4px;
     position: relative;
-    top:60px;
+    top: 60px;
     left: 87%;
     z-index: 1000;
 }
+
 .table_container {
+    position: relative;
+    .backbtn {
+        width: 100px;
+        font-size: 16px;
+        color: #333;
+        padding: 6px 15px;
+        background: #e6e6e6;
+        border: 1px solid #bbbbbb;
+        border-radius: 4px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+    }
+    .el-tabs__content {
+        position: static;
+    }
+    .el-tabs__item.is-active {
+        color: #e51c23;
+    }
+    .el-tabs__item {
+        padding: 0 40px;
+        height: 50px;
+        line-height: 50px;
+        color: #000;
+    }
+    .el-tabs--border-card>.el-tabs__header {
+        background: #f5f5f5;
+    }
     .el-form {
         border-top: 1px solid #ececec;
         .el-form-item {
@@ -450,8 +503,6 @@ export default {
         }
     }
 }
-
-
 
 @media screen and (max-width: 820px) {
     .el-form .el-form-item {

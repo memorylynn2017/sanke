@@ -269,9 +269,120 @@ export default {
 }
 
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/mixin';
-@import '../style/sstyle';
+
+
+.qf {
+    *zoom: 1;
+}
+
+.qf:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.tal {
+    text-align: left!important;
+}
+
+.tac {
+    text-align: center!important;
+}
+
+.tar {
+    text-align: right!important;
+}
+
+
+
+.table_container {
+    position: relative;
+    .el-tabs__content {
+        position: relative;
+    }
+    .el-tabs__item.is-active {
+        color: #e51c23;
+    }
+    .el-tabs__item {
+        padding: 0 40px;
+        height: 50px;
+        line-height: 50px;
+        color: #000;
+    }
+    .el-tabs--border-card>.el-tabs__header {
+        background: #f5f5f5;
+    }
+    .el-tabs--border-card {
+        border-bottom: 1px solid #fff;
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .el-form .el-form-item {
+        width: 100%!important;
+        border-left: 1px solid #ececec;
+        border-right: 1px solid #ececec;
+    }
+}
+
+@basecolor: #e51c23!important;
+
+.basecolor {
+    color: @basecolor;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.table0 {
+    border: 1px solid #ececec;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #646464;
+}
+
+.table0 td,
+.table0 th {
+    padding: 5px 10px;
+    border: 1px solid #ececec;
+}
+
+.el-input__inner:focus,
+.el-select .el-input__inner:focus,
+.el-radio__inner:hover {
+    border-color: @basecolor;
+}
+
+.el-select-dropdown__item.selected {
+    background-color: @basecolor;
+}
+
+.el-button:focus,
+.el-button:hover {
+    color: @basecolor;
+    border-color: @basecolor;
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+    border-color: @basecolor;
+    background: @basecolor;
+}
+
+
+.writeo {
+    display: inline-block;
+    width: 21px;
+    height: 16px;
+    vertical-align: middle;
+    background: url(".././assets/img/write.png") no-repeat center center;
+    margin-left: 10px;
+}
+
 
 
 .backbtn {
@@ -283,22 +394,15 @@ export default {
     border: 1px solid #bbbbbb;
     border-radius: 4px;
     position: relative;
-    top: 40px;
+    top: 45px;
     left: 87%;
     z-index: 1000;
 }
-
-
 
 .table_container {
     padding: 0;
 }
 
-.table0 {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #646464;
-}
 
 .record .title {
     font-size: 14px;

@@ -6,7 +6,7 @@
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
-                    <template slot>
+                    <template>
                         <el-form label-position="left" inline class="demo-table-expand tableone">
                             <div class="el-form-items">
                                 <el-form-item label="会员ID">
@@ -229,6 +229,31 @@
                             <p class="price">￥ 25.00</p>
                             <p class="date">2017-10-11 23:01</p>
                         </div>
+                        <div class="step">
+                            <div class="pic"><img src=".././assets/img/steppic.png" alt=""></div>
+                            <p class="price">￥ 25.00</p>
+                            <p class="date">2017-10-11 23:01</p>
+                        </div>
+                        <div class="step">
+                            <div class="pic"><img src=".././assets/img/steppic.png" alt=""></div>
+                            <p class="price">￥ 25.00</p>
+                            <p class="date">2017-10-11 23:01</p>
+                        </div>
+                        <div class="step">
+                            <div class="pic"><img src=".././assets/img/steppic.png" alt=""></div>
+                            <p class="price">￥ 25.00</p>
+                            <p class="date">2017-10-11 23:01</p>
+                        </div>
+                        <div class="step">
+                            <div class="pic"><img src=".././assets/img/steppic.png" alt=""></div>
+                            <p class="price">￥ 25.00</p>
+                            <p class="date">2017-10-11 23:01</p>
+                        </div>
+                        <div class="step">
+                            <div class="pic"><img src=".././assets/img/steppic.png" alt=""></div>
+                            <p class="price">￥ 25.00</p>
+                            <p class="date">2017-10-11 23:01</p>
+                        </div>
                     </div>
                 </el-tab-pane>
                 <el-tab-pane label="地址(99)">
@@ -257,7 +282,6 @@
 </template>
 <script>
 // import headTop from '../components/headTop'
-import 'element-ui/lib/theme-default/index.css'
 import { getUserList, getUserCount } from '@/api/getData'
 export default {
     data() {
@@ -507,10 +531,16 @@ export default {
 }
 
 </script>
-<style lang="less" scoped>
+<style lang="less">
+.qf {
+    *zoom: 1;
+}
 
-@import '../style/sstyle';
-
+.qf:after {
+    content: '';
+    display: table;
+    clear: both;
+}
 
 .backbtn {
     width: 100px;
@@ -525,7 +555,23 @@ export default {
     left: 87%;
     z-index: 1000;
 }
+
 .table_container {
+
+
+
+    .el-tabs__item.is-active {
+        color: #e51c23;
+    }
+    .el-tabs__item {
+        padding: 0 40px;
+        height: 50px;
+        line-height: 50px;
+        color: #000;
+    }
+    .el-tabs--border-card>.el-tabs__header {
+        background: #f5f5f5;
+    }
     .el-form.tableone {
         width: 56%;
         margin: 0 10px 100px;
@@ -600,7 +646,14 @@ export default {
             }
         }
     }
-
+    .writeo {
+        display: inline-block;
+        width: 21px;
+        height: 16px;
+        vertical-align: middle;
+        background: url(".././assets/img/write.png") no-repeat center center;
+        margin-left: 10px;
+    }
     .yue {
         .yue-head {
             margin-bottom: 20px;
@@ -719,6 +772,7 @@ export default {
         }
     }
     .el-tabs--border-card {
+
         border: 1px solid #fff;
         box-shadow: none;
     }

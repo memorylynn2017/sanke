@@ -9,6 +9,7 @@ const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const userDetail = r => require.ensure([], () => r(require('@/page/userDetail')), 'userDetail');
 const orderDetail = r => require.ensure([], () => r(require('@/page/orderDetail')), 'orderDetail');
 const shopDetail = r => require.ensure([], () => r(require('@/page/shopDetail')), 'shopDetail');
+const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
@@ -24,7 +25,7 @@ const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'a
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
 
-const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
+
 
 
 const routes = [{
@@ -111,10 +112,6 @@ const routes = [{
             path: '/goodDetail',
             component: goodDetail,
             meta: ['商品列表', '详情'],
-        }, {
-            path: '/orderHandle',
-            component: orderHandle,
-            meta: ['订单列表', '列表处理'],
         }]
     }
 ]
