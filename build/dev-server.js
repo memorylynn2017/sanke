@@ -71,13 +71,13 @@ compiler.plugin('compilation', function(compilation) {
 })
 
 // proxy api requests
-// Object.keys(proxyTable).forEach(function (context) {
-//   var options = proxyTable[context]
-//   if (typeof options === 'string') {
-//     options = { target: options }
-//   }
-//   app.use(proxyMiddleware(options.filter || context, options))
-// })
+Object.keys(proxyTable).forEach(function (context) {
+   var options = proxyTable[context]
+   if (typeof options === 'string') {
+     options = { target: options }
+   }
+   app.use(proxyMiddleware(options.filter || context, options))
+ })
 
 var context = config.dev.context
 
@@ -93,9 +93,10 @@ var options = {
     target: proxypath,
     changeOrigin: true,
 }
-if (context.length) {
+
+/* if (context.length) {
     app.use(proxyMiddleware(context, options))
-}
+} */
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 

@@ -137,8 +137,23 @@ export default {
             this.$refs[formName].validate(async(valid) => {
                 if (valid) {
                     if (this.loginForm.verifycode.validate(this.loginForm.checknode)) {
-                        axios.get('/login').then(res => {
-                            if (res.data) {
+                        axios.post('admin/login',{"user_name": this.loginForm.username,"pass_word": this.loginForm.password}).then(res => {
+                            const data = res.data
+                            if(data.status == 200){
+                                this.$message({
+                                    type: 'success',
+                                    message: '验证成功'
+                                });
+                                this.$router.push('manage')
+                            }else{
+                                this.$message({
+                                    type: 'error',
+                                    message: '登陆失败'
+                                });
+                                this.loginForm.verifycode.refresh();
+                                return false;
+                            }
+                            /* if (res.data) {
                                 const userData = res.data;
                                 let data = [];
                                 for (let i = 0, len = userData.length; i < len; i++) {
@@ -147,9 +162,6 @@ export default {
                                         break;
                                     }
                                 }
-                                /* const data = userData.filter((item)=>{
-                                  return item.user_name == this.loginForm.username;
-                                }); */
                                 if (data.user_name) {
                                     if (data.pass_word == this.loginForm.password) {
                                         //登录成功
@@ -174,16 +186,11 @@ export default {
                                     this.loginForm.verifycode.refresh();
                                     return false;
                                 }
-                            }
+                            } */
                         }).catch(error => {
                             console.log(error);
                         })
                     } else {
-                        // this.$notify.error({
-                        //     title: '错误',
-                        //     message: '验证码错误 请重新输入,',
-                        //     offset: 100
-                        // });
                         this.$alert('验证码错误 请重新输入', '警告', {
                           confirmButtonText: '确认',
                           callback: action => {

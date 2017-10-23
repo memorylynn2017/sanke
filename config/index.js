@@ -28,9 +28,11 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api/':'http://localhost:8003/',
+            '/admin/*':{
+                target: 'http://127.0.0.1:3000'
+            }
         },
-        context: [ //代理路径
+        /* context: [ //代理路径
             '/shopping',
             '/ugc',
             '/v1',
@@ -44,7 +46,7 @@ module.exports = {
             '/payapi',
             // '/admin',
             '/statis',
-        ],
+        ], */
 
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README
