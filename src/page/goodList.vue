@@ -218,17 +218,6 @@ export default {
 </script>
 <style lang="less">
 @import '../style/stable';
-.patag {
-    display: inline-block;
-    float: left;
-    position: relative;
-    top: -3px;
-    left: 5px;
-}
-
-.pashow {
-    display: inline-block;
-    float: left;
-}
+</style>
 
 </style>

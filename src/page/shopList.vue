@@ -214,24 +214,19 @@ export default {
 }
 
 </script>
+
 <style lang="less">
 @import '../style/stable';
-.btn .el-button {
-    padding: 7px 15px;
-    background-color: #f5f5f5;
-}
-
-.patag {
-    display: inline-block;
-    float: left;
-    position: relative;
-    top: -3px;
-    left: 5px;
-}
-
-.pashow {
-    display: inline-block;
-    float: left;
-}
-
 </style>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -42,7 +42,7 @@
                 </el-table-column>
                 <el-table-column property="purshname" label="订单" width="100" sortable>
                 </el-table-column>
-                <el-table-column property="countname" label="数量" width="100" sortable>
+                <el-table-column property="countname" label="数量" width="110" sortable>
                 </el-table-column>
                 <el-table-column property="pricename" label="金额" width="110" sortable>
                 </el-table-column>
@@ -50,7 +50,7 @@
                 </el-table-column>
                 <el-table-column property="registe_time" label="注册时间" width="160" sortable>
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="140">
+                <el-table-column property="editname" label="操作" width="160">
                     <template slot-scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList">[详情]</el-button>
                     </template>
@@ -59,7 +59,7 @@
                 </el-table-column> -->
             </el-table>
             <div class="pagination_bottom">
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
         </div>
@@ -249,20 +249,7 @@ export default {
 }
 
 </script>
+
 <style lang="less">
-@import '../style/mixin';
 @import '../style/stable';
-.patag {
-    display: inline-block;
-    float: left;
-    position: relative;
-    top: -3px;
-    left: 5px;
-}
-
-.pashow {
-    display: inline-block;
-    float: left;
-}
-
 </style>

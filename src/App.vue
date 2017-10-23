@@ -12,4 +12,6 @@
 
 <style lang="less">
     @import './style/common';
+    @import './style/mixin';
+      
 </style>

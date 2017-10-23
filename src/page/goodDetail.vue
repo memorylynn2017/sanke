@@ -2,7 +2,7 @@
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
-        <div class="table_container">
+        <div class="table_container gooddetail">
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">基本信息</span>
@@ -310,58 +310,5 @@ export default {
 
 </script>
 <style lang="less">
-@import '../style/mixin';
 @import '../style/sstyle';
-
-.backbtn {
-    width: 100px;
-    font-size: 16px;
-    color: #333;
-    padding: 6px 15px;
-    background: #e6e6e6;
-    border: 1px solid #bbbbbb;
-    border-radius: 4px;
-    position: relative;
-    top:60px;
-    left: 87%;
-    z-index: 1000;
-}
-
-.table0 {
-    tr {
-        td {
-            font-size: 16px;
-            color: #646464;
-            box-sizing: border-box;
-            &:first-child {
-                width: 160px;
-                text-align: right;
-            }
-            .el-input {
-                width: 200px;
-            }
-        }
-        &.last {
-            td {
-                border: none;
-            }
-        }
-    }
-}
-
-
-.el-select .el-input .el-input__icon {
-    color: #bfcbd9;
-    font-size: 12px;
-    transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-    transition: transform 0.3s, -webkit-transform 0.3s;
-    -webkit-transform: translateY(-50%) rotateZ(180deg);
-    transform: translateY(-50%) rotateZ(180deg);
-    line-height: 16px;
-    left: 165px;
-    top: 52%;
-    cursor: pointer;
-}
-
 </style>
