@@ -82,19 +82,17 @@ router.post('/updateAdmin', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
 	const params = req.body;
-	Admin.update({"user_name":params.username}, {"$set": {"user_name": params.username,"pass_word": params.password}},{"upsert": true},function (err, doc) {
+	Admin.update({ user_name:params.user_name}, {$set: params},{upsert: true},function (err, doc) {
 		if (err) {
 			res.json({
 				status: 100,
 				msg: err.message
 			})
 		} else {
-			if(doc){
-				res.json({
-					status: 200,
-					msg: '添加管理员成功'
-				})
-			}
+			res.json({
+				status: 200,
+				msg: '添加管理员成功'
+			})
 		}
 	})
 })

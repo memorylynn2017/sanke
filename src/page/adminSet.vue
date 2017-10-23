@@ -50,7 +50,7 @@ export default {
             imageUrl: '',
             addForm: {},
             editForm:{},
-            adminList: {},
+            adminList:[],
             dialogAdd:false,
             dialogEdit: false,
 
