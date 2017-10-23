@@ -1,6 +1,6 @@
 <template>
     <div class="fillcontain">
-        <head-top></head-top>
+        
         <header class="admin_title">管理员信息</header>
         <!-- <div class="admin_set">
             <ul id="example">
@@ -13,95 +13,68 @@
             </ul>
         </div> -->
         <div class="table_container">
-            <!-- <el-table :data="loginList" style="width: 100%">
+            <el-table :data="adminList" style="width: 100%">
                 <el-table-column type="expand">
                 </el-table-column>
-                <el-table-column label="用户ID" prop="userid">
+                <el-table-column label="用户ID" prop="_id">
                 </el-table-column>
-                <el-table-column label="用户名" prop="username">
+                <el-table-column label="用户名" prop="user_name">
                 </el-table-column>
-                <el-table-column label="用户密码" prop="password">
+                <el-table-column label="用户密码" prop="pass_word">
                 </el-table-column>
                 <el-table-column label="操作" width="160">
                     <template scope="scope">
-                        <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+                        <el-button size="small" @click="dialogEdit = true">编辑</el-button>
                         <el-button size="small" type="danger">删除</el-button>
                     </template>
                 </el-table-column>
-            </el-table> -->
-            <template>
-                <el-table :data="tableData" border style="width: 100%">
-                    <el-table-column label="日期" width="180">
-                        <template slot-scope="scope">
-                            <el-icon name="time"></el-icon>
-                            <span style="margin-left: 10px">{{ scope.row.date }}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="姓名" width="180">
-                        <template slot-scope="scope">
-                            <el-popover trigger="hover" placement="top">
-                                <p>姓名: {{ scope.row.name }}</p>
-                                <p>备注: {{ scope.row.address }}</p>
-                                <div slot="reference" class="name-wrapper">
-                                    <el-tag>{{ scope.row.name }}</el-tag>
-                                </div>
-                            </el-popover>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="操作">
-                        <template slot-scope="scope">
-                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                            <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </template>
+            </el-table>
             <div class="tablebottom" style="position:relative;left:996px;margin-top:10px;">
-                <el-button type="info" @click="handleAdd(scope.$index, scope.row)">新增管理员</el-button>
-                <el-dialog title="修改管理员信息" v-model="dialogFormVisible1">
-                    <el-form :model="selectTable">
+                <el-button type="info" @click="dialogAdd = true">新增管理员</el-button>
+                <el-dialog title="新增管理员信息" :visible.sync="dialogAdd">
+                    <el-form  :model="addForm">
                         <el-form-item label="用户名" label-width="100px">
-                            <el-input auto-complete="off"></el-input>
+                            <el-input v-model="addForm.username" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" label-width="100px">
+                            <el-input type="password" v-model="addForm.password"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button type="primary" @click="addAct()">添 加</el-button>
+                        <el-button @click="dialogAdd = false">取 消</el-button>
+                    </div>
+                </el-dialog>
+            </div>
+            <div class="tablebottom" style="position:relative;left:996px;margin-top:10px;">
+                <el-button type="info" @click="dialogEdit = true">编辑管理员</el-button>
+                <el-dialog title="修改管理员信息" :visible.sync="dialogEdit">
+                    <el-form :model="editForm">
+                        <el-form-item label="用户名" label-width="100px">
+                            <el-input v-model="editForm.username"auto-complete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="密码" label-width="100px">
                             <el-input></el-input>
                         </el-form-item>
                         <el-form-item label="上传头像" label-width="100px">
-                            <el-upload>
+                            <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
-                        <el-button type="primary">添 加</el-button>
-                        <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+                        <el-button @click="dialogEdit = false">取 消</el-button>
+                        <el-button type="primary">确 定</el-button>
                     </div>
                 </el-dialog>
             </div>
-            <el-dialog title="修改管理员信息" v-model="dialogFormVisible2">
-                <el-form :model="selectTable">
-                    <el-form-item label="用户名" label-width="100px">
-                        <el-input auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="密码" label-width="100px">
-                        <el-input></el-input>
-                    </el-form-item>
-                    <el-form-item label="上传头像" label-width="100px">
-                        <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload>
-                    </el-form-item>
-                </el-form>
-                <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-                    <el-button type="primary">确 定</el-button>
-                </div>
-            </el-dialog>
         </div>
     </div>
 </template>
 <script>
 import headTop from '../components/headTop'
+import axios from 'axios'
 // import { mapState } from 'vuex'
 // import {baseUrl, baseImgPath} from '@/config/env'
 
@@ -121,75 +94,56 @@ export default {
                 address: '备注信息 1517 弄'
             }],
 
-            loginForm: [],
-            loginList: [],
-            selectTable: {},
-            dialogFormVisible1: true,
-            dialogFormVisible2: false,
+            addForm: {},
+            editForm:{},
+            adminList: {},
+            dialogAdd:false,
+            dialogEdit: false,
 
         }
     },
     components: {
         headTop,
     },
-
-
-
-
-
     // computed: {
     //     ...mapState(['adminInfo']),
     // },
     created() {
         this.initData();
     },
-
     methods: {
         async initData() {
-            var data = []
-            let url = 'http://localhost:3000/verifyForm'
-            let _this = this
-            this.$http.get(url, {}).then(function(res) {
-                for (let i = 0; i < res.data.length; i++) {
-
-                    var obj = {}
-                    obj.userid = res.data[i].user_id
-                    obj.username = res.data[i].user_name
-                    obj.password = res.data[i].pass_word
-                    data[i] = obj
+            axios.get("/admin/getList").then(res=>{
+                const data = res.data;
+                if(data.status == 200){
+                    this.adminList = data.result.adminList;
                 }
-
-                console.log(data);
-                _this.loginForm = data;
-                console.log(_this.loginForm);
-                _this.loginList = _this.loginForm;
-            }).catch(function(error) {
+            }).catch(error=>{
                 console.log(error);
             })
 
             // console.log(this.loginForm)
+        },
+        addAct(){
+            axios.post("/admin/add",{"user_name": this.addForm.username,"pass_word": this.addForm.password}).then(res=>{
+                const data = res.data;
+                if(data.status == 200){
+                    this.$message({
+                        type: 'success',
+                        message: '添加管理员成功'
+                    });
+                    this.initData();
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+            this.dialogAdd = false;
         },
         //新增功能
         handleAdd(row) {
             this.dialogFormVisible1 = true;
         },
 
-
-        //添加、删除功能
-        // expand(row, status) {
-        //     if (status) {
-        //         this.getSelectItemData(row)
-        //     } else {
-        //         const index = this.expendRow.indexOf(row.index);
-        //         this.expendRow.splice(index, 1)
-        //     }
-        // },
-        handleEdit(row) {
-            this.dialogFormVisible2 = true;
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
-        },
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
         },
@@ -259,7 +213,7 @@ export default {
     height: 178px;
     display: block;
 }
-
+</style>
 
 
 
