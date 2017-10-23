@@ -1,17 +1,6 @@
 <template>
     <div class="fillcontain">
-        
         <header class="admin_title">管理员信息</header>
-        <!-- <div class="admin_set">
-            <ul id="example">
-                <li v-for="item in loginList">
-                    <span>姓名：{{item.username}}</span>
-                    <br>
-                    <span>密码：{{item.password}}</span>
-                </li>
-                
-            </ul>
-        </div> -->
         <div class="table_container">
             <el-table :data="adminList" style="width: 100%">
                 <el-table-column type="expand">
@@ -46,34 +35,11 @@
                     </div>
                 </el-dialog>
             </div>
-            <div class="tablebottom" style="position:relative;left:996px;margin-top:10px;">
-                <el-button type="info" @click="dialogEdit = true">编辑管理员</el-button>
-                <el-dialog title="修改管理员信息" :visible.sync="dialogEdit">
-                    <el-form :model="editForm">
-                        <el-form-item label="用户名" label-width="100px">
-                            <el-input v-model="editForm.username"auto-complete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="密码" label-width="100px">
-                            <el-input></el-input>
-                        </el-form-item>
-                        <el-form-item label="上传头像" label-width="100px">
-                            <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </el-form-item>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                        <el-button @click="dialogEdit = false">取 消</el-button>
-                        <el-button type="primary">确 定</el-button>
-                    </div>
-                </el-dialog>
-            </div>
         </div>
     </div>
 </template>
 <script>
-import headTop from '../components/headTop'
+//import headTop from '../components/headTop'
 import axios from 'axios'
 // import { mapState } from 'vuex'
 // import {baseUrl, baseImgPath} from '@/config/env'
@@ -81,19 +47,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
-
             imageUrl: '',
-
-            tableData: [{
-                date: '2016-10-14',
-                name: '张三',
-                address: '备注信息 1518 弄'
-            }, {
-                date: '2016-10-14',
-                name: '李四',
-                address: '备注信息 1517 弄'
-            }],
-
             addForm: {},
             editForm:{},
             adminList: {},
@@ -103,12 +57,9 @@ export default {
         }
     },
     components: {
-        headTop,
+        //headTop,
     },
-    // computed: {
-    //     ...mapState(['adminInfo']),
-    // },
-    created() {
+    mounted() {
         this.initData();
     },
     methods: {
@@ -139,14 +90,6 @@ export default {
             })
             this.dialogAdd = false;
         },
-        //新增功能
-        handleAdd(row) {
-            this.dialogFormVisible1 = true;
-        },
-
-        handleAvatarSuccess(res, file) {
-            this.imageUrl = URL.createObjectURL(file.raw);
-        },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 / 1024 < 2;
@@ -159,11 +102,11 @@ export default {
             }
             return isJPG && isLt2M;
         }
-    },
+    }
 }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '../style/mixin';
 
 .admin_set {

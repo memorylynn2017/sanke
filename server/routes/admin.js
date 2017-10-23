@@ -89,11 +89,12 @@ router.post('/add', function (req, res, next) {
 				msg: err.message
 			})
 		} else {
-			res.json({
-				status: 200,
-				msg: '添加管理员成功'
-			})
-			
+			if(doc){
+				res.json({
+					status: 200,
+					msg: '添加管理员成功'
+				})
+			}
 		}
 	})
 })
