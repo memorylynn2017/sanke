@@ -39,7 +39,8 @@ router.post('/login', function (req, res, next) {
 })
 
 router.get('/getList', function (req, res, next) {
-	Admin.find({}, function (err, doc) {
+	const query = req.query
+	Admin.find(query, function (err, doc) {
 		if (err) {
 			res.json({
 				status: 100,
@@ -59,27 +60,6 @@ router.get('/getList', function (req, res, next) {
 	})
 })
 
-router.post('/updateAdmin', function (req, res, next) {
-	const params = req.body;
-	Admin.update({"_id":params._id}, {"user_name": params.username,"pass_word": params.password},function (err, doc) {
-		if (err) {
-			res.json({
-				status: 100,
-				msg: err.message
-			})
-		} else {
-			res.json({
-				status: 200,
-				msg: '修改管理员成功',
-				result: {
-					adminList: doc
-				}
-			})
-			
-		}
-	})
-})
-
 router.post('/add', function (req, res, next) {
 	const params = req.body;
 	Admin.update({ user_name:params.user_name}, {$set: params},{upsert: true},function (err, doc) {
@@ -92,6 +72,40 @@ router.post('/add', function (req, res, next) {
 			res.json({
 				status: 200,
 				msg: '添加管理员成功'
+			})
+		}
+	})
+})
+
+router.post('/delete', function (req, res, next) {
+	const id = req.body.id;
+	Admin.remove({ _id:id},function (err) {
+		if (err) {
+			res.json({
+				status: 100,
+				msg: '删除失败'
+			})
+		} else {
+			res.json({
+				status: 200,
+				msg: '删除管理员成功'
+			})
+		}
+	})
+})
+
+router.post('/edit', function (req, res, next) {
+	const params = req.body;
+	Admin.update({ _id:params._id},{user_name: params.user_name, pass_word:params.pass_word},function (err) {
+		if (err) {
+			res.json({
+				status: 100,
+				msg: '修改管理员失败'
+			})
+		} else {
+			res.json({
+				status: 200,
+				msg: '修改管理员成功'
 			})
 		}
 	})

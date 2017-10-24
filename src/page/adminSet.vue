@@ -13,8 +13,8 @@
                 </el-table-column>
                 <el-table-column label="操作" width="160">
                     <template scope="scope">
-                        <el-button size="small" @click="dialogEdit = true">编辑</el-button>
-                        <el-button size="small" type="danger">删除</el-button>
+                        <el-button size="small" @click="handleEdit(scope.row._id)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -52,8 +52,6 @@ export default {
             editForm:{},
             adminList:[],
             dialogAdd:false,
-            dialogEdit: false,
-
         }
     },
     components: {
@@ -89,6 +87,27 @@ export default {
                 console.log(error)
             })
             this.dialogAdd = false;
+        },
+        handleEdit(id) {
+            this.$router.push({path: "editAdmin",query:{id: id}});
+        },
+        handleDelete(index,row) {
+            //数据库删除
+            axios.post("/admin/delete",{id: row._id}).then(res=>{
+                const data = res.data;
+                if(data.status == 200){
+                    //界面上删除
+                    row.splice(index,1);
+                    
+                    this.$message({
+                        type: 'success',
+                        message: data.msg
+                    });
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+            console.log(index,row);
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
