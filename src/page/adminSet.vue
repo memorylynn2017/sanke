@@ -89,7 +89,7 @@ export default {
             this.dialogAdd = false;
         },
         handleEdit(id) {
-            this.$router.push({path: "editAdmin",query:{id: id}});
+            this.$router.push({path: "adminEdit",query:{id: id}});
         },
         handleDelete(index,row) {
             //数据库删除
@@ -97,8 +97,7 @@ export default {
                 const data = res.data;
                 if(data.status == 200){
                     //界面上删除
-                    row.splice(index,1);
-                    
+                    this.initData();
                     this.$message({
                         type: 'success',
                         message: data.msg
@@ -107,7 +106,6 @@ export default {
             }).catch(error=>{
                 console.log(error)
             })
-            console.log(index,row);
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';

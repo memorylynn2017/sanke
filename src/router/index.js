@@ -17,6 +17,7 @@ const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 's
 const goodList = r => require.ensure([], () => r(require('@/page/goodList')), 'goodList');
 const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 'orderList');
 const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
+const adminEdit = r => require.ensure([], () => r(require('@/page/adminEdit')), 'adminEdit');
 const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
 const newMember = r => require.ensure([], () => r(require('@/page/newMember')), 'newMember');
 const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 'uploadImg');
@@ -96,6 +97,9 @@ const routes = [{
             path: '/adminSet',
             component: adminSet,
             meta: ['设置', '管理员设置'],
+        },{
+            path: '/adminEdit',
+            component: adminEdit
         }, {
             path: '/sendMessage',
             component: sendMessage,

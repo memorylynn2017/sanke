@@ -38,9 +38,30 @@ router.post('/login', function (req, res, next) {
 	})
 })
 
+router.get('/getAdmin', function (req, res, next) {
+	const id = req.query.id;
+	Admin.findOne({_id: id}, function (err, doc) {
+		if (err) {
+			res.json({
+				status: 100,
+				msg: err.message
+			})
+		} else {
+			if (doc) {
+				res.json({
+					status: 200,
+					msg: '获取管理员列表成功',
+					result: {
+						adminInfo: doc
+					}
+				})
+			}
+		}
+	})
+})
+
 router.get('/getList', function (req, res, next) {
-	const query = req.query
-	Admin.find(query, function (err, doc) {
+	Admin.find({}, function (err, doc) {
 		if (err) {
 			res.json({
 				status: 100,
