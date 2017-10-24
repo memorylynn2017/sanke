@@ -23,9 +23,6 @@
                 </div>
                 <div class="searched_middle">
                     <span class="pashow">显示</span>&nbsp;
-                    <!-- <el-select v-model="pageNum" filterable style="margin-left:-30px;">
-                        <el-option v-for="page in pageData" :key="page.value" :label="page.label" :value="page.value"> </el-option>
-                    </el-select> -->
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
                 </div>
@@ -40,7 +37,7 @@
                 </el-table-column>
                 <el-table-column property="shop_type" label="类型" width="100" sortable>
                 </el-table-column>
-                <el-table-column property="shop_market" label="商家名称" width="135" sortable>
+                <el-table-column property="shop_Stall" label="商家名称" width="135" sortable>
                 </el-table-column>
                 <el-table-column property="shop_area" label="所在市场" width="100">
                 </el-table-column>
@@ -55,8 +52,9 @@
                 </el-table-column>
                 <el-table-column property="editname" label="操作" width="180">
                     <template slot-scope="scope">
-                        <el-button style="float:left; border:none;" size="small" @click="handleList">[编辑]</el-button>
-                        <el-button style="float:left; display:inline-block; border:none;" size="small">[抓取商品]</el-button>
+                        <!-- @click="handleEdit(scope.$index, scope.row)" -->
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[编辑]</el-button>
+                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -64,169 +62,193 @@
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
+            <!-- <el-dialog title="商家信息" :visible.sync="dialogFormVisible">
+                <el-form :model="form">
+                    <el-form-item label="商家ID" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_id" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="类型" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_type" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="商家代码" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_market" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="商家名称" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_Stall" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所在市场" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_area" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="商家排名" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_ranking" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="进驻时间" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_time" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="状态" :label-width="formLabelWidth">
+                        <el-input v-model="form.shop_status" auto-complete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="cancel">取 消</el-button>
+                    <el-button type="primary" @click="update">确 定</el-button>
+                </div>
+            </el-dialog> -->
         </div>
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
-import {
-    getUserList,
-    getUserCount
-} from '@/api/getData'
-import axios from 'axios'
+// import { reformat } from '../common/reformartDate';
+import axios from "axios";
+
 export default {
-    data() {
-        return {
-            tableData: [],
-            levelData: [{
-                value: '所有分类',
-                label: '所有分类'
-            }, {
-                value: 'A类',
-                label: 'A类'
-            }, {
-                value: 'B类',
-                label: 'B类'
-            }, {
-                value: 'C类',
-                label: 'C类'
-            }],
-            pageData: [{
-                value: '选项1',
-                label: '15'
-            }, {
-                value: '选项2',
-                label: '30'
-            }, {
-                value: '选项3',
-                label: '90'
-            }, {
-                value: '选项4',
-                label: '120'
-            }],
-            shop_id: '',
-            levelName: '所有分类',
-            currentRow: null,
-            begin: 0,
-            end: 0,
-            limit: 20,
-            count: 0,
-            currentPage: 1,
-            pageSize: 15,
-            shopList: []
+  data() {
+    return {
+      currentIndex: "",
+      dialogFormVisible: false,
+      formLabelWidth: "200px",
+      form: {},
+      tableData: [],
+      shopList: [],
+      levelData: [
+        {
+          value: "所有分类",
+          label: "所有分类"
+        },
+        {
+          value: "A类",
+          label: "A类"
+        },
+        {
+          value: "B类",
+          label: "B类"
+        },
+        {
+          value: "C类",
+          label: "C类"
         }
-    },
-    components: {
-        // headTop,
-    },
-    computed: {
-        getshopListFilter() {
-            return this.shopList.slice(this.begin, this.end);
+      ],
+      pageData: [
+        {
+          value: "选项1",
+          label: "15"
         },
-        Message: function() {
-            return this.shopList.length
+        {
+          value: "选项2",
+          label: "30"
+        },
+        {
+          value: "选项3",
+          label: "90"
+        },
+        {
+          value: "选项4",
+          label: "120"
         }
+      ],
+      shop_id: "",
+      levelName: "所有分类",
+      currentRow: null,
+      begin: 0,
+      end: 0,
+      limit: 20,
+      count: 0,
+      currentPage: 1,
+      pageSize: 15
+    };
+  },
+  components: {
+    // headTop,
+  },
+  computed: {
+    getshopListFilter() {
+      return this.shopList.slice(this.begin, this.end);
     },
-    mounted() {
-        this.initData();
-    },
-    methods: {
-        async initData() {
-            axios.get('/getShopList').then(res => {
-                if (res.data) {
-                    //临时表
-                    this.tableData = res.data;
-                    //数据表
-                    this.shopList = res.data;
-                    this.count = this.shopList.length;
-                    this.begin = 0;
-                    this.end = this.pageSize;
-                    console.log(this.shopList)
-                    console.log('\separter');
-                    console.log(this.shopList.slice(this.begin, this.end));
-                }
-            }).catch(error => {
-                console.log(error);
-            })
-        },
-        showNums(index) {
-            this.pageNum = parseInt(this.options2[index].label);
-        },
-        filterLevel(levelName) {
-            if (this.levelName == '' || this.levelName == "所有分类") {
-                this.shopList = this.tableData;
-            } else {
-                this.shopList = this.tableData.filter(item => {
-                    return item.shop_type !== null && item.shop_type == this.levelName;
-                });
-            }
-        },
-        showNums(index) {
-            this.pageNum = parseInt(this.options2[index].label);
-        },
-        searchUser() {
-            // 这是一种精确查询
-            // if (this.shop_id) {
-            //     this.shopList = this.tableData.filter((item) => {
-            //         return item.shop_id == this.shop_id;
-            //     });
-            // }
-            // 这是一种模糊查询
-            if (this.shop_id) {
-                this.shopList = this.tableData.filter((item) => {
-                    return item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !== -1
-
-                });
-            }
-        },
-        // handleSizeChange(val) {
-        //     console.log(`每页 ${val} 条`);
-        // },
-        // handleCurrentChange(val) {
-        //     this.currentPage = val;
-        //     this.offset = (val - 1) * this.limit;
-        //     this.getUsers()
-        // },
-
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-            this.pageSize = val;
-            this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage * this.pageSize;
-        },
-
-        handleCurrentChange(val) {
-            this.currentPage = val;
-            this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage * this.pageSize;
-            console.log(this.currentPage);
-            console.log(this.begin);
-        },
-        handleList() {
-            this.$router.push({
-                path: '/shopDetail'
-            });
-        },
-        filterTag(value, row) {
-            return row.levelname === value;
-        },
+    Message: function() {
+      return this.shopList.length;
     }
-}
+  },
+  mounted() {
+    this.initData();
+  },
+  methods: {
+    async initData() {
+      axios
+        .get("/admin/getShopList")
+        .then(res => {
+          const data = res.data;
+          if (data.status == 200) {
+            console.log(data.result.shopList);
+            //临时表
+            this.tableData = data.result.shopList;
+            //数据表
+            this.shopList = data.result.shopList;
+            this.count = this.shopList.length;
+            this.begin = 0;
+            this.end = this.pageSize;
+            // console.log("separter");
+            // console.log(this.shopList.slice(this.begin, this.end));
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    showNums(index) {
+      this.pageNum = parseInt(this.options2[index].label);
+    },
+    filterLevel(levelName) {
+      if (this.levelName == "" || this.levelName == "所有分类") {
+        this.shopList = this.tableData;
+      } else {
+        this.shopList = this.tableData.filter(item => {
+          return item.shop_type !== null && item.shop_type == this.levelName;
+        });
+      }
+    },
+    showNums(index) {
+      this.pageNum = parseInt(this.options2[index].label);
+    },
+    searchUser() {
+      if (this.shop_id) {
+        this.shopList = this.tableData.filter(item => {
+          return (
+            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==-1
+            
+          );
+        });
+      }
+    },
 
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.begin = (this.currentPage - 1) * this.pageSize;
+      this.end = this.currentPage * this.pageSize;
+    },
+
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.begin = (this.currentPage - 1) * this.pageSize;
+      this.end = this.currentPage * this.pageSize;
+      console.log(this.currentPage);
+      console.log(this.begin);
+    },
+    handleList(index, row) {
+      this.$router.push({
+        path: "/shopDetail",
+        query: {
+          shop_id: row.shop_id
+        }
+      });
+    },
+    filterTag(value, row) {
+      return row.levelname === value;
+    }
+
+  }
+};
 </script>
-
 <style lang="less">
-@import '../style/stable';
+@import "../style/stable";
 </style>
-
-
-
-
-
-
-
-
-
-
-
-

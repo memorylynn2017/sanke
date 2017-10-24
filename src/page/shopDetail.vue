@@ -1,6 +1,7 @@
 <template>
     <div class="fillcontain shopdetail">
         <!-- <head-top></head-top> -->
+        {{this.tempShopList}}
         <el-button class="backbtn" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
@@ -213,9 +214,12 @@
 </template>
 <script>
 // import headTop from '../components/headTop'
+import axios from "axios";
 export default {
     data() {
         return {
+            msg: '',
+            tempShopList: [],
             input: '',
             levels: [{
                 value: '选项1',
@@ -294,22 +298,42 @@ export default {
         // headTop,
     },
     created() {
-        this.initData();
+        
+    },
+    mounted() {
+        this.getParams();
+        this.getShop();
+
     },
     methods: {
-        async initData() {
-            try {
-                const countData = await getUserCount();
-                if (countData.status == 1) {
-                    this.count = countData.count;
-                } else {
-                    throw new Error('获取数据失败');
+
+        getShop() {
+
+            axios.get("/admin/getShop", { params: { shop_id: this.$route.query.shop_id } }).then(res => {
+                const data = res.data
+                if (data.status == 200) {
+                    this.tempShopList = data.result.shopList
+                    // console.log(this.tempShopList)
+
+
                 }
-                this.getUsers();
-            } catch (err) {
-                console.log('获取数据失败', err);
-            }
+            }).catch(error => {
+                console.log(error)
+            })
         },
+        // async initData() {
+        //     try {
+        //         const countData = await getUserCount();
+        //         if (countData.status == 1) {
+        //             this.count = countData.count;
+        //         } else {
+        //             throw new Error('获取数据失败');
+        //         }
+        //         this.getUsers();
+        //     } catch (err) {
+        //         console.log('获取数据失败', err);
+        //     }
+        // },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
         },
@@ -333,11 +357,22 @@ export default {
             this.$router.push({
                 path: '/shopList'
             });
-        }
+        },
+        getParams() {
+          // 取到路由带过来的参数
+          let routerParams = this.$route.query.shop_id;
+          // 将数据放在当前组件的数据内
+          this.msg = routerParams;
+    }
     },
+    watch: {
+    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+       $route: "getParams"
+  }
 }
 
 </script>
 <style lang="less">
 @import '../style/sstyle';
+
 </style>

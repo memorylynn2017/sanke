@@ -29,6 +29,7 @@ export default{
                 const data = res.data
                 if(data.status == 200){
                     this.adminInfo = data.result.adminInfo
+                    console.log(this.adminInfo)
 
                 }
             }).catch(error=>{

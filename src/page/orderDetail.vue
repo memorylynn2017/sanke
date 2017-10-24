@@ -264,7 +264,21 @@ export default {
             this.$router.push({
                 path: '/orderList'
             });
-        }
+        },
+        getAdmin(){
+            const shop_id = this.$route.query.shop_id
+            axios.get("/admin/getShop",{params: {shop_id: shop_id}}).then(res=>{
+                const data = res.data
+                if(data.status == 200){
+                    this.adminInfo = data.result.adminInfo
+                    console.log(this.adminInfo)
+
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+
     },
 }
 

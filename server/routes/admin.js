@@ -1,6 +1,7 @@
 var express = require('express')
 var Mongoose = require('mongoose')
 var Admin = require('./../models/admin')
+var Shop = require('./../models/ShopList')
 var router = express.Router()
 
 Mongoose.connect('mongodb://127.0.0.1:27017/taoyi').then(
@@ -50,9 +51,31 @@ router.get('/getAdmin', function (req, res, next) {
 			if (doc) {
 				res.json({
 					status: 200,
-					msg: '获取管理员列表成功',
+					msg: '获取指定管理员成功',
 					result: {
 						adminInfo: doc
+					}
+				})
+			}
+		}
+	})
+})
+
+router.get('/getShop', function (req, res, next) {
+	const shop_id = req.query.shop_id;
+	Shop.findOne({shop_id: shop_id}, function (err, doc) {
+		if (err) {
+			res.json({
+				status: 100,
+				msg: err.message
+			})
+		} else {
+			if (doc) {
+				res.json({
+					status: 200,
+					msg: '获取指定商家成功',
+					result: {
+						shopList: doc
 					}
 				})
 			}
@@ -80,6 +103,28 @@ router.get('/getList', function (req, res, next) {
 		}
 	})
 })
+
+router.get('/getShopList', function (req, res, next) {
+	Shop.find({}, function (err, doc) {
+		if (err) {
+			res.json({
+				status: 100,
+				msg: err.message
+			})
+		} else {
+			if (doc) {
+				res.json({
+					status: 200,
+					msg: '获取商家列表成功',
+					result: {
+						shopList: doc
+					}
+				})
+			}
+		}
+	})
+})
+
 
 router.post('/add', function (req, res, next) {
 	const params = req.body;
