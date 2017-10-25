@@ -1,12 +1,10 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
-        <el-button type="primary" @click="showAddDialog">新增</el-button>
+        <!-- <el-button type="primary" @click="showAddDialog">新增</el-button> -->
         <header class="admin_title">管理员信息</header>
         <div class="table_container">
             <el-table :data="adminList" style="width: 100%">
-                <el-table-column type="expand">
-                </el-table-column>
                 <el-table-column label="用户ID" prop="_id">
                 </el-table-column>
                 <el-table-column label="用户名" prop="user_name">
@@ -16,13 +14,13 @@
                 <el-table-column label="操作" width="160">
                     <template slot-scope="scope">
                         <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                        <!-- <el-button size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
             
             <!-- 新增 -->
-            <el-dialog title="新增" v-model="dialogAdd" :close-on-click-modal="false">
+            <!-- <el-dialog title="新增" v-model="dialogAdd" :close-on-click-modal="false">
                 <el-form  :model="addForm">
                     <el-form-item label="用户名" label-width="100px">
                         <el-input v-model="addForm.username" auto-complete="off"></el-input>
@@ -35,7 +33,7 @@
                     <el-button @click.native="dialogAdd = false">取消</el-button>
                     <el-button type="primary" @click.native="addAct" :loading="addLoading">添加</el-button>
                 </div>
-            </el-dialog>
+            </el-dialog> -->
             <!-- 编辑-->
             <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
                 <el-form  label-width="80px" :model="editForm">
@@ -57,8 +55,6 @@
 <script>
 import headTop from '../components/headTop'
 import axios from 'axios'
-// import { mapState } from 'vuex'
-// import {baseUrl, baseImgPath} from '@/config/env'
 
 export default {
     data() {
@@ -95,28 +91,28 @@ export default {
 
             // console.log(this.loginForm)
         },
-        showAddDialog(){
-            this.dialogAdd = true;
-        },
-        addAct(){
-            this.$confirm('确认提交吗?','提示',{}).then(()=>{
-                this.addLoading = true;
-                axios.post("/admin/add",{"user_name": this.addForm.username,"pass_word": this.addForm.password}).then(res=>{
-                    const data = res.data;
-                    if(data.status == 200){
-                        this.$message({
-                            type: 'success',
-                            message: '添加管理员成功'
-                        });
-                        this.initData();
-                    }
-                }).catch(error=>{
-                    console.log(error)
-                })
-                this.dialogAdd = false;
-                this.initData();
-            })
-        },
+        // showAddDialog(){
+        //     this.dialogAdd = true;
+        // },
+        // addAct(){
+        //     this.$confirm('确认提交吗?','提示',{}).then(()=>{
+        //         this.addLoading = true;
+        //         axios.post("/admin/add",{"user_name": this.addForm.username,"pass_word": this.addForm.password}).then(res=>{
+        //             const data = res.data;
+        //             if(data.status == 200){
+        //                 this.$message({
+        //                     type: 'success',
+        //                     message: '添加管理员成功'
+        //                 });
+        //                 this.initData();
+        //             }
+        //         }).catch(error=>{
+        //             console.log(error)
+        //         })
+        //         this.dialogAdd = false;
+        //         this.initData();
+        //     })
+        // },
         handleEdit(row) {
             this.editFormVisible = true
             this.editForm = row
@@ -139,25 +135,25 @@ export default {
                 this.initData();
             });
         },
-        handleDelete(index,row) {
-            this.$confirm('确认删除该管理员吗？','提示',{type: 'warning'}).then(()=>{
-                //数据库删除
-                axios.post("/admin/delete",{id: row._id}).then(res=>{
-                    const data = res.data;
-                    if(data.status == 200){
-                        //视图界面上删除
-                        this.initData();
-                        this.$message({
-                            type: 'success',
-                            message: data.msg
-                        });
-                    }
-                }).catch(error=>{
-                    console.log(error)
-                })
-            })
+        // handleDelete(index,row) {
+        //     this.$confirm('确认删除该管理员吗？','提示',{type: 'warning'}).then(()=>{
+        //         //数据库删除
+        //         axios.post("/admin/delete",{id: row._id}).then(res=>{
+        //             const data = res.data;
+        //             if(data.status == 200){
+        //                 //视图界面上删除
+        //                 this.initData();
+        //                 this.$message({
+        //                     type: 'success',
+        //                     message: data.msg
+        //                 });
+        //             }
+        //         }).catch(error=>{
+        //             console.log(error)
+        //         })
+        //     })
             
-        },
+        // },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 / 1024 < 2;

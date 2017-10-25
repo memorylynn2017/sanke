@@ -1,7 +1,7 @@
 <template>
     <div class="fillcontain orderdetail">
         <!-- <head-top></head-top> -->
-        <el-button class="backbtn_last" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_order" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>

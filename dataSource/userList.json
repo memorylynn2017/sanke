@@ -1,0 +1,144 @@
+{ 
+    "_id" : ObjectId("59eda2f62ad0d40fa8a8a952"), 
+    "user_id" : "8005896", 
+    "levelname" : "批发会员", 
+    "areaname" : "美国", 
+    "purshname" : "9000001", 
+    "username" : "张三", 
+    "countname" : "100001", 
+    "pricename" : "10001", 
+    "costname" : "100011", 
+    "registe_time" : "2015-10-18 20:00", 
+    "usersex" : "男", 
+    "usercall" : "13647895410", 
+    "userqq" : "333331", 
+    "useremail" : "eleonorachen1@gmail.com", 
+    "userzi" : "1280", 
+    "userdate" : "1984-05-1", 
+    "usercity" : "美国", 
+    "login_time" : "2017-10-18 9:15", 
+    "registe_IP" : "109.156.21.146", 
+    "login_IP" : "109.156.21.150", 
+    "login_count" : "1001", 
+    "user_tag" : [
+        {
+            "tag1" : "女装", 
+            "tag2" : "韩版", 
+            "tag3" : "好质量", 
+            "tag4" : "爽快", 
+            "tag5" : "老客户"
+        }
+    ], 
+    "user_expert" : "许顺", 
+    "user_bei" : "备注信息", 
+    "user_score" : "8000", 
+    "user_status" : "正常"
+}
+{ 
+    "_id" : ObjectId("59eda2f62ad0d40fa8a8a953"), 
+    "user_id" : "8005897", 
+    "levelname" : "批发会员", 
+    "areaname" : "英国", 
+    "purshname" : "9000002", 
+    "username" : "李四", 
+    "countname" : "200001", 
+    "pricename" : "20001", 
+    "costname" : "200011", 
+    "registe_time" : "2015-10-19 20:00", 
+    "usersex" : "男", 
+    "usercall" : "13647895411", 
+    "userqq" : "333332", 
+    "useremail" : "eleonorachen2@gmail.com", 
+    "userzi" : "1281", 
+    "userdate" : "1985-05-1", 
+    "usercity" : "新加坡", 
+    "login_time" : "2017-10-18 13:20", 
+    "registe_IP" : "109.156.21.146", 
+    "login_IP" : "109.156.21.150", 
+    "login_count" : "1001", 
+    "user_tag" : [
+        {
+            "tag1" : "男装", 
+            "tag2" : "韩版", 
+            "tag3" : "好质量", 
+            "tag4" : "爽快", 
+            "tag5" : "老客户"
+        }
+    ], 
+    "user_expert" : "许顺", 
+    "user_bei" : "备注信息", 
+    "user_score" : "9000", 
+    "user_status" : "正常"
+}
+{ 
+    "_id" : ObjectId("59eda2f62ad0d40fa8a8a954"), 
+    "user_id" : "8005898", 
+    "levelname" : "批发会员", 
+    "areaname" : "广州", 
+    "purshname" : "9000003", 
+    "username" : "王五", 
+    "countname" : "300001", 
+    "pricename" : "30001", 
+    "costname" : "300011", 
+    "registe_time" : "2016-10-18 20:00", 
+    "usersex" : "男", 
+    "usercall" : "13647895412", 
+    "userqq" : "333333", 
+    "useremail" : "eleonorachen3@gmail.com", 
+    "userzi" : "1282", 
+    "userdate" : "1985-06-1", 
+    "usercity" : "新加坡", 
+    "login_time" : "2017-10-18 15:30", 
+    "registe_IP" : "109.156.21.146", 
+    "login_IP" : "109.156.21.150", 
+    "login_count" : "1001", 
+    "user_tag" : [
+        {
+            "tag1" : "女装", 
+            "tag2" : "中版", 
+            "tag3" : "信得过", 
+            "tag4" : "特色", 
+            "tag5" : "老客户"
+        }
+    ], 
+    "user_expert" : "阿松", 
+    "user_bei" : "备注信息", 
+    "user_score" : "8500", 
+    "user_status" : "正常"
+}
+{ 
+    "_id" : ObjectId("59eda2f62ad0d40fa8a8a955"), 
+    "user_id" : "8005899", 
+    "levelname" : "批发会员", 
+    "areaname" : "美国", 
+    "purshname" : "9000004", 
+    "username" : "李六", 
+    "countname" : "400001", 
+    "pricename" : "40001", 
+    "costname" : "400011", 
+    "registe_time" : "2016-10-18 20:00", 
+    "usersex" : "男", 
+    "usercall" : "13647895413", 
+    "userqq" : "333334", 
+    "useremail" : "eleonorachen4@gmail.com", 
+    "userzi" : "1283", 
+    "userdate" : "1987-05-1", 
+    "usercity" : "新加坡", 
+    "login_time" : "2017-10-18 19:11", 
+    "registe_IP" : "109.156.21.146", 
+    "login_IP" : "109.156.21.150", 
+    "login_count" : "1001", 
+    "user_tag" : [
+        {
+            "tag1" : "男装", 
+            "tag2" : "中版", 
+            "tag3" : "信得过", 
+            "tag4" : "特色", 
+            "tag5" : "老客户"
+        }
+    ], 
+    "user_expert" : "阿松", 
+    "user_bei" : "备注信息", 
+    "user_score" : "9500", 
+    "user_status" : "正常"
+}

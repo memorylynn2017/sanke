@@ -2,6 +2,7 @@
     <div class="fillcontain userdetail">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_user" @click="editSubmit" sytle=" z-index:999;">提交</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -26,11 +27,14 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="等级">
-                                    <span>{{userForm.levelname}}<i class="writeo"></i></span>
+                                    <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="saveIconClick1" @blur="saveIconClick1" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <span v-show='!this.flag1'>{{userForm.levelname}}<i class="writeo" @click='edit1()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                                 <el-form-item label="真实姓名">
-                                    <span>{{userForm.username}}<i class="writeo"></i></span>
+                                    <el-input v-show='this.flag2' v-focus="true" v-model="userForm.username" @keyup.enter.native="saveIconClick2" @blur="saveIconClick2" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <span v-show='!this.flag2'>{{userForm.username}}<i class="writeo" @click='edit2()' style="cursor:pointer"></i></span>
                                 </el-form-item>
+
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="积分">
@@ -53,7 +57,8 @@
                                     <span>{{userForm.registe_time}}</span>
                                 </el-form-item>
                                 <el-form-item label="城市">
-                                    <span>{{userForm.usercity}}<i class="writeo"></i></span>
+                                    <el-input v-show='this.flag3' v-focus="true" v-model="userForm.usercity" @keyup.enter.native="saveIconClick3" @blur="saveIconClick3" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <span v-show='!this.flag3'>{{userForm.usercity}}<i class="writeo" @click='edit3()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
@@ -69,7 +74,8 @@
                                     <span>{{userForm.login_time}}</span>
                                 </el-form-item>
                                 <el-form-item label="联系电话">
-                                    <span>{{userForm.usercall}}<i class="writeo"></i></span>
+                                    <el-input v-show='this.flag4' v-focus="true" v-model="userForm.usercall" @keyup.enter.native="saveIconClick4" @blur="saveIconClick4" style="border-bottom:1px solid #ccc;width:125px;"></el-input>
+                                    <span v-show='!this.flag4'>{{userForm.usercall}}<i class="writeo" @click='edit4()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
@@ -77,7 +83,8 @@
                                     <span>{{userForm.login_IP}}</span>
                                 </el-form-item>
                                 <el-form-item label="QQ微信">
-                                    <span>{{userForm.userqq}}<i class="writeo"></i></span>
+                                    <el-input v-show='this.flag5' v-focus="true" v-model="userForm.userqq" @keyup.enter.native="saveIconClick5" @blur="saveIconClick5" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <span v-show='!this.flag5'>{{userForm.userqq}}<i class="writeo" @click='edit5()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
@@ -138,7 +145,10 @@
                         </div>
                         <div class="customer">
                             <p>客服顾问<span style="margin-left: 22px;">{{userForm.user_expert}}</span></p>
-                            <p>备注信息：{{userForm.user_bei}}<i class="writeo"></i></p>
+                            <p>备注信息：
+                            <el-input v-show='this.flag6' v-focus="true" v-model="userForm.user_bei" @keyup.enter.native="saveIconClick6" @blur="saveIconClick6" style="border-bottom:1px solid #ccc;width:250px;"></el-input><span v-show='!this.flag6'>{{userForm.user_bei}}<i class="writeo" @click='edit6()' style="cursor:pointer"></i></span> </p>
+                                    
+                           
                         </div>
                     </template>
                 </el-tab-pane>
@@ -275,288 +285,407 @@
                     </div>
                 </el-tab-pane>
             </el-tabs>
+            <el-button size="small" @click="handleEdit">编辑</el-button>
+            <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+                <el-form  label-width="80px" :model="editForm">
+                    <el-form-item label="等级">
+                        <el-input v-model="editForm.levelname" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="用户名">
+                        <el-input v-model="editForm.username" auto-complete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                <el-button @click.native="editFormVisible = false">取消</el-button>
+                <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+                </div>
+            </el-dialog>
         </div>
     </div>
 </template>
 <script>
 import axios from "axios";
+
 export default {
-    data() {
-        return {
-            id: this.$route.query.user_id,
-            userForm: {
-                user_id: '',
-                username: '',
-
-            },
-            tableData: [{
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }, {
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-
-            }],
-            zioptions: [{
-                value: '在线支付',
-                label: '在线支付'
-            }, {
-                value: '缺货支付',
-                label: '缺货支付'
-            }, {
-                value: '退运费',
-                label: '退运费'
-            }, {
-                value: '充值提交',
-                label: '充值提交'
-            }, {
-                value: '账务调节',
-                label: '账务调节'
-            }, {
-                value: '余额支付',
-                label: '余额支付'
-            }, {
-                value: '提现',
-                label: '提现'
-            }, {
-                value: '订单取消',
-                label: '订单取消'
-            }],
-            value12: '请选择',
-            currentRow: null,
-            offset: 0,
-            limit: 20,
-            count: 0,
-            currentPage: 1,
-        }
-    },
-    components: {},
-    created() {},
-    mounted() {
-        this.getUser();
-    },
-    methods: {
-        getUser() {
-            axios.get("/admin/getUser", { params: { user_id: this.id } }).then(res => {
-                const data = res.data
-                if (data.status == 200) {
-                    this.userForm = data.result.userList
-                    console.log(this.userForm)
-                }
-            }).catch(error => {
-                console.log(error)
-            })
+  data() {
+    return {
+      flag1: false,
+      flag2: false,
+      flag3: false,
+      flag4: false,
+      flag5: false,
+      flag6: false,
+      editFormVisible: false,
+      editLoading: false,
+      id: this.$route.query.user_id,
+      userForm: {
+        
+      },
+      editForm:{},
+      tableData: [
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
         },
-        handleReturn() {
-            this.$router.push({
-                path: '/userList'
-            });
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
         },
-    },
-    watch: {
-        // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-        '$route' (to, from) {
-            this.id = this.$route.query.user_id;
-            this.getUser();
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
+        },
+        {
+          edit_type: "提现",
+          pursh_code: "900023",
+          save_in: "100",
+          save_out: "1200",
+          cost_count: "50",
+          sell_time: "2016-10-10",
+          edit_name: "管理员",
+          edit_exp: "补运费"
         }
+      ],
+      zioptions: [
+        {
+          value: "在线支付",
+          label: "在线支付"
+        },
+        {
+          value: "缺货支付",
+          label: "缺货支付"
+        },
+        {
+          value: "退运费",
+          label: "退运费"
+        },
+        {
+          value: "充值提交",
+          label: "充值提交"
+        },
+        {
+          value: "账务调节",
+          label: "账务调节"
+        },
+        {
+          value: "余额支付",
+          label: "余额支付"
+        },
+        {
+          value: "提现",
+          label: "提现"
+        },
+        {
+          value: "订单取消",
+          label: "订单取消"
+        }
+      ],
+      value12: "请选择",
+      currentRow: null,
+      offset: 0,
+      limit: 20,
+      count: 0,
+      currentPage: 1
+    };
+  },
+  components: {},
+  created() {},
+  mounted() {
+    this.getUser();
+  },
+  directives: {
+    focus: function(el, option) {
+      var defClass = "el-input",
+        defTag = "input";
+      var value = option.value || true;
+      if (typeof value === "boolean")
+        value = { cls: defClass, tag: defTag, foc: value };
+      else
+        value = {
+          cls: value.cls || defClass,
+          tag: value.tag || defTag,
+          foc: value.foc || false
+        };
+      if (el.classList.contains(value.cls) && value.foc)
+        el.getElementsByTagName(value.tag)[0].focus();
     }
-}
-
+  },
+  methods: {
+    getUser() {
+      axios
+        .get("/admin/getUser", { params: { user_id: this.id } })
+        .then(res => {
+          const data = res.data;
+          if (data.status == 200) {
+            this.userForm = data.result.userList;
+            console.log(this.userForm);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    handleReturn() {
+      this.$router.push({
+        path: "/userList"
+      });
+    },
+    handleEdit(row) {
+      this.editFormVisible = true;
+      this.editForm = this.userForm;
+    },
+    edit1() {
+      this.flag1 = true;
+    },
+    saveIconClick1() {
+      console.log("save");
+      this.flag1 = false;
+    },
+    edit2() {
+      this.flag2 = !this.flag2;
+    },
+    saveIconClick2() {
+      console.log("save");
+      this.flag2 = !this.flag2;
+    },
+    edit3() {
+      this.flag3 = !this.flag3;
+    },
+    saveIconClick3() {
+      console.log("save");
+      this.flag3 = !this.flag3;
+    },
+    edit4() {
+      this.flag4 = !this.flag4;
+    },
+    saveIconClick4() {
+      console.log("save");
+      this.flag4 = !this.flag4;
+    },
+    edit5() {
+      this.flag5 = !this.flag5;
+    },
+    saveIconClick5() {
+      console.log("save");
+      this.flag5 = !this.flag5;
+    },
+    edit6() {
+      this.flag6 = !this.flag6;
+    },
+    saveIconClick6() {
+      console.log("save");
+      this.flag6 = !this.flag6;
+    },
+    editSubmit() {
+      this.$confirm("确认提交吗？", "提示", {}).then(() => {
+        this.editLoading = true;
+        axios
+          .post("/admin/editUser", this.userForm)
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+              //   console.log()
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        this.editFormVisible = false;
+        this.getUser();
+      });
+    }
+  },
+  watch: {
+    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+    $route(to, from) {
+      this.id = this.$route.query.user_id;
+      this.getUser();
+    }
+  }
+};
 </script>
 <style lang="less">
-@import '../style/sstyle';
-
+@import "../style/sstyle";
 </style>

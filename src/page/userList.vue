@@ -26,9 +26,9 @@
                     </el-pagination>
                 </div>
             </div>
-            <div class="recorded">
+            <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
-            </div>
+            </div> -->
         </div>
         <div class="table_container">
             <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
