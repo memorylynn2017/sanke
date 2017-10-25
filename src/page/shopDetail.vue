@@ -1,8 +1,6 @@
 <template>
     <div class="fillcontain shopdetail">
-        <!-- <head-top></head-top> -->
-        {{this.tempShopList}}
-        <el-button class="backbtn" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_shop" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -11,128 +9,150 @@
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
                                 <template>
-                                    <el-form label-position="left" inline class="demo-table-expand qf">
+                                    <el-form label-position="left" inline class="demo-table-expand qf" ref="shopForm" :model="shopForm">
                                         <el-form-item label="商家序号">
                                             <span style="color: #e51c23;">系统自动生成</span>
                                         </el-form-item>
                                         <el-form-item label="商家等级">
                                             <span>
-                            <el-select size="small" v-model="level" placeholder="请选择">
-                              <el-option
-                                v-for="item in levels"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </span>
+                                                  <el-select size="small" v-model="shopForm.shop_level" placeholder="请选择">
+                                                      <el-option
+                                                        v-for="item in levels"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                      </el-option>
+                                                  </el-select>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="商家名称">
-                                            <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><em>*</em></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_name" placeholder="请输入内容"></el-input><em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="商家类型">
                                             <span>
-                            <el-radio-group v-model="type">
-                              <el-radio :label="3">A类</el-radio>
-                              <el-radio :label="6">B类</el-radio>
-                              <el-radio :label="9">C类</el-radio>
-                              <el-radio :label="12">T类</el-radio>
-                            </el-radio-group>
-                            <em>*</em>
-                          </span>
+                                                <el-radio-group v-model="shopForm.shop_type">
+                                                  <el-radio :label="1" value="A类">A类</el-radio>
+                                                  <el-radio :label="2" value="B类">B类</el-radio>
+                                                  <el-radio :label="3" value="C类">C类</el-radio>
+                                                  <el-radio :label="4" value="T类">T类</el-radio>
+                                                </el-radio-group>
+                                                <em>*</em>
+                                          </span>
                                         </el-form-item>
                                         <el-form-item label="商家简称">
-                                            <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_short" placeholder="请输入内容"></el-input>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="授信额度">
-                                            <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_credit" placeholder="请输入内容"></el-input>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="商家账号">
                                             <span>
-                          <el-input size="small" v-model="input" placeholder="请输入内容"></el-input>
-                          <em>*</em>
-                          <el-checkbox class="radio" v-model="auto" label="1">自动生成</el-checkbox>
-                          </span>
+                                              <el-input size="small" v-model="shopForm.shop_id" placeholder="请输入内容"></el-input>
+                                              <em>*</em>
+                                              <el-checkbox class="radio" v-model="auto" label="1">自动生成</el-checkbox>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="联系人">
-                                            <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_cr_human" placeholder="请输入内容"></el-input>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="商家密码">
-                                            <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><em>*</em></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_password" placeholder="请输入内容" type="password"></el-input><em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="手机号码">
-                                            <span><el-input size="small" v-model="input" ></el-input></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_cr_telephone" ></el-input>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="确认密码">
-                                            <span><el-input size="small" v-model="input" ></el-input><em>*</em></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_confirm" type="password"></el-input><em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="QQ/微信">
-                                            <span><el-input size="small" v-model="input" ></el-input></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_cr_weixi" ></el-input>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="所在市场">
                                             <span>
-                            <el-select size="small" v-model="marketplace" placeholder="请选择">
-                              <el-option
-                                v-for="item in marketplaces"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
+                                                <el-select size="small" v-model="shopForm.shop_Stall" placeholder="请选择">
+                                                  <el-option
+                                                    v-for="item in marketplaces"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
+                                                  </el-option>
+                                                </el-select>
+                                                <em>*</em>
+                                          </span>
                                         </el-form-item>
                                         <el-form-item label="通信地址">
-                                            <span><el-input size="small" v-model="input"></el-input></span>
+                                            <span><el-input size="small" v-model="shopForm.shop_cr_address"></el-input></span>
                                         </el-form-item>
                                         <el-form-item label="所在档口">
-                                            <span><el-input size="small" v-model="input"></el-input><em>*</em></span>
+                                            <span><el-input size="small" v-model="shopForm.shop_market"></el-input><em>*</em></span>
                                         </el-form-item>
                                         <el-form-item label="紧急联系电话">
-                                            <span><el-input size="small" v-model="input"></el-input></span>
+                                            <span><el-input size="small" v-model="shopForm.shop_alert"></el-input></span>
                                         </el-form-item>
                                         <el-form-item label="所在楼层">
                                             <span>
-                            <el-select size="small" v-model="floor" placeholder="请选择">
-                              <el-option
-                                v-for="item in floors"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
+                                              <el-select size="small" v-model="shopForm.shop_floor" placeholder="请选择">
+                                              <el-option
+                                                v-for="item in floors"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                              </el-option>
+                                              </el-select>
+                                              <em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="服务认证">
                                             <span>
-                            <el-radio-group v-model="serve">
-                              <el-radio :label="3">实拍</el-radio>
-                              <el-radio :label="6">退现</el-radio>
-                              <el-radio :label="9">代发</el-radio>
-                            </el-radio-group>
-                          </span>
+                                                <el-radio-group v-model="shopForm.shop_auth">
+                                                  <el-radio :label="1">实拍</el-radio>
+                                                  <el-radio :label="2">退现</el-radio>
+                                                  <el-radio :label="3">代发</el-radio>
+                                                </el-radio-group>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="联系电话">
-                                            <span><el-input size="small" v-model="input"></el-input><em>*</em></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_contact"></el-input><em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="经营范围">
-                                            <span><el-input size="small" v-model="input"></el-input><em>*</em></span>
+                                            <span>
+                                                <el-input size="small" v-model="shopForm.shop_scope"></el-input><em>*</em>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item label="注册日期">
                                             <span>2017-08-03 13:47:09</span>
                                         </el-form-item>
                                         <el-form-item label="是否启用">
                                             <span>
-                            <el-radio-group v-model="start">
-                              <el-radio :label="3">启用</el-radio>
-                              <el-radio :label="6">禁用</el-radio>
-                            </el-radio-group>
-                            <em>*</em>
-                          </span>
+                                            <el-radio-group v-model="shopForm.shop_status">
+                                              <el-radio :label="1">启用</el-radio>
+                                              <el-radio :label="2">禁用</el-radio>
+                                            </el-radio-group>
+                                            <em>*</em>
+                                          </span>
                                         </el-form-item>
                                         <el-form-item class="special">
-                                            <span><el-button>确定</el-button></span>
+                                            <span>
+                                                 <el-button>确定</el-button>
+                                            </span>
                                         </el-form-item>
                                     </el-form>
                                 </template>
@@ -189,9 +209,9 @@
                                         </el-form-item>
                                         <el-form-item label="品牌">
                                             <span>
-                            <el-select size="small" v-model="brand" placeholder="请选择">
+                            <el-select size="small" v-model="shopForm.shop_Stall" placeholder="请选择">
                               <el-option
-                                v-for="item in brands"
+                                v-for="item in marketplaces"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
@@ -213,127 +233,138 @@
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
 import axios from "axios";
 export default {
     data() {
         return {
-            msg: '',
-            tempShopList: [],
+            id: this.$route.query.shop_id,
+            shopForm:{
+                shop_auth:1
+            },
+            
             input: '',
             levels: [{
-                value: '选项1',
-                label: '黄金糕'
+                value: '普通商家',
+                label: '普通商家'
             }, {
-                value: '选项2',
-                label: '双皮奶'
+                value: '合作商家',
+                label: '合作商家'
             }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
+                value: 'VIP商家',
+                label: 'VIP商家'
             }],
             marketplaces: [{
-                value: '选项11',
-                label: '市场1'
+                value: '大西豪',
+                label: '大西豪'
             }, {
-                value: '选项22',
-                label: '市场2'
+                value: '三晟',
+                label: '三晟'
+            },{
+                value: '佰润',
+                label: '佰润'
+            }, {
+                value: '跨客城',
+                label: '跨客城'
+            },{
+                value: '国大',
+                label: '国大'
+            }, {
+                value: '大时代',
+                label: '大时代'
+            },{
+                value: '女人街',
+                label: '女人街'
+            }, {
+                value: '宝华',
+                label: '宝华'
+            }, {
+                value: '国投',
+                label: '国投'
+            },{
+                value: '柏美',
+                label: '柏美'
+            }, {
+                value: '非凡',
+                label: '非凡'
+            }, {
+                value: '新金马',
+                label: '新金马'
+            },{
+                value: '圣迦',
+                label: '圣迦'
+            }, {
+                value: '景叶',
+                label: '景叶'
             }],
             floors: [{
-                value: '选项11',
-                label: 'F1'
+                value: '1F',
+                label: '1F'
             }, {
-                value: '选项22',
-                label: 'F2'
+                value: '2F',
+                label: '2F'
             }],
             classifys: [{
-                value: '选项11',
-                label: 'F1'
+                value: '女装',
+                label: '女装'
             }, {
-                value: '选项22',
-                label: 'F2'
+                value: '—裤装',
+                label: '—裤装'
+            },{
+                value: '—牛仔裤',
+                label: '—牛仔裤'
+            }, {
+                value: '—运动',
+                label: '—运动'
             }],
             shoptypes: [{
-                value: '选项11',
-                label: 'F1'
+                value: '服装',
+                label: '服装'
             }, {
-                value: '选项22',
-                label: 'F2'
-            }],
-            brands: [{
-                value: '选项11',
-                label: 'F1'
+                value: '配钸',
+                label: '配钸'
+            },{
+                value: '鞋帽',
+                label: '鞋帽'
             }, {
-                value: '选项22',
-                label: 'F2'
+                value: '箱包',
+                label: '箱包'
             }],
-            level: '',
-            marketplace: '',
-            floor: '',
+           
+           
             classify: '',
             shoptype: '',
             brand: '',
-            type: 3,
-            serve: '',
-            start: '',
+            type:3,
+            serve:1,
+            start:1,
             auto: '',
-            tableData: [{
-                edit_type: '提现',
-                pursh_code: '900023',
-                save_in: '100',
-                save_out: '1200',
-                cost_count: '50',
-                sell_time: '2016-10-10',
-                edit_name: '管理员',
-                edit_exp: '补运费',
-            }]
+            tableData: []
+                
+           
         }
     },
     components: {
-        // headTop,
     },
     created() {
         
     },
     mounted() {
-        this.getParams();
         this.getShop();
-
     },
+
     methods: {
 
         getShop() {
-
-            axios.get("/admin/getShop", { params: { shop_id: this.$route.query.shop_id } }).then(res => {
+            axios.get("/admin/getShop", { params: { shop_id: this.id } }).then(res => {
                 const data = res.data
                 if (data.status == 200) {
-                    this.tempShopList = data.result.shopList
-                    // console.log(this.tempShopList)
-
-
+                    this.shopForm = data.result.shopList
+                    console.log(this.shopForm)
                 }
             }).catch(error => {
                 console.log(error)
             })
         },
-        // async initData() {
-        //     try {
-        //         const countData = await getUserCount();
-        //         if (countData.status == 1) {
-        //             this.count = countData.count;
-        //         } else {
-        //             throw new Error('获取数据失败');
-        //         }
-        //         this.getUsers();
-        //     } catch (err) {
-        //         console.log('获取数据失败', err);
-        //     }
-        // },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
         },
@@ -342,37 +373,27 @@ export default {
             this.offset = (val - 1) * this.limit;
             this.getUsers()
         },
-        // async getUsers() {
-        //     const Users = await getUserList({ offset: this.offset, limit: this.limit });
-        //     this.tableData = [];
-        //     Users.forEach(item => {
-        //         const tableData = {};
-        //         tableData.username = item.username;
-        //         tableData.registe_time = item.registe_time;
-        //         tableData.city = item.city;
-        //         this.tableData.push(tableData);
-        //     })
-        // },
         gobackIndex() {
             this.$router.push({
                 path: '/shopList'
             });
         },
-        getParams() {
-          // 取到路由带过来的参数
-          let routerParams = this.$route.query.shop_id;
-          // 将数据放在当前组件的数据内
-          this.msg = routerParams;
-    }
     },
     watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-       $route: "getParams"
-  }
+        '$route'(to,from){
+            this.id=this.$route.query.shop_id;
+            this.getShop();
+        }
+   }
 }
+             
 
 </script>
 <style lang="less">
 @import '../style/sstyle';
 
 </style>
+        
+
+

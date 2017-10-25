@@ -1,16 +1,16 @@
 <template>
     <div class="fillcontain userdetail">
         <!-- <head-top></head-top> -->
-        <el-button class="backbtn" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
                     <template>
-                        <el-form label-position="left" inline class="demo-table-expand tableone">
+                        <el-form label-position="left" inline class="demo-table-expand tableone" ref="userForm" :model="userForm">
                             <div class="el-form-items">
                                 <el-form-item label="会员ID">
-                                    <span>80001737</span>
+                                    <span>{{userForm.user_id}}</span>
                                 </el-form-item>
                                 <el-form-item label="采购数量">
                                     <span>79820</span>
@@ -18,7 +18,7 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="用户名">
-                                    <span>13678954132</span>
+                                    <span>{{userForm.username}}</span>
                                 </el-form-item>
                                 <el-form-item label="累计金额">
                                     <span>136789.32</span>
@@ -26,66 +26,66 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="等级">
-                                    <span>批发会员<i class="writeo"></i></span>
+                                    <span>{{userForm.levelname}}<i class="writeo"></i></span>
                                 </el-form-item>
                                 <el-form-item label="真实姓名">
-                                    <span><i class="writeo"></i></span>
+                                    <span>{{userForm.username}}<i class="writeo"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="积分">
-                                    <span>81168</span>
+                                    <span>{{userForm.user_score}}</span>
                                 </el-form-item>
                                 <el-form-item label="性别">
-                                    <span>女</span>
+                                    <span>{{userForm.usersex}}</span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="禁用">
-                                    <span>否</span>
+                                    <span>{{userForm.user_status}}</span>
                                 </el-form-item>
                                 <el-form-item label="出生日期">
-                                    <span>1990-11-23</span>
+                                    <span>{{userForm.userdate}}</span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="注册时间">
-                                    <span>2015-09-24 08:51</span>
+                                    <span>{{userForm.registe_time}}</span>
                                 </el-form-item>
                                 <el-form-item label="城市">
-                                    <span>新加坡<i class="writeo"></i></span>
+                                    <span>{{userForm.usercity}}<i class="writeo"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="注册IP">
-                                    <span>109.156.21.146</span>
+                                    <span>{{userForm.registe_IP}}</span>
                                 </el-form-item>
                                 <el-form-item label="(E-mail)">
-                                    <span>eleonorachen@gmail.com</span>
+                                    <span>{{userForm.useremail}}</span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="最近访问">
-                                    <span>2017-09-24 08:51</span>
+                                    <span>{{userForm.login_time}}</span>
                                 </el-form-item>
                                 <el-form-item label="联系电话">
-                                    <span><i class="writeo"></i></span>
+                                    <span>{{userForm.usercall}}<i class="writeo"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="登录IP">
-                                    <span>109.156.21.146</span>
+                                    <span>{{userForm.login_IP}}</span>
                                 </el-form-item>
                                 <el-form-item label="QQ微信">
-                                    <span><i class="writeo"></i></span>
+                                    <span>{{userForm.userqq}}<i class="writeo"></i></span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="访问次数">
-                                    <span>1001</span>
+                                    <span>{{userForm.login_count}}</span>
                                 </el-form-item>
                                 <el-form-item label="支付宝">
-                                    <span></span>
+                                    <span>{{userForm.userzi}}</span>
                                 </el-form-item>
                             </div>
                             <div class="el-form-items">
@@ -137,19 +137,17 @@
                             <div class="item"><span>爽快</span><span>老客户</span></div>
                         </div>
                         <div class="customer">
-                            <p>客服顾问<span style="margin-left: 22px;">许顺</span></p>
-                            <p>备注信息：<i class="writeo"></i></p>
+                            <p>客服顾问<span style="margin-left: 22px;">{{userForm.user_expert}}</span></p>
+                            <p>备注信息：{{userForm.user_bei}}<i class="writeo"></i></p>
                         </div>
                     </template>
                 </el-tab-pane>
                 <el-tab-pane class="yue" label="余额(100000.00)">
                     <div class="yue-head">
-                        <!-- <el-select >
-                            <el-option>请选择</el-option>
-                            <el-option>余额支付</el-option>
-                            <el-option>在线支付</el-option>
-                            <el-option>退运费</el-option>
-                        </el-select> -->
+                        <el-select v-model="value12">
+                            <el-option v-for="item in zioptions" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
                         <span>总记录数<i>11</i>笔</span>
                         <span>存入总金额￥<i>35862.00</i></span>
                         <span>支出总金额￥<i>35862.00</i></span>
@@ -281,11 +279,16 @@
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
-import { getUserList, getUserCount } from '@/api/getData'
+import axios from "axios";
 export default {
     data() {
         return {
+            id: this.$route.query.user_id,
+            userForm: {
+                user_id: '',
+                username: '',
+
+            },
             tableData: [{
                 edit_type: '提现',
                 pursh_code: '900023',
@@ -487,6 +490,32 @@ export default {
                 edit_exp: '补运费',
 
             }],
+            zioptions: [{
+                value: '在线支付',
+                label: '在线支付'
+            }, {
+                value: '缺货支付',
+                label: '缺货支付'
+            }, {
+                value: '退运费',
+                label: '退运费'
+            }, {
+                value: '充值提交',
+                label: '充值提交'
+            }, {
+                value: '账务调节',
+                label: '账务调节'
+            }, {
+                value: '余额支付',
+                label: '余额支付'
+            }, {
+                value: '提现',
+                label: '提现'
+            }, {
+                value: '订单取消',
+                label: '订单取消'
+            }],
+            value12: '请选择',
             currentRow: null,
             offset: 0,
             limit: 20,
@@ -494,43 +523,40 @@ export default {
             currentPage: 1,
         }
     },
-    components: {
-        // headTop,
-    },
-    created() {
-        this.initData();
+    components: {},
+    created() {},
+    mounted() {
+        this.getUser();
     },
     methods: {
-        async initData() {
-            try {
-                const countData = await getUserCount();
-                if (countData.status == 1) {
-                    this.count = countData.count;
-                } else {
-                    throw new Error('获取数据失败');
+        getUser() {
+            axios.get("/admin/getUser", { params: { user_id: this.id } }).then(res => {
+                const data = res.data
+                if (data.status == 200) {
+                    this.userForm = data.result.userList
+                    console.log(this.userForm)
                 }
-                this.getUsers();
-            } catch (err) {
-                console.log('获取数据失败', err);
-            }
+            }).catch(error => {
+                console.log(error)
+            })
         },
         handleReturn() {
             this.$router.push({
                 path: '/userList'
             });
         },
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            this.currentPage = val;
-            this.offset = (val - 1) * this.limit;
-            this.getUsers()
-        },
     },
+    watch: {
+        // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+        '$route' (to, from) {
+            this.id = this.$route.query.user_id;
+            this.getUser();
+        }
+    }
 }
 
 </script>
 <style lang="less">
 @import '../style/sstyle';
+
 </style>

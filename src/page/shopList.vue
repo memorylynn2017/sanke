@@ -37,7 +37,7 @@
                 </el-table-column>
                 <el-table-column property="shop_type" label="类型" width="100" sortable>
                 </el-table-column>
-                <el-table-column property="shop_Stall" label="商家名称" width="135" sortable>
+                <el-table-column property="shop_name" label="商家名称" width="135" sortable>
                 </el-table-column>
                 <el-table-column property="shop_area" label="所在市场" width="100">
                 </el-table-column>
@@ -50,7 +50,7 @@
                 </el-table-column>
                 <el-table-column property="shop_status" label="状态" width="75">
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="180">
+                <el-table-column property="editname" label="操作" width="170">
                     <template slot-scope="scope">
                         <!-- @click="handleEdit(scope.$index, scope.row)" -->
                         <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[编辑]</el-button>
@@ -62,6 +62,7 @@
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
+            <!-- 一般式运用模块框 -->
             <!-- <el-dialog title="商家信息" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
                     <el-form-item label="商家ID" :label-width="formLabelWidth">
@@ -102,153 +103,153 @@
 import axios from "axios";
 
 export default {
-  data() {
-    return {
-      currentIndex: "",
-      dialogFormVisible: false,
-      formLabelWidth: "200px",
-      form: {},
-      tableData: [],
-      shopList: [],
-      levelData: [
-        {
-          value: "所有分类",
-          label: "所有分类"
-        },
-        {
-          value: "A类",
-          label: "A类"
-        },
-        {
-          value: "B类",
-          label: "B类"
-        },
-        {
-          value: "C类",
-          label: "C类"
-        }
-      ],
-      pageData: [
-        {
-          value: "选项1",
-          label: "15"
-        },
-        {
-          value: "选项2",
-          label: "30"
-        },
-        {
-          value: "选项3",
-          label: "90"
-        },
-        {
-          value: "选项4",
-          label: "120"
-        }
-      ],
-      shop_id: "",
-      levelName: "所有分类",
-      currentRow: null,
-      begin: 0,
-      end: 0,
-      limit: 20,
-      count: 0,
-      currentPage: 1,
-      pageSize: 15
-    };
-  },
-  components: {
-    // headTop,
-  },
-  computed: {
-    getshopListFilter() {
-      return this.shopList.slice(this.begin, this.end);
+    data() {
+        return {
+            currentIndex: "",
+            dialogFormVisible: false,
+            formLabelWidth: "200px",
+            form: {},
+            tableData: [],
+            shopList: [],
+            levelData: [{
+                    value: "所有分类",
+                    label: "所有分类"
+                },
+                {
+                    value: "A类",
+                    label: "A类"
+                },
+                {
+                    value: "B类",
+                    label: "B类"
+                },
+                {
+                    value: "C类",
+                    label: "C类"
+                }
+            ],
+            pageData: [{
+                    value: "选项1",
+                    label: "15"
+                },
+                {
+                    value: "选项2",
+                    label: "30"
+                },
+                {
+                    value: "选项3",
+                    label: "90"
+                },
+                {
+                    value: "选项4",
+                    label: "120"
+                }
+            ],
+            shop_id: "",
+            levelName: "所有分类",
+            currentRow: null,
+            begin: 0,
+            end: 0,
+            limit: 20,
+            count: 0,
+            currentPage: 1,
+            pageSize: 15
+        };
     },
-    Message: function() {
-      return this.shopList.length;
+    components: {
+        // headTop,
+    },
+    computed: {
+        getshopListFilter() {
+            return this.shopList.slice(this.begin, this.end);
+        },
+        Message: function() {
+            return this.shopList.length;
+        }
+    },
+    mounted() {
+        this.initData();
+    },
+    methods: {
+        async initData() {
+            axios
+                .get("/admin/getShopList")
+                .then(res => {
+                    const data = res.data;
+                    if (data.status == 200) {
+                        console.log(data.result.shopList);
+                        //临时表
+                        this.tableData = data.result.shopList;
+                        //数据表
+                        this.shopList = data.result.shopList;
+                        this.count = this.shopList.length;
+                        this.begin = 0;
+                        this.end = this.pageSize;
+                        // console.log("separter");
+                        // console.log(this.shopList.slice(this.begin, this.end));
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        showNums(index) {
+            this.pageNum = parseInt(this.options2[index].label);
+        },
+        filterLevel(levelName) {
+            if (this.levelName == "" || this.levelName == "所有分类") {
+                this.shopList = this.tableData;
+            } else {
+                this.shopList = this.tableData.filter(item => {
+                    return item.shop_type !== null && item.shop_type == this.levelName;
+                });
+            }
+        },
+        showNums(index) {
+            this.pageNum = parseInt(this.options2[index].label);
+        },
+        searchUser() {
+            if (this.shop_id) {
+                this.shopList = this.tableData.filter(item => {
+                    return (
+                        item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !== -1
+
+                    );
+                });
+            }
+        },
+
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
+        },
+
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.begin = (this.currentPage - 1) * this.pageSize;
+            this.end = this.currentPage * this.pageSize;
+            console.log(this.currentPage);
+            console.log(this.begin);
+        },
+        handleList(index, row) {
+            this.$router.push({
+                path: "/shopDetail",
+                query: {
+                    shop_id: row.shop_id
+                }
+            });
+        },
+        filterTag(value, row) {
+            return row.levelname === value;
+        }
+
     }
-  },
-  mounted() {
-    this.initData();
-  },
-  methods: {
-    async initData() {
-      axios
-        .get("/admin/getShopList")
-        .then(res => {
-          const data = res.data;
-          if (data.status == 200) {
-            console.log(data.result.shopList);
-            //临时表
-            this.tableData = data.result.shopList;
-            //数据表
-            this.shopList = data.result.shopList;
-            this.count = this.shopList.length;
-            this.begin = 0;
-            this.end = this.pageSize;
-            // console.log("separter");
-            // console.log(this.shopList.slice(this.begin, this.end));
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    showNums(index) {
-      this.pageNum = parseInt(this.options2[index].label);
-    },
-    filterLevel(levelName) {
-      if (this.levelName == "" || this.levelName == "所有分类") {
-        this.shopList = this.tableData;
-      } else {
-        this.shopList = this.tableData.filter(item => {
-          return item.shop_type !== null && item.shop_type == this.levelName;
-        });
-      }
-    },
-    showNums(index) {
-      this.pageNum = parseInt(this.options2[index].label);
-    },
-    searchUser() {
-      if (this.shop_id) {
-        this.shopList = this.tableData.filter(item => {
-          return (
-            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==-1
-            
-          );
-        });
-      }
-    },
-
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.pageSize = val;
-      this.begin = (this.currentPage - 1) * this.pageSize;
-      this.end = this.currentPage * this.pageSize;
-    },
-
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      this.begin = (this.currentPage - 1) * this.pageSize;
-      this.end = this.currentPage * this.pageSize;
-      console.log(this.currentPage);
-      console.log(this.begin);
-    },
-    handleList(index, row) {
-      this.$router.push({
-        path: "/shopDetail",
-        query: {
-          shop_id: row.shop_id
-        }
-      });
-    },
-    filterTag(value, row) {
-      return row.levelname === value;
-    }
-
-  }
 };
+
 </script>
 <style lang="less">
 @import "../style/stable";
+
 </style>
