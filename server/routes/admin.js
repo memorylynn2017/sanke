@@ -34,6 +34,11 @@ router.post('/login', function (req, res, next) {
 						userName: doc.username
 					}
 				})
+			}else{
+				res.json({
+					status: 300,
+					msg: '登录失败'
+				})
 			}
 		}
 	})

@@ -1,5 +1,7 @@
 <template>
     <div class="fillcontain">
+        <head-top></head-top>
+        <el-button type="primary" @click="showAddDialog">新增</el-button>
         <header class="admin_title">管理员信息</header>
         <div class="table_container">
             <el-table :data="adminList" style="width: 100%">
@@ -12,34 +14,48 @@
                 <el-table-column label="用户密码" prop="pass_word">
                 </el-table-column>
                 <el-table-column label="操作" width="160">
-                    <template slot-scope="scope">
-                        <el-button size="small" @click="handleEdit(scope.row._id)">编辑</el-button>
+                    <template scope="scope">
+                        <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
                         <el-button size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
-            <div class="tablebottom" style="position:relative;left:996px;margin-top:10px;">
-                <el-button type="info" @click="dialogAdd = true">新增管理员</el-button>
-                <el-dialog title="新增管理员信息" :visible.sync="dialogAdd">
-                    <el-form  :model="addForm">
-                        <el-form-item label="用户名" label-width="100px">
-                            <el-input v-model="addForm.username" auto-complete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="密码" label-width="100px">
-                            <el-input type="password" v-model="addForm.password"></el-input>
-                        </el-form-item>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                        <el-button type="primary" @click="addAct()">添 加</el-button>
-                        <el-button @click="dialogAdd = false">取 消</el-button>
-                    </div>
-                </el-dialog>
-            </div>
+            
+            <!-- 新增 -->
+            <el-dialog title="新增" v-model="dialogAdd" :close-on-click-modal="false">
+                <el-form  :model="addForm">
+                    <el-form-item label="用户名" label-width="100px">
+                        <el-input v-model="addForm.username" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" label-width="100px">
+                        <el-input type="password" v-model="addForm.password"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click.native="dialogAdd = false">取消</el-button>
+                    <el-button type="primary" @click.native="addAct" :loading="addLoading">添加</el-button>
+                </div>
+            </el-dialog>
+            <!-- 编辑-->
+            <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+                <el-form  label-width="80px" :model="editForm">
+                    <el-form-item label="用户名">
+                        <el-input v-model="editForm.user_name" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码">
+                        <el-input type="password" v-model="editForm.pass_word" auto-complete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                <el-button @click.native="editFormVisible = false">取消</el-button>
+                <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+                </div>
+            </el-dialog>
         </div>
     </div>
 </template>
 <script>
-//import headTop from '../components/headTop'
+import headTop from '../components/headTop'
 import axios from 'axios'
 // import { mapState } from 'vuex'
 // import {baseUrl, baseImgPath} from '@/config/env'
@@ -48,14 +64,20 @@ export default {
     data() {
         return {
             imageUrl: '',
+            filters: {
+                name: ''
+            },
             addForm: {},
             editForm:{},
             adminList:[],
             dialogAdd:false,
+            addLoading: false,
+            editFormVisible: false,
+            editLoading: false,
         }
     },
     components: {
-        //headTop,
+        headTop,
     },
     mounted() {
         this.initData();
@@ -73,39 +95,68 @@ export default {
 
             // console.log(this.loginForm)
         },
-        addAct(){
-            axios.post("/admin/add",{"user_name": this.addForm.username,"pass_word": this.addForm.password}).then(res=>{
-                const data = res.data;
-                if(data.status == 200){
-                    this.$message({
-                        type: 'success',
-                        message: '添加管理员成功'
-                    });
-                    this.initData();
-                }
-            }).catch(error=>{
-                console.log(error)
-            })
-            this.dialogAdd = false;
+        showAddDialog(){
+            this.dialogAdd = true;
         },
-        handleEdit(id) {
-            this.$router.push({path: "adminEdit",query:{id: id}});
+        addAct(){
+            this.$confirm('确认提交吗?','提示',{}).then(()=>{
+                this.addLoading = true;
+                axios.post("/admin/add",{"user_name": this.addForm.username,"pass_word": this.addForm.password}).then(res=>{
+                    const data = res.data;
+                    if(data.status == 200){
+                        this.$message({
+                            type: 'success',
+                            message: '添加管理员成功'
+                        });
+                        this.initData();
+                    }
+                }).catch(error=>{
+                    console.log(error)
+                })
+                this.dialogAdd = false;
+                this.initData();
+            })
+        },
+        handleEdit(row) {
+            this.editFormVisible = true
+            this.editForm = row
+        },
+        editSubmit(){
+            this.$confirm('确认提交吗？', '提示', {}).then(() => {
+                this.editLoading = true;
+                axios.post("/admin/edit",this.editForm).then(res=>{
+                    const data = res.data
+                    if(data.status == 200){
+                        this.$message({
+                            type: 'success',
+                            message: data.msg
+                        })
+                    }
+                }).catch(error=>{
+                    console.log(error)
+                })
+                this.editFormVisible = false;
+                this.initData();
+            });
         },
         handleDelete(index,row) {
-            //数据库删除
-            axios.post("/admin/delete",{id: row._id}).then(res=>{
-                const data = res.data;
-                if(data.status == 200){
-                    //界面上删除
-                    this.initData();
-                    this.$message({
-                        type: 'success',
-                        message: data.msg
-                    });
-                }
-            }).catch(error=>{
-                console.log(error)
+            this.$confirm('确认删除该管理员吗？','提示',{type: 'warning'}).then(()=>{
+                //数据库删除
+                axios.post("/admin/delete",{id: row._id}).then(res=>{
+                    const data = res.data;
+                    if(data.status == 200){
+                        //视图界面上删除
+                        this.initData();
+                        this.$message({
+                            type: 'success',
+                            message: data.msg
+                        });
+                    }
+                }).catch(error=>{
+                    console.log(error)
+                })
             })
+            
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
