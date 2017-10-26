@@ -48,7 +48,7 @@
                 <el-table-column property="product_down_time" label="下架时间" width="140">
                 </el-table-column>
                 <el-table-column property="editname" label="操作" width="135">
-                    <template slot-scope="scope">
+                    <template scope="scope">
                         <!-- <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button> -->
                         <el-button style="float:left; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[编辑]</el-button>
                     </template>
@@ -155,7 +155,7 @@ export default {
 
     async initData() {
       axios
-        .get("/admin/getGoodList")
+        .get("/good/getGoodList")
         .then(res => {
           const data = res.data;
           if (data.status == 200) {

@@ -1,7 +1,7 @@
 <template>
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
-        <el-button class="backbtn_good" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_good" @click="goback()" sytle=" z-index:999;">返回</el-button>
         <div class="table_container gooddetail">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -147,7 +147,7 @@
                             <tr class="last">
                                 <td></td>
                                 <td>
-                                    <el-button size="small">确定</el-button>
+                                    <el-button size="small" @click="editSubmit()">确定</el-button>
                                 </td>
                             </tr>
                         </table>
@@ -314,7 +314,7 @@ export default {
     },
     methods: {
         getGood() {
-            axios.get("/admin/getGood", { params: { product_id: this.id } }).then(res => {
+            axios.get("/good/getGood", { params: { product_id: this.id } }).then(res => {
                 const data = res.data
                 if (data.status == 200) {
                     this.goodForm = data.result.goodList
@@ -324,11 +324,27 @@ export default {
                 console.log(error)
             })
         },
-        gobackIndex() {
-            this.$router.push({
-                path: '/goodList'
-            });
-        }
+        editSubmit(){
+            axios.post("/good/edit",this.goodForm).then(res=>{
+                const data = res.data;
+                if(data.status == 200){
+                    this.$message({
+                        type: 'success',
+                        message: data.msg
+                    })
+                    //因为vue-router后退操作不刷新页面，此处强制刷新
+                    setTimeout(() => {
+                        this.goback()
+                    }, 1500)
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+            
+        },
+        goback(){
+            this.$router.go(-1);
+        },
     },
     watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可

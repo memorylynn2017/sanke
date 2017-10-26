@@ -177,27 +177,9 @@ export default {
     this.initData();
   },
   methods: {
-    // async initData() {
-    //     axios.get('/getUserList').then(res => {
-    //         if (res.data) {
-    //             //临时表
-    //             this.tableData = res.data;
-    //             //数据表
-    //             this.userList = res.data;
-    //             this.count = this.userList.length;
-    //             this.begin = 0;
-    //             this.end = this.pageSize;
-    //             console.log(this.userList)
-    //             console.log('\separter');
-    //             console.log(this.userList.slice(this.begin, this.end));
-    //         }
-    //     }).catch(error => {
-    //         console.log(error);
-    //     })
-    // },
     async initData() {
       axios
-        .get("/admin/getUserList")
+        .get("/user/getUserList")
         .then(res => {
           const data = res.data;
           if (data.status == 200) {

@@ -30,7 +30,16 @@ module.exports = {
         proxyTable: {
             '/admin/*':{
                 target: 'http://127.0.0.1:3000'
-            }
+            },
+            '/good/*':{
+                target: 'http://127.0.0.1:3000'
+            },
+            '/shop/*':{
+                target: 'http://127.0.0.1:3000'
+            },
+            '/user/*':{
+                target: 'http://127.0.0.1:3000'
+            },
         },
         /* context: [ //代理路径
             '/shopping',

@@ -591,7 +591,7 @@ export default {
   methods: {
     getUser() {
       axios
-        .get("/admin/getUser", { params: { user_id: this.id } })
+        .get("/user/getUser", { params: { user_id: this.id } })
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
@@ -658,7 +658,7 @@ export default {
       this.$confirm("确认提交吗？", "提示", {}).then(() => {
         this.editLoading = true;
         axios
-          .post("/admin/editUser", this.userForm)
+          .post("/user/editUser", this.userForm)
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
@@ -666,7 +666,6 @@ export default {
                 type: "success",
                 message: data.msg
               });
-              //   console.log()
             }
           })
           .catch(error => {

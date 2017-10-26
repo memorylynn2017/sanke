@@ -355,7 +355,7 @@ export default {
     methods: {
 
         getShop() {
-            axios.get("/admin/getShop", { params: { shop_id: this.id } }).then(res => {
+            axios.get("/shop/getShop", { params: { shop_id: this.id } }).then(res => {
                 const data = res.data
                 if (data.status == 200) {
                     this.shopForm = data.result.shopList
@@ -378,14 +378,7 @@ export default {
                 path: '/shopList'
             });
         },
-    },
-    watch: {
-    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-        '$route'(to,from){
-            this.id=this.$route.query.shop_id;
-            this.getShop();
-        }
-   }
+    }
 }
              
 

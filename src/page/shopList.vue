@@ -175,7 +175,7 @@ export default {
   methods: {
     async initData() {
       axios
-        .get("/admin/getShopList")
+        .get("/shop/getShopList")
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
