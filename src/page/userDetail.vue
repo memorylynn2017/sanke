@@ -19,9 +19,10 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="用户名">
-                                    <span>{{userForm.username}}</span>
+                                    <span>{{userForm.usercall}}</span>
                                 </el-form-item>
                                 <el-form-item label="累计金额">
+                                    <!-- 此用户消费的累计金额 -->
                                     <span>136789.32</span>
                                 </el-form-item>
                             </div>
@@ -144,9 +145,10 @@
                             <div class="item"><span>爽快</span><span>老客户</span></div>
                         </div>
                         <div class="customer">
-                            <p>客服顾问<span style="margin-left: 22px;">{{userForm.user_expert}}</span></p>
+                            <p>客户顾问：
+                            <el-input v-show='this.flag6' v-focus="true" v-model="userForm.user_expert" @keyup.enter.native="saveIconClick6" @blur="saveIconClick6" style="border-bottom:1px solid #ccc;width:88px;"></el-input><span v-show='!this.flag6'>{{userForm.user_expert}}<i class="writeo" @click='edit6()' style="cursor:pointer"></i></span> </p>
                             <p>备注信息：
-                            <el-input v-show='this.flag6' v-focus="true" v-model="userForm.user_bei" @keyup.enter.native="saveIconClick6" @blur="saveIconClick6" style="border-bottom:1px solid #ccc;width:250px;"></el-input><span v-show='!this.flag6'>{{userForm.user_bei}}<i class="writeo" @click='edit6()' style="cursor:pointer"></i></span> </p>
+                            <el-input v-show='this.flag7' v-focus="true" v-model="userForm.user_bei" @keyup.enter.native="saveIconClick7" @blur="saveIconClick7" style="border-bottom:1px solid #ccc;width:250px;"></el-input><span v-show='!this.flag7'>{{userForm.user_bei}}<i class="writeo" @click='edit7()' style="cursor:pointer"></i></span> </p>
                                     
                            
                         </div>
@@ -285,7 +287,6 @@
                     </div>
                 </el-tab-pane>
             </el-tabs>
-            <!-- <el-button size="small" @click="handleEdit">编辑</el-button> -->
             <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
                 <el-form  label-width="120px" :model="editForm">
                     <el-form-item label="所属会员">
@@ -303,10 +304,17 @@
                     <el-form-item label="QQ/微信">
                         <el-input v-model="editForm.userqq" auto-complete="off"></el-input>
                     </el-form-item>
+                    <el-form-item label="客户顾问">
+                        <el-input v-model="editForm.user_expert" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="备注信息">
+                        <el-input v-model="editForm.user_bei" auto-complete="off"></el-input>
+                    </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                 <el-button @click.native="editFormVisible = false">取消</el-button>
-                <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+                <!-- :loading="editLoading" -->
+                <el-button type="primary" @click.native="editSubmit">提交</el-button>
                 </div>
             </el-dialog>
         </div>
@@ -324,8 +332,9 @@ export default {
       flag4: false,
       flag5: false,
       flag6: false,
+      flag7: false,
       editFormVisible: false,
-      editLoading: false,
+    //   editLoading: false,
       id: this.$route.query.user_id,
       userForm: {
         
@@ -665,9 +674,16 @@ export default {
       console.log("save");
       this.flag6 = !this.flag6;
     },
+    edit7() {
+      this.flag7 = !this.flag7;
+    },
+    saveIconClick7() {
+      console.log("save");
+      this.flag7 = !this.flag7;
+    },
     editSubmit() {
       this.$confirm("确认提交吗？", "提示", {}).then(() => {
-        this.editLoading = true;
+        // this.editLoading = true;
         axios
           .post("/user/editUser", this.editForm)
           .then(res => {
@@ -689,9 +705,9 @@ export default {
   },
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-    $route(to, from) {
-      this.id = this.$route.query.user_id;
-      this.getUser();
+      $route(to, from) {
+        this.id = this.$route.query.user_id;
+        this.getUser();
     }
   }
 };

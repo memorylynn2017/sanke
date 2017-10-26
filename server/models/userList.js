@@ -15,6 +15,9 @@ var userListSchema = new mongoose.Schema({
     "pricename": String,
     "costname": String,
     "registe_time": String,
+    "login_time": String,
+    "user_expert": String,
+    "user_bei": String,
     "purchase_num": String,
     "statusname": String
 })

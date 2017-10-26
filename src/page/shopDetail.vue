@@ -239,7 +239,6 @@ export default {
         return {
             id: this.$route.query.shop_id,
             shopForm:{
-                shop_auth:1
             },
             
             input: '',

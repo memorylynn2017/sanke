@@ -26,9 +26,9 @@
                     </el-pagination>
                 </div>
             </div>
-            <!-- <div class="recorded">
+            <div class="recorded">
                 <span>总记录数 {{Message}}</span>
-            </div> -->
+            </div>
         </div>
         <div class="table_container">
             <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
@@ -36,7 +36,7 @@
                 </el-table-column>
                 <el-table-column property="levelname" label="等级" width="100">
                 </el-table-column>
-                <el-table-column property="username" label="用户名" width="100">
+                <el-table-column property="usercall" label="用户名" width="130">
                 </el-table-column>
                 <el-table-column property="usercity" label="地区" width="100">
                 </el-table-column>
