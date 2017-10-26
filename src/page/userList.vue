@@ -38,9 +38,9 @@
                 </el-table-column>
                 <el-table-column property="username" label="用户名" width="100">
                 </el-table-column>
-                <el-table-column property="areaname" label="地区" width="100">
+                <el-table-column property="usercity" label="地区" width="100">
                 </el-table-column>
-                <el-table-column property="purshname" label="订单" width="100" sortable>
+                <el-table-column property="purchase_num" label="订单" width="100" sortable>
                 </el-table-column>
                 <el-table-column property="countname" label="数量" width="100" sortable>
                 </el-table-column>

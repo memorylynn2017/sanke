@@ -2,7 +2,7 @@
     <div class="fillcontain userdetail">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
-        <el-button class="backbtn_user" @click="editSubmit" sytle=" z-index:999;">提交</el-button>
+        <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">编辑</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -285,14 +285,23 @@
                     </div>
                 </el-tab-pane>
             </el-tabs>
-            <el-button size="small" @click="handleEdit">编辑</el-button>
+            <!-- <el-button size="small" @click="handleEdit">编辑</el-button> -->
             <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
-                <el-form  label-width="80px" :model="editForm">
-                    <el-form-item label="等级">
+                <el-form  label-width="120px" :model="editForm">
+                    <el-form-item label="所属会员">
+                        <el-input v-model="editForm.username" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所属等级">
                         <el-input v-model="editForm.levelname" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="用户名">
-                        <el-input v-model="editForm.username" auto-complete="off"></el-input>
+                    <el-form-item label="所属城市">
+                        <el-input v-model="editForm.usercity" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系电话">
+                        <el-input v-model="editForm.usercall" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="QQ/微信">
+                        <el-input v-model="editForm.userqq" auto-complete="off"></el-input>
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -321,7 +330,9 @@ export default {
       userForm: {
         
       },
-      editForm:{},
+      editForm:{
+
+      },
       tableData: [
         {
           edit_type: "提现",
@@ -658,7 +669,7 @@ export default {
       this.$confirm("确认提交吗？", "提示", {}).then(() => {
         this.editLoading = true;
         axios
-          .post("/user/editUser", this.userForm)
+          .post("/user/editUser", this.editForm)
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
