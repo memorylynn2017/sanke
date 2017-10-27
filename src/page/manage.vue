@@ -20,7 +20,7 @@
                 <el-submenu index="3">
                     <template slot="title" :to="{ path: '/manage' }">商家管理</template>
                     <el-menu-item index="shopList">商家列表</el-menu-item>
-                    <el-menu-item index="addShop">添加商家</el-menu-item>
+                    <!-- <el-menu-item index="addShop">添加商家</el-menu-item> -->
                 </el-submenu>
                 <el-submenu index="4">
                     <template slot="title" :to="{ path: '/manage' }">商品管理</template>
@@ -53,7 +53,7 @@
         </el-col>
         <el-col :span="21" style="height: 100%;overflow: auto;">
             <keep-alive>
-                <router-view keep-alive></router-view>
+                <router-view></router-view>
             </keep-alive>
         </el-col>
     </el-row>

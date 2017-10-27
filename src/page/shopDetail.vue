@@ -103,7 +103,7 @@
                                         <el-form-item label="所在档口">
                                             <span><el-input size="small" v-model="shopForm.shop_market"></el-input><em>*</em></span>
                                         </el-form-item>
-                                        <el-form-item label="紧急联系电话">
+                                        <el-form-item label="紧急电话">
                                             <span><el-input size="small" v-model="shopForm.shop_alert"></el-input></span>
                                         </el-form-item>
                                         <el-form-item label="所在楼层">
@@ -118,6 +118,12 @@
                                               </el-select>
                                               <em>*</em>
                                             </span>
+                                        </el-form-item>
+                                        <el-form-item label="所在区域">
+                                            <span><el-input size="small" v-model="shopForm.shop_area"></el-input></span>
+                                        </el-form-item>
+                                        <el-form-item label="商家排名">
+                                            <span><el-input size="small" v-model="shopForm.shop_ranking"></el-input></span>
                                         </el-form-item>
                                         <el-form-item label="服务认证">
                                             <span>
@@ -152,7 +158,7 @@
                                         </el-form-item>
                                         <el-form-item class="special">
                                             <span>
-                                                 <el-button @click="handleEdit">确定</el-button>
+                                                 <el-button @click="editSubmit">确定</el-button>
                                             </span>
                                         </el-form-item>
                                     </el-form>
@@ -230,7 +236,7 @@
                     </el-row>
                 </el-tab-pane>
             </el-tabs>
-            <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false" >
+            <!-- <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false" >
                 <el-form  label-width="120px;" :model="editForm">
                     <el-form-item label="所属商家">
                         <el-input v-model="editForm.shop_name" auto-complete="off"></el-input>
@@ -250,7 +256,7 @@
                     <el-form-item label="联系人">
                         <el-input v-model="editForm.shop_cr_human" auto-complete="off"></el-input>
                     </el-form-item>
-                    <!-- <el-form-item label="联系电话">
+                    <el-form-item label="联系电话">
                         <el-input v-model="editForm.shop_cr_telephone" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="QQ/微信">
@@ -261,7 +267,7 @@
                     </el-form-item>
                     <el-form-item label="紧急联系人">
                         <el-input v-model="editForm.shop_alert" auto-complete="off"></el-input>
-                    </el-form-item> -->
+                    </el-form-item>
                     <el-form-item label="所在市场">
                         <el-input v-model="editForm.shop_Stall" auto-complete="off"></el-input>
                     </el-form-item>
@@ -284,10 +290,9 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                 <el-button @click.native="editFormVisible = false">取消</el-button>
-                <!-- :loading="editLoading" -->
                 <el-button type="primary" @click.native="editSubmit">提交</el-button>
                 </div>
-            </el-dialog>
+            </el-dialog> -->
         </div>
     </div>
 </template>
@@ -296,14 +301,12 @@ import axios from "axios";
 export default {
   data() {
     return {
-      editFormVisible: false,
+      //   editFormVisible: false,
       id: this.$route.query.shop_id,
-      shopForm: {
+      shopForm: {},
+      //   editForm:{
 
-      },
-      editForm:{
-
-      },
+      //   },
 
       input: "",
       levels: [
@@ -440,9 +443,12 @@ export default {
   mounted() {
     this.getShop();
   },
+  activated() {
+    this.getShop();
+  },
 
   methods: {
-    getShop() {
+    async getShop() {
       axios
         .get("/shop/getShop", { params: { shop_id: this.id } })
         .then(res => {
@@ -460,7 +466,7 @@ export default {
       this.$confirm("确认提交吗？", "提示", {}).then(() => {
         // this.editLoading = true;
         axios
-          .post("/shop/editShop", this.editForm)
+          .post("/shop/editShop", this.shopForm)
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
@@ -473,19 +479,19 @@ export default {
           .catch(error => {
             console.log(error);
           });
-        this.editFormVisible = false;
-        this.getUser();
+        // this.editFormVisible = false;
+        this.getShop();
       });
     },
     handleReturn() {
       this.$router.push({
         path: "/shopList"
       });
-    },
-    handleEdit(row) {
-      this.editFormVisible = true;
-      this.editForm = this.shopForm;
     }
+    // handleEdit(row) {
+    //   this.editFormVisible = true;
+    //   this.editForm = this.shopForm;
+    // }
   },
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可

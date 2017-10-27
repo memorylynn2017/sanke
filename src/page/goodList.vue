@@ -148,6 +148,9 @@ export default {
   mounted() {
     this.initData();
   },
+  activated() {
+    this.initData();
+  },
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val;

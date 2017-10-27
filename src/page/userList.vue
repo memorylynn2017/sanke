@@ -50,12 +50,12 @@
                 </el-table-column>
                 <el-table-column property="registe_time" label="注册时间" width="160" sortable>
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="135">
+                <el-table-column property="editname" label="操作" width="120">
                     <template slot-scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList(scope.$index, scope.row)">[详情]</el-button>
                     </template>
                 </el-table-column>
-                <el-table-column property="user_status" label="状态" width="80">
+                <el-table-column property="user_status" label="状态" width="70">
                 </el-table-column>
             </el-table>
             <div class="pagination_bottom">
@@ -171,7 +171,10 @@ export default {
       }
     }
   },
-  mounted() {
+  // mounted() {
+  //   this.initData();
+  // },
+  activated() {
     this.initData();
   },
   methods: {

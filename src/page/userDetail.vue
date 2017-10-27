@@ -2,7 +2,7 @@
     <div class="fillcontain userdetail">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
-        <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">修改</el-button>
+        <!-- <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">修改</el-button> -->
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -28,21 +28,14 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="等级">
-                                     <!-- @click='upload()'  -->
-                                     <!-- <el-button @click="cancel" type="text" size="">取消</el-button> -->
-                                      <!-- @blur="saveIconClick1" -->
-                                    <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="upload" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
-                                    <el-button-group style="float:right" v-show='this.flag1' ><el-button @click="upload" type="text" style="margin: 1px 1px;">上传<i class="el-icon-upload el-icon--right"></i></el-button></el-button-group>
-  
-  
-
+                                    <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="upload" @blur="saveIconClick1" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <!-- <el-button-group style="float:right" v-show='this.flag1' ><el-button @click="upload" type="text" style="margin: 1px 1px;">上传<i class="el-icon-upload el-icon--right"></i></el-button></el-button-group> -->
                                     <span v-show='!this.flag1'>{{userForm.levelname}}<i class="writeo" @click='edit1()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                                 <el-form-item label="真实姓名">
                                     <el-input v-show='this.flag2' v-focus="true" v-model="userForm.username" @keyup.enter.native="saveIconClick2" @blur="saveIconClick2" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
                                     <span v-show='!this.flag2'>{{userForm.username}}<i class="writeo" @click='edit2()' style="cursor:pointer"></i></span>
                                 </el-form-item>
-
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="积分">
@@ -52,6 +45,10 @@
                                     <span>{{userForm.usersex}}</span>
                                 </el-form-item>
                             </div>
+  
+  
+
+
                             <div class="el-form-items">
                                 <el-form-item label="禁用">
                                     <span>{{userForm.user_status}}</span>
@@ -294,7 +291,7 @@
                     </div>
                 </el-tab-pane>
             </el-tabs>
-            <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+            <!-- <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
                 <el-form  label-width="120px" :model="editForm">
                     <el-form-item label="所属会员">
                         <el-input v-model="editForm.username" auto-complete="off"></el-input>
@@ -320,10 +317,9 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                 <el-button @click.native="editFormVisible = false">取消</el-button>
-                <!-- :loading="editLoading" -->
                 <el-button type="primary" @click.native="editSubmit">提交</el-button>
                 </div>
-            </el-dialog>
+            </el-dialog> -->
         </div>
     </div>
 </template>
@@ -340,15 +336,11 @@ export default {
       flag5: false,
       flag6: false,
       flag7: false,
-      editFormVisible: false,
-    //   editLoading: false,
+    //   editFormVisible: false,
+      //   editLoading: false,
       id: this.$route.query.user_id,
-      userForm: {
-        
-      },
-      editForm:{
-
-      },
+      userForm: {},
+      editForm: {},
       tableData: [
         {
           edit_type: "提现",
@@ -598,6 +590,9 @@ export default {
   mounted() {
     this.getUser();
   },
+  activated() {
+    this.getUser();
+  },
   directives: {
     focus: function(el, option) {
       var defClass = "el-input",
@@ -616,7 +611,7 @@ export default {
     }
   },
   methods: {
-    getUser() {
+    async getUser() {
       axios
         .get("/user/getUser", { params: { user_id: this.id } })
         .then(res => {
@@ -635,14 +630,15 @@ export default {
         path: "/userList"
       });
     },
-    handleEdit(row) {
-      this.editFormVisible = true;
-      this.editForm = this.userForm;
-    },
+    // handleEdit(row) {
+    //   this.editFormVisible = true;
+    //   this.editForm = this.userForm;
+    // },
     edit1() {
       this.flag1 = true;
     },
     saveIconClick1() {
+      this.upload();
       console.log("save");
       this.flag1 = false;
     },
@@ -650,6 +646,7 @@ export default {
       this.flag2 = !this.flag2;
     },
     saveIconClick2() {
+      this.upload();
       console.log("save");
       this.flag2 = !this.flag2;
     },
@@ -657,6 +654,7 @@ export default {
       this.flag3 = !this.flag3;
     },
     saveIconClick3() {
+      this.upload();
       console.log("save");
       this.flag3 = !this.flag3;
     },
@@ -664,6 +662,7 @@ export default {
       this.flag4 = !this.flag4;
     },
     saveIconClick4() {
+      this.upload();
       console.log("save");
       this.flag4 = !this.flag4;
     },
@@ -671,6 +670,7 @@ export default {
       this.flag5 = !this.flag5;
     },
     saveIconClick5() {
+      this.upload();
       console.log("save");
       this.flag5 = !this.flag5;
     },
@@ -678,6 +678,7 @@ export default {
       this.flag6 = !this.flag6;
     },
     saveIconClick6() {
+      this.upload();
       console.log("save");
       this.flag6 = !this.flag6;
     },
@@ -685,50 +686,50 @@ export default {
       this.flag7 = !this.flag7;
     },
     saveIconClick7() {
+      this.upload();
       console.log("save");
       this.flag7 = !this.flag7;
     },
-    editSubmit() {
-      this.$confirm("确认提交吗？", "提示", {}).then(() => {
-        // this.editLoading = true;
-        axios
-          .post("/user/editUser", this.editForm)
-          .then(res => {
-            const data = res.data;
-            if (data.status == 200) {
-              this.$message({
-                type: "success",
-                message: data.msg
-              });
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        this.editFormVisible = false;
-        this.getUser();
-      });
-    },
+    // editSubmit() {
+    //   this.$confirm("确认提交吗？", "提示", {}).then(() => {
+    //     // this.editLoading = true;
+    //     axios
+    //       .post("/user/editUser", this.editForm)
+    //       .then(res => {
+    //         const data = res.data;
+    //         if (data.status == 200) {
+    //           this.$message({
+    //             type: "success",
+    //             message: data.msg
+    //           });
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
+    //     this.editFormVisible = false;
+    //     this.getUser();
+    //   });
+    // },
     upload() {
-      this.$confirm("确认提交并上传吗？", "提示", {}).then(() => {
-         axios
-          .post("/user/editUser", this.userForm)
-          .then(res => {
-            const data = res.data;
-            if (data.status == 200) {
-              this.$message({
-                type: "success",
-                message: data.msg
-              });
-            }
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        this.saveIconClick1();
-        this.getUser();
-     });
-    },
+      //   this.$confirm("确认提交上传吗？", "提示", {}).then(() => {
+      axios
+        .post("/user/editUser", this.userForm)
+        .then(res => {
+          const data = res.data;
+          if (data.status == 200) {
+            this.$message({
+              type: "success",
+              message: data.msg
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.getUser();
+      //   });
+    }
     // cancel(){
     //     this.saveIconClick1();
     //     this.getUser();
@@ -738,18 +739,16 @@ export default {
     //     });
     // }
   },
-        
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-      $route(to, from) {
-        this.id = this.$route.query.user_id;
-        this.getUser();
+    $route(to, from) {
+      this.id = this.$route.query.user_id;
+      this.getUser();
     }
   }
 };
-       
-     
 </script>
 <style lang="less">
 @import "../style/sstyle";
 </style>
+

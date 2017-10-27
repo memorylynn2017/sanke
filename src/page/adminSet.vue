@@ -1,5 +1,5 @@
 <template>
-    <div class="fillcontain">
+    <div class="fillcontain admindetail">
       
         <header class="admin_title">管理员信息</header>
         <div class="table_container">
@@ -48,8 +48,8 @@
                 <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
                 </div>
             </el-dialog>
-            <el-button type="info" size="small" @click="showAddDialog" style="margin-top:10px;position:relative;left:1085px;">新增</el-button>
-            <el-button type="danger" size="small" @click="showAddDialog" style="margin-top:10px;position:relative;left:1085px;">其它</el-button>
+            <el-button type="info" size="small" @click="showAddDialog" style="margin-top:10px;position:relative;left:1058px;">新增</el-button>
+            <el-button type="danger" size="small" @click="showAddDialog" style="margin-top:10px;position:relative;left:1058px;">其它</el-button>
         </div>
     </div>
 </template>

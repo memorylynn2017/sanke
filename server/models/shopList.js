@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var shopListSchema = new mongoose.Schema({
     shop_id: String,
-    shop_type: Number,
+    shop_type: String,
     shop_name: String,
     shop_short: String,
     shop_password: String,
@@ -14,6 +14,7 @@ var shopListSchema = new mongoose.Schema({
     shop_cr_weixi: String,
     shop_cr_address: String,
     shop_cr_telephone: String,
+    shop_alert: String,
     shop_auth: Number,
     shop_scope: String,
     shop_market: String,

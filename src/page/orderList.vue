@@ -47,8 +47,8 @@
             </el-table-column>
             <el-table-column property="purchase_key" label="会员编号" width="120">
             </el-table-column>
-            <!-- <el-table-column property="purchase_goodsman" label="收货人" width="90">
-            </el-table-column> -->
+            <el-table-column property="purchase_goodsman" label="收货人" width="90">
+            </el-table-column>
             <el-table-column property="purchase_leval" label="等级" width="100">
             </el-table-column>
             <el-table-column property="purchase_area" label="地区" width="100">

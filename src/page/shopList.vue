@@ -39,7 +39,7 @@
                 </el-table-column>
                 <el-table-column property="shop_name" label="商家名称" width="135" sortable>
                 </el-table-column>
-                <el-table-column property="shop_level" label="等级" width="100" sortable>
+                <el-table-column property="shop_type" label="类型" width="100" sortable>
                 </el-table-column>
                 <el-table-column property="shop_market" label="所在档口" width="150">
                 </el-table-column>
@@ -54,11 +54,11 @@
                 </el-table-column>
                 
                 
-                <el-table-column property="editname" label="操作" width="160">
+                <el-table-column property="editname" label="操作" width="195">
                     <template slot-scope="scope">
                         <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
-                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button> -->
+                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button> -->
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -99,6 +99,34 @@
                     <el-button type="primary" @click="update">确 定</el-button>
                 </div>
             </el-dialog> -->
+             <!-- 一般式运用模块框 -->
+            <!-- <el-dialog title="抓取商品" :visible.sync="dialogFormVisible">
+                <el-form :model="form" style="text-align:center;width:400px;height:400px;">
+                    <span>商家：</span><span>芬妮女装</span>
+                    <el-form-item label="分类" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                    <el-form-item label="类型" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                    <el-form-item label="品牌" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                    <el-form-item label="价格统一减去" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                    <el-form-item label="打包价" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                    <el-form-item label="重量" :label-width="formLabelWidth">
+                        <el-input auto-complete="off" style="width:100px;">></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer" style="text-align:center;">
+                    <el-button type="primary" size="small" @click="update">立即抓取</el-button>
+                    <el-button @click="cancel">取 消</el-button>
+                </div>
+            </el-dialog> -->
         </div>
     </div>
 </template>
@@ -109,7 +137,7 @@ export default {
   data() {
     return {
       currentIndex: "",
-      dialogFormVisible: false,
+      dialogFormVisible: true,
       formLabelWidth: "200px",
       form: {},
       tableData: [],
@@ -173,11 +201,14 @@ export default {
   created() {
     console.log(this.getStatus(this.$route.path));
   },
-  mounted() {
+  // mounted() {
+  //   this.initData();
+  // },
+  activated() {
     this.initData();
   },
   methods: {
-    initData() {
+    async initData() {
       axios
         .get("/shop/getShopList")
         .then(res => {
@@ -218,8 +249,8 @@ export default {
       if (this.shop_id) {
         this.shopList = this.tableData.filter(item => {
           return (
-            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==
-            -1
+            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==-1
+            
           );
         });
       }
@@ -280,12 +311,12 @@ export default {
     filterTag(value, row) {
       return row.levelname === value;
     }
-  },
-  watch: {
-    $route(to, from) {
-      console.log(this.getStatus(this.$route.path));
-    }
   }
+  // watch: {
+  //   $route(to, from) {
+  //     console.log(this.getStatus(this.$route.path));
+  //   }
+  // }
 };
 </script>
 <style lang="less">

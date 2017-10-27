@@ -156,7 +156,7 @@
                 <el-tab-pane class="shopset" label="商品描述">
                 </el-tab-pane>
                 <el-tab-pane class="shopset" label="商品属性">
-                    <!-- <table class="table0 w100">
+                    <table class="table0 w100">
                         <tr>
                             <td>商品类型</td>
                             <td>
@@ -180,10 +180,10 @@
                                 <el-checkbox class="radio" v-model="auto" label="1" style="margin-left: 20px;">保存后继续添加商品</el-checkbox>
                             </td>
                         </tr>
-                    </table> -->
+                    </table>
                 </el-tab-pane>
                 <el-tab-pane class="shopset" label="商品规格">
-                    <!-- <table class="table0 w100">
+                    <table class="table0 w100">
                         <tr>
                             <td>规格名称</td>
                             <td>
@@ -254,7 +254,7 @@
                                 <el-checkbox class="radio" v-model="auto" label="1" style="margin-left: 20px;">保存后继续添加商品</el-checkbox>
                             </td>
                         </tr>
-                    </table> -->
+                    </table>
                 </el-tab-pane>
             </el-tabs>
         </div>
