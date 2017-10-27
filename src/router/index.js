@@ -11,7 +11,7 @@ const orderDetail = r => require.ensure([], () => r(require('@/page/orderDetail'
 const shopDetail = r => require.ensure([], () => r(require('@/page/shopDetail')), 'shopDetail');
 const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
-const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
+const addGood = r => require.ensure([], () => r(require('@/page/addGood')), 'addGood');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
 const goodList = r => require.ensure([], () => r(require('@/page/goodList')), 'goodList');
@@ -53,8 +53,8 @@ const routes = [{
             component: addShop,
             meta: ['添加数据', '添加商铺'],
         }, {
-            path: '/addGoods',
-            component: addGoods,
+            path: '/addGood',
+            component: addGood,
             meta: ['添加数据', '添加商品'],
         }, {
             path: '/userList',

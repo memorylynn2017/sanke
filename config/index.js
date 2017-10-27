@@ -28,18 +28,22 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/admin/*':{
+            '/admin/*': {
                 target: 'http://127.0.0.1:3000'
             },
-            '/good/*':{
+            '/order/*': {
                 target: 'http://127.0.0.1:3000'
             },
-            '/shop/*':{
+            '/good/*': {
                 target: 'http://127.0.0.1:3000'
             },
-            '/user/*':{
+            '/shop/*': {
                 target: 'http://127.0.0.1:3000'
             },
+            '/user/*': {
+                target: 'http://127.0.0.1:3000'
+            },
+
         },
         /* context: [ //代理路径
             '/shopping',

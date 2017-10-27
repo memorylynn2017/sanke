@@ -57,8 +57,8 @@
                 <el-table-column property="editname" label="操作" width="195">
                     <template slot-scope="scope">
                         <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
-                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button> -->
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button>
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -201,9 +201,9 @@ export default {
   created() {
     console.log(this.getStatus(this.$route.path));
   },
-  // mounted() {
-  //   this.initData();
-  // },
+  mounted() {
+    this.initData();
+  },
   activated() {
     this.initData();
   },

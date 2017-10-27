@@ -40,18 +40,18 @@
                 </el-table-column>
                 <el-table-column property="usercity" label="地区" width="100">
                 </el-table-column>
-                <el-table-column property="purchase_num" label="订单" width="100" sortable>
+                <el-table-column property="purchase_num" label="订单(数量)" width="125" sortable>
                 </el-table-column>
-                <el-table-column property="countname" label="数量" width="100" sortable>
+                <el-table-column property="countname" label="数量" width="120" sortable>
                 </el-table-column>
-                <el-table-column property="pricename" label="金额" width="110" sortable>
+                <el-table-column property="pricename" label="金额" width="120" sortable>
                 </el-table-column>
-                <el-table-column property="costname" label="余额" width="110" sortable>
+                <el-table-column property="costname" label="余额" width="130" sortable>
                 </el-table-column>
                 <el-table-column property="registe_time" label="注册时间" width="160" sortable>
                 </el-table-column>
                 <el-table-column property="editname" label="操作" width="135">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList(scope.$index, scope.row)">[详情]</el-button>
                     </template>
                 </el-table-column>
@@ -77,8 +77,8 @@ export default {
           label: "所有等级"
         },
         {
-          value: "VIP",
-          label: "VIP"
+          value: "VIP会员",
+          label: "VIP会员"
         },
         {
           value: "批发会员",

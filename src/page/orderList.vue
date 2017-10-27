@@ -7,15 +7,16 @@
         </div>
         <div class="searched">
             <div class="searched_left">
-                <el-select v-model="purvalue1" filterable placeholder="请选择" @change="filterLevel1">
+                <!-- @change="filterLevel1" -->
+                <el-select v-model="purvalue1" filterable placeholder="请选择">
                     <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
-                <el-select v-model="purvalue2" filterable placeholder="请选择" @change="filterLevel2">
+                <el-select v-model="purvalue2" filterable placeholder="请选择">
                     <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
-                <el-select v-model="purvalue3" filterable placeholder="请选择" @change="filterLevel3">
+                <el-select v-model="purvalue3" filterable placeholder="请选择">
                     <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
@@ -53,11 +54,12 @@
             </el-table-column>
             <el-table-column property="purchase_area" label="地区" width="100">
             </el-table-column>
-            <!-- <el-table-column property="purchase_areasend" label="配送方式" width="100">
-                </el-table-column> -->
+            
             <el-table-column property="purchase_purstatus" label="订单状态" width="90">
             </el-table-column>
             <el-table-column property="purchase_senstatus" label="发货状态" width="90">
+            </el-table-column>
+            <el-table-column property="purchase_paystatus" label="付款状态" width="100">
             </el-table-column>
             <el-table-column property="purchase_times" label="下架时间" width="160">
                 </el-table-column>
@@ -75,193 +77,209 @@
 </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-    data() {
-        return {
-            oncontrol: true,
-            purchList: [
-
-            ],
-            tableData: [],
-            options1: [{
-                value: '所有等级',
-                label: '所有等级'
-            }, {
-                value: '批发会员',
-                label: '批发会员'
-            }, {
-                value: 'VIP',
-                label: 'VIP'
-            }, {
-                value: '注册会员',
-                label: '注册会员'
-            }],
-            options2: [{
-                value: '未付款',
-                label: '未付款'
-            }, {
-                value: '已付款',
-                label: '已付款'
-            }, {
-                value: '已取消',
-                label: '已取消'
-            }],
-            options3: [{
-                value: '未发货',
-                label: '未发货'
-            }, {
-                value: '已打单',
-                label: '已打单'
-            }, {
-                value: '已发货',
-                label: '已发货'
-            }, {
-                value: '已完结',
-                label: '已完结'
-            }, {
-                value: '已作废',
-                label: '已作废'
-            }],
-            options4: [{
-                value: '选项1',
-                label: '30'
-            }, {
-                value: '选项2',
-                label: '60'
-            }, {
-                value: '选项3',
-                label: '90'
-            }, {
-                value: '选项4',
-                label: '120'
-            }],
-            purchase_num: '',
-            input: '',
-            purvalue1: '所有等级',
-            purvalue2: '订单状态',
-            purvalue3: '发货状态',
-            myvalue4: '30',
-            currentRow: null,
-            begin: 0,
-            end: 0,
-            limit: 20,
-            count: 0,
-            currentPage: 1,
-            pageSize: 15,
-            purchList: [],
-            multipleSelection: []
+  data() {
+    return {
+      oncontrol: true,
+      purchList: [],
+      tableData: [],
+      options1: [
+        {
+          value: "订单产生",
+          label: "订单产生"
+        },
+        {
+          value: "采购保存",
+          label: "采购保存"
+        },
+        {
+          value: "已打订单",
+          label: "已打订单"
+        },
+        {
+          value: "已完成",
+          label: "已完成"
+        },
+        {
+          value: "已打订单",
+          label: "已打订单"
+        },
+        {
+          value: "已作废",
+          label: "已作废"
         }
-    },
-    components: {
-        // headTop,
-    },
-    computed: {
-        Message: function() {
-            return this.purchList.length
+      ],
+      options2: [
+        {
+          value: "未发货",
+          label: "未发货"
         },
-        purchListFilter() {
-            return this.purchList.slice(this.begin, this.end);
+        {
+          value: "已发货",
+          label: "已发货"
+        },
+        {
+          value: "已取消",
+          label: "已取消"
         }
+      ],
+      options3: [
+        {
+          value: "已付款",
+          label: "已付款"
+        },
+        {
+          value: "未付款",
+          label: "未付款"
+        },
+        {
+          value: "退款",
+          label: "退款"
+        }
+      ],
+      // options4: [{
+      //     value: '选项1',
+      //     label: '30'
+      // }, {
+      //     value: '选项2',
+      //     label: '60'
+      // }, {
+      //     value: '选项3',
+      //     label: '90'
+      // }, {
+      //     value: '选项4',
+      //     label: '120'
+      // }],
+      purchase_num: "",
+      input: "",
+      purvalue1: "发货状态",
+      purvalue2: "订单状态",
+      purvalue3: "付款状态",
+      myvalue4: "30",
+      currentRow: null,
+      begin: 0,
+      end: 0,
+      limit: 20,
+      count: 0,
+      currentPage: 1,
+      pageSize: 15,
+      purchList: [],
+      multipleSelection: []
+    };
+  },
+  components: {
+    // headTop,
+  },
+  computed: {
+    Message: function() {
+      return this.purchList.length;
+    },
+    purchListFilter() {
+      return this.purchList.slice(this.begin, this.end);
+    }
+  },
+
+  mounted() {
+    this.initData();
+  },
+  methods: {
+    // filterLevel1(purvalue1) {
+    //     // console.log(levelName);
+    //     if (this.purvalue1 == '' || this.purvalue1 == "所有等级") {
+    //         this.purchList = this.tableData;
+    //     } else {
+    //         this.purchList = this.tableData.filter(item => {
+    //             return item.purchase_leval !== null && item.purchase_leval == this.purvalue1;
+    //         });
+    //     }
+    // },
+    // filterLevel2(purvalue2) {
+    //     // console.log(levelName);
+    //     if (this.purvalue2 == '' || this.purvalue2 == "订单状态") {
+    //         this.purchList = this.tableData;
+    //     } else {
+    //         this.purchList = this.tableData.filter(item => {
+    //             return item.purchase_purstatus !== null && item.purchase_purstatus == this.purvalue2;
+    //         });
+    //     }
+    // },
+    // filterLevel3(purvalue3) {
+    //     // console.log(levelName);
+    //     if (this.purvalue3 == '' || this.purvalue3 == "发货状态") {
+    //         this.purchList = this.tableData;
+    //     } else {
+    //         this.purchList = this.tableData.filter(item => {
+    //             return item.purchase_senstatus !== null && item.purchase_senstatus == this.purvalue3;
+    //         });
+    //     }
+    // },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    handleList() {
+      this.$router.push({
+        path: "/orderDetail"
+      });
+    },
+    async initData() {
+      axios
+        .get("getPurchasList")
+        .then(res => {
+          if (res.data) {
+            //临时表
+            this.tableData = res.data;
+            //数据表
+            this.purchList = res.data;
+            this.count = this.purchList.length;
+            this.begin = 0;
+            this.end = this.pageSize;
+            console.log(this.purchList);
+            console.log("separter");
+            console.log(this.purchList.slice(this.begin, this.end));
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    showNums(index) {
+      this.pageNum = parseInt(this.options2[index].label);
+    },
+    searchUser() {
+      if (this.purchase_num) {
+        // this.userList = this.tableData.filter((item) => {
+        //     return item.customer_id == this.customer_id;
+        // });
+        this.purchList = this.tableData.filter(item => {
+          return (
+            item.purchase_num
+              .toLowerCase()
+              .indexOf(this.purchase_num.toLowerCase()) !== -1
+          );
+        });
+      }
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.begin = (this.currentPage - 1) * this.pageSize;
+      this.end = this.currentPage * this.pageSize;
     },
 
-
-    mounted() {
-        this.initData();
-
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.begin = (this.currentPage - 1) * this.pageSize;
+      this.end = this.currentPage * this.pageSize;
+      console.log(this.currentPage);
+      console.log(this.begin);
     },
-    methods: {
-
-        filterLevel1(purvalue1) {
-            // console.log(levelName);
-            if (this.purvalue1 == '' || this.purvalue1 == "所有等级") {
-                this.purchList = this.tableData;
-            } else {
-                this.purchList = this.tableData.filter(item => {
-                    return item.purchase_leval !== null && item.purchase_leval == this.purvalue1;
-                });
-            }
-        },
-        filterLevel2(purvalue2) {
-            // console.log(levelName);
-            if (this.purvalue2 == '' || this.purvalue2 == "订单状态") {
-                this.purchList = this.tableData;
-            } else {
-                this.purchList = this.tableData.filter(item => {
-                    return item.purchase_purstatus !== null && item.purchase_purstatus == this.purvalue2;
-                });
-            }
-        },
-        filterLevel3(purvalue3) {
-            // console.log(levelName);
-            if (this.purvalue3 == '' || this.purvalue3 == "发货状态") {
-                this.purchList = this.tableData;
-            } else {
-                this.purchList = this.tableData.filter(item => {
-                    return item.purchase_senstatus !== null && item.purchase_senstatus == this.purvalue3;
-                });
-            }
-        },
-        handleSelectionChange(val) {
-            this.multipleSelection = val;
-        },
-        handleList() {
-            this.$router.push({
-                path: '/orderDetail'
-            });
-        },
-        async initData() {
-            axios.get('getPurchasList').then(res => {
-                if (res.data) {
-                    //临时表
-                    this.tableData = res.data;
-                    //数据表
-                    this.purchList = res.data;
-                    this.count = this.purchList.length;
-                    this.begin = 0;
-                    this.end = this.pageSize;
-                    console.log(this.purchList)
-                    console.log('\separter');
-                    console.log(this.purchList.slice(this.begin, this.end));
-                }
-            }).catch(error => {
-                console.log(error);
-            })
-        },
-        showNums(index) {
-            this.pageNum = parseInt(this.options2[index].label);
-        },
-        searchUser() {
-            if (this.purchase_num) {
-                // this.userList = this.tableData.filter((item) => {
-                //     return item.customer_id == this.customer_id;
-                // });
-                this.purchList = this.tableData.filter((item) => {
-                    return item.purchase_num.toLowerCase().indexOf(this.purchase_num.toLowerCase()) !== -1
-
-                });
-            }
-        },
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-            this.pageSize = val;
-            this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage * this.pageSize;
-        },
-
-        handleCurrentChange(val) {
-            this.currentPage = val;
-            this.begin = (this.currentPage - 1) * this.pageSize;
-            this.end = this.currentPage * this.pageSize;
-            console.log(this.currentPage);
-            console.log(this.begin);
-        },
-        filterTag(value, row) {
-            return row.levelname === value;
-        },
-    },
-}
+    filterTag(value, row) {
+      return row.levelname === value;
+    }
+  }
+};
 </script>
 <style lang="less">
-@import '../style/stable';
+@import "../style/stable";
 </style>

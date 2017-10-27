@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 
 var goodListSchema = new mongoose.Schema({
-    product_name: String,
     product_id: String,
+    product_name: String,
     product_class: String,
     product_puprice: String,
     product_boxprice: String,

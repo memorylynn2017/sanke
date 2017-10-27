@@ -6,6 +6,10 @@
                 <span><strong>商品列表</strong></span>
             </div>
             <div class="searched">
+                <div class="btn" style="position:relative;left:-92px;display:inline-block;">
+                    <el-button @click="handleAdd">新建商品</el-button>
+                    <el-button>更新数据</el-button>
+                </div>
                 <div class="searched_left">
                     <el-select v-model="levelName" filterable placeholder="请选择" @change="filterLevel">
                         <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
@@ -47,19 +51,20 @@
                 </el-table-column>
                 <el-table-column property="product_down_time" label="下架时间" width="140">
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="135">
+                <el-table-column property="editname" label="操作" width="160">
                     <template slot-scope="scope">
                         <!-- <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button> -->
-                        <el-button style="float:left; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[编辑]</el-button>
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
+                        <el-button type="danger" style="float:left; display:inline-block; border:none;" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        
                     </template>
                 </el-table-column>
-                <el-table-column property="product_down" label="下架" width="80">
-                    <!-- 这里有用到scope -->
+                <!-- <el-table-column property="product_down" label="下架" width="80">
                     <template slot-scope="scope">
                         <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
                         </el-switch>
                     </template>
-                </el-table-column>
+                </el-table-column> -->
             </el-table>
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
@@ -84,20 +89,20 @@ export default {
           label: "所有类型"
         },
         {
-          value: "打底衫",
-          label: "打底衫"
+          value: "A类",
+          label: "A类"
         },
         {
-          value: "外套外衣",
-          label: "外套外衣"
+          value: "B类",
+          label: "B类"
         },
         {
-          value: "短裤",
-          label: "短裤"
+          value: "C类",
+          label: "C类"
         },
         {
-          value: "长裤",
-          label: "长裤"
+          value: "T类",
+          label: "T类"
         }
       ],
       options2: [
@@ -207,12 +212,38 @@ export default {
       console.log(this.currentPage);
       console.log(this.begin);
     },
-    handleList(index, row) {
+    handleAdd() {
+      this.$router.push({
+        path: "/addGood"
+      });
+    },
+    handleEdit(index, row) {
       this.$router.push({
         path: "/goodDetail",
          query: {
           product_id:row.product_id
         }
+      });
+    },
+    handleDelete(index, row) {
+      this.$confirm("确认删除该商品吗？", "提示", { type: "warning" }).then(() => {
+        //数据库删除
+        axios
+          .post("/good/delete", { id: row._id })
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              //视图界面上删除
+              this.initData();
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       });
     },
     filterTag(value, row) {
