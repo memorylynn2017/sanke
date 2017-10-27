@@ -171,12 +171,12 @@ export default {
       }
     }
   },
-<<<<<<< HEAD
+
   // mounted() {
   //   this.initData();
   // },
-=======
->>>>>>> origin/master
+
+
   activated() {
     this.initData();
   },
