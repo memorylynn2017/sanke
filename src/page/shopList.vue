@@ -7,7 +7,7 @@
             </div>
             <div class="searched">
                 <div class="btn" style="position:relative;left:-92px;display:inline-block;">
-                    <el-button>新建商家</el-button>
+                    <el-button @click="handleAdd">新建商家</el-button>
                     <el-button>更新数据</el-button>
                 </div>
                 <div class="searched_left">
@@ -33,11 +33,15 @@
         </div>
         <div class="table_container">
             <el-table :data="getshopListFilter" highlight-current-row style="width: 100%">
+                <!-- <el-table-column property="_id"  label="编码ID" prop="_id" width="180">
+                </el-table-column> -->
                 <el-table-column property="shop_id" label="商家ID" width="100" sortable>
                 </el-table-column>
-                <el-table-column property="shop_type" label="类型" width="100" sortable>
-                </el-table-column>
                 <el-table-column property="shop_name" label="商家名称" width="135" sortable>
+                </el-table-column>
+                <el-table-column property="shop_level" label="等级" width="100" sortable>
+                </el-table-column>
+                <el-table-column property="shop_market" label="所在档口" width="150">
                 </el-table-column>
                 <el-table-column property="shop_area" label="所在市场" width="100">
                 </el-table-column>
@@ -48,12 +52,12 @@
                 <el-table-column property="shop_time" label="进驻时间" width="180">
                 </el-table-column>
                 </el-table-column>
-                <el-table-column property="shop_status" label="状态" width="75">
-                </el-table-column>
-                <el-table-column property="editname" label="操作" width="170">
+                
+                
+                <el-table-column property="editname" label="操作" width="160">
                     <template slot-scope="scope">
-                        <!-- @click="handleEdit(scope.$index, scope.row)" -->
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[编辑]</el-button>
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
+                        <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
                         <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button> -->
                     </template>
                 </el-table-column>
@@ -99,7 +103,6 @@
     </div>
 </template>
 <script>
-// import { reformat } from '../common/reformartDate';
 import axios from "axios";
 
 export default {
@@ -158,9 +161,7 @@ export default {
       pageSize: 15
     };
   },
-  components: {
-    // headTop,
-  },
+  components: {},
   computed: {
     getshopListFilter() {
       return this.shopList.slice(this.begin, this.end);
@@ -169,11 +170,14 @@ export default {
       return this.shopList.length;
     }
   },
+  created() {
+    console.log(this.getStatus(this.$route.path));
+  },
   mounted() {
     this.initData();
   },
   methods: {
-    async initData() {
+    initData() {
       axios
         .get("/shop/getShopList")
         .then(res => {
@@ -235,7 +239,16 @@ export default {
       console.log(this.currentPage);
       console.log(this.begin);
     },
-    handleList(index, row) {
+    getStatus(urlStr) {
+      var urlStrArr = urlStr.split("/");
+      return urlStrArr[urlStrArr.length - 1];
+    },
+    handleAdd() {
+      this.$router.push({
+        path: "/addShop"
+      });
+    },
+    handleEdit(index, row) {
       this.$router.push({
         path: "/shopDetail",
         query: {
@@ -243,8 +256,34 @@ export default {
         }
       });
     },
+    handleDelete(index, row) {
+      this.$confirm("确认删除该商家吗？", "提示", { type: "warning" }).then(() => {
+        //数据库删除
+        axios
+          .post("/shop/delete", { id: row._id })
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              //视图界面上删除
+              this.initData();
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+    },
     filterTag(value, row) {
       return row.levelname === value;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      console.log(this.getStatus(this.$route.path));
     }
   }
 };

@@ -1,6 +1,7 @@
 <template>
     <div class="fillcontain shopdetail">
-        <el-button class="backbtn_shop" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_shop" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
+        <!-- <el-button class="backbtn_shop" @click="handleEdit" sytle=" z-index:999;">修改</el-button> -->
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -53,7 +54,7 @@
                                         </el-form-item>
                                         <el-form-item label="商家账号">
                                             <span>
-                                              <el-input size="small" v-model="shopForm.shop_id" placeholder="请输入内容"></el-input>
+                                              <el-input size="small" v-model="shopForm.shop_accout" placeholder="请输入内容"></el-input>
                                               <em>*</em>
                                               <el-checkbox class="radio" v-model="auto" label="1">自动生成</el-checkbox>
                                             </span>
@@ -151,7 +152,7 @@
                                         </el-form-item>
                                         <el-form-item class="special">
                                             <span>
-                                                 <el-button>确定</el-button>
+                                                 <el-button @click="handleEdit">确定</el-button>
                                             </span>
                                         </el-form-item>
                                     </el-form>
@@ -229,162 +230,274 @@
                     </el-row>
                 </el-tab-pane>
             </el-tabs>
+            <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false" >
+                <el-form  label-width="120px;" :model="editForm">
+                    <el-form-item label="所属商家">
+                        <el-input v-model="editForm.shop_name" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所属商家">
+                        <el-input v-model="editForm.shop_short" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所属类型">
+                        <el-input v-model="editForm.shop_type" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所属等级">
+                        <el-input v-model="editForm.shop_level" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="商家账号">
+                        <el-input v-model="editForm.shop_accout" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系人">
+                        <el-input v-model="editForm.shop_cr_human" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <!-- <el-form-item label="联系电话">
+                        <el-input v-model="editForm.shop_cr_telephone" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="QQ/微信">
+                        <el-input v-model="editForm.shop_cr_weixi" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="通迅地址">
+                        <el-input v-model="editForm.shop_cr_address" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="紧急联系人">
+                        <el-input v-model="editForm.shop_alert" auto-complete="off"></el-input>
+                    </el-form-item> -->
+                    <el-form-item label="所在市场">
+                        <el-input v-model="editForm.shop_Stall" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所在档口">
+                        <el-input v-model="editForm.shop_market" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所在楼层">
+                        <el-input v-model="editForm.shop_floor" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系方式">
+                        <el-input v-model="editForm.shop_contact" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="服务认证">
+                        <el-input v-model="editForm.shop_auth" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="是否启用">
+                        <el-input v-model="editForm.shop_status" auto-complete="off"></el-input>
+                    </el-form-item>
+
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                <el-button @click.native="editFormVisible = false">取消</el-button>
+                <!-- :loading="editLoading" -->
+                <el-button type="primary" @click.native="editSubmit">提交</el-button>
+                </div>
+            </el-dialog>
         </div>
     </div>
 </template>
 <script>
 import axios from "axios";
 export default {
-    data() {
-        return {
-            id: this.$route.query.shop_id,
-            shopForm:{
-            },
-            
-            input: '',
-            levels: [{
-                value: '普通商家',
-                label: '普通商家'
-            }, {
-                value: '合作商家',
-                label: '合作商家'
-            }, {
-                value: 'VIP商家',
-                label: 'VIP商家'
-            }],
-            marketplaces: [{
-                value: '大西豪',
-                label: '大西豪'
-            }, {
-                value: '三晟',
-                label: '三晟'
-            },{
-                value: '佰润',
-                label: '佰润'
-            }, {
-                value: '跨客城',
-                label: '跨客城'
-            },{
-                value: '国大',
-                label: '国大'
-            }, {
-                value: '大时代',
-                label: '大时代'
-            },{
-                value: '女人街',
-                label: '女人街'
-            }, {
-                value: '宝华',
-                label: '宝华'
-            }, {
-                value: '国投',
-                label: '国投'
-            },{
-                value: '柏美',
-                label: '柏美'
-            }, {
-                value: '非凡',
-                label: '非凡'
-            }, {
-                value: '新金马',
-                label: '新金马'
-            },{
-                value: '圣迦',
-                label: '圣迦'
-            }, {
-                value: '景叶',
-                label: '景叶'
-            }],
-            floors: [{
-                value: '1F',
-                label: '1F'
-            }, {
-                value: '2F',
-                label: '2F'
-            }],
-            classifys: [{
-                value: '女装',
-                label: '女装'
-            }, {
-                value: '—裤装',
-                label: '—裤装'
-            },{
-                value: '—牛仔裤',
-                label: '—牛仔裤'
-            }, {
-                value: '—运动',
-                label: '—运动'
-            }],
-            shoptypes: [{
-                value: '服装',
-                label: '服装'
-            }, {
-                value: '配钸',
-                label: '配钸'
-            },{
-                value: '鞋帽',
-                label: '鞋帽'
-            }, {
-                value: '箱包',
-                label: '箱包'
-            }],
-           
-           
-            classify: '',
-            shoptype: '',
-            brand: '',
-            type:3,
-            serve:1,
-            start:1,
-            auto: '',
-            tableData: []
-                
-           
+  data() {
+    return {
+      editFormVisible: false,
+      id: this.$route.query.shop_id,
+      shopForm: {
+
+      },
+      editForm:{
+
+      },
+
+      input: "",
+      levels: [
+        {
+          value: "普通商家",
+          label: "普通商家"
+        },
+        {
+          value: "合作商家",
+          label: "合作商家"
+        },
+        {
+          value: "VIP商家",
+          label: "VIP商家"
         }
-    },
-    components: {
-    },
-    created() {
-        
-    },
-    mounted() {
-        this.getShop();
-    },
+      ],
+      marketplaces: [
+        {
+          value: "大西豪",
+          label: "大西豪"
+        },
+        {
+          value: "三晟",
+          label: "三晟"
+        },
+        {
+          value: "佰润",
+          label: "佰润"
+        },
+        {
+          value: "跨客城",
+          label: "跨客城"
+        },
+        {
+          value: "国大",
+          label: "国大"
+        },
+        {
+          value: "大时代",
+          label: "大时代"
+        },
+        {
+          value: "女人街",
+          label: "女人街"
+        },
+        {
+          value: "宝华",
+          label: "宝华"
+        },
+        {
+          value: "国投",
+          label: "国投"
+        },
+        {
+          value: "柏美",
+          label: "柏美"
+        },
+        {
+          value: "非凡",
+          label: "非凡"
+        },
+        {
+          value: "新金马",
+          label: "新金马"
+        },
+        {
+          value: "圣迦",
+          label: "圣迦"
+        },
+        {
+          value: "景叶",
+          label: "景叶"
+        }
+      ],
+      floors: [
+        {
+          value: "1F",
+          label: "1F"
+        },
+        {
+          value: "2F",
+          label: "2F"
+        }
+      ],
+      classifys: [
+        {
+          value: "女装",
+          label: "女装"
+        },
+        {
+          value: "—裤装",
+          label: "—裤装"
+        },
+        {
+          value: "—牛仔裤",
+          label: "—牛仔裤"
+        },
+        {
+          value: "—运动",
+          label: "—运动"
+        }
+      ],
+      shoptypes: [
+        {
+          value: "服装",
+          label: "服装"
+        },
+        {
+          value: "配钸",
+          label: "配钸"
+        },
+        {
+          value: "鞋帽",
+          label: "鞋帽"
+        },
+        {
+          value: "箱包",
+          label: "箱包"
+        }
+      ],
 
-    methods: {
+      classify: "",
+      shoptype: "",
+      brand: "",
+      type: 3,
+      serve: 1,
+      start: 1,
+      auto: "",
+      tableData: []
+    };
+  },
+  components: {},
+  created() {},
+  mounted() {
+    this.getShop();
+  },
 
-        getShop() {
-            axios.get("/shop/getShop", { params: { shop_id: this.id } }).then(res => {
-                const data = res.data
-                if (data.status == 200) {
-                    this.shopForm = data.result.shopList
-                    console.log(this.shopForm)
-                }
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            this.currentPage = val;
-            this.offset = (val - 1) * this.limit;
-            this.getUsers()
-        },
-        gobackIndex() {
-            this.$router.push({
-                path: '/shopList'
-            });
-        },
+  methods: {
+    getShop() {
+      axios
+        .get("/shop/getShop", { params: { shop_id: this.id } })
+        .then(res => {
+          const data = res.data;
+          if (data.status == 200) {
+            this.shopForm = data.result.shopList;
+            console.log(this.shopForm);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    editSubmit() {
+      this.$confirm("确认提交吗？", "提示", {}).then(() => {
+        // this.editLoading = true;
+        axios
+          .post("/shop/editShop", this.editForm)
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        this.editFormVisible = false;
+        this.getUser();
+      });
+    },
+    handleReturn() {
+      this.$router.push({
+        path: "/shopList"
+      });
+    },
+    handleEdit(row) {
+      this.editFormVisible = true;
+      this.editForm = this.shopForm;
     }
-}
-             
-
+  },
+  watch: {
+    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+    $route(to, from) {
+      this.id = this.$route.query.shop_id;
+      this.getShop();
+    }
+  }
+};
 </script>
 <style lang="less">
-@import '../style/sstyle';
-
+@import "../style/sstyle";
 </style>
         
 

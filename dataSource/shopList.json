@@ -1,7 +1,7 @@
 { 
     "_id" : ObjectId("59edf0792ad0d40f80ade027"), 
     "shop_id" : "6001", 
-    "shop_type" : NumberInt(1), 
+    "shop_type" : "A类", 
     "shop_name" : "Na1", 
     "shop_short" : "N1", 
     "shop_password" : "123", 
@@ -30,7 +30,7 @@
 { 
     "_id" : ObjectId("59edf0792ad0d40f80ade028"), 
     "shop_id" : "6002", 
-    "shop_type" : NumberInt(2), 
+    "shop_type" : "B类",  
     "shop_name" : "Na2", 
     "shop_short" : "N2", 
     "shop_password" : "123", 
@@ -59,7 +59,7 @@
 { 
     "_id" : ObjectId("59edf0792ad0d40f80ade029"), 
     "shop_id" : "6003", 
-    "shop_type" : NumberInt(2), 
+    "shop_type" : "C类", 
     "shop_name" : "Na3", 
     "shop_short" : "N3", 
     "shop_password" : "123", 
@@ -88,7 +88,7 @@
 { 
     "_id" : ObjectId("59edf0792ad0d40f80ade02a"), 
     "shop_id" : "6004", 
-    "shop_type" : NumberInt(3), 
+    "shop_type" : "D类",  
     "shop_name" : "Na4", 
     "shop_short" : "N4", 
     "shop_password" : "123", 
@@ -117,7 +117,7 @@
 { 
     "_id" : ObjectId("59edf0792ad0d40f80ade02b"), 
     "shop_id" : "6005", 
-    "shop_type" : NumberInt(1), 
+    "shop_type" : "T类", 
     "shop_name" : "Na5", 
     "shop_short" : "N5", 
     "shop_password" : "123", 

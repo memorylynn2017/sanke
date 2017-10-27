@@ -50,7 +50,7 @@ router.get('/getUserList', function(req, res, next) {
  */
 router.post('/editUser', function(req, res, next) {
     const params = req.body;
-    User.update({ user_id: params.user_id }, { levelname: params.levelname, username: params.username, usercity: params.usercity, usercall: params.usercall, userqq: params.userqq, user_bei: params.user_bei }, function(err) {
+    User.update({ user_id: params.user_id }, { levelname: params.levelname, username: params.username, usercity: params.usercity, usercall: params.usercall, userqq: params.userqq, user_expert: params.user_expert, user_bei: params.user_bei }, function(err) {
         if (err) {
             res.json({
                 status: 100,

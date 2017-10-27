@@ -44,11 +44,11 @@ const routes = [{
             path: '/userDetail',
             component: userDetail,
             meta: ['会员管理', '会员信息'],
-        },{
+        }, {
             path: '/orderDetail',
             component: orderDetail,
             meta: ['会员管理', '会员信息'],
-        },  {
+        }, {
             path: '/addShop',
             component: addShop,
             meta: ['添加数据', '添加商铺'],

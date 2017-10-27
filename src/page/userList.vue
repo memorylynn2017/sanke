@@ -55,8 +55,8 @@
                         <el-button style="border:none;" size="small" @click="handleList(scope.$index, scope.row)">[详情]</el-button>
                     </template>
                 </el-table-column>
-                <!-- <el-table-column property="statusname" label="状态" width="80">
-                </el-table-column> -->
+                <el-table-column property="user_status" label="状态" width="80">
+                </el-table-column>
             </el-table>
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, prev, pager, next, jumper" :total="count" style="float: right;">
@@ -66,8 +66,6 @@
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
-// import { getUserList, getUserCount} from '@/api/getData'
 import axios from "axios";
 export default {
   data() {

@@ -2,7 +2,7 @@
     <div class="fillcontain userdetail">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
-        <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">编辑</el-button>
+        <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">修改</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -28,7 +28,14 @@
                             </div>
                             <div class="el-form-items">
                                 <el-form-item label="等级">
-                                    <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="saveIconClick1" @blur="saveIconClick1" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                     <!-- @click='upload()'  -->
+                                     <!-- <el-button @click="cancel" type="text" size="">取消</el-button> -->
+                                      <!-- @blur="saveIconClick1" -->
+                                    <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="upload" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
+                                    <el-button-group style="float:right" v-show='this.flag1' ><el-button @click="upload" type="text" style="margin: 1px 1px;">上传<i class="el-icon-upload el-icon--right"></i></el-button></el-button-group>
+  
+  
+
                                     <span v-show='!this.flag1'>{{userForm.levelname}}<i class="writeo" @click='edit1()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                                 <el-form-item label="真实姓名">
@@ -701,8 +708,37 @@ export default {
         this.editFormVisible = false;
         this.getUser();
       });
-    }
+    },
+    upload() {
+      this.$confirm("确认提交并上传吗？", "提示", {}).then(() => {
+         axios
+          .post("/user/editUser", this.userForm)
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        this.saveIconClick1();
+        this.getUser();
+     });
+    },
+    // cancel(){
+    //     this.saveIconClick1();
+    //     this.getUser();
+    //     this.$message({
+    //             type: "success",
+    //             message: "已成功取消"
+    //     });
+    // }
   },
+        
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
       $route(to, from) {
@@ -711,6 +747,8 @@ export default {
     }
   }
 };
+       
+     
 </script>
 <style lang="less">
 @import "../style/sstyle";
