@@ -50,8 +50,8 @@
                 </el-table-column>
                 <el-table-column property="registe_time" label="注册时间" width="160" sortable>
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="120">
-                    <template slot-scope="scope">
+                <el-table-column property="editname" label="操作" width="135">
+                    <template scope="scope">
                         <el-button style="border:none;" size="small" @click="handleList(scope.$index, scope.row)">[详情]</el-button>
                     </template>
                 </el-table-column>
@@ -171,9 +171,12 @@ export default {
       }
     }
   },
+<<<<<<< HEAD
   // mounted() {
   //   this.initData();
   // },
+=======
+>>>>>>> origin/master
   activated() {
     this.initData();
   },
