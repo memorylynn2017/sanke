@@ -7,11 +7,11 @@
             </div>
             <div class="searched">
                 <div class="searched_left">
-                    <el-select v-model="levelName" placeholder="请选择" @change="filterLevel">
+                    <el-select v-model="levelName" placeholder="请选择" @change="filterUser()">
                         <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
                         </el-option>
                     </el-select>
-                    <el-select v-model="areaName" placeholder="区域" @change="test">
+                    <el-select v-model="areaName" placeholder="区域" @change="filterUser()">
                         <el-option　v-for="area in areaData" :key="area.value" :label="area.label" :value="area.value"></el-option>
                     </el-select>
                 </div>
@@ -95,16 +95,12 @@ export default {
           label: "全部地区"
         },
         {
-          value: "美国",
-          label: "美国"
+          value: "法国",
+          label: "法国"
         },
         {
-          value: "英国",
-          label: "英国"
-        },
-        {
-          value: "广州",
-          label: "广州"
+          value: "新加坡",
+          label: "新加坡"
         }
       ],
       pageData: [
@@ -136,7 +132,6 @@ export default {
       currentPage: 1,
       pageSize: 15,
       userList: [],
-      mid_userList: []
     };
   },
   components: {
@@ -203,16 +198,25 @@ export default {
           console.log(error);
         });
     },
-
-    test(areaName) {
-      // console.log(areaName);
-      if (this.areaName == "" || this.areaName == "全部地区") {
-        this.userList = this.mid_userList;
-      } else {
-        this.userList = this.mid_userList.filter(item => {
-          // console.log(item);
-          return item.areaname !== null && item.areaname == this.areaName;
-        });
+    filterUser(){
+      if(this.levelName == '' || this.levelName == "所有等级"){
+        if(this.areaName == '' || this.areaName == "全部地区"){
+          this.userList = this.tableData;
+        }else{
+          this.userList = this.tableData.filter(item=>{
+            return item.usercity == this.areaName
+          })
+        }
+      }else{
+        if(this.areaName == '' || this.areaName == "全部地区"){
+          this.userList = this.tableData.filter(item=>{
+            return item.levelname == this.levelName
+          })
+        }else{
+          this.userList = this.tableData.filter(item=>{
+            return item.levelname == this.levelName && item.usercity == this.areaName
+          })
+        }
       }
     },
     showNums(index) {
@@ -227,7 +231,6 @@ export default {
         this.userList = this.tableData.filter(item => {
           return item.levelname !== null && item.levelname == this.levelName;
         });
-        this.mid_userList = this.userList;
       }
     },
     showNums(index) {

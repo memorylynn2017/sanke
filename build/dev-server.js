@@ -28,7 +28,7 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 //用mock数据模拟接口
-var router = express.Router();
+/* var router = express.Router();
 var mockData = require('./../mock/db.json');
 router.get("/login",function(req,res,next){
     res.json(mockData.userInfo);
@@ -50,7 +50,7 @@ router.get("/getPurchasList",function(req,res,next){
     res.json(mockData.purchases);
 })
 
-app.use(router);
+app.use(router); */
 
 var compiler = webpack(webpackConfig)
 
