@@ -456,7 +456,6 @@ export default {
           const data = res.data;
           if (data.status == 200) {
             this.shopForm = data.result.shopList;
-            console.log(this.shopForm);
           }
         })
         .catch(error => {
@@ -503,7 +502,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "../style/sstyle";
 </style>
         

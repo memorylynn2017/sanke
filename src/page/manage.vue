@@ -81,7 +81,7 @@
     </div>
 </template>
 <script>
-// import { signout } from "@/api/getData";
+import { signout } from "@/api/getData";
 // import { mapActions, mapState } from "vuex";
 export default {
   data() {
@@ -138,12 +138,11 @@ export default {
 
 .qf {
   *zoom: 1;
-}
-
-.qf:after {
-  content: "";
-  display: table;
-  clear: both;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 .fl {
@@ -154,39 +153,34 @@ export default {
   float: right;
 }
 
-.advTop {
-  background: url(".././assets/img/top_1.png") repeat-x;
-}
-
-.advTop .advTop_left {
-  /*border: 1px solid gray;*/
-  width: 300px;
-  height: 50px;
-  line-height: 45px;
-  padding-left: 10px;
-}
-
-.advTop .advTop_left a {
-  font-family: "Microsoft YaHei", Serif;
-  color: #fff;
-}
-
-.advTop .advTop_right {
-  /*border: 1px solid gray;*/
-  width: 150px;
-  height: 45px;
-  line-height: 45px;
-  padding-left: 10px;
-}
-
-.advTop .advTop_right i {
-  padding-left: 10px;
-  padding-right: 10px;
-  cursor: pointer;
-}
-
 .manage_page {
-  min-width: 980px;
+  width: 100%;
+  min-width: 900px;
+
+  .advTop {
+    background: url(".././assets/img/top_1.png") repeat-x;
+    .advTop_left {
+      width: 300px;
+      height: 50px;
+      line-height: 45px;
+      padding-left: 10px;
+      a {
+        font-family: "Microsoft YaHei", Serif;
+        color: #fff;
+      }
+    }
+    .advTop_right {
+      width: 150px;
+      height: 45px;
+      line-height: 45px;
+      padding-left: 10px;
+      i {
+        padding-left: 10px;
+        padding-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
 
   .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active,
   .el-menu-item.is-active {

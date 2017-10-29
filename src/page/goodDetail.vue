@@ -1,8 +1,8 @@
 <template>
-    <div class="fillcontain">
+    <div class="fillcontain gooddetail">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_good" @click="goback()" sytle=" z-index:999;">返回</el-button>
-        <div class="table_container gooddetail">
+        <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">基本信息</span>
@@ -105,7 +105,8 @@
                             <tr>
                                 <td>上传商品图片</td>
                                 <td>
-                                    <el-upload style="width: 400px; padding: 5px; border: 1px solid #ececec;" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                                     <!-- :on-preview="handlePictureCardPreview" :on-remove="handleRemove" -->
+                                    <el-upload style="width: 400px; padding: 5px; border: 1px solid #ececec;" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card">
                                         <i class="el-icon-plus"></i>
                                     </el-upload>
                                     <el-dialog v-model="dialogVisible" size="tiny">
@@ -318,7 +319,6 @@ export default {
                 const data = res.data
                 if (data.status == 200) {
                     this.goodForm = data.result.goodList
-                    console.log(this.goodForm)
                 }
             }).catch(error => {
                 console.log(error)
@@ -356,7 +356,7 @@ export default {
 }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '../style/sstyle';
 
 </style>

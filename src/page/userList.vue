@@ -24,11 +24,11 @@
                         <el-button slot="append" @click="searchUser">查询</el-button>
                     </el-input>
                 </div>
-                <!-- <div class="searched_middle qf">
+                <div class="searched_middle qf">
                     <span class="pashow">显示</span>&nbsp;
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
-                </div> -->
+                </div>
             </div>
             <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
