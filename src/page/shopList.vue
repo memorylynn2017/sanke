@@ -2,11 +2,13 @@
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
         <div class="headAdv">
-            <div class="listed">
-                <!-- <span><strong>商家列表</strong></span> -->
-            </div>
+            
+                <!-- <div class="listed">
+                <span><strong>商家列表</strong></span>
+            </div> -->
+          
             <div class="searched">
-                <div class="btn" style="position:relative;left:-92px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-152px;display:inline-block;">
                     <el-button @click="handleAdd">新建商家</el-button>
                     <el-button>更新数据</el-button>
                 </div>
@@ -21,44 +23,40 @@
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>
-                <div class="searched_middle">
+                <!-- <div class="searched_middle">
                     <span class="pashow">显示</span>&nbsp;
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
-                </div>
+                </div> -->
             </div>
-            <div class="recorded">
+            <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
-            </div>
+            </div> -->
         </div>
         <div class="table_container">
             <el-table :data="getshopListFilter" highlight-current-row style="width: 100%">
-                <!-- <el-table-column property="_id"  label="编码ID" prop="_id" width="180">
-                </el-table-column> -->
                 <el-table-column property="shop_id" label="商家ID" width="100" sortable>
                 </el-table-column>
                 <el-table-column property="shop_name" label="商家名称" width="135" sortable>
                 </el-table-column>
-                <el-table-column property="shop_type" label="类型" width="100" sortable>
+                <el-table-column property="shop_type" label="类型" width="85" sortable>
                 </el-table-column>
-                <el-table-column property="shop_market" label="所在档口" width="150">
+                <el-table-column property="shop_market" label="所在档口" width="130">
                 </el-table-column>
                 <el-table-column property="shop_area" label="所在市场" width="100">
                 </el-table-column>
-                <el-table-column property="shop_ranking" label="商家排名" width="100">
-                </el-table-column>
-                <el-table-column property="shop_time" label="最后抓取商品时间" width="180">
+                <el-table-column property="shop_ranking" label="商家排名" width="95">
                 </el-table-column>
                 <el-table-column property="shop_time" label="进驻时间" width="180">
                 </el-table-column>
+                <el-table-column property="shop_time" label="抓取商品时间" width="180">
                 </el-table-column>
-                
-                
-                <el-table-column property="editname" label="操作" width="195">
+                </el-table-column>
+                <el-table-column property="editname" label="操作" width="180">
                     <template slot-scope="scope">
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
-                        <!-- <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleList(scope.$index, scope.row)">[抓取商品]</el-button> -->
+                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small">[编辑]</el-button>
+                        <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
+                        <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">[抓取商品]</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -66,6 +64,8 @@
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
+                
+                
             <!-- 一般式运用模块框 -->
             <!-- <el-dialog title="商家信息" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
@@ -229,9 +229,6 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    },
-    showNums(index) {
-      this.pageNum = parseInt(this.options2[index].label);
     },
     filterLevel(levelName) {
       if (this.levelName == "" || this.levelName == "所有分类") {

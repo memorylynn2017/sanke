@@ -1,14 +1,17 @@
 <template>
     <div class="fillcontain userdetail">
-        <!-- <head-top></head-top> -->
         <el-button class="backbtn_user" @click="handleReturn" sytle=" z-index:999;">返回</el-button>
         <!-- <el-button class="backbtn_user" @click="handleEdit" sytle=" z-index:999;">修改</el-button> -->
         <div class="table_container">
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
+
+                    <el-row :gutter="30">
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                            <div class="grid-content bg-purple">
                     <template>
-                        <el-form label-position="left" inline class="demo-table-expand tableone" ref="userForm" :model="userForm">
+                        <el-form  label-position="left" inline class="demo-table-expand tableone" ref="userForm" :model="userForm">
                             <div class="el-form-items">
                                 <el-form-item label="会员ID">
                                     <span>{{userForm.user_id}}</span>
@@ -157,6 +160,9 @@
                            
                         </div>
                     </template>
+                    </div>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
                 <el-tab-pane class="yue" label="余额(100000.00)">
                     <div class="yue-head">
@@ -336,7 +342,7 @@ export default {
       flag5: false,
       flag6: false,
       flag7: false,
-    //   editFormVisible: false,
+      //   editFormVisible: false,
       //   editLoading: false,
       id: this.$route.query.user_id,
       userForm: {},

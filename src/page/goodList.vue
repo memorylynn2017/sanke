@@ -2,11 +2,11 @@
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
         <div class="headAdv">
-            <div class="listed">
+            <!-- <div class="listed">
                 <span><strong>商品列表</strong></span>
-            </div>
+            </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-92px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-152px;display:inline-block;">
                     <el-button @click="handleAdd">新建商品</el-button>
                     <el-button>更新数据</el-button>
                 </div>
@@ -21,15 +21,15 @@
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>
-                <div class="searched_middle qf">
+                <!-- <div class="searched_middle qf">
                     <span class="pashow">显示</span>&nbsp;
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
-                </div>
+                </div> -->
             </div>
-            <div class="recorded">
+            <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
-            </div>
+            </div> -->
         </div>
         <div class="table_container">
             <el-table ref="multipleTable" :data="getProductListFilter" highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
@@ -39,14 +39,14 @@
                 </el-table-column>
                 <el-table-column property="product_id" label="商品编号" width="100">
                 </el-table-column>
-                <el-table-column property="product_class" label="分类" width="100">
-                </el-table-column>
+                <!-- <el-table-column property="product_class" label="分类" width="100">
+                </el-table-column> -->
                 <el-table-column property="product_puprice" label="拿货价" width="100">
                 </el-table-column>
                 <el-table-column property="product_shop" label="商家名称" width="100">
                 </el-table-column>
-                <!-- <el-table-column property="product_up" label="上架" width="80">
-                </el-table-column> -->
+                <el-table-column property="product_up" label="上架状态" width="95">
+                </el-table-column>
                 <el-table-column property="product_up_time" label="上架时间" width="140">
                 </el-table-column>
                 <el-table-column property="product_down_time" label="下架时间" width="140">
@@ -54,22 +54,19 @@
                 <el-table-column property="editname" label="操作" width="160">
                     <template slot-scope="scope">
                         <!-- <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button> -->
-                        <el-button style="float:left; display:inline-block; border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[编辑]</el-button>
-                        <el-button type="danger" style="float:left; display:inline-block; border:none;" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                        
+                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="samll">[编辑]</el-button>
+                        <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">删除</el-button>
                     </template>
                 </el-table-column>
-                <!-- <el-table-column property="product_down" label="下架" width="80">
-                    <template slot-scope="scope">
-                        <el-switch v-model="oncontrol" on-text="开" off-text="关" on-color="#13ce66" off-color="#ff4949">
-                        </el-switch>
-                    </template>
-                </el-table-column> -->
+                <el-table-column property="product_down" label="下架">
+                </el-table-column>
             </el-table>
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
+                        
+                    
         </div>
     </div>
 </template>
@@ -82,7 +79,7 @@ export default {
       product_code: "",
       oncontrol: true,
       tableData: [],
-    productList: [],
+      productList: [],
       levelData: [
         {
           value: "所有类型",
@@ -134,7 +131,7 @@ export default {
       count: 0,
       currentPage: 1,
       pageSize: 15,
-     
+
       multipleSelection: []
     };
   },
@@ -220,8 +217,8 @@ export default {
     handleEdit(index, row) {
       this.$router.push({
         path: "/goodDetail",
-         query: {
-          product_id:row.product_id
+        query: {
+          product_id: row.product_id
         }
       });
     },
@@ -257,8 +254,8 @@ export default {
         this.productList = this.tableData.filter(item => {
           return (
             item.product_id
-              .toLowerCase().indexOf(this.product_id.toLowerCase()) !== -1
-              
+              .toLowerCase()
+              .indexOf(this.product_id.toLowerCase()) !== -1
           );
         });
       }

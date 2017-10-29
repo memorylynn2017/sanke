@@ -2,10 +2,14 @@
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
         <div class="headAdv">
-            <div class="listed">
+            <!-- <div class="listed">
                 <span><strong>会员列表</strong></span>
-            </div>
+            </div> -->
             <div class="searched">
+                <div class="btn" style="position:relative;left:-92px;display:inline-block;">
+                    <el-button @click="handleAdd">新建商家</el-button>
+                    <el-button>更新数据</el-button>
+                </div>
                 <div class="searched_left">
                     <el-select v-model="levelName" placeholder="请选择" @change="filterUser()">
                         <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
@@ -20,15 +24,15 @@
                         <el-button slot="append" @click="searchUser">查询</el-button>
                     </el-input>
                 </div>
-                <div class="searched_middle qf">
+                <!-- <div class="searched_middle qf">
                     <span class="pashow">显示</span>&nbsp;
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
-                </div>
+                </div> -->
             </div>
-            <div class="recorded">
+            <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
-            </div>
+            </div> -->
         </div>
         <div class="table_container">
             <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
@@ -38,25 +42,26 @@
                 </el-table-column>
                 <el-table-column property="usercall" label="用户名" width="130">
                 </el-table-column>
-                <el-table-column property="usercity" label="地区" width="100">
+                <el-table-column property="usercity" label="地区" width="110" sortable>
                 </el-table-column>
-                <el-table-column property="purchase_num" label="订单(数量)" width="125" sortable>
+                <el-table-column property="purchase_num" label="订单量" width="110" sortable>
                 </el-table-column>
-                <el-table-column property="countname" label="数量" width="120" sortable>
+                <el-table-column property="countname" label="数量" width="110" sortable>
                 </el-table-column>
                 <el-table-column property="pricename" label="金额" width="120" sortable>
                 </el-table-column>
                 <el-table-column property="costname" label="余额" width="130" sortable>
                 </el-table-column>
-                <el-table-column property="registe_time" label="注册时间" width="160" sortable>
+                <el-table-column property="registe_time" label="注册时间" width="150" sortable>
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="135">
+                <el-table-column property="editname" label="操作">
                     <template slot-scope="scope">
-                        <el-button style="border:none;" size="small" @click="handleList(scope.$index, scope.row)">[详情]</el-button>
+                        <el-button style="border:none;" size="small" @click="handleEdit(scope.$index, scope.row)">[详情]</el-button>
+                        <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
                     </template>
                 </el-table-column>
-                <el-table-column property="user_status" label="状态" width="70">
-                </el-table-column>
+                <!-- <el-table-column property="user_status" label="状态" width="70">
+                </el-table-column> -->
             </el-table>
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, prev, pager, next, jumper" :total="count" style="float: right;">
@@ -95,12 +100,16 @@ export default {
           label: "全部地区"
         },
         {
-          value: "法国",
-          label: "法国"
-        },
-        {
           value: "新加坡",
           label: "新加坡"
+        },
+        {
+          value: "中国",
+          label: "中国"
+        },
+        {
+          value: "法国",
+          label: "法国"
         }
       ],
       pageData: [
@@ -131,7 +140,7 @@ export default {
       count: 0,
       currentPage: 1,
       pageSize: 15,
-      userList: [],
+      userList: []
     };
   },
   components: {
@@ -166,15 +175,14 @@ export default {
       }
     }
   },
-
-  // mounted() {
-  //   this.initData();
-  // },
-
+  mounted() {
+    this.initData();
+  },
 
   activated() {
     this.initData();
   },
+
   methods: {
     async initData() {
       axios
@@ -198,24 +206,26 @@ export default {
           console.log(error);
         });
     },
-    filterUser(){
-      if(this.levelName == '' || this.levelName == "所有等级"){
-        if(this.areaName == '' || this.areaName == "全部地区"){
+    filterUser() {
+      if (this.levelName == "" || this.levelName == "所有等级") {
+        if (this.areaName == "" || this.areaName == "全部地区") {
           this.userList = this.tableData;
-        }else{
-          this.userList = this.tableData.filter(item=>{
-            return item.usercity == this.areaName
-          })
+        } else {
+          this.userList = this.tableData.filter(item => {
+            return item.usercity == this.areaName;
+          });
         }
-      }else{
-        if(this.areaName == '' || this.areaName == "全部地区"){
-          this.userList = this.tableData.filter(item=>{
-            return item.levelname == this.levelName
-          })
-        }else{
-          this.userList = this.tableData.filter(item=>{
-            return item.levelname == this.levelName && item.usercity == this.areaName
-          })
+      } else {
+        if (this.areaName == "" || this.areaName == "全部地区") {
+          this.userList = this.tableData.filter(item => {
+            return item.levelname == this.levelName;
+          });
+        } else {
+          this.userList = this.tableData.filter(item => {
+            return (
+              item.levelname == this.levelName && item.usercity == this.areaName
+            );
+          });
         }
       }
     },
@@ -243,11 +253,11 @@ export default {
         // });
         this.userList = this.tableData.filter(item => {
           return (
-            item.user_id .toLowerCase().indexOf(this.user_id.toLowerCase()) !== -1
+            item.user_id.toLowerCase().indexOf(this.user_id.toLowerCase()) !==
+            -1
           );
         });
-             
-              
+
         this.user_id = "";
       } else {
         this.userList = this.tableData;
@@ -267,10 +277,15 @@ export default {
       console.log(this.currentPage);
       console.log(this.begin);
     },
-    handleList(index, row) {
+     handleAdd() {
+      this.$router.push({
+        path: "/addUser"
+      });
+    },
+    handleEdit(index, row) {
       this.$router.push({
         path: "/userDetail",
-         query: {
+        query: {
           user_id: row.user_id
         }
       });

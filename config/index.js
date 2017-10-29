@@ -31,9 +31,6 @@ module.exports = {
             '/admin/*': {
                 target: 'http://127.0.0.1:3000'
             },
-            '/order/*': {
-                target: 'http://127.0.0.1:3000'
-            },
             '/good/*': {
                 target: 'http://127.0.0.1:3000'
             },
@@ -43,8 +40,12 @@ module.exports = {
             '/user/*': {
                 target: 'http://127.0.0.1:3000'
             },
+            '/order/*': {
+                target: 'http://127.0.0.1:3000'
+            }
 
         },
+
         /* context: [ //代理路径
             '/shopping',
             '/ugc',

@@ -6,6 +6,7 @@
             <el-tabs type="border-card">
                 <el-tab-pane>
                     <span slot="label">会员资料</span>
+                    
                     <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
