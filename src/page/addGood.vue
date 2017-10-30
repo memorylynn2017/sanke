@@ -1,5 +1,5 @@
 <template>
-    <div class="fillcontain">
+    <div class="fillcontain addgood">
         <!-- <head-top></head-top> -->
         <el-button class="backbtn_good" @click="gobackIndex()" sytle=" z-index:999;">返回</el-button>
         <div class="table_container gooddetail">

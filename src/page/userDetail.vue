@@ -32,7 +32,6 @@
                             <div class="el-form-items">
                                 <el-form-item label="等级">
                                     <el-input v-show='this.flag1' v-focus="true" v-model="userForm.levelname" @keyup.enter.native="upload" @blur="saveIconClick1" style="border-bottom:1px solid #ccc;width:88px;"></el-input>
-                                    <!-- <el-button-group style="float:right" v-show='this.flag1' ><el-button @click="upload" type="text" style="margin: 1px 1px;">上传<i class="el-icon-upload el-icon--right"></i></el-button></el-button-group> -->
                                     <span v-show='!this.flag1'>{{userForm.levelname}}<i class="writeo" @click='edit1()' style="cursor:pointer"></i></span>
                                 </el-form-item>
                                 <el-form-item label="真实姓名">
@@ -389,7 +388,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "退运费",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -399,7 +398,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "退运费",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -409,7 +408,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "财务调节",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -419,7 +418,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "财务调节",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -429,7 +428,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "充值提交",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -439,7 +438,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "充值提交",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -449,7 +448,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "缺货支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -459,7 +458,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "缺货支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -469,7 +468,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "在线支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -479,7 +478,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "在线支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -489,7 +488,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "在线支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -499,7 +498,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "余额支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -509,7 +508,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "余额支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -519,7 +518,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "余额支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -529,7 +528,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "余额支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -539,7 +538,7 @@ export default {
           edit_exp: "补运费"
         },
         {
-          edit_type: "提现",
+          edit_type: "余额支付",
           pursh_code: "900023",
           save_in: "100",
           save_out: "1200",
@@ -635,10 +634,6 @@ export default {
         path: "/userList"
       });
     },
-    // handleEdit(row) {
-    //   this.editFormVisible = true;
-    //   this.editForm = this.userForm;
-    // },
     edit1() {
       this.flag1 = true;
     },
@@ -695,29 +690,8 @@ export default {
       console.log("save");
       this.flag7 = !this.flag7;
     },
-    // editSubmit() {
-    //   this.$confirm("确认提交吗？", "提示", {}).then(() => {
-    //     // this.editLoading = true;
-    //     axios
-    //       .post("/user/editUser", this.editForm)
-    //       .then(res => {
-    //         const data = res.data;
-    //         if (data.status == 200) {
-    //           this.$message({
-    //             type: "success",
-    //             message: data.msg
-    //           });
-    //         }
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //       });
-    //     this.editFormVisible = false;
-    //     this.getUser();
-    //   });
-    // },
+
     upload() {
-      //   this.$confirm("确认提交上传吗？", "提示", {}).then(() => {
       axios
         .post("/user/editUser", this.userForm)
         .then(res => {
@@ -733,16 +707,7 @@ export default {
           console.log(error);
         });
       this.getUser();
-      //   });
     }
-    // cancel(){
-    //     this.saveIconClick1();
-    //     this.getUser();
-    //     this.$message({
-    //             type: "success",
-    //             message: "已成功取消"
-    //     });
-    // }
   },
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
@@ -753,7 +718,7 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "../style/sstyle";
 </style>
 

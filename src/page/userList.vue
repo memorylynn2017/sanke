@@ -6,18 +6,19 @@
                 <span><strong>会员列表</strong></span>
             </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-92px;display:inline-block;">
+                <!-- <div class="btn" style="position:relative;left:-92px;display:inline-block;">
                     <el-button @click="handleAdd">新建商家</el-button>
                     <el-button>更新数据</el-button>
-                </div>
+                </div> -->
                 <div class="searched_left">
+                    <el-select v-model="areaName" placeholder="区域" @change="filterUser()">
+                        <el-option　v-for="area in areaData" :key="area.value" :label="area.label" :value="area.value"></el-option>
+                    </el-select>
                     <el-select v-model="levelName" placeholder="请选择" @change="filterUser()">
                         <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
                         </el-option>
                     </el-select>
-                    <el-select v-model="areaName" placeholder="区域" @change="filterUser()">
-                        <el-option　v-for="area in areaData" :key="area.value" :label="area.label" :value="area.value"></el-option>
-                    </el-select>
+                    
                 </div>
                 <div class="searched_right">
                     <el-input v-model="user_id" placeholder="请输入要查询的客户Id" @keyup.enter.native="searchUser">
@@ -36,6 +37,8 @@
         </div>
         <div class="table_container">
             <el-table :data="getUserListFilter" highlight-current-row style="width: 100%">
+                <el-table-column property="user_fetch" label="渠道" width="100">
+                </el-table-column>
                 <el-table-column property="user_id" label="客户ID" width="100">
                 </el-table-column>
                 <el-table-column property="levelname" label="等级" width="100">
@@ -96,20 +99,20 @@ export default {
       ],
       areaData: [
         {
-          value: "全部地区",
-          label: "全部地区"
+          value: "所有渠道",
+          label: "所有渠道"
         },
         {
-          value: "新加坡",
-          label: "新加坡"
+          value: "网站",
+          label: "网站"
         },
         {
-          value: "中国",
-          label: "中国"
+          value: "小程序",
+          label: "小程序"
         },
         {
-          value: "法国",
-          label: "法国"
+          value: "线下",
+          label: "线下"
         }
       ],
       pageData: [
@@ -132,7 +135,7 @@ export default {
       ],
       user_id: "",
       levelName: "所有等级",
-      areaName: "全部地区",
+      areaName: "所有渠道",
       currentRow: null,
       begin: 0,
       end: 0,
@@ -208,22 +211,22 @@ export default {
     },
     filterUser() {
       if (this.levelName == "" || this.levelName == "所有等级") {
-        if (this.areaName == "" || this.areaName == "全部地区") {
+        if (this.areaName == "" || this.areaName == "所有渠道") {
           this.userList = this.tableData;
         } else {
           this.userList = this.tableData.filter(item => {
-            return item.usercity == this.areaName;
+            return item.user_fetch == this.areaName;
           });
         }
       } else {
-        if (this.areaName == "" || this.areaName == "全部地区") {
+        if (this.areaName == "" || this.areaName == "所有渠道") {
           this.userList = this.tableData.filter(item => {
             return item.levelname == this.levelName;
           });
         } else {
           this.userList = this.tableData.filter(item => {
             return (
-              item.levelname == this.levelName && item.usercity == this.areaName
+              item.levelname == this.levelName && item.user_fetch == this.areaName
             );
           });
         }
@@ -236,7 +239,7 @@ export default {
       // console.log(levelName);
       if (this.levelName == "" || this.levelName == "所有等级") {
         this.userList = this.tableData;
-        this.areaName = "全部地区";
+        this.areaName = "所有渠道";
       } else {
         this.userList = this.tableData.filter(item => {
           return item.levelname !== null && item.levelname == this.levelName;

@@ -173,7 +173,6 @@
     </div>
 </template>
 <script>
-// import headTop from '../components/headTop'
 export default {
     data() {
         return {
@@ -257,7 +256,6 @@ export default {
         }
     },
     components: {
-        // headTop,
     },
     methods: {
         gobackIndex() {
@@ -283,6 +281,6 @@ export default {
 
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../style/sstyle';
 </style>

@@ -14,7 +14,7 @@
                  <!-- :default-openeds="['1']" -->
                 <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
                     <span></span>
-                    <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
+                    <el-menu-item index="manage" style="border-left:6px solid #f8d347"><i class="el-icon-menu"></i>首页</el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
                     <span></span>
                     <el-menu-item index="userList">会员管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
@@ -29,7 +29,14 @@
                     <el-menu-item index="orderList">订单管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
                     <span></span>
-                    <el-menu-item index="visitor">内容管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
+                    <el-submenu index="#">
+                      <template slot="title" :to="{ path: '/manage' }">内容管理</template>
+                      <el-menu-item index="makeInfo">市场信息</el-menu-item>
+                      <el-menu-item index="shopCom">商家审核</el-menu-item>
+                      <el-menu-item index="artClass">文章分类</el-menu-item>
+                      <!-- <el-menu-item index="artMan">文章管理</el-menu-item>
+                      <el-menu-item index="advMan">广告管理</el-menu-item> -->
+                    </el-submenu>
                     <div style="background-color:#2A3542;height:11px;"></div>
                     <span></span>
                     <el-menu-item index="adminSet">系统设置<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>

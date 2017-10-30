@@ -3,13 +3,13 @@
         <!-- <head-top></head-top> -->
         <div class="headAdv">
             
-                <!-- <div class="listed">
-                <span><strong>商家列表</strong></span>
-            </div> -->
+            <div class="listed" style="margin-left:50px;">
+                <span><strong>商家审核</strong></span>
+            </div>
           
             <div class="searched">
-                <div class="btn" style="position:relative;left:-202px;display:inline-block;">
-                    <el-button @click="handleAdd">新建商家</el-button>
+                <div class="btn" style="position:relative;left:-152px;display:inline-block;">
+                    <el-button @click="handleAdd">添加商家</el-button>
                     <el-button>更新数据</el-button>
                 </div>
                 <div class="searched_left">
@@ -19,15 +19,15 @@
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <el-input v-model="shop_id" placeholder="请输入要查询的客户Id">
+                    <el-input v-model="shop_id" placeholder="">
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>
-                <!-- <div class="searched_middle">
+                <div class="searched_middle">
                     <span class="pashow">显示</span>&nbsp;
                     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="sizes" :total="count" class="patag">
                     </el-pagination>
-                </div> -->
+                </div>
             </div>
             <!-- <div class="recorded">
                 <span>总记录数 {{Message}}</span>
@@ -35,32 +35,37 @@
         </div>
         <div class="table_container">
             <el-table :data="getshopListFilter" highlight-current-row style="width: 100%">
-                <el-table-column property="shop_id" label="商家ID" width="100" sortable>
+                <el-table-column type="selection" width="55">
                 </el-table-column>
-                <el-table-column property="shop_name" label="商家名称" width="135" sortable>
+                <el-table-column property="#" label="品牌" width="90">
                 </el-table-column>
-                <el-table-column property="shop_type" label="类型" width="85" sortable>
+                <el-table-column property="#" label="公司名称" width="120">
                 </el-table-column>
-                <el-table-column property="shop_market" label="所在档口" width="130">
+                <el-table-column property="#" label="公司性质" width="120">
                 </el-table-column>
-                <el-table-column property="shop_area" label="所在市场" width="100">
+                <el-table-column property="#" label="所属行业" width="120">
                 </el-table-column>
-                <el-table-column property="shop_ranking" label="商家排名" width="95">
+                <el-table-column property="#" label="销售类目" width="100">
                 </el-table-column>
-                <el-table-column property="shop_time" label="进驻时间" width="180">
+                <el-table-column property="#" label="供货模式" width="90">
                 </el-table-column>
-                <el-table-column property="shop_time" label="抓取商品时间" width="180">
+                <el-table-column property="#" label="保证金" width="100">
                 </el-table-column>
+                <el-table-column property="#" label="技术费用" width="100">
+                </el-table-column>
+                <el-table-column property="#" label="进度" width="80">
+                </el-table-column>
+                <el-table-column property="#" label="业务员" width="80">
+                </el-table-column>
+                <el-table-column property="#" label="创建时间" width="120">
                 </el-table-column>
                 <el-table-column property="editname" label="操作">
                     <template slot-scope="scope">
                         <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small">[编辑]</el-button>
-                        <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
-                        <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">[抓取商品]</el-button>
                     </template>
                 </el-table-column>
             </el-table>
-            <div class="pagination_bottom">
+            <div class="pagination_bottom" style="margin-top:35px;">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
@@ -143,21 +148,18 @@ export default {
       tableData: [],
       shopList: [],
       levelData: [
+        
         {
-          value: "所有分类",
-          label: "所有分类"
+          value: "恰谈中",
+          label: "恰谈中"
         },
         {
-          value: "A类",
-          label: "A类"
+          value: "已签约",
+          label: "已签约"
         },
-        {
-          value: "B类",
-          label: "B类"
-        },
-        {
-          value: "C类",
-          label: "C类"
+         {
+          value: "放弃",
+          label: "放弃"
         }
       ],
       pageData: [
@@ -179,7 +181,7 @@ export default {
         }
       ],
       shop_id: "",
-      levelName: "所有分类",
+      levelName: "全部",
       currentRow: null,
       begin: 0,
       end: 0,
@@ -192,7 +194,7 @@ export default {
   components: {},
   computed: {
     getshopListFilter() {
-      return this.shopList.slice(this.begin, this.end);
+      // return this.shopList.slice(this.begin, this.end);
     },
     Message: function() {
       return this.shopList.length;
@@ -214,7 +216,6 @@ export default {
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
-            console.log(data.result.shopList);
             //临时表
             this.tableData = data.result.shopList;
             //数据表
@@ -246,8 +247,8 @@ export default {
       if (this.shop_id) {
         this.shopList = this.tableData.filter(item => {
           return (
-            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==-1
-            
+            item.shop_id.toLowerCase().indexOf(this.shop_id.toLowerCase()) !==
+            -1
           );
         });
       }
@@ -317,5 +318,5 @@ export default {
 };
 </script>
 <style lang="less">
-@import "../style/stable";
+@import "../../style/stable";
 </style>

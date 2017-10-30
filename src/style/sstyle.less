@@ -20,7 +20,10 @@
   text-align: right !important;
 }
 
-.orderdetail .table_container,.gooddetail .table_container,.shopdetail .table_container,.userdetail .table_container {
+.orderdetail .table_container,
+.gooddetail .table_container,
+.shopdetail .table_container,
+.userdetail .table_container {
   // position: relative;
   .el-tabs__content {
     position: relative;
@@ -345,15 +348,41 @@
 .shopdetail {
   .table_container {
     padding: 0;
-    // position: relative;
+
+    .shopset {
+      .el-form .el-form-item {
+        width: 100%;
+        float: normal;
+      }
+    }
+    .shoplist {
+      .el-form .el-form-item {
+        width: 50%;
+        float: left;
+      }
+    }
+
     .el-form {
       border-top: 1px solid #ececec;
       .el-form-item {
-        width: 50%;
         padding: 0;
         margin: 0;
+        border-left: 1px solid #ececec;
+        border-right: 1px solid #ececec;
+        .warn {
+          color: #e51c23;
+        }
+        .el-form-item__label {
+          width: 150px;
+          padding-right: 30px;
+          font-size: 14px;
+          color: #666;
+          text-align: right;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
         box-sizing: border-box;
-        float: left;
         border-bottom: 1px solid #ececec;
         position: relative;
         &:nth-child(2n + 1) {
@@ -366,6 +395,7 @@
         &.last {
           border-bottom: none;
         }
+
         .el-form-item__label {
           width: 150px;
           padding-right: 30px;
@@ -409,17 +439,6 @@
     }
   }
 
-  .shopset {
-    .el-form .el-form-item {
-      width: 100%;
-      border-left: 1px solid #ececec;
-      border-right: 1px solid #ececec;
-      .warn {
-        color: #e51c23;
-      }
-    }
-  }
-
   @media screen and (max-width: 820px) {
     .el-form .el-form-item {
       width: 100% !important;
@@ -429,7 +448,8 @@
   }
 }
 
-.gooddetail {
+.gooddetail,
+.addGood {
   .table_container {
     padding: 0;
     // .el-tabs--border-card {
@@ -496,7 +516,6 @@
     margin-bottom: 20px;
     font-size: 14px;
     color: #646464;
-    
   }
   .record .title {
     font-size: 14px;

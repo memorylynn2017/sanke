@@ -4,7 +4,7 @@
         <!-- <el-button class="backbtn_shop" @click="handleEdit" sytle=" z-index:999;">修改</el-button> -->
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-tab-pane>
+                <el-tab-pane class="shoplist">
                     <span slot="label">会员资料</span>
                     
                     <el-row :gutter="30">
@@ -168,7 +168,8 @@
                         </el-col>
                     </el-row>
                 </el-tab-pane>
-                <el-tab-pane class="shopset" label="店铺设置">
+                <el-tab-pane class="shopset">
+                    <span slot="label">店铺设置</span>
                     <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
@@ -190,42 +191,42 @@
                                             <span><el-input size="small" v-model="input" placeholder="请输入内容"></el-input><em>*</em></span>
                                         </el-form-item>
                                         <el-form-item label="分类">
-                                            <span>
-                            <el-select size="small" v-model="classify" placeholder="请选择">
-                              <el-option
-                                v-for="item in classifys"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
+                                        <span>
+                                            <el-select size="small" v-model="classify" placeholder="请选择">
+                                                <el-option
+                                                v-for="item in classifys"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                            <em>*</em>
+                                        </span>
                                         </el-form-item>
                                         <el-form-item label="类型">
-                                            <span>
-                            <el-select size="small" v-model="shoptype" placeholder="请选择">
-                              <el-option
-                                v-for="item in shoptypes"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                            <em>*</em>
-                          </span>
+                                        <span>
+                                            <el-select size="small" v-model="shoptype" placeholder="请选择">
+                                                <el-option
+                                                v-for="item in shoptypes"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                            <em>*</em>
+                                        </span>
                                         </el-form-item>
                                         <el-form-item label="品牌">
                                             <span>
-                            <el-select size="small" v-model="shopForm.shop_Stall" placeholder="请选择">
-                              <el-option
-                                v-for="item in marketplaces"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                              </el-option>
-                            </el-select>
-                          </span>
+                                                <el-select size="small" v-model="shopForm.shop_Stall" placeholder="请选择">
+                                                    <el-option
+                                                        v-for="item in marketplaces"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                    </el-option>
+                                                </el-select>
+                                            </span>
                                         </el-form-item>
                                         <el-form-item class="special">
                                             <span><el-button>确定</el-button></span>
@@ -302,12 +303,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      //   editFormVisible: false,
       id: this.$route.query.shop_id,
       shopForm: {},
-      //   editForm:{
-
-      //   },
 
       input: "",
       levels: [
@@ -479,7 +476,6 @@ export default {
           .catch(error => {
             console.log(error);
           });
-        // this.editFormVisible = false;
         this.getShop();
       });
     },
@@ -488,10 +484,6 @@ export default {
         path: "/shopList"
       });
     }
-    // handleEdit(row) {
-    //   this.editFormVisible = true;
-    //   this.editForm = this.shopForm;
-    // }
   },
   watch: {
     // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
@@ -502,7 +494,7 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "../style/sstyle";
 </style>
         

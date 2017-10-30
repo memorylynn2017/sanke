@@ -12,18 +12,23 @@ const shopDetail = r => require.ensure([], () => r(require('@/page/shopDetail'))
 const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail')), 'goodDetail');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGood = r => require.ensure([], () => r(require('@/page/addGood')), 'addGood');
+const addOrder = r => require.ensure([], () => r(require('@/page/addOrder')), 'addOrder');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
 const goodList = r => require.ensure([], () => r(require('@/page/goodList')), 'goodList');
 const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 'orderList');
 const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
 const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
-const newMember = r => require.ensure([], () => r(require('@/page/newMember')), 'newMember');
 const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 'uploadImg');
 const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vueEdit');
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+const makeInfo = r => require.ensure([], () => r(require('@/page/content/makeInfo')), 'makeInfo');
+const artClass = r => require.ensure([], () => r(require('@/page/content/artClass')), 'artClass');
+const artMan = r => require.ensure([], () => r(require('@/page/content/artMan')), 'artMan');
+const advMan = r => require.ensure([], () => r(require('@/page/content/advMan')), 'advMan');
+const shopCom = r => require.ensure([], () => r(require('@/page/content/shopCom')), 'shopCom');
 
 
 
@@ -43,11 +48,11 @@ const routes = [{
         }, {
             path: '/userDetail',
             component: userDetail,
-            meta: ['会员管理', '会员信息'],
+            meta: ['会员管理', '详情'],
         }, {
             path: '/orderDetail',
             component: orderDetail,
-            meta: ['会员管理', '会员信息'],
+            meta: ['订单管理', '详情'],
         }, {
             path: '/addShop',
             component: addShop,
@@ -56,7 +61,11 @@ const routes = [{
             path: '/addGood',
             component: addGood,
             meta: ['添加数据', '添加商品'],
-        }, {
+        },{
+            path: '/addOrder',
+            component: addOrder,
+            meta: ['添加数据', '添加订单'],
+        },{
             path: '/userList',
             component: userList,
             meta: ['数据管理', '会员列表'],
@@ -80,10 +89,6 @@ const routes = [{
             path: '/visitor',
             component: visitor,
             meta: ['图表', '用户分布'],
-        }, {
-            path: '/newMember',
-            component: newMember,
-            meta: ['图表', '用户数据'],
         }, {
             path: '/uploadImg',
             component: uploadImg,
@@ -112,6 +117,26 @@ const routes = [{
             path: '/goodDetail',
             component: goodDetail,
             meta: ['商品列表', '详情'],
+        }, {
+            path: '/makeInfo',
+            component: makeInfo,
+            meta: ['内容管理', '市场信息'],
+        }, {
+            path: '/shopCom',
+            component: shopCom,
+            meta: ['内容管理', '商家审核'],
+        }, {
+            path: '/artClass',
+            component: artClass,
+            meta: ['内容管理', '文章分类'],
+        }, {
+            path: '/artMan',
+            component: artMan,
+            meta: ['内容管理', '文章管理'],
+        }, {
+            path: '/advMan',
+            component: advMan,
+            meta: ['内容管理', '广告管理'],
         }]
     }
 ]
