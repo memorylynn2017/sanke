@@ -326,7 +326,7 @@ export default {
                 type: "success",
                 message: "添加商家成功"
               });
-              this.initData();
+            //   this.initData();
             }
           })
           .catch(error => {

@@ -6,7 +6,7 @@
                 <span><strong>商品列表</strong></span>
             </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-152px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-218px;display:inline-block;">
                     <el-button @click="handleAdd">新建商品</el-button>
                     <el-button>更新数据</el-button>
                 </div>
@@ -51,15 +51,16 @@
                 </el-table-column>
                 <el-table-column property="product_down_time" label="下架时间" width="140">
                 </el-table-column>
-                <el-table-column property="editname" label="操作" width="160">
+                 <el-table-column property="product_down" label="下架" width="120">
+                </el-table-column>
+                <el-table-column property="editname" label="操作">
                     <template slot-scope="scope">
                         <!-- <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button> -->
                         <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="samll">[编辑]</el-button>
-                        <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">删除</el-button>
+                        <!-- <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">删除</el-button> -->
                     </template>
                 </el-table-column>
-                <el-table-column property="product_down" label="下架">
-                </el-table-column>
+               
             </el-table>
             <div class="pagination_bottom">
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">

@@ -8,7 +8,7 @@
             </div> -->
           
             <div class="searched">
-                <div class="btn" style="position:relative;left:-202px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-218px;display:inline-block;">
                     <el-button @click="handleAdd">新建商家</el-button>
                     <el-button>更新数据</el-button>
                 </div>
@@ -56,7 +56,7 @@
                     <template slot-scope="scope">
                         <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small">[编辑]</el-button>
                         <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
-                        <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">[抓取商品]</el-button>
+                        <!-- <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">[抓取商品]</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
