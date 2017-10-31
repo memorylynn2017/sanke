@@ -5,8 +5,10 @@
 # npm install
 首先运行：
 模拟后台数据接口
-# npm run mock
-然后：
+# npm run mock（删掉）
+现改编为：express+moogdb处理生成本地JSON数据接口
+# cd server ->npm start 前提要安装moogdb数据库，汇入dataSource
+然后才：
 开发环境测试
 # npm run dev
 生产环境测试
