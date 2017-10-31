@@ -43,7 +43,7 @@
                 </el-table-column>
                 <el-table-column property="levelname" label="等级" width="100">
                 </el-table-column>
-                <el-table-column property="usercall" label="用户名" width="130">
+                <el-table-column property="usercall" label="用户名" width="150">
                 </el-table-column>
                 <el-table-column property="usercity" label="地区" width="110" sortable>
                 </el-table-column>

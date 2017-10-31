@@ -45,7 +45,7 @@
                 </el-table-column>
                 <el-table-column property="product_shop" label="商家名称" width="100">
                 </el-table-column>
-                <el-table-column property="product_up" label="上架状态" width="95">
+                <el-table-column property="product_up" label="上架状态" width="105">
                 </el-table-column>
                 <el-table-column property="product_up_time" label="上架时间" width="140">
                 </el-table-column>

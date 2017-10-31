@@ -1,8 +1,8 @@
 {
     "order_id": "900001",
     "order_count": 1000,
-    "order_price": 20,
     "order_freight": 23,
+    "order_price": 20,
     "order_key": "8005896",
     "order_leval": "批发会员",
     "order_goodsman": "YONG",
@@ -15,8 +15,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 19:15",
     "order_purnum": "20161210191570"
-},
-{
+}, {
     "order_id": "900002",
     "order_count": 1000,
     "order_price": 20,
@@ -33,8 +32,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 18:15",
     "order_purnum": "20161210181571"
-},
-{
+}, {
     "order_id": "900003",
     "order_count": 1000,
     "order_price": 20,
@@ -51,8 +49,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 17:15",
     "order_purnum": "20161210171572"
-},
-{
+}, {
     "order_id": "900005",
     "order_count": 1000,
     "order_price": 20,
@@ -69,8 +66,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 12:15",
     "order_purnum": "20161210121575"
-},
-{
+}, {
     "order_id": "900006",
     "order_count": 1000,
     "order_price": 20,
@@ -87,8 +83,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 12:25",
     "order_purnum": "20161210122576"
-},
-{
+}, {
     "order_id": "900007",
     "order_count": 1000,
     "order_price": 20,
@@ -105,8 +100,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-10 12:35",
     "order_purnum": "20161210123577"
-},
-{
+}, {
     "order_id": "900008",
     "order_count": 200,
     "order_price": 20,
@@ -123,8 +117,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-01 12:02",
     "order_purnum": "20161210120278"
-},
-{
+}, {
     "order_id": "900009",
     "order_count": 300,
     "order_price": 20,
@@ -141,8 +134,7 @@
     "order_paystatus": "已付款",
     "order_times": "2016-12-01 12:04",
     "order_purnum": "20161210120479"
-},
-{
+}, {
     "order_id": "900010",
     "order_count": 500,
     "order_price": 20,
@@ -160,7 +152,3 @@
     "order_times": "2016-12-01 12:06",
     "order_purnum": "20161210120680"
 }
-
-
-
-

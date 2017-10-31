@@ -11,25 +11,33 @@
         </div>
         <el-row style="height: 100%;">
             <el-col :span="3" style="min-height: 100%; background-color: #293641;">
-                 <!-- :default-openeds="['1']" -->
+                 
                 <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
-                    <span></span>
-                    <el-menu-item index="manage" style="border-left:6px solid #f8d347"><i class="el-icon-menu"></i>首页</el-menu-item>
+                    <!-- <i style="display:inline-block;height:50px;border-left:6px solid #f8d347;position:relative;left:-18px;"></i><span slot="title"> -->
+                    <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</span></el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
+                    
                     <el-menu-item index="userList">会员管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
+                    
                     <el-menu-item index="shopList">商家管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
+                    
                     <el-menu-item index="goodList">商品管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
-                    <el-menu-item index="orderList">订单管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
+
+                    <!-- <el-menu-item index="goodList">商品管理<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
+                    <div style="background-color:#2A3542;height:11px;"></div> -->
+                    
+                    <el-submenu index="1">
+                      <template slot="title" :to="{ path: '/orderList' }">订单管理</template>
+                      <el-menu-item index="orderList">生成订单</el-menu-item>
+                      <!-- <el-menu-item index="#">订单审核</el-menu-item> -->
+                      <el-menu-item index="addPursh">生成购单</el-menu-item>
+                    </el-submenu>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
-                    <el-submenu index="#">
+                    
+                    <el-submenu index="2">
                       <template slot="title" :to="{ path: '/manage' }">内容管理</template>
                       <el-menu-item index="makeInfo">市场信息</el-menu-item>
                       <el-menu-item index="shopCom">商家审核</el-menu-item>
@@ -38,7 +46,7 @@
                       <el-menu-item index="advMan">广告管理</el-menu-item> -->
                     </el-submenu>
                     <div style="background-color:#2A3542;height:11px;"></div>
-                    <span></span>
+                    
                     <el-menu-item index="adminSet">系统设置<i class="el-submenu__icon-arrow el-icon-arrow-down"></i></el-menu-item>
                     <!-- <<span></span>
                     <div style="background-color:#2A3542;height:11px;"></div>
@@ -126,6 +134,11 @@ export default {
     handleHome() {
       this.$router.push({
         path: "/manage"
+      });
+    },
+    handleDirect() {
+      this.$router.push({
+        path: "/orderList"
       });
     }
   },

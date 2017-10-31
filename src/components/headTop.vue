@@ -5,7 +5,7 @@
             <img src=".././assets/img/timg.jpg" class="avator" style="float:left;margin-right: 15px;height:40px;">
             <!-- 这里写路由跳转 -->
             <el-breadcrumb-item :to="{ path: '/manage' }">早上好，XXX</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
+            <!-- <el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item> -->
         </el-breadcrumb>
         <!-- <el-dropdown @command="handleCommand" menu-align='start'>
             <img :src="baseImgPath + adminInfo.avatar" class="avator">

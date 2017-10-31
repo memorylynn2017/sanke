@@ -47,9 +47,9 @@
                 </el-table-column>
                 <el-table-column property="shop_ranking" label="商家排名" width="95">
                 </el-table-column>
-                <el-table-column property="shop_time" label="进驻时间" width="180">
+                <el-table-column property="shop_time" label="进驻时间" width="190">
                 </el-table-column>
-                <el-table-column property="shop_time" label="抓取商品时间" width="180">
+                <el-table-column property="shop_time" label="抓取商品时间" width="190">
                 </el-table-column>
                 </el-table-column>
                 <el-table-column property="editname" label="操作">

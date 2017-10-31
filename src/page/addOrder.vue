@@ -1,138 +1,107 @@
 <template>
-    <div class="fillcontain addgood">
+    <div class="fillcontain shopdetail">
         <!-- <head-top></head-top> -->
-        <el-button class="backbtn_good" @click="gobackIndex()" sytle=" z-index:999;" style="position:relative;top:60px;">返回</el-button>
+        <el-button class="backbtn_good" @click="gobackIndex()" sytle=" z-index:999;" style="position:relative;top:40px;">返回</el-button>
         <div class="table_container gooddetail">
             <el-tabs type="border-card">
-                <el-tab-pane>
+                <el-tab-pane class="shoplist">
                     <span slot="label">基本信息</span>
-                    <el-form ref="addForm" :model="addForm" label-width="80px">
-                        <table class="table0 w100">
-                            <tr>
-                                <td>下单时间</td>
-                                <td>
-                                    <el-date-picker v-model="addForm.order_times" type="datetime"  placeholder="选择日期时间">
-                                    </el-date-picker>
-                                </td>
-                            </tr>
-      
-     
-    
-                            <tr>
-                                <td>获取渠道</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_fetch" placeholder="请选择">
-                                        <el-option v-for="item in fetch" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>订单生成号</td>
-                                <td>
-                                    <el-input size="small" v-model="addForm.order_id" placeholder="请输入内容"></el-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>数量</td>
-                                <td>
-                                    <el-input size="small" v-model="addForm.order_count" placeholder="请输入内容"></el-input>
-                                    <!-- <span style="margin-left: 20px;font-size: 12px; color: #000;">查看图片</span> -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>金额</td>
-                                <td>
-                                    <el-input size="small" v-model="addForm.order_price" placeholder="请输入内容"></el-input>
-                                    <!-- <el-checkbox class="radio" v-model="auto" label="1">记住我的选择</el-checkbox> -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>运费</td>
-                                <td>
-                                    <el-input size="small" v-model="addForm.order_freight" placeholder="请输入内容"></el-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>!会员ID</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_key" placeholder="请选择">
-                                        <el-option v-for="item in levelsA" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>!会员等级</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_leval" placeholder="请选择">
-                                        <el-option v-for="item in levelsB" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                             <tr>
-                                <td>!收货人</td>
-                                <td>
-                                    <el-input size="small" v-model="addForm.order_goodsman" placeholder="请输入内容"></el-input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>!收货地区</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_area" placeholder="请选择">
-                                        <el-option v-for="item in levels_a" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>配送方式</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_sendm" placeholder="请选择">
-                                        <el-option v-for="item in levels_b" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>订单状态</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_purstatus" placeholder="请选择">
-                                        <el-option v-for="item in purstatus" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>发货状态</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_senstatus" placeholder="请选择">
-                                        <el-option v-for="item in senstatus" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>付款状态</td>
-                                <td>
-                                    <el-select size="small" v-model="addForm.order_paystatus" placeholder="请选择">
-                                        <el-option v-for="item in paystatus" :key="item.value" :label="item.label" :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </td>
-                            </tr>
-                            
-                            <tr class="last">
-                                <td></td>
-                                <td>
-                                    <el-button size="small" @click="addAct">确定</el-button>
-                                </td>
-                            </tr>
-                        </table>
-                    </el-form>
+                    
+                    <el-row :gutter="30">
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                            <div class="grid-content bg-purple">
+                                <template>
+                                    <el-form label-position="left" inline class="demo-table-expand qf" ref="addForm" :model="shopForm">
+                                        <el-form-item label="自动订单号">
+                                            <span style="color: #e51c23;">系统自动生成</span>
+                                        </el-form-item>
+                                        <el-form-item label="手工订单号">
+                                            <el-input size="small" v-model="addForm.order_id" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                       
+                                        <el-form-item label="获取渠道">
+                                            <el-select size="small" v-model="addForm.order_fetch" placeholder="请选择">
+                                                <el-option v-for="item in fetch" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                             </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="订单数量">
+                                            <el-input size="small" v-model="addForm.order_count" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="订单金额">
+                                            <el-input size="small" v-model="addForm.order_price" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="产生运费">
+                                             <el-input size="small" v-model="addForm.order_freight" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="所属会员">
+                                            <el-input size="small" v-model="addForm.order_key" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="会员示例">
+                                            <el-select size="small" v-model="addForm.order_key" placeholder="请选择">
+                                                <el-option v-for="item in mymember" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="会员单号">
+                                            <el-select size="small" v-model="addForm.order_key" placeholder="请选择">
+                                                <el-option v-for="item in purch_order" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="会员等级">
+                                            <el-select size="small" v-model="addForm.order_leval" placeholder="请选择">
+                                                <el-option v-for="item in levelsB" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="收货人">
+                                             <el-input size="small" v-model="addForm.order_goodsman" placeholder="请输入内容"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="收货地区">
+                                            <el-select size="small" v-model="addForm.order_area" placeholder="请选择">
+                                                <el-option v-for="item in levels_a" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="配送方式">
+                                            <el-select size="small" v-model="addForm.order_sendm" placeholder="请选择">
+                                                <el-option v-for="item in levels_b" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="订单状态">
+                                            <el-select size="small" v-model="addForm.order_purstatus" placeholder="请选择">
+                                                <el-option v-for="item in purstatus" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="发货状态">
+                                            <el-select size="small" v-model="addForm.order_senstatus" placeholder="请选择">
+                                                <el-option v-for="item in senstatus" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-form-item label="付款状态">
+                                             <el-select size="small" v-model="addForm.order_paystatus" placeholder="请选择">
+                                                <el-option v-for="item in paystatus" :key="item.value" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                         <el-form-item label="下单时间">
+                                            <el-date-picker v-model="addForm.order_times" type="datetime" placeholder="选择日期时间">
+                                            </el-date-picker>
+                                        </el-form-item>
+                                        <el-form-item class="special">
+                                            <span><el-button @click="addAct">确定</el-button></span>
+                                        </el-form-item>
+                                    </el-form>
+                                </template>
+                            </div>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
-                <el-tab-pane class="shopset" label="生成采购单">
+                <el-tab-pane class="shopset" label="生成购单">
                     拓展供应商采购信息测试
                 </el-tab-pane>
             </el-tabs>
@@ -153,6 +122,33 @@ export default {
       auto: "",
       checkList: "",
       start: "",
+      purch_order: [
+        {
+          value: "所属会员订单1",
+          label: "所属会员订单1"
+        },
+        {
+          value: "所属会员订单2",
+          label: "所属会员订单2"
+        },
+        {
+          value: "所属会员订单3",
+          label: "所属会员订单3"
+        },
+        {
+          value: "所属会员订单4",
+          label: "所属会员订单4"
+        },
+        {
+          value: "所属会员订单5",
+          label: "所属会员订单5"
+        },
+        {
+          value: "所属会员订单6",
+          label: "所属会员订单6"
+        }
+      ],
+
       levels: [
         {
           value: "淘亿",
@@ -219,7 +215,7 @@ export default {
           label: "退款"
         }
       ],
-      levelsA: [
+      mymember: [
         {
           value: "关联会员1",
           label: "关联会员1"
@@ -261,16 +257,16 @@ export default {
       ],
       levels_a: [
         {
-          value: "广州",
-          label: "广州"
+          value: "法国",
+          label: "法国"
         },
         {
-          value: "深圳",
-          label: "深圳"
+          value: "新加坡",
+          label: "新加坡"
         },
         {
-          value: "东莞",
-          label: "东莞"
+          value: "中国",
+          label: "中国"
         }
       ],
       levels_b: [

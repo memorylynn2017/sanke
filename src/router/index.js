@@ -13,6 +13,7 @@ const goodDetail = r => require.ensure([], () => r(require('@/page/goodDetail'))
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGood = r => require.ensure([], () => r(require('@/page/addGood')), 'addGood');
 const addOrder = r => require.ensure([], () => r(require('@/page/addOrder')), 'addOrder');
+const addPursh = r => require.ensure([], () => r(require('@/page/addPursh')), 'addPursh');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
 const goodList = r => require.ensure([], () => r(require('@/page/goodList')), 'goodList');
@@ -61,11 +62,15 @@ const routes = [{
             path: '/addGood',
             component: addGood,
             meta: ['添加数据', '添加商品'],
-        },{
+        }, {
             path: '/addOrder',
             component: addOrder,
             meta: ['添加数据', '添加订单'],
-        },{
+        }, {
+            path: '/addPursh',
+            component: addPursh,
+            meta: ['添加数据', '添加采购单'],
+        }, {
             path: '/userList',
             component: userList,
             meta: ['数据管理', '会员列表'],
