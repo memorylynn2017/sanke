@@ -8,7 +8,7 @@
             </div> -->
           
             <div class="searched">
-                <div class="btn" style="position:relative;left:-218px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-225px;display:inline-block;">
                     <el-button @click="handleAdd">新建商家</el-button>
                     <el-button>更新数据</el-button>
                 </div>

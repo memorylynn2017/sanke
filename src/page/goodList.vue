@@ -6,7 +6,7 @@
                 <span><strong>商品列表</strong></span>
             </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-218px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-285px;display:inline-block;">
                     <el-button @click="handleAdd">新建商品</el-button>
                     <el-button>更新数据</el-button>
                 </div>

@@ -6,10 +6,10 @@
             <span><strong>订单列表</strong></span>
         </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-28px;display:inline-block;">
+                <div class="btn" style="position:relative;left:-95px;display:inline-block;">
                     <el-button @click="handleAdd">测试订单入口</el-button>
                 </div>
-                <div class="searched_left" style="position:relative;left:-135px;">
+                <div class="searched_left" style="position:relative;left:-65px;">
                     <el-select v-model="purvalue0" placeholder="请选择" @change="filterUser()">
                         <el-option v-for="item in options0" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
@@ -28,7 +28,7 @@
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <el-input v-model="search_id" placeholder="搜索" style="position:relative;left:-20px;">
+                    <el-input v-model="search_id" placeholder="搜索" style="position:relative;left:0px;">
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="fillcontain">
         <!-- <head-top></head-top> -->
-        <div class="headAdv">
+        <div class="headAdv addPursh">
             <!-- <div class="listed">
             <span><strong>订单列表</strong></span>
             </div> -->
@@ -9,23 +9,24 @@
                 <!-- <div class="btn" style="position:relative;left:-250px;display:inline-block;">
                     <el-button>测试采购单入口</el-button>
                 </div> -->
-                <div class="searched_left">
-                    <el-select v-model="purvalue0" placeholder="请选择" >
+                <div class="searched_left" style="position:relative;left:-480px;">
+                   <span>查询编号：</span>&nbsp;
+                    <el-select v-model="purvalue" placeholder="请选择" >
                         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </div>
                 <div class="searched_right">
                 </div>
-                <div class="searched_middle" style="position:relative;left:250px;">
-                    <!-- <span class="pashow">显示</span>&nbsp; -->
+                <div class="searched_middle" style="position:relative;left:420px;">
+                   
                     <el-button>保存</el-button>
-                    <el-button>打印</el-button>
+                    <el-button>打印</el-button>&nbsp;
+                    
                 </div>
             </div>
-            <!-- <div class="recorded">
-            <span>总记录数 {{Message}}</span>
-            </div> -->
+            <div class="recorded" style="position:relative;left:0px;">
+            </div>
         </div>
         <div class="table_container">
             <el-table ref="multipleTable" :data="getorderListFilter" highlight-current-row style="width:100%">
@@ -74,8 +75,7 @@ export default {
       ],
       order_id: "",
       input: "",
-      purvalue0: "查询",
-      purvalue1: "查询",
+      purvalue: "请输入编号",
       myvalue4: "30",
       currentRow: null,
       begin: 0,
