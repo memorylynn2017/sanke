@@ -35,21 +35,21 @@
         </div>
         <div class="table_container">
             <el-table :data="getshopListFilter" highlight-current-row style="width: 100%">
-                <el-table-column property="shop_id" label="商家ID" width="100" sortable>
+                <el-table-column property="shop_id" label="商家ID" width="120" sortable>
                 </el-table-column>
                 <el-table-column property="shop_name" label="商家名称" width="135" sortable>
                 </el-table-column>
-                <el-table-column property="shop_type" label="类型" width="85" sortable>
+                <el-table-column property="shop_type" label="类型" width="110" sortable>
                 </el-table-column>
-                <el-table-column property="shop_market" label="所在档口" width="130">
+                <el-table-column property="shop_market" label="所在档口" width="140">
                 </el-table-column>
                 <el-table-column property="shop_area" label="所在市场" width="100">
                 </el-table-column>
-                <el-table-column property="shop_ranking" label="商家排名" width="95">
+                <el-table-column property="shop_ranking" label="商家排名" width="125">
                 </el-table-column>
-                <el-table-column property="shop_time" label="进驻时间" width="190">
+                <el-table-column property="shop_time" label="进驻时间" width="220">
                 </el-table-column>
-                <el-table-column property="shop_time" label="抓取商品时间" width="190">
+                <el-table-column property="shop_time" label="抓取商品时间" width="220">
                 </el-table-column>
                 </el-table-column>
                 <el-table-column property="editname" label="操作">

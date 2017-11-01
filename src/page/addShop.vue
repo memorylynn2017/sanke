@@ -3,7 +3,7 @@
         <el-button class="backbtn_shop" @click="gobackIndex" sytle=" z-index:999;">返回</el-button>
         <div class="table_container">
             <el-tabs type="border-card">
-                <el-tab-pane>
+                <el-tab-pane class="shoplist">
                     <span slot="label">会员资料</span>
                     <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
