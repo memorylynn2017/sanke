@@ -166,7 +166,7 @@
                     </el-row>
                 </el-tab-pane>
                 <el-tab-pane class="shopset" label="店铺设置">
-                    <!-- <el-row :gutter="30">
+                    <el-row :gutter="30">
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
                                 <template>
@@ -231,7 +231,7 @@
                                 </template>
                             </div>
                         </el-col>
-                    </el-row> -->
+                    </el-row>
                 </el-tab-pane>
             </el-tabs>
             <!-- <el-dialog title="新增" v-model="dialogAdd" :close-on-click-modal="false" >
@@ -304,7 +304,6 @@ export default {
     return {
       id: this.$route.query.shop_id,
       addForm: {},
-    //   dialogAdd: false,
       input: "",
 
       // 以下这些都是选项卡
@@ -430,7 +429,7 @@ export default {
       classify: "",
       shoptype: "",
       brand: "",
-      type: 3,
+       type: 3,
       serve: 1,
       start: 1,
       auto: "",
@@ -439,17 +438,9 @@ export default {
   },
   components: {},
   created() {},
-  mounted() {
-    //    this.initData();
-  },
+  mounted() {},
 
   methods: {
-    // async initData(){
-
-    // },
-    // showAddDialog() {
-    //   this.dialogAdd = true;
-    // },
     addAct() {
       this.$confirm("确认提交吗?", "提示", {}).then(() => {
         axios
@@ -482,14 +473,11 @@ export default {
                 type: "success",
                 message: "添加商家成功"
               });
-            //   this.initData();
             }
           })
           .catch(error => {
             console.log(error);
           });
-        // this.dialogAdd = false;
-        // this.initData();
       });
     },
     gobackIndex() {

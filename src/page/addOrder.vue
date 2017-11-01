@@ -11,7 +11,7 @@
                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
                             <div class="grid-content bg-purple">
                                 <template>
-                                    <el-form label-position="left" inline class="demo-table-expand qf" ref="addForm" :model="shopForm">
+                                    <el-form label-position="left" inline class="demo-table-expand qf" ref="addForm" :model="addForm">
                                         <el-form-item label="自动订单号">
                                             <span style="color: #e51c23;">系统自动生成</span>
                                         </el-form-item>

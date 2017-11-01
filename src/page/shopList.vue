@@ -56,7 +56,7 @@
                     <template slot-scope="scope">
                         <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="small">[编辑]</el-button>
                         <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
-                        <!-- <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">[抓取商品]</el-button> -->
+                        <el-button type="danger" size="small">[抓取商品]</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -64,75 +64,12 @@
                 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" :page-sizes="[15,30,60,90]" layout="total, sizes, prev, pager, next, jumper" :total="count" style="float: right;">
                 </el-pagination>
             </div>
-                
-                
-            <!-- 一般式运用模块框 -->
-            <!-- <el-dialog title="商家信息" :visible.sync="dialogFormVisible">
-                <el-form :model="form">
-                    <el-form-item label="商家ID" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_id" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="类型" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_type" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="商家代码" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_market" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="商家名称" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_Stall" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="所在市场" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_area" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="商家排名" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_ranking" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="进驻时间" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_time" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="状态" :label-width="formLabelWidth">
-                        <el-input v-model="form.shop_status" auto-complete="off"></el-input>
-                    </el-form-item>
-                </el-form>
-                <div slot="footer" class="dialog-footer">
-                    <el-button @click="cancel">取 消</el-button>
-                    <el-button type="primary" @click="update">确 定</el-button>
-                </div>
-            </el-dialog> -->
-             <!-- 一般式运用模块框 -->
-            <!-- <el-dialog title="抓取商品" :visible.sync="dialogFormVisible">
-                <el-form :model="form" style="text-align:center;width:400px;height:400px;">
-                    <span>商家：</span><span>芬妮女装</span>
-                    <el-form-item label="分类" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                    <el-form-item label="类型" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                    <el-form-item label="品牌" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                    <el-form-item label="价格统一减去" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                    <el-form-item label="打包价" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                    <el-form-item label="重量" :label-width="formLabelWidth">
-                        <el-input auto-complete="off" style="width:100px;">></el-input>
-                    </el-form-item>
-                </el-form>
-                <div slot="footer" class="dialog-footer" style="text-align:center;">
-                    <el-button type="primary" size="small" @click="update">立即抓取</el-button>
-                    <el-button @click="cancel">取 消</el-button>
-                </div>
-            </el-dialog> -->
         </div>
     </div>
 </template>
 <script>
-import axios from "axios";
 
+import axios from "axios";
 export default {
   data() {
     return {
@@ -199,7 +136,7 @@ export default {
     }
   },
   created() {
-    console.log(this.getStatus(this.$route.path));
+    // console.log(this.getStatus(this.$route.path));
   },
   mounted() {
     this.initData();
@@ -214,16 +151,11 @@ export default {
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
-            console.log(data.result.shopList);
-            //临时表
             this.tableData = data.result.shopList;
-            //数据表
             this.shopList = data.result.shopList;
             this.count = this.shopList.length;
             this.begin = 0;
             this.end = this.pageSize;
-            // console.log("separter");
-            // console.log(this.shopList.slice(this.begin, this.end));
           }
         })
         .catch(error => {
@@ -254,7 +186,6 @@ export default {
     },
 
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
@@ -264,8 +195,6 @@ export default {
       this.currentPage = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
-      console.log(this.currentPage);
-      console.log(this.begin);
     },
     getStatus(urlStr) {
       var urlStrArr = urlStr.split("/");
@@ -286,13 +215,11 @@ export default {
     },
     handleDelete(index, row) {
       this.$confirm("确认删除该商家吗？", "提示", { type: "warning" }).then(() => {
-        //数据库删除
         axios
           .post("/shop/delete", { id: row._id })
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
-              //视图界面上删除
               this.initData();
               this.$message({
                 type: "success",
@@ -308,12 +235,12 @@ export default {
     filterTag(value, row) {
       return row.levelname === value;
     }
+  },
+  watch: {
+    $route(to, from) {
+      // console.log(this.getStatus(this.$route.path));
+    }
   }
-  // watch: {
-  //   $route(to, from) {
-  //     console.log(this.getStatus(this.$route.path));
-  //   }
-  // }
 };
 </script>
 <style lang="less">

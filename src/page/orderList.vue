@@ -28,19 +28,17 @@
                     </el-select>
                 </div>
                 <div class="searched_right">
-                    <el-input v-model="order_id" placeholder="搜索" style="position:relative;left:-100px;">
+                    <el-input v-model="search_id" placeholder="搜索" style="position:relative;left:-20px;">
                         <el-button slot="append" @click="searchUser()">查询</el-button>
                     </el-input>
                 </div>
                 <div class="searched_middle">
-                  <el-button type="info" size="small">生成采购单</el-button>
+                    <el-button type="info" size="small" @click="addAct">生成采购单</el-button>
                 </div>
             </div>
             <!-- <div class="recorded">
-            <span>总记录数 {{Message}}</span>
-        </div> -->
-               
-            
+              <span>总记录数 {{Message}}</span>
+            </div> -->
         </div>
         <div class="table_container">
             <el-table ref="multipleTable" :data="getorderListFilter" highlight-current-row style="width:100%">
@@ -90,15 +88,18 @@
 </template>
 <script>
 import axios from "axios";
+import ".././assets/js/formatefy.js";
 export default {
   data() {
     return {
+      getime: "",
       currentIndex: "",
       dialogFormVisible: true,
       formLabelWidth: "200px",
       form: {},
       tableData: [],
       orderList: [],
+      dataArray: [],
       options1: [
         {
           value: "全部",
@@ -175,7 +176,7 @@ export default {
           label: "线下"
         }
       ],
-      order_id: "",
+      search_id: "",
       input: "",
       purvalue1: "全部",
       purvalue2: "全部",
@@ -189,7 +190,8 @@ export default {
       count: 0,
       currentPage: 1,
       pageSize: 15,
-      multipleSelection: []
+      multipleSelection: [],
+      msg: "虚拟单号800100023"
     };
   },
   components: {
@@ -222,31 +224,47 @@ export default {
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
-            //临时表
             this.tableData = data.result.orderList;
-            //数据表
             this.orderList = data.result.orderList;
             this.count = this.orderList.length;
             this.begin = 0;
             this.end = this.pageSize;
-            // console.log("separter");
-            // console.log(this.shopList.slice(this.begin, this.end));
           }
         })
         .catch(error => {
           console.log(error);
         });
     },
-    // filterLevel(levelName) {
-    //   if (this.levelName == "" || this.levelName == "所有分类") {
-    //     this.orderList = this.tableData;
-    //   } else {
-    //     this.orderList = this.tableData.filter(item => {
-    //       return item.order_type !== null && item.order_type == this.levelName;
-    //     });
-    //   }
-    // },
-
+    addAct() {
+      this.$confirm("确认提交吗?", "提示", {}).then(() => {
+        axios
+          .post("/pursh/add", {
+            pursh_id: this.msg+getNowFormatDate(),
+            pursh_time: getNowFormatDate(),
+            pursh_man: "沈利松"
+          })
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              this.$message({
+                type: "success",
+                message: "添加采购单成功"
+              });
+              //因为vue-router后退操作不刷新页面，此处强制刷新
+              setTimeout(() => {
+                this.$router.push({
+                  path: "/addPursh"
+                });
+                // this.goback();
+              }, 1500);
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+    },
+    //待完善
     filterUser() {
       if (this.purvalue0 == "" || this.purvalue0 == "所有渠道") {
         if (this.purvalue1 == "" || this.purvalue1 == "全部") {
@@ -274,18 +292,37 @@ export default {
     showNums(index) {
       this.pageNum = parseInt(this.options2[index].label);
     },
+    //旧高级搜索功能测试逻辑1
+    // searchUser() {
+    //   if (this.order_id) {
+    //     this.orderList = this.tableData.filter(item => {
+    //       return (
+    //         item.order_id.toLowerCase().indexOf(this.order_id.toLowerCase()) !==-1
+
+    //       );
+    //     });
+    //   }
+    // },
+    //新高级搜索功能测试逻辑2
     searchUser() {
-      if (this.order_id) {
-        this.orderList = this.tableData.filter(item => {
-          return (
-            item.order_id.toLowerCase().indexOf(this.order_id.toLowerCase()) !==
-            -1
-          );
-        });
+      if (this.search_id) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.searchMethod(this.tableData[i], this.search_id.toLowerCase());
+        }
+        this.orderList = this.dataArray;
       }
     },
+    searchMethod(data, value) {
+      if (data.order_fetch.indexOf(value) > 0) {
+        this.dataArray.push(data);
+        return;
+      } else if (data.order_area.indexOf(value) > 0) {
+        this.dataArray.push(data);
+        return;
+      }
+    },
+
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
@@ -295,8 +332,6 @@ export default {
       this.currentPage = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
-      console.log(this.currentPage);
-      console.log(this.begin);
     },
     getStatus(urlStr) {
       var urlStrArr = urlStr.split("/");
@@ -317,13 +352,11 @@ export default {
     },
     handleDelete(index, row) {
       this.$confirm("确认删除该订单吗？", "提示", { type: "warning" }).then(() => {
-        //数据库删除
         axios
           .post("/order/delete", { id: row._id })
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
-              //视图界面上删除
               this.initData();
               this.$message({
                 type: "success",
@@ -339,12 +372,12 @@ export default {
     filterTag(value, row) {
       return row.levelname === value;
     }
+  },
+  watch: {
+    $route(to, from) {
+      // console.log(this.getStatus(this.$route.path));
+    }
   }
-  // watch: {
-  //   $route(to, from) {
-  //     console.log(this.getStatus(this.$route.path));
-  //   }
-  // }
 };
 </script>
 <style lang="less">

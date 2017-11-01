@@ -11,10 +11,10 @@
                     <el-button>更新数据</el-button>
                 </div>
                 <div class="searched_left">
-                    <el-select v-model="levelName" filterable placeholder="请选择" @change="filterLevel">
+                    <!-- <el-select v-model="levelName" filterable placeholder="请选择" @change="filterLevel">
                         <el-option v-for="level in levelData" :key="level.value" :label="level.label" :value="level.value">
                         </el-option>
-                    </el-select>
+                    </el-select> -->
                 </div>
                 <div class="searched_right">
                     <el-input v-model="product_code" placeholder="请输入要查询的商品Id">
@@ -55,7 +55,7 @@
                 </el-table-column>
                 <el-table-column property="editname" label="操作">
                     <template slot-scope="scope">
-                        <!-- <el-button style="float:left; border:none;" size="small" @click="handleEdit">[下架]</el-button> -->
+                        <el-button size="small">[下架]</el-button>
                         <el-button type="text" @click="handleEdit(scope.$index, scope.row)" size="samll">[编辑]</el-button>
                         <!-- <el-button type="danger" @click="handleDelete(scope.$index, scope.row)" size="small">删除</el-button> -->
                     </template>
@@ -165,16 +165,11 @@ export default {
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
-            // console.log(data.result.goodList);
-            //临时表
             this.tableData = data.result.goodList;
-            //数据表
             this.productList = data.result.goodList;
             this.count = this.productList.length;
             this.begin = 0;
             this.end = this.pageSize;
-            // console.log("separter");
-            // console.log(this.shopList.slice(this.begin, this.end));
           }
         })
         .catch(error => {
@@ -185,7 +180,6 @@ export default {
       this.pageNum = parseInt(this.options2[index].label);
     },
     filterLevel(levelName) {
-      // console.log(levelName);
       if (this.levelName == "" || this.levelName == "所有类型") {
         this.productList = this.tableData;
       } else {
@@ -197,7 +191,6 @@ export default {
       }
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
@@ -207,8 +200,6 @@ export default {
       this.currentPage = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
-      console.log(this.currentPage);
-      console.log(this.begin);
     },
     handleAdd() {
       this.$router.push({
@@ -225,13 +216,11 @@ export default {
     },
     handleDelete(index, row) {
       this.$confirm("确认删除该商品吗？", "提示", { type: "warning" }).then(() => {
-        //数据库删除
         axios
           .post("/good/delete", { id: row._id })
           .then(res => {
             const data = res.data;
             if (data.status == 200) {
-              //视图界面上删除
               this.initData();
               this.$message({
                 type: "success",
@@ -246,20 +235,6 @@ export default {
     },
     filterTag(value, row) {
       return row.levelname === value;
-    },
-    searchUser() {
-      if (this.product_id) {
-        // this.userList = this.tableData.filter((item) => {
-        //     return item.customer_id == this.customer_id;
-        // });
-        this.productList = this.tableData.filter(item => {
-          return (
-            item.product_id
-              .toLowerCase()
-              .indexOf(this.product_id.toLowerCase()) !== -1
-          );
-        });
-      }
     }
   }
 };

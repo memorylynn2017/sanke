@@ -1,7 +1,7 @@
 <template>
     <div class="fillcontain addgood">
         <!-- <head-top></head-top> -->
-        <el-button class="backbtn_good" @click="gobackIndex()" sytle=" z-index:999;">返回</el-button>
+        <el-button class="backbtn_good" @click="gobackIndex()" sytle="z-index:999;position:relative;top:90px;">返回</el-button>
         <div class="table_container gooddetail">
             <el-tabs type="border-card">
                 <el-tab-pane>
@@ -360,7 +360,6 @@ export default {
               type: "success",
               message: data.msg
             });
-            //因为vue-router后退操作不刷新页面，此处强制刷新
             setTimeout(() => {
               this.goback();
             }, 1500);
@@ -380,7 +379,6 @@ export default {
     }
   },
   watch: {
-    // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
     $route(to, from) {
       this.id = this.$route.query.product_id;
       this.getGood();

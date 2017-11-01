@@ -4,48 +4,45 @@
         <div class="headAdv">
             <!-- <div class="listed">
             <span><strong>订单列表</strong></span>
-        </div> -->
+            </div> -->
             <div class="searched">
-                <div class="btn" style="position:relative;left:-480px;display:inline-block;">
-                    <!-- <el-button @click="handleAdd">测试采购单入口</el-button> -->
-                </div>
+                <!-- <div class="btn" style="position:relative;left:-250px;display:inline-block;">
+                    <el-button>测试采购单入口</el-button>
+                </div> -->
                 <div class="searched_left">
+                    <el-select v-model="purvalue0" placeholder="请选择" >
+                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
                 </div>
                 <div class="searched_right">
-                    
                 </div>
-                <div class="searched_middle" style="position:relative;left:450px;">
+                <div class="searched_middle" style="position:relative;left:250px;">
                     <!-- <span class="pashow">显示</span>&nbsp; -->
-                     <!-- @click="handleAdd" -->
                     <el-button>保存</el-button>
                     <el-button>打印</el-button>
                 </div>
             </div>
             <!-- <div class="recorded">
             <span>总记录数 {{Message}}</span>
-        </div> -->
+            </div> -->
         </div>
-                
-           
         <div class="table_container">
             <el-table ref="multipleTable" :data="getorderListFilter" highlight-current-row style="width:100%">
                 <el-table-column type="selection" width="55">
                 </el-table-column>
-                <el-table-column property="#" label="采购编号" width="250">
+                <el-table-column property="pursh_time" label="创建时间" width="250">
                 </el-table-column>
-                <el-table-column property="order_times" label="创建时间" width="650">
+                <el-table-column property="pursh_id" label="采购编号" width="450">
                 </el-table-column>
-                <el-table-column property="order_suppler" label="创建人" width="250">
+                <el-table-column property="pursh_man" label="创建人" width="350">
                 </el-table-column>
-            
-        
                
-                </el-table-column>
-                
+               
                 <el-table-column property="editname" label="处理">
                     <template slot-scope="scope">
                         <el-button type="text" size="small">[查看]</el-button>
-                        <!-- <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button> -->
+                        <el-button type="danger" @click="handleDelete(scope.$index,scope.row)" size="small">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -62,93 +59,23 @@ export default {
   data() {
     return {
       currentIndex: "",
-      dialogFormVisible: true,
       formLabelWidth: "200px",
-      form: {},
       tableData: [],
-      orderList: [],
-      options1: [
+      purshList: [],
+      options: [
         {
-          value: "全部",
-          label: "全部"
+          value: "采购编号1",
+          label: "采购编号1"
         },
         {
-          value: "订单产生",
-          label: "订单产生"
-        },
-        {
-          value: "采购保存",
-          label: "采购保存"
-        },
-        {
-          value: "已打订单",
-          label: "已打订单"
-        },
-        {
-          value: "已完成",
-          label: "已完成"
-        }
-      ],
-      options2: [
-        {
-          value: "全部",
-          label: "全部"
-        },
-        {
-          value: "未发货",
-          label: "未发货"
-        },
-        {
-          value: "已发货",
-          label: "已发货"
-        },
-        {
-          value: "已取消",
-          label: "已取消"
-        }
-      ],
-      options3: [
-        {
-          value: "全部",
-          label: "全部"
-        },
-        {
-          value: "已付款",
-          label: "已付款"
-        },
-        {
-          value: "未付款",
-          label: "未付款"
-        },
-        {
-          value: "退款",
-          label: "退款"
-        }
-      ],
-      options0: [
-        {
-          value: "所有渠道",
-          label: "所有渠道"
-        },
-        {
-          value: "网站",
-          label: "网站"
-        },
-        {
-          value: "小程序",
-          label: "小程序"
-        },
-        {
-          value: "线下",
-          label: "线下"
+          value: "采购编号2",
+          label: "采购编号2"
         }
       ],
       order_id: "",
       input: "",
-      purvalue1: "全部",
-      purvalue2: "全部",
-      purvalue3: "全部",
-      purvalue0: "所有渠道",
+      purvalue0: "查询",
+      purvalue1: "查询",
       myvalue4: "30",
       currentRow: null,
       begin: 0,
@@ -165,10 +92,10 @@ export default {
   },
   computed: {
     getorderListFilter() {
-      return this.orderList.slice(this.begin, this.end);
+      return this.purshList.slice(this.begin, this.end);
     },
     Message: function() {
-      return this.orderList.length;
+      return this.purshList.length;
     }
   },
   created() {
@@ -186,74 +113,26 @@ export default {
     },
     async initData() {
       axios
-        .get("/order/getOrderList")
+        .get("/pursh/getPurshList")
         .then(res => {
           const data = res.data;
           if (data.status == 200) {
-            //临时表
-            this.tableData = data.result.orderList;
-            //数据表
-            this.orderList = data.result.orderList;
-            this.count = this.orderList.length;
+            this.tableData = data.result.purshList;
+            this.purshList = data.result.purshList;
+            this.count = this.purshList.length;
             this.begin = 0;
             this.end = this.pageSize;
-            // console.log("separter");
-            // console.log(this.shopList.slice(this.begin, this.end));
           }
         })
         .catch(error => {
           console.log(error);
         });
     },
-    // filterLevel(levelName) {
-    //   if (this.levelName == "" || this.levelName == "所有分类") {
-    //     this.orderList = this.tableData;
-    //   } else {
-    //     this.orderList = this.tableData.filter(item => {
-    //       return item.order_type !== null && item.order_type == this.levelName;
-    //     });
-    //   }
-    // },
 
-    // filterUser() {
-    //   if (this.purvalue0 == "" || this.purvalue0 == "所有渠道") {
-    //     if (this.purvalue1 == "" || this.purvalue1 == "全部") {
-    //       this.orderList = this.tableData;
-    //     } else {
-    //       this.orderList = this.tableData.filter(item => {
-    //         return item.order_purstatus == this.purvalue1;
-    //       });
-    //     }
-    //   } else {
-    //     if (this.purvalue1 == "" || this.purvalue1 == "全部") {
-    //       this.orderList = this.tableData.filter(item => {
-    //         return item.order_fetch == this.purvalue0;
-    //       });
-    //     } else {
-    //       this.orderList = this.tableData.filter(item => {
-    //         return (
-    //           item.order_fetch == this.purvalue0 &&
-    //           item.order_purstatus == this.purvalue1
-    //         );
-    //       });
-    //     }
-    //   }
-    // },
     showNums(index) {
       this.pageNum = parseInt(this.options2[index].label);
     },
-    // searchUser() {
-    //   if (this.order_id) {
-    //     this.orderList = this.tableData.filter(item => {
-    //       return (
-    //         item.order_id.toLowerCase().indexOf(this.order_id.toLowerCase()) !==
-    //         -1
-    //       );
-    //     });
-    //   }
-    // },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
@@ -263,32 +142,36 @@ export default {
       this.currentPage = val;
       this.begin = (this.currentPage - 1) * this.pageSize;
       this.end = this.currentPage * this.pageSize;
-      console.log(this.currentPage);
-      console.log(this.begin);
     },
     getStatus(urlStr) {
       var urlStrArr = urlStr.split("/");
       return urlStrArr[urlStrArr.length - 1];
     },
-   
-    // handleEdit(index, row) {
-    //   this.$router.push({
-    //     path: "/purshrDetail",
-    //     query: {
-    //       pursh_id: row.pursh_id
-    //     }
-    //   });
-    // },
-    
-    filterTag(value, row) {
-      return row.levelname === value;
+    handleDelete(index, row) {
+      this.$confirm("确认删除该订单吗？", "提示", { type: "warning" }).then(() => {
+        axios
+          .post("/pursh/delete", { id: row._id })
+          .then(res => {
+            const data = res.data;
+            if (data.status == 200) {
+              this.initData();
+              this.$message({
+                type: "success",
+                message: data.msg
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // console.log(this.getStatus(this.$route.path));
     }
   }
-  // watch: {
-  //   $route(to, from) {
-  //     console.log(this.getStatus(this.$route.path));
-  //   }
-  // }
 };
 </script>
 <style lang="less">

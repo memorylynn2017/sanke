@@ -42,7 +42,11 @@ module.exports = {
             },
             '/order/*': {
                 target: 'http://127.0.0.1:3000'
+            },
+            '/pursh/*': {
+                target: 'http://127.0.0.1:3000'
             }
+
 
         },
 
